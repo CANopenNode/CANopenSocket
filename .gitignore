@@ -1,0 +1,5 @@
+canopend
+*.o
+
+doc/
+

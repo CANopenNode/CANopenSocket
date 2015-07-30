@@ -1,0 +1,12 @@
+CANopenSocket is Linux implementation of CANopen device with master functionality.
+
+It is based on CANopenNode, which is an opensource CANopen Stack and is included as git submodule.
+
+To clone the project with submodules use:
+git clone --recursive https://github.com/CANopenNode/CANopenSocket.git
+
+Project is based on BECK_SC2x3 from 
+http://sourceforge.net/p/canopennode/code_complete/
+
+To be continued ...
+
