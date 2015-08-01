@@ -1,0 +1,10 @@
+canopend
+*.o
+
+#eclipse
+/Debug/
+/Release/
+.cproject
+.project
+.settings/
+

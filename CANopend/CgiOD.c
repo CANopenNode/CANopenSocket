@@ -3,10 +3,8 @@
  * Object Dictionary on any device.
  *
  * @file        CgiOD.c
- * @ingroup     CgiOD
- * @version     SVN: \$Id$
  * @author      Janez Paternoster
- * @copyright   2004 - 2013 Janez Paternoster
+ * @copyright   2012 - 2015 Janez Paternoster
  *
  * This file is part of CANopenNode, an opensource CANopen Stack.
  * Project home page is <http://canopennode.sourceforge.net>.
