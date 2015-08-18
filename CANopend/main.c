@@ -36,9 +36,17 @@
 #include <sys/timerfd.h>
 
 
+#define NSEC_PER_SEC        (1000000000)    /* The number of nsecs per sec. */
+#define TMR_TASK_INTERVAL   (1000000)       /* Interval of tmrTask thread in nsec */
+#define INCREMENT_1MS(var)  (var++)         /* Increment 1ms variable in tmrTask */
+#define USE_RT_SCHEDULER
+
+
 /* Global variables and objects */
-    volatile uint16_t   CO_timer1ms = 0U; /* variable increments each millisecond */
-//    CO_EE_t             CO_EEO;           /* EEprom object */
+    volatile uint16_t   CO_timer1ms = 0U;   /* variable increments each millisecond */
+    volatile bool_t     CO_CAN_OK = false;  /* CAN in normal mode indicator */
+
+//    CO_EE_t             CO_EEO;             /* EEprom object */
 
 //    CgiLog_t            CgiLogObj;
 //    CgiCli_t            CgiCliObj;
@@ -54,30 +62,50 @@
 //    uint8_t CgiCliSDObuf[CgiCliSDObufSize];
 
 
-/* Receive pooling function from driver */
-#ifndef USE_CAN_CALLBACKS
-    void CO_CANreceive(CO_CANmodule_t *CANmodule);
-#endif
+/* Threads and race condition.
+ * There are three threads. Each runs in endless loop:
+ * - mainline: after initialization it processes time-non-critical tasks like
+ *      SDO, Heartbeat, etc. nanosleep() is after each cycle. Critical sections
+ *      which accesses data received from CAN(CANrx thread) and data from
+ *      Object dictionary(tmrTask thread) are protected by mutexes.
+ * - tmrTask: Realtime thread first copies data from received PDOs(CANopen
+ *      process data objects) into preconfigured places in Object dictionary(OD).
+ *      Then it prepares transmitting PDOs from OD data and sends it over CAN
+ *      according to PDO transmission and mapping parameters.
+ *      tmrTask thread executes fast and is protected by mutex.
+ * - CANrx: Realtime thread receives CAN messages. It delivers CAN message to
+ *      correct CANopen object. Message is later processed by another thread.
+ *      CANrx thread executes fast and is protected by mutex.
+ */
+
+/* Timer periodic thread */
+    static void* tmrTask_thread(void* arg);
+    static pthread_mutex_t tmrTask_mtx = PTHREAD_MUTEX_INITIALIZER;
+
+/* CAN Receive thread */
+    static void* CANrx_thread(void* arg);
+    static pthread_mutex_t CANrx_mtx = PTHREAD_MUTEX_INITIALIZER;
 
 
-/* Timer thread with period 1ms */
-    static void* tmr1ms_thread(void* arg);
-    static int tmr1ms_fd;
-    static bool_t tmr1ms_justStarted;
-
-
-/* Wake up task ***************************************************************/
-static void wakeUpTask(uint32_t arg){
-//    RTX_Wakeup(arg);
+/* Helper functions ***********************************************************/
+static void errExit(char* msg) {
+    perror(msg);
+    exit(EXIT_FAILURE);
 }
+
+//static void wakeUpTask(uint32_t arg){
+//    RTX_Wakeup(arg);
+//}
 
 /* main ***********************************************************************/
 int main (int argc, char *argv[]){
-    int s;
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     struct timespec sleep50ms, sleep2ms;
-    struct itimerspec tmr1ms_spec;
-    pthread_t thread_timer1ms = 0;
+    pthread_t tmrTask_id, CANrx_id;
+#ifdef USE_RT_SCHEDULER
+    const struct sched_param tmrTask_priority = {1};
+    const struct sched_param CANrx_priority = {1};
+#endif
     uint8_t powerOn = 1;
 
     printf("%s - starting ...\n", argv[0]);
@@ -90,45 +118,36 @@ int main (int argc, char *argv[]){
     sleep2ms.tv_nsec = 2000000L;
 
 
-    /* Prepare timer and thread  with 1ms interval */
-    tmr1ms_fd = timerfd_create(CLOCK_MONOTONIC, 0);
-    if(tmr1ms_fd == -1) {
-        perror("Timerfd creation failed.");
-        exit(EXIT_FAILURE);
-    }
-
-    tmr1ms_spec.it_interval.tv_sec = 0;
-    tmr1ms_spec.it_interval.tv_nsec = 1000000L;
-    tmr1ms_spec.it_value.tv_sec = 0;
-    tmr1ms_spec.it_value.tv_nsec = 1;
-    tmr1ms_justStarted = true;
-    s = timerfd_settime(tmr1ms_fd, 0, &tmr1ms_spec, NULL);
-    if(s != 0) {
-        perror("Timerfd failed to start.");
-        exit(EXIT_FAILURE);
-    }
-
-    s = pthread_create(&thread_timer1ms, NULL, tmr1ms_thread, NULL);
-    if(s != 0) {
-        perror("Timer thread creation failed.");
-        exit(EXIT_FAILURE);
-    }
-
-
     /* Verify, if OD structures have proper alignment of initial values */
     if(CO_OD_RAM.FirstWord != CO_OD_RAM.LastWord) {
-        fprintf(stderr, "%s - Error in CO_OD_RAM.\n", argv[0]);
+        fprintf(stderr, "Program init - %s - Error in CO_OD_RAM.\n", argv[0]);
         exit(EXIT_FAILURE);
     }
     if(CO_OD_EEPROM.FirstWord != CO_OD_EEPROM.LastWord) {
-        fprintf(stderr, "%s - Error in CO_OD_EEPROM.\n", argv[0]);
+        fprintf(stderr, "Program init - %s - Error in CO_OD_EEPROM.\n", argv[0]);
         exit(EXIT_FAILURE);
     }
     if(CO_OD_ROM.FirstWord != CO_OD_ROM.LastWord) {
-        fprintf(stderr, "%s - Error in CO_OD_ROM.\n", argv[0]);
+        fprintf(stderr, "Program init - %s - Error in CO_OD_ROM.\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
+
+    /* Generate RT thread with constant interval */
+    if(pthread_create(&tmrTask_id, NULL, tmrTask_thread, NULL) != 0)
+        errExit("Program init - tmrTask thread creation failed");
+#ifdef USE_RT_SCHEDULER
+    if(pthread_setschedparam(tmrTask_id, SCHED_FIFO, &tmrTask_priority) != 0)
+        errExit("Program init - tmrTask thread set scheduler failed");
+#endif
+
+    /* Generate RT thread for CAN receive */
+    if(pthread_create(&CANrx_id, NULL, CANrx_thread, NULL) != 0)
+        errExit("Program init - CANrx thread creation failed");
+#ifdef USE_RT_SCHEDULER
+    if(pthread_setschedparam(CANrx_id, SCHED_FIFO, &CANrx_priority) != 0)
+        errExit("Program init - CANrx thread set scheduler failed");
+#endif
 
 //    /* initialize battery powered SRAM */
 //    struct{
@@ -186,19 +205,33 @@ int main (int argc, char *argv[]){
 
         printf("%s - communication reset ...\n", argv[0]);
 
-        /* disable timer and CAN interrupts */
-//        if(TaskTimerID) RTX_Suspend_Task(TaskTimerID);
+        /* Wait tmrTask and CANrx, then configure CAN */
+        if(pthread_mutex_lock(&tmrTask_mtx) != 0)
+            errExit("mainline - Mutex lock tmrTask failed");
+        if(pthread_mutex_lock(&CANrx_mtx) != 0)
+            errExit("mainline - Mutex lock CANrx failed");
+
+        CO_CAN_OK = false;
+
+        if(pthread_mutex_unlock(&tmrTask_mtx) != 0)
+            errExit("mainline - Mutex unlock tmrTask failed");
+        if(pthread_mutex_unlock(&CANrx_mtx) != 0)
+            errExit("mainline - Mutex unlock CANrx failed");
+
         CO_CANsetConfigurationMode(ADDR_CAN1);
 
 
         /* initialize CANopen */
         err = CO_init();
         if(err != CO_ERROR_NO){
-            perror("CANopen initialization failed.");
+            fprintf(stderr, "Communication reset - %s - CANopen initialization failed.\n", argv[0]);
             exit(EXIT_FAILURE);
-            /* CO_errorReport(CO->em, CO_EM_MEMORY_ALLOCATION_ERROR, CO_EMC_SOFTWARE_INTERNAL, err); */
         }
 
+        /* Prepare function, which will wake this task after CAN SDO response is */
+        /* received (inside CAN receive interrupt). */
+//        CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
+//        CO->SDO->functArg = RTX_Get_TaskID();  /* id of this task */
 
 //        /* initialize eeprom - part 2 */
 //        CO_EE_init_2(&CO_EEO, eeStatus, CO->SDO, CO->em);
@@ -213,24 +246,11 @@ int main (int argc, char *argv[]){
 
         /* start CAN */
         CO_CANsetNormalMode(ADDR_CAN1);
-
-
-        /* Configure Timer interrupt function for execution every 1 millisecond */
-//        if(TaskTimerID){
-//            RTX_Resume_Task(TaskTimerID);
-//        }
-//        else{
-//            TaskTimerID = RTX_NewTask(&TaskTimerDef);
-//        }
+        CO_CAN_OK = true;
 
         reset = CO_RESET_NOT;
         timer1msPrevious = CO_timer1ms;
         printf("%s - running ...\n", argv[0]);
-
-        /* Prepare function, which will wake this task after CAN SDO response is */
-        /* received (inside CAN receive interrupt). */
-        CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
-//        CO->SDO->functArg = RTX_Get_TaskID();  /* id of this task */
 
         while(reset == CO_RESET_NOT){
 /* loop for normal program execution ******************************************/
@@ -261,9 +281,11 @@ int main (int argc, char *argv[]){
 
 
 /* program exit ***************************************************************/
-    /* delete timer task */
-        //Will be removed on exit
-    //TODO mutex
+    /* lock threads */
+    if(pthread_mutex_lock(&tmrTask_mtx) != 0)
+        errExit("Program exit - Mutex lock tmrTask failed");
+    if(pthread_mutex_lock(&CANrx_mtx) != 0)
+        errExit("Program exit - Mutex lock CANrx failed");
 
     /* delete objects from memory */
     CO_delete();
@@ -272,54 +294,72 @@ int main (int argc, char *argv[]){
 
 
     printf("%s - finished.\n", argv[0]);
-//    if(reset == CO_RESET_APP) BIOS_Reboot(); /* CANopen reset node */
+//    if(reset == CO_RESET_APP) reboot(); /* CANopen reset node */
     exit(EXIT_SUCCESS);
 }
 
 
 /* timer thread executes every millisecond ************************************/
-static void* tmr1ms_thread(void* arg) {
-    ssize_t n;
-    uint64_t tmrNumExp;
-    struct timespec clockStart, clockStop;
-    long ticks;
+static void* tmrTask_thread(void* arg) {
+    struct timespec tmr;
 
-    volatile static uint16_t cnt = 0, cnt2 = 0;
+    if(clock_gettime(CLOCK_MONOTONIC, &tmr) == -1)
+        errExit("tmrTask - gettime failed");
 
     for(;;) {
-        /* Wait for timer to expire */
-        n = read(tmr1ms_fd, &tmrNumExp, sizeof(tmrNumExp));
-        if(n != sizeof(uint64_t)) {
-            perror("Timer thread failed.");
-            exit(EXIT_FAILURE);
+        /* Wait for timer to expire, then calculate next shot */
+        clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &tmr, NULL);
+        tmr.tv_nsec += TMR_TASK_INTERVAL;
+        if(tmr.tv_nsec >= NSEC_PER_SEC) {
+            tmr.tv_nsec -= NSEC_PER_SEC;
+            tmr.tv_sec++;
         }
 
-        CO_timer1ms += (uint16_t) tmrNumExp;
+#if 1
+        /* trace timing */
+        long dt = 1000;    //delta-time in microseconds
+        struct timespec tnow;
+        static struct timespec tprev;
+        static int cnt = -1, dtmin = 1000, dtmax= 0, dtmaxmax = 0;
 
-        /* verify overflow */
-        if(tmr1ms_justStarted) {
-            tmr1ms_justStarted = false;
+        clock_gettime(CLOCK_MONOTONIC, &tnow);
+        if(cnt >= 0) {
+            dt = (tnow.tv_sec - tprev.tv_sec) * 1000000;
+            dt += (tnow.tv_nsec - tprev.tv_nsec) / 1000;
         }
-        else if(tmrNumExp != 1) {
-            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
-        }
+        tprev.tv_sec = tnow.tv_sec;
+        tprev.tv_nsec = tnow.tv_nsec;
 
-#ifndef USE_CAN_CALLBACKS
-    /* process received CAN messages */
-//    CO_CANreceive(CO->CANmodule[0]);
-#if CO_NO_CAN_MODULES >= 2
-    CO_CANreceive(CO->CANmodule[1]);
-#endif
-#endif
-
-        CO_process_RPDO(CO);
+        if(dt < dtmin) dtmin = dt;
+        if(dt > dtmax) dtmax = dt;
+        if(dt > dtmaxmax) dtmaxmax = dt;
 
         if(++cnt == 1000) {
-            cnt = 0;
-            printf("tmr: %d\n", cnt2++);
+            printf("tmr: %9ld, %6d, %6d, %6d\n", tnow.tv_nsec/1000, dtmin, dtmax, dtmaxmax);
+            cnt = 0; dtmin = 1000; dtmax = 0;
+        }
+#endif
+
+#if 0
+        /* verify overflow */
+        if(timer_overflow) {
+            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
+        }
+#endif
+
+        /* Lock PDOs and OD */
+        if(pthread_mutex_lock(&tmrTask_mtx) != 0)
+            errExit("tmrTask - Mutex lock failed");
+
+        INCREMENT_1MS(CO_timer1ms);
+
+        if(CO_CAN_OK) {
+            CO_process_RPDO(CO);
+            CO_process_TPDO(CO);
         }
 
-        CO_process_TPDO(CO);
+        if(pthread_mutex_unlock(&tmrTask_mtx) != 0)
+            errExit("tmrTask - Mutex unlock failed");
 
     }
 
@@ -327,13 +367,10 @@ static void* tmr1ms_thread(void* arg) {
 }
 
 
-#ifdef USE_CAN_CALLBACKS
-/* CAN callback function ******************************************************/
-int CAN1callback(CanEvent event, const CanMsg *msg){
-    return CO_CANinterrupt(CO->CANmodule[0], event, msg);
-}
+/* CAN receive thread *********************************************************/
+static void* CANrx_thread(void* arg) {
 
-int CAN2callback(CanEvent event, const CanMsg *msg){
-    return CO_CANinterrupt(CO->CANmodule[1], event, msg);
+//    CO_CANinterrupt(CO->CANmodule[0], event, msg);
+
+    return NULL;
 }
-#endif
