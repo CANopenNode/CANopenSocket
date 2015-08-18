@@ -30,6 +30,10 @@
 //#include "CgiOD.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <pthread.h>
+#include <sys/timerfd.h>
 
 
 /* Global variables and objects */
@@ -56,24 +60,10 @@
 #endif
 
 
-/* Variables for timer task */
-//    static void TaskTimer(void);
-//    static RTX_ID TaskTimerID = 0;
-//    static DWORD TaskTimerStack[10000] ;
-//    static const RtxTaskDefS TaskTimerDef = {
-//        {'C', 'O', 'T', 'M'},               /*  tkdTag[4] */
-//        (RTX_TASK_PROC) TaskTimer,          /*  tkdProc */
-//        &TaskTimerStack[0],                 /*  tkdStackBase */
-//        sizeof(TaskTimerStack),             /*  tkdStackSize */
-//        0,                                  /*  tkdlParam (not used here) */
-//        22,                                 /*  tkdPriority */
-//        RTX_TA_PERIODIC | RTX_TA_CATCH_UP,  /*  tkdAttr */
-//        0,                                  /*  tkdSlice */
-//        1,                                  /*  tkdPeriod [ms] */
-//        /*  Remaining members tkdPhase, and tkdPhaseRef */
-//        /*  play no role in this example since their corresponding tkdAttr */
-//        /*  flags are zero. */
-//    } ;
+/* Timer thread with period 1ms */
+    static void* tmr1ms_thread(void* arg);
+    static int tmr1ms_fd;
+    static bool_t tmr1ms_justStarted;
 
 
 /* Wake up task ***************************************************************/
@@ -83,10 +73,46 @@ static void wakeUpTask(uint32_t arg){
 
 /* main ***********************************************************************/
 int main (int argc, char *argv[]){
+    int s;
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
+    struct timespec sleep50ms, sleep2ms;
+    struct itimerspec tmr1ms_spec;
+    pthread_t thread_timer1ms = 0;
     uint8_t powerOn = 1;
 
     printf("%s - starting ...\n", argv[0]);
+
+
+    /* Init variables */
+    sleep50ms.tv_sec = 0;
+    sleep50ms.tv_nsec = 50000000L;
+    sleep2ms.tv_sec = 0;
+    sleep2ms.tv_nsec = 2000000L;
+
+
+    /* Prepare timer and thread  with 1ms interval */
+    tmr1ms_fd = timerfd_create(CLOCK_MONOTONIC, 0);
+    if(tmr1ms_fd == -1) {
+        perror("Timerfd creation failed.");
+        exit(EXIT_FAILURE);
+    }
+
+    tmr1ms_spec.it_interval.tv_sec = 0;
+    tmr1ms_spec.it_interval.tv_nsec = 1000000L;
+    tmr1ms_spec.it_value.tv_sec = 0;
+    tmr1ms_spec.it_value.tv_nsec = 1;
+    tmr1ms_justStarted = true;
+    s = timerfd_settime(tmr1ms_fd, 0, &tmr1ms_spec, NULL);
+    if(s != 0) {
+        perror("Timerfd failed to start.");
+        exit(EXIT_FAILURE);
+    }
+
+    s = pthread_create(&thread_timer1ms, NULL, tmr1ms_thread, NULL);
+    if(s != 0) {
+        perror("Timer thread creation failed.");
+        exit(EXIT_FAILURE);
+    }
 
 
     /* Verify, if OD structures have proper alignment of initial values */
@@ -167,7 +193,7 @@ int main (int argc, char *argv[]){
 
         /* initialize CANopen */
         err = CO_init();
-       if(err != CO_ERROR_NO){
+        if(err != CO_ERROR_NO){
             perror("CANopen initialization failed.");
             exit(EXIT_FAILURE);
             /* CO_errorReport(CO->em, CO_EM_MEMORY_ALLOCATION_ERROR, CO_EMC_SOFTWARE_INTERNAL, err); */
@@ -197,8 +223,6 @@ int main (int argc, char *argv[]){
 //            TaskTimerID = RTX_NewTask(&TaskTimerDef);
 //        }
 
-        OD_performance[ODA_performance_mainCycleMaxTime] = 0;
-        OD_performance[ODA_performance_timerCycleMaxTime] = 0;
         reset = CO_RESET_NOT;
         timer1msPrevious = CO_timer1ms;
         printf("%s - running ...\n", argv[0]);
@@ -208,13 +232,9 @@ int main (int argc, char *argv[]){
         CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
 //        CO->SDO->functArg = RTX_Get_TaskID();  /* id of this task */
 
-
         while(reset == CO_RESET_NOT){
 /* loop for normal program execution ******************************************/
             uint16_t timer1msCopy, timer1msDiff;
-
-            /* read start time for performance measurement */
-//            uint32_t TB_prev = readTB();
 
             timer1msCopy = CO_timer1ms;
             timer1msDiff = timer1msCopy - timer1msPrevious;
@@ -224,26 +244,14 @@ int main (int argc, char *argv[]){
             /* CANopen process */
             reset = CO_process(CO, timer1msDiff);
 
-//            if(kbhit()) if(getch() == 'q') reset = CO_RESET_QUIT; /* quit only, no reboot */
-
 //            CgiLogEmcyProcess(CgiLog);
 
 
-            /* calculate cycle time for performance measurement */
-            /* units are 0,01 * ms (percent of timer cycle time) */
-//            uint32_t ticks = readTB() - TB_prev;
-//            ticks /= RTX_TB_TICKS_PER_us * 10;
-//            if(ticks > 0xFFFF) ticks = 0xFFFF;
-//            OD_performance[ODA_performance_mainCycleTime] = ticks;
-//            if(ticks > OD_performance[ODA_performance_mainCycleMaxTime])
-//                OD_performance[ODA_performance_mainCycleMaxTime] = ticks;
-
-
             if(CO->SDO->state == CO_SDO_ST_UPLOAD_BL_SUBBLOCK) {
-//                RTX_Sleep_Time(2);
+                nanosleep(&sleep2ms, NULL);
             }
             else {
-//                RTX_Sleep_Time(50);
+                nanosleep(&sleep50ms, NULL);
             }
 
 
@@ -254,7 +262,8 @@ int main (int argc, char *argv[]){
 
 /* program exit ***************************************************************/
     /* delete timer task */
-//    RTX_Delete_Task(TaskTimerID);
+        //Will be removed on exit
+    //TODO mutex
 
     /* delete objects from memory */
     CO_delete();
@@ -268,21 +277,32 @@ int main (int argc, char *argv[]){
 }
 
 
-/* timer interrupt function executes every millisecond ************************/
-static void TaskTimer(void){
-    volatile static uint8_t catchUp = 0;
+/* timer thread executes every millisecond ************************************/
+static void* tmr1ms_thread(void* arg) {
+    ssize_t n;
+    uint64_t tmrNumExp;
+    struct timespec clockStart, clockStop;
+    long ticks;
 
-    CO_timer1ms++;
+    volatile static uint16_t cnt = 0, cnt2 = 0;
 
-    /* verify overflow */
-    if(catchUp++){
-        OD_performance[ODA_performance_timerCycleMaxTime] = 100;
-        CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
-        return;
-    }
+    for(;;) {
+        /* Wait for timer to expire */
+        n = read(tmr1ms_fd, &tmrNumExp, sizeof(tmrNumExp));
+        if(n != sizeof(uint64_t)) {
+            perror("Timer thread failed.");
+            exit(EXIT_FAILURE);
+        }
 
-    /* read start time for performance measurement */
-//    uint32_t TB_prev = readTB();
+        CO_timer1ms += (uint16_t) tmrNumExp;
+
+        /* verify overflow */
+        if(tmr1ms_justStarted) {
+            tmr1ms_justStarted = false;
+        }
+        else if(tmrNumExp != 1) {
+            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
+        }
 
 #ifndef USE_CAN_CALLBACKS
     /* process received CAN messages */
@@ -292,21 +312,18 @@ static void TaskTimer(void){
 #endif
 #endif
 
-    CO_process_RPDO(CO);
+        CO_process_RPDO(CO);
 
+        if(++cnt == 1000) {
+            cnt = 0;
+            printf("tmr: %d\n", cnt2++);
+        }
 
-    CO_process_TPDO(CO);
+        CO_process_TPDO(CO);
 
-    /* calculate cycle time for performance measurement */
-    /* units are 0,01 * ms (percent of timer cycle time) */
-//    uint32_t ticks = readTB() - TB_prev;
-//    ticks /= RTX_TB_TICKS_PER_us * 10;
-//    if(ticks > 0xFFFF) ticks = 0xFFFF;
-//    OD_performance[ODA_performance_timerCycleTime] = ticks;
-//    if(ticks > OD_performance[ODA_performance_timerCycleMaxTime])
-//        OD_performance[ODA_performance_timerCycleMaxTime] = ticks;
+    }
 
-    catchUp--;
+    return NULL;
 }
 
 

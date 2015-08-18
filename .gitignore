@@ -1,5 +1,6 @@
 canopend
 *.o
+*.bak
 
 doc/
 
