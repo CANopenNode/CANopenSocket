@@ -37,7 +37,7 @@
 
 
 #define NSEC_PER_SEC        (1000000000)    /* The number of nsecs per sec. */
-#define TMR_TASK_INTERVAL   (1000000)       /* Interval of tmrTask thread in nsec */
+#define TMR_TASK_INTERVAL   (1000)          /* Interval of tmrTask thread in microseconds */
 #define INCREMENT_1MS(var)  (var++)         /* Increment 1ms variable in tmrTask */
 #define USE_RT_SCHEDULER
 
@@ -75,7 +75,8 @@
  *      tmrTask thread executes fast and is protected by mutex.
  * - CANrx: Realtime thread receives CAN messages. It delivers CAN message to
  *      correct CANopen object. Message is later processed by another thread.
- *      CANrx thread executes fast and is protected by mutex.
+ *      It is locked by mutex only by cbCANrx_lockBySync() function. Other
+ *      CANopen objects don't need locking of the CANrx.
  */
 
 /* Timer periodic thread */
@@ -84,13 +85,29 @@
 
 /* CAN Receive thread */
     static void* CANrx_thread(void* arg);
+    static bool_t CANrx_lockedBySync = false;
     static pthread_mutex_t CANrx_mtx = PTHREAD_MUTEX_INITIALIZER;
 
 
 /* Helper functions ***********************************************************/
-static void errExit(char* msg) {
+static void errExit(char* msg){
     perror(msg);
     exit(EXIT_FAILURE);
+}
+
+static void cbCANrx_lockBySync(void *arg){
+    //CALLBACK function is called immediatelly after SYNC message on CAN bus.
+    //It mutes CAN receive thread.
+    if(pthread_mutex_lock(&CANrx_mtx) != 0)
+        errExit("CANrx - Mutex lock failed");
+    CANrx_lockedBySync = true;
+}
+static void cbCANrx_unlockBySync(void){
+    if(CANrx_lockedBySync){
+        if(pthread_mutex_unlock(&CANrx_mtx) != 0)
+            errExit("CANrx - Mutex unlock failed");
+        CANrx_lockedBySync = false;
+    }
 }
 
 //static void wakeUpTask(uint32_t arg){
@@ -228,6 +245,8 @@ int main (int argc, char *argv[]){
             exit(EXIT_FAILURE);
         }
 
+        /* set callback functions for task control. */
+        CO_SYNC_initCallback(CO->SYNC, cbCANrx_lockBySync, NULL);
         /* Prepare function, which will wake this task after CAN SDO response is */
         /* received (inside CAN receive interrupt). */
 //        CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
@@ -264,6 +283,8 @@ int main (int argc, char *argv[]){
             /* CANopen process */
             reset = CO_process(CO, timer1msDiff);
 
+            /* Nonblocking application code may go here. */
+
 //            CgiLogEmcyProcess(CgiLog);
 
 
@@ -275,6 +296,7 @@ int main (int argc, char *argv[]){
             }
 
 
+            /* Process EEPROM */
 //            CO_EE_process(&CO_EEO);
         }
     }
@@ -299,7 +321,7 @@ int main (int argc, char *argv[]){
 }
 
 
-/* timer thread executes every millisecond ************************************/
+/* timer thread executes in constant intervals ********************************/
 static void* tmrTask_thread(void* arg) {
     struct timespec tmr;
 
@@ -309,7 +331,7 @@ static void* tmrTask_thread(void* arg) {
     for(;;) {
         /* Wait for timer to expire, then calculate next shot */
         clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &tmr, NULL);
-        tmr.tv_nsec += TMR_TASK_INTERVAL;
+        tmr.tv_nsec += (TMR_TASK_INTERVAL*1000);
         if(tmr.tv_nsec >= NSEC_PER_SEC) {
             tmr.tv_nsec -= NSEC_PER_SEC;
             tmr.tv_sec++;
@@ -340,13 +362,6 @@ static void* tmrTask_thread(void* arg) {
         }
 #endif
 
-#if 0
-        /* verify overflow */
-        if(timer_overflow) {
-            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
-        }
-#endif
-
         /* Lock PDOs and OD */
         if(pthread_mutex_lock(&tmrTask_mtx) != 0)
             errExit("tmrTask - Mutex lock failed");
@@ -354,12 +369,41 @@ static void* tmrTask_thread(void* arg) {
         INCREMENT_1MS(CO_timer1ms);
 
         if(CO_CAN_OK) {
-            CO_process_RPDO(CO);
-            CO_process_TPDO(CO);
+            int16_t i;
+            bool_t syncWas = false;
+
+            /* Process SYNC */
+            switch(CO_SYNC_process(CO->SYNC, TMR_TASK_INTERVAL, OD_synchronousWindowLength)){
+                case 1: syncWas = true; break;  //immediatelly after SYNC message
+                case 2: CO_CANclearPendingSyncPDOs(CO->CANmodule[0]); break; //outside SYNC window
+            }
+
+            /* Process RPDOs */
+            for(i=0; i<CO_NO_RPDO; i++){
+                CO_RPDO_process(CO->RPDO[i], syncWas);
+            }
+
+            /* Reenable CANrx, if it was disabled by SYNC callback */
+            cbCANrx_unlockBySync();
+
+            /* Further I/O or nonblocking application code may go here. */
+
+            /* Verify PDO Change Of State and process PDOs */
+            for(i=0; i<CO_NO_TPDO; i++){
+                if(!CO->TPDO[i]->sendRequest) CO->TPDO[i]->sendRequest = CO_TPDOisCOS(CO->TPDO[i]);
+                CO_TPDO_process(CO->TPDO[i], CO->SYNC, syncWas, TMR_TASK_INTERVAL);
+            }
         }
 
         if(pthread_mutex_unlock(&tmrTask_mtx) != 0)
             errExit("tmrTask - Mutex unlock failed");
+
+#if 0
+        /* verify overflow */
+        if(timer_overflow_??) {
+            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
+        }
+#endif
 
     }
 
