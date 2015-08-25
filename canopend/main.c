@@ -39,7 +39,7 @@
 #define NSEC_PER_SEC        (1000000000)    /* The number of nsecs per sec. */
 #define TMR_TASK_INTERVAL   (1000)          /* Interval of tmrTask thread in microseconds */
 #define INCREMENT_1MS(var)  (var++)         /* Increment 1ms variable in tmrTask */
-#define USE_RT_SCHEDULER
+//#define NO_RT_SCHEDULER
 
 
 /* Global variables and objects */
@@ -119,7 +119,7 @@ int main (int argc, char *argv[]){
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     struct timespec sleep50ms, sleep2ms;
     pthread_t tmrTask_id, CANrx_id;
-#ifdef USE_RT_SCHEDULER
+#ifndef NO_RT_SCHEDULER
     const struct sched_param tmrTask_priority = {1};
     const struct sched_param CANrx_priority = {1};
 #endif
@@ -153,7 +153,7 @@ int main (int argc, char *argv[]){
     /* Generate RT thread with constant interval */
     if(pthread_create(&tmrTask_id, NULL, tmrTask_thread, NULL) != 0)
         errExit("Program init - tmrTask thread creation failed");
-#ifdef USE_RT_SCHEDULER
+#ifndef NO_RT_SCHEDULER
     if(pthread_setschedparam(tmrTask_id, SCHED_FIFO, &tmrTask_priority) != 0)
         errExit("Program init - tmrTask thread set scheduler failed");
 #endif
@@ -161,7 +161,7 @@ int main (int argc, char *argv[]){
     /* Generate RT thread for CAN receive */
     if(pthread_create(&CANrx_id, NULL, CANrx_thread, NULL) != 0)
         errExit("Program init - CANrx thread creation failed");
-#ifdef USE_RT_SCHEDULER
+#ifndef NO_RT_SCHEDULER
     if(pthread_setschedparam(CANrx_id, SCHED_FIFO, &CANrx_priority) != 0)
         errExit("Program init - CANrx thread set scheduler failed");
 #endif
@@ -400,7 +400,7 @@ static void* tmrTask_thread(void* arg) {
 
 #if 0
         /* verify overflow */
-        if(timer_overflow_??) {
+        if(timer_overflow) {
             CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
         }
 #endif

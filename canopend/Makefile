@@ -1,9 +1,9 @@
 # Makefile for CANopend.
 
 
-STACK_SRC =     CANopenNode/stack
-STACKDRV_SRC =  CANopenNode/stack/drvTemplate
-CANOPEN_SRC =   CANopenNode
+STACK_SRC =     ../CANopenNode/stack
+STACKDRV_SRC =  ../CANopenNode/stack/drvTemplate
+CANOPEN_SRC =   ../CANopenNode
 APPL_SRC =      .
 
 
