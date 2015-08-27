@@ -90,22 +90,24 @@
 
 
 /* Helper functions ***********************************************************/
-static void errExit(char* msg){
+void CO_errExit(char* msg){
     perror(msg);
     exit(EXIT_FAILURE);
 }
 
-static void cbCANrx_lockBySync(void *arg){
+static void cbCANrx_lockBySync(bool_t syncReceived){
     //CALLBACK function is called immediatelly after SYNC message on CAN bus.
     //It mutes CAN receive thread.
-    if(pthread_mutex_lock(&CANrx_mtx) != 0)
-        errExit("CANrx - Mutex lock failed");
+    if(!syncReceived){
+        if(pthread_mutex_lock(&CANrx_mtx) != 0)
+            CO_errExit("CANrx - Mutex lock failed");
+    }
     CANrx_lockedBySync = true;
 }
 static void cbCANrx_unlockBySync(void){
     if(CANrx_lockedBySync){
         if(pthread_mutex_unlock(&CANrx_mtx) != 0)
-            errExit("CANrx - Mutex unlock failed");
+            CO_errExit("CANrx - Mutex unlock failed");
         CANrx_lockedBySync = false;
     }
 }
@@ -152,18 +154,18 @@ int main (int argc, char *argv[]){
 
     /* Generate RT thread with constant interval */
     if(pthread_create(&tmrTask_id, NULL, tmrTask_thread, NULL) != 0)
-        errExit("Program init - tmrTask thread creation failed");
+        CO_errExit("Program init - tmrTask thread creation failed");
 #ifndef NO_RT_SCHEDULER
     if(pthread_setschedparam(tmrTask_id, SCHED_FIFO, &tmrTask_priority) != 0)
-        errExit("Program init - tmrTask thread set scheduler failed");
+        CO_errExit("Program init - tmrTask thread set scheduler failed");
 #endif
 
     /* Generate RT thread for CAN receive */
     if(pthread_create(&CANrx_id, NULL, CANrx_thread, NULL) != 0)
-        errExit("Program init - CANrx thread creation failed");
+        CO_errExit("Program init - CANrx thread creation failed");
 #ifndef NO_RT_SCHEDULER
     if(pthread_setschedparam(CANrx_id, SCHED_FIFO, &CANrx_priority) != 0)
-        errExit("Program init - CANrx thread set scheduler failed");
+        CO_errExit("Program init - CANrx thread set scheduler failed");
 #endif
 
 //    /* initialize battery powered SRAM */
@@ -223,30 +225,28 @@ int main (int argc, char *argv[]){
         printf("%s - communication reset ...\n", argv[0]);
 
         /* Wait tmrTask and CANrx, then configure CAN */
-        if(pthread_mutex_lock(&tmrTask_mtx) != 0)
-            errExit("mainline - Mutex lock tmrTask failed");
+        CO_LOCK_OD();
         if(pthread_mutex_lock(&CANrx_mtx) != 0)
-            errExit("mainline - Mutex lock CANrx failed");
+            CO_errExit("mainline - Mutex lock CANrx failed");
 
         CO_CAN_OK = false;
 
-        if(pthread_mutex_unlock(&tmrTask_mtx) != 0)
-            errExit("mainline - Mutex unlock tmrTask failed");
+        CO_UNLOCK_OD();
         if(pthread_mutex_unlock(&CANrx_mtx) != 0)
-            errExit("mainline - Mutex unlock CANrx failed");
+            CO_errExit("mainline - Mutex unlock CANrx failed");
 
         CO_CANsetConfigurationMode(ADDR_CAN1);
 
 
         /* initialize CANopen */
-        err = CO_init();
+        err = CO_init(-1);
         if(err != CO_ERROR_NO){
             fprintf(stderr, "Communication reset - %s - CANopen initialization failed.\n", argv[0]);
             exit(EXIT_FAILURE);
         }
 
         /* set callback functions for task control. */
-        CO_SYNC_initCallback(CO->SYNC, cbCANrx_lockBySync, NULL);
+        CO_SYNC_initCallback(CO->SYNC, cbCANrx_lockBySync);
         /* Prepare function, which will wake this task after CAN SDO response is */
         /* received (inside CAN receive interrupt). */
 //        CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
@@ -304,13 +304,12 @@ int main (int argc, char *argv[]){
 
 /* program exit ***************************************************************/
     /* lock threads */
-    if(pthread_mutex_lock(&tmrTask_mtx) != 0)
-        errExit("Program exit - Mutex lock tmrTask failed");
+    CO_LOCK_OD();
     if(pthread_mutex_lock(&CANrx_mtx) != 0)
-        errExit("Program exit - Mutex lock CANrx failed");
+        CO_errExit("Program exit - Mutex lock CANrx failed");
 
     /* delete objects from memory */
-    CO_delete();
+    CO_delete(-1);
 //    CgiLog_delete(CgiLog);
 //    CgiCli_delete(CgiCli);
 
@@ -326,7 +325,7 @@ static void* tmrTask_thread(void* arg) {
     struct timespec tmr;
 
     if(clock_gettime(CLOCK_MONOTONIC, &tmr) == -1)
-        errExit("tmrTask - gettime failed");
+        CO_errExit("tmrTask - gettime failed");
 
     for(;;) {
         /* Wait for timer to expire, then calculate next shot */
@@ -363,8 +362,7 @@ static void* tmrTask_thread(void* arg) {
 #endif
 
         /* Lock PDOs and OD */
-        if(pthread_mutex_lock(&tmrTask_mtx) != 0)
-            errExit("tmrTask - Mutex lock failed");
+        CO_LOCK_OD();
 
         INCREMENT_1MS(CO_timer1ms);
 
@@ -385,8 +383,7 @@ static void* tmrTask_thread(void* arg) {
             CO_process_TPDO(CO, syncWas, TMR_TASK_INTERVAL);
         }
 
-        if(pthread_mutex_unlock(&tmrTask_mtx) != 0)
-            errExit("tmrTask - Mutex unlock failed");
+        CO_UNLOCK_OD();
 
 #if 0
         /* verify overflow */
