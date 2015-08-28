@@ -1,12 +1,56 @@
-CANopenSocket is Linux implementation of CANopen device with master functionality.
+CANopenSocket
+=============
 
-It is based on CANopenNode, which is an opensource CANopen Stack and is included as git submodule.
+CANopenSocket is a collection of CANopen tools running on Linux with socketCAN interface.
+It is based on CANopenNode, which is an opensource [CANopen](http://can-cia.org/) Stack ([CiA301](http://can-cia.org/standardization/technical-documents)) and is included as a git submodule.
+
+canopend
+--------
+
+canopend is an implementation of CANopen device with master functionality.
+
+
+**First words on CAN bus:**
 
 To clone the project with submodules use:
-git clone --recursive https://github.com/CANopenNode/CANopenSocket.git
 
-Project is based on BECK_SC2x3 from 
-http://sourceforge.net/p/canopennode/code_complete/
+    git clone --recursive https://github.com/CANopenNode/CANopenSocket.git
+
+Compile:
+
+    cd CANopenSocket/canopend
+    make
+
+Now go to second terminal and prepare CAN (virtual) device:
+
+    sudo modprobe vcan
+    sudo ip link add dev vcan0 type vcan
+    sudo ip link set up vcan0
+
+From the same terminal run candump from [can-utils](https://github.com/linux-can/can-utils):
+
+    candump vcan0
+
+Now go to the first terminal and run canopend on vcan0, nodeId=3, no realtime scheduler:
+
+    ./canopend vcan0 -i3 -p-1
+
+Program will print some debug text, then it will print some nonsense line each second. You may stop canopend after few seconds with ctrl-c.
+
+On second terminal will show something like this:
+
+    vcan0  703   [1]  00
+    vcan0  183   [2]  00 00
+    vcan0  083   [8]  00 00 00 22 01 00 00 00
+    vcan0  703   [1]  05
+    vcan0  703   [1]  05
+    vcan0  703   [1]  05
+    ....
+
+That is bootup message from nodeId=3, one PDO, informative emergency message (22=CO_EM_MICROCONTROLLER_RESET) and heartbeat messages in 1s interval informing that node is operational.
+
+It seems CANopenNode started talking Linux.
+
 
 To be continued ...
 

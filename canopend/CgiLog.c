@@ -218,7 +218,7 @@ void CgiLog_delete(CgiLog_t *CgiLog){
 /******************************************************************************/
 void CO_logMessage(const CanMsg *msg){
     extern CgiLog_t *CgiLog;
-
+make it reentrant or use mutex
     /* variables */
     uint32_t   timeStamp = RTX_GetTickCount();
     uint8_t    len       = msg->len;

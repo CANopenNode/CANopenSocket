@@ -2,7 +2,7 @@
 
 
 STACK_SRC =     ../CANopenNode/stack
-STACKDRV_SRC =  ../CANopenNode/stack/drvTemplate
+STACKDRV_SRC =  ../CANopenNode/stack/socketCAN
 CANOPEN_SRC =   ../CANopenNode
 APPL_SRC =      .
 
