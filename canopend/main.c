@@ -405,7 +405,7 @@ static void* tmrTask_thread(void* arg) {
     if(clock_gettime(CLOCK_MONOTONIC, &tmr) == -1)
         CO_errExit("tmrTask - gettime failed");
 
-    for(;;) {
+    for(;;){
         /* Wait for timer to expire, then calculate next shot */
         clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &tmr, NULL);
         tmr.tv_nsec += (TMR_TASK_INTERVAL*1000);
@@ -479,7 +479,18 @@ static void* tmrTask_thread(void* arg) {
 /* CAN receive thread *********************************************************/
 static void* CANrx_thread(void* arg) {
 
-//    CO_CANinterrupt(CO->CANmodule[0], event, msg);
+    for(;;){
+        struct can_frame msg;
+        int n, size;
+
+        size = sizeof(struct can_frame);
+        n = read(CO->CANmodule[0]->fdSocket, &msg, size);
+        if(n != size) {
+            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_GENERIC, n);
+        }else{
+            CO_CANreceive(CO->CANmodule[0], &msg);
+        }
+    }
 
     return NULL;
 }
