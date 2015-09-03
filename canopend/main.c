@@ -32,8 +32,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <signal.h>
 
 #include <pthread.h>
+#include <semaphore.h>
 #include <sys/timerfd.h>
 
 #include <net/if.h>
@@ -41,14 +43,15 @@
 #include <linux/can.h>
 
 
-#define NSEC_PER_SEC        (1000000000)    /* The number of nsecs per sec. */
-#define TMR_TASK_INTERVAL   (1000)          /* Interval of tmrTask thread in microseconds */
-#define INCREMENT_1MS(var)  (var++)         /* Increment 1ms variable in tmrTask */
+#define NSEC_PER_SEC        (1000000000)        /* The number of nsecs per sec. */
+#define TMR_TASK_INTERVAL   (1000)              /* Interval of tmrTask thread in microseconds */
+#define INCREMENT_1MS(var)  (var++)             /* Increment 1ms variable in tmrTask */
 
 
 /* Global variables and objects */
-    volatile uint16_t   CO_timer1ms = 0U;   /* variable increments each millisecond */
-    volatile bool_t     CO_CAN_OK = false;  /* CAN in normal mode indicator */
+    volatile uint16_t       CO_timer1ms = 0U;   /* variable increments each millisecond */
+    static volatile bool_t  CAN_OK = false;     /* CAN in normal mode indicator */
+    static int              CANsocket0 = -1;    /* CAN socket[0] */
 
 //    CO_EE_t             CO_EEO;             /* EEprom object */
 
@@ -66,19 +69,45 @@
 //    uint8_t CgiCliSDObuf[CgiCliSDObufSize];
 
 
-/* Program structure and critical sections
- * Program runs in multiple threads.
+/* Threads and synchronization *************************************************
  * For program structure see CANopenNode/README.
- * For info on critical sections see CANopenNode/stack/drvTemplate/CO_driver.h.
- */
+ * For info on critical sections see CANopenNode/stack/drvTemplate/CO_driver.h. */
 
 /* Timer periodic thread */
     static void* tmrTask_thread(void* arg);
 
-/* CAN Receive thread */
+/* CAN Receive thread and locking */
     static void* CANrx_thread(void* arg);
-    static bool_t CANrx_lockedBySync = false;
-    static pthread_mutex_t CANrx_mtx = PTHREAD_MUTEX_INITIALIZER;
+    /* After presence of SYNC message on CANopen bus, CANrx should be
+     * temporary disabled until all receive PDOs are processed. See
+     * also CO_SYNC.h file and CO_SYNC_initCallback() function. */
+    static sem_t CANrx_sem;
+    volatile static int CANrx_semCnt;
+    static int CANrx_semInit(void){
+        return sem_init(&CANrx_sem, 0, 1);
+    }
+    static void CANrx_lockCbSync(bool_t syncReceived){
+        /* Callback function is called at SYNC message on CAN bus.
+         * It disables CAN receive thread. Tries to lock, nonblocking */
+        sem_trywait(&CANrx_sem);
+        CANrx_semCnt = 1;
+    }
+    static void CANrx_unlock(void){
+        int sVal;
+        /* Function is called from tmrTask after
+         * synchronous CANopen RPDOs are processed. */
+        sem_getvalue(&CANrx_sem, &sVal);
+        if(sVal < 1){
+            sem_post(&CANrx_sem);
+        }
+        CANrx_semCnt = 0;
+    }
+
+/* Signal handler */
+    static volatile sig_atomic_t endProgram = 0;
+    static void sigHandler(int sig){
+        endProgram = 1;
+    }
 
 
 /* Helper functions ***********************************************************/
@@ -96,23 +125,6 @@ static void usageExit(char *progName){
     exit(EXIT_FAILURE);
 }
 
-static void cbCANrx_lockBySync(bool_t syncReceived){
-    //CALLBACK function is called immediately after SYNC message on CAN bus.
-    //It mutes CAN receive thread.
-    if(!syncReceived){
-        if(pthread_mutex_lock(&CANrx_mtx) != 0)
-            CO_errExit("CANrx - Mutex lock failed");
-    }
-    CANrx_lockedBySync = true;
-}
-static void cbCANrx_unlockBySync(void){
-    if(CANrx_lockedBySync){
-        if(pthread_mutex_unlock(&CANrx_mtx) != 0)
-            CO_errExit("CANrx - Mutex unlock failed");
-        CANrx_lockedBySync = false;
-    }
-}
-
 //static void wakeUpTask(uint32_t arg){
 //    RTX_Wakeup(arg);
 //}
@@ -123,15 +135,13 @@ int main (int argc, char *argv[]){
     uint8_t powerOn = 1;
     struct timespec sleep50ms, sleep2ms;
     pthread_t tmrTask_id, CANrx_id;
-    //Real time priority for CANrx thread. Thread tmrTask has priority of
-    //CANrx + 1. If zero, no RT is used for threads.
-    int nodeId = -1;    //Set to 1..127 by arguments
-    int rtPriority = 1; //Real time priority, 1 by default, settable by arguments.
-    char* CANdevice = NULL;//CAN device, settable by arguments.
     int CANdeviceIndex = 0;
-    int CANsocket = -1;
-    struct sockaddr_can CANsocketAddr;
+    struct sockaddr_can CANsocket0Addr;
     int opt;
+
+    int nodeId = -1;    //Set to 1..127 by arguments
+    int rtPriority = 1; //Real time priority, 1 by default, configurable by arguments.
+    char* CANdevice = NULL;//CAN device, configurable by arguments.
 
 
     /* Get program options */
@@ -191,6 +201,22 @@ int main (int argc, char *argv[]){
     }
 
 
+    /* Create and bind socket */
+    CANsocket0 = socket(AF_CAN, SOCK_RAW, CAN_RAW);
+    if(CANsocket0 < 0)
+        CO_errExit("Program init - Socket creation failed");
+
+    CANsocket0Addr.can_family = AF_CAN;
+    CANsocket0Addr.can_ifindex = CANdeviceIndex;
+    if(bind(CANsocket0, (struct sockaddr*)&CANsocket0Addr, sizeof(CANsocket0Addr)) != 0)
+        CO_errExit("Program init - Socket binding failed");
+
+
+    /* CANrx semaphore */
+    if(CANrx_semInit() != 0)
+        CO_errExit("Program init - CANrx_sem init failed");
+
+
     /* Generate thread with constant interval and thread for CAN receive */
     if(pthread_create(&tmrTask_id, NULL, tmrTask_thread, NULL) != 0)
         CO_errExit("Program init - tmrTask thread creation failed");
@@ -210,16 +236,6 @@ int main (int argc, char *argv[]){
             CO_errExit("Program init - CANrx thread set scheduler failed");
     }
 
-
-    /* Sreate and bind socket */
-    CANsocket = socket(AF_CAN, SOCK_RAW, CAN_RAW);
-    if(CANsocket < 0)
-        CO_errExit("Program init - Socket creation failed");
-
-    CANsocketAddr.can_family = AF_CAN;
-    CANsocketAddr.can_ifindex = CANdeviceIndex;
-    if(bind(CANsocket, (struct sockaddr*)&CANsocketAddr, sizeof(CANsocketAddr)) != 0)
-        CO_errExit("Program init - Socket binding failed");
 
 //    /* initialize battery powered SRAM */
 //    struct{
@@ -265,41 +281,40 @@ int main (int argc, char *argv[]){
 //        exit(EXIT_FAILURE);
 //    }
 
+    /* Catch signals SIGINT and SIGTERM */
+    if(signal(SIGINT, sigHandler) == SIG_ERR)
+        CO_errExit("Program init - SIGINIT handler creation failed");
+    if(signal(SIGTERM, sigHandler) == SIG_ERR)
+        CO_errExit("Program init - SIGTERM handler creation failed");
 
     /* increase variable each startup. Variable is stored in eeprom. */
     OD_powerOnCounter++;
 
 
-    while(reset != CO_RESET_APP && reset != CO_RESET_QUIT){
+    while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && endProgram == 0){
 /* CANopen communication reset - initialize CANopen objects *******************/
         CO_ReturnError_t err;
         uint16_t timer1msPrevious;
 
         printf("%s - communication reset ...\n", argv[0]);
 
-        /* Wait tmrTask and CANrx, then configure CAN */
+        /* Wait tmrTask, then configure CAN */
         CO_LOCK_OD();
-        if(pthread_mutex_lock(&CANrx_mtx) != 0)
-            CO_errExit("mainline - Mutex lock CANrx failed");
-
-        CO_CAN_OK = false;
-
+        CAN_OK = false;
         CO_UNLOCK_OD();
-        if(pthread_mutex_unlock(&CANrx_mtx) != 0)
-            CO_errExit("mainline - Mutex unlock CANrx failed");
 
-        CO_CANsetConfigurationMode(CANsocket);
+        CO_CANsetConfigurationMode(CANsocket0);
 
 
         /* initialize CANopen */
-        err = CO_init(CANsocket, nodeId, 0);
+        err = CO_init(CANsocket0, nodeId, 0);
         if(err != CO_ERROR_NO){
             fprintf(stderr, "Communication reset - %s - CANopen initialization failed.\n", argv[0]);
             exit(EXIT_FAILURE);
         }
 
         /* set callback functions for task control. */
-        CO_SYNC_initCallback(CO->SYNC, cbCANrx_lockBySync);
+        CO_SYNC_initCallback(CO->SYNC, CANrx_lockCbSync);
         /* Prepare function, which will wake this task after CAN SDO response is */
         /* received (inside CAN receive interrupt). */
 //        CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
@@ -318,7 +333,7 @@ int main (int argc, char *argv[]){
 
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
-        CO_CAN_OK = true;
+        CAN_OK = true;
 
         reset = CO_RESET_NOT;
         timer1msPrevious = CO_timer1ms;
@@ -335,11 +350,11 @@ int main (int argc, char *argv[]){
         socklen_t len4 = sizeof(recv_own_msgs);
         socklen_t len5 = sizeof(enable_can_fd);
 
-        getsockopt(CANsocket, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, &len1);
-        getsockopt(CANsocket, SOL_CAN_RAW, CAN_RAW_ERR_FILTER, &err_mask, &len2);
-        getsockopt(CANsocket, SOL_CAN_RAW, CAN_RAW_LOOPBACK, &loopback, &len3);
-        getsockopt(CANsocket, SOL_CAN_RAW, CAN_RAW_RECV_OWN_MSGS, &recv_own_msgs, &len4);
-        getsockopt(CANsocket, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &enable_can_fd, &len5);
+        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, &len1);
+        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_ERR_FILTER, &err_mask, &len2);
+        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_LOOPBACK, &loopback, &len3);
+        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_RECV_OWN_MSGS, &recv_own_msgs, &len4);
+        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &enable_can_fd, &len5);
         int ifil;
         for(ifil=0; ifil<50; ifil++)
             printf("filter[%2d].id=%08X, filter[%2d].mask=%08X\n", ifil, rfilter[ifil].can_id, ifil, rfilter[ifil].can_mask);
@@ -348,7 +363,7 @@ int main (int argc, char *argv[]){
 #endif
 
 
-        while(reset == CO_RESET_NOT){
+        while(reset == CO_RESET_NOT && endProgram == 0){
 /* loop for normal program execution ******************************************/
             uint16_t timer1msCopy, timer1msDiff;
 
@@ -382,14 +397,10 @@ int main (int argc, char *argv[]){
 /* program exit ***************************************************************/
     /* lock threads */
     CO_LOCK_OD();
-    if(pthread_mutex_lock(&CANrx_mtx) != 0)
-        CO_errExit("Program exit - Mutex lock CANrx failed");
+    CAN_OK = false;
 
     /* delete objects from memory */
-    CO_delete(CANsocket);
-//    CgiLog_delete(CgiLog);
-//    CgiCli_delete(CgiCli);
-    close(CANsocket);
+    /* tasks; CO_delete(CANsocket0); ...; close(CANsocket0), will be closed on exit */
 
 
     printf("%s - finished.\n", argv[0]);
@@ -444,15 +455,22 @@ static void* tmrTask_thread(void* arg) {
 
         INCREMENT_1MS(CO_timer1ms);
 
-        if(CO_CAN_OK) {
+        if(CAN_OK) {
             bool_t syncWas;
 
             /* Process Sync and read inputs */
             syncWas = CO_process_SYNC_RPDO(CO, TMR_TASK_INTERVAL);
 
-            /* Reenable CANrx, if it was disabled by SYNC callback */
+            /* Re-enable CANrx, if it was disabled by SYNC callback */
             if(syncWas){
-                cbCANrx_unlockBySync();
+                CANrx_unlock();
+            }
+            /* just for safety. If some error in CO_SYNC.c, force unlocking CANrx_sem. */
+            else if(CANrx_semCnt > 0){
+                if((CANrx_semCnt++) > 3){
+                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_GENERIC, 0x2000);
+                    CANrx_unlock();
+                }
             }
 
             /* Further I/O or nonblocking application code may go here. */
@@ -461,6 +479,7 @@ static void* tmrTask_thread(void* arg) {
             CO_process_TPDO(CO, syncWas, TMR_TASK_INTERVAL);
         }
 
+        /* Unlock */
         CO_UNLOCK_OD();
 
 #if 0
@@ -478,17 +497,27 @@ static void* tmrTask_thread(void* arg) {
 
 /* CAN receive thread *********************************************************/
 static void* CANrx_thread(void* arg) {
+    /* should be RT thread with higher priority than mainline, because CAN_OK
+     * don't lock perfectly in case of CANopen NMT resets.*/
 
     for(;;){
         struct can_frame msg;
         int n, size;
 
         size = sizeof(struct can_frame);
-        n = read(CO->CANmodule[0]->fdSocket, &msg, size);
-        if(n != size) {
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_GENERIC, n);
-        }else{
-            CO_CANreceive(CO->CANmodule[0], &msg);
+
+        /* Wait here, if locked by sync. */
+        sem_wait(&CANrx_sem);
+        sem_post(&CANrx_sem);
+
+        /* Read socket and pre-process message */
+        n = read(CANsocket0, &msg, size);
+        if(CAN_OK){
+            if(n != size) {
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_GENERIC, n);
+            }else{
+                CO_CANreceive(CO->CANmodule[0], &msg);
+            }
         }
     }
 
