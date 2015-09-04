@@ -31,8 +31,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <strings.h>
 #include <time.h>
 #include <signal.h>
+#include <linux/reboot.h>
+#include <sys/reboot.h>
 
 #include <pthread.h>
 #include <semaphore.h>
@@ -43,7 +46,8 @@
 #include <linux/can.h>
 
 
-#define NSEC_PER_SEC        (1000000000)        /* The number of nsecs per sec. */
+#define NSEC_PER_SEC        (1000000000)        /* The number of nanoseconds per second. */
+#define NSEC_PER_MSEC       (1000000)           /* The number of nanoseconds per millisecond. */
 #define TMR_TASK_INTERVAL   (1000)              /* Interval of tmrTask thread in microseconds */
 #define INCREMENT_1MS(var)  (var++)             /* Increment 1ms variable in tmrTask */
 
@@ -121,6 +125,7 @@ static void usageExit(char *progName){
     fprintf(stderr, "Options:\n");
     fprintf(stderr, "  -p <RT priority>    Realtime priority of CANrx thread (default=1). Timer\n");
     fprintf(stderr, "                      thread has priority of CANrx + 1. If -1, no RT is used.\n");
+    fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
 }
@@ -133,22 +138,24 @@ static void usageExit(char *progName){
 int main (int argc, char *argv[]){
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     uint8_t powerOn = 1;
-    struct timespec sleep50ms, sleep2ms;
     pthread_t tmrTask_id, CANrx_id;
     int CANdeviceIndex = 0;
     struct sockaddr_can CANsocket0Addr;
     int opt;
+    int mainlineTimerFd;
+    struct itimerspec mainlineTimerSpec;
 
+    char* CANdevice = NULL;//CAN device, configurable by arguments.
     int nodeId = -1;    //Set to 1..127 by arguments
     int rtPriority = 1; //Real time priority, 1 by default, configurable by arguments.
-    char* CANdevice = NULL;//CAN device, configurable by arguments.
-
+    bool_t rebootEnable = false;
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "i:p:")) != -1) {
+    while((opt = getopt(argc, argv, "i:p:r")) != -1) {
         switch (opt) {
             case 'i': nodeId = strtol(optarg, NULL, 0);     break;
             case 'p': rtPriority = strtol(optarg, NULL, 0); break;
+            case 'r': rebootEnable = true;                  break;
             default:  usageExit(argv[0]);
         }
     }
@@ -179,13 +186,6 @@ int main (int argc, char *argv[]){
     printf("%s - starting CANopen device with Node ID %d(0x%02X) ...\n", argv[0], nodeId, nodeId);
 
 
-    /* Init variables */
-    sleep50ms.tv_sec = 0;
-    sleep50ms.tv_nsec = 50000000L;
-    sleep2ms.tv_sec = 0;
-    sleep2ms.tv_nsec = 2000000L;
-
-
     /* Verify, if OD structures have proper alignment of initial values */
     if(CO_OD_RAM.FirstWord != CO_OD_RAM.LastWord) {
         fprintf(stderr, "Program init - %s - Error in CO_OD_RAM.\n", argv[0]);
@@ -210,6 +210,12 @@ int main (int argc, char *argv[]){
     CANsocket0Addr.can_ifindex = CANdeviceIndex;
     if(bind(CANsocket0, (struct sockaddr*)&CANsocket0Addr, sizeof(CANsocket0Addr)) != 0)
         CO_errExit("Program init - Socket binding failed");
+
+
+    /* Mainline control */
+    mainlineTimerFd = timerfd_create(CLOCK_MONOTONIC, 0);
+    if(mainlineTimerFd == -1)
+        CO_errExit("Program init - mainlineTimerFd creation failed");
 
 
     /* CANrx semaphore */
@@ -337,55 +343,44 @@ int main (int argc, char *argv[]){
 
         reset = CO_RESET_NOT;
         timer1msPrevious = CO_timer1ms;
+        bzero(&mainlineTimerSpec, sizeof(mainlineTimerSpec));
+        mainlineTimerSpec.it_value.tv_nsec = 1;
+        if(timerfd_settime(mainlineTimerFd, 0, &mainlineTimerSpec, NULL) == -1)
+            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x10000001L);
+
         printf("%s - running ...\n", argv[0]);
-
-
-#if 1
-        struct can_filter rfilter[50];
-        can_err_mask_t err_mask;
-        int loopback, recv_own_msgs, enable_can_fd;
-        socklen_t len1 = sizeof(rfilter);
-        socklen_t len2 = sizeof(err_mask);
-        socklen_t len3 = sizeof(loopback);
-        socklen_t len4 = sizeof(recv_own_msgs);
-        socklen_t len5 = sizeof(enable_can_fd);
-
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, &len1);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_ERR_FILTER, &err_mask, &len2);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_LOOPBACK, &loopback, &len3);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_RECV_OWN_MSGS, &recv_own_msgs, &len4);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &enable_can_fd, &len5);
-        int ifil;
-        for(ifil=0; ifil<50; ifil++)
-            printf("filter[%2d].id=%08X, filter[%2d].mask=%08X\n", ifil, rfilter[ifil].can_id, ifil, rfilter[ifil].can_mask);
-        printf("filterSize=%d, errMask=%x, loopback=%d, recv_own_msgs=%d, enable_can_fd=%d\n",
-               len1, err_mask, loopback, recv_own_msgs, enable_can_fd);
-#endif
 
 
         while(reset == CO_RESET_NOT && endProgram == 0){
 /* loop for normal program execution ******************************************/
             uint16_t timer1msCopy, timer1msDiff;
+            uint16_t timerNext = 50;
+            uint64_t tmrExp;
 
+            /* Sleep for specific time. */
+            if(read(mainlineTimerFd, &tmrExp, sizeof(tmrExp)) != sizeof(uint64_t))
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000001L);
+
+
+            /* Calculate timer1msDiff form global CO_timer1ms */
             timer1msCopy = CO_timer1ms;
             timer1msDiff = timer1msCopy - timer1msPrevious;
             timer1msPrevious = timer1msCopy;
 
 
             /* CANopen process */
-            reset = CO_process(CO, timer1msDiff);
+            reset = CO_process(CO, timer1msDiff, &timerNext);
 
             /* Nonblocking application code may go here. */
+printf("%2d ", timer1msDiff); fflush(stdout);
 
-//            CgiLogEmcyProcess(CgiLog);
+            /* Set time for next sleep. */
+            mainlineTimerSpec.it_value.tv_nsec = (long)(++timerNext) * NSEC_PER_MSEC;
+            if(timerfd_settime(mainlineTimerFd, 0, &mainlineTimerSpec, NULL) == -1)
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000002L);
 
 
-            if(CO->SDO->state == CO_SDO_ST_UPLOAD_BL_SUBBLOCK) {
-                nanosleep(&sleep2ms, NULL);
-            }
-            else {
-                nanosleep(&sleep50ms, NULL);
-            }
+            //            CgiLogEmcyProcess(CgiLog);
 
 
             /* Process EEPROM */
@@ -404,26 +399,51 @@ int main (int argc, char *argv[]){
 
 
     printf("%s - finished.\n", argv[0]);
-//    if(reset == CO_RESET_APP) reboot(); /* CANopen reset node */
+
+    /* Flush all buffers (and reboot) */
+    sync();
+    if(rebootEnable && reset == CO_RESET_APP){
+        if(reboot(LINUX_REBOOT_CMD_RESTART) != 0){
+            CO_errExit("Program end - Reboot failed");
+        }
+    }
+
     exit(EXIT_SUCCESS);
 }
 
 
 /* timer thread executes in constant intervals ********************************/
 static void* tmrTask_thread(void* arg) {
-    struct timespec tmr;
+    int timerFd;
+    struct itimerspec timerSpec;
+    struct timespec *tmrVal;
 
-    if(clock_gettime(CLOCK_MONOTONIC, &tmr) == -1)
+    /* Prepare timer (one shot, each time calculate new expiration time) It is
+     * necessary not to use timerSpec it_interval, because it is sliding. */
+    timerFd = timerfd_create(CLOCK_MONOTONIC, 0);
+    if(timerFd == -1)
+        CO_errExit("tmrTask - timerFd creation failed");
+
+    timerSpec.it_interval.tv_sec = 0;
+    timerSpec.it_interval.tv_nsec = 0;
+    tmrVal = &timerSpec.it_value;
+    if(clock_gettime(CLOCK_MONOTONIC, tmrVal) == -1)
         CO_errExit("tmrTask - gettime failed");
 
+    if(timerfd_settime(timerFd, TFD_TIMER_ABSTIME, &timerSpec, NULL) == -1)
+        CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000001L);
+
+    OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL;
+
+
+    /* Endless loop */
     for(;;){
-        /* Wait for timer to expire, then calculate next shot */
-        clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &tmr, NULL);
-        tmr.tv_nsec += (TMR_TASK_INTERVAL*1000);
-        if(tmr.tv_nsec >= NSEC_PER_SEC) {
-            tmr.tv_nsec -= NSEC_PER_SEC;
-            tmr.tv_sec++;
-        }
+        uint64_t tmrExp;
+        struct timespec tmrMeasure;
+
+        /* Wait for timer to expire */
+        if(read(timerFd, &tmrExp, sizeof(tmrExp)) != sizeof(uint64_t))
+            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000002L);
 
 #if 1
         /* trace timing */
@@ -445,7 +465,7 @@ static void* tmrTask_thread(void* arg) {
         if(dt > dtmaxmax) dtmaxmax = dt;
 
         if(++cnt == 1000) {
-            printf("tmr: %9ld, %6d, %6d, %6d\n", tnow.tv_nsec/1000, dtmin, dtmax, dtmaxmax);
+            printf("tmr: %9ld, %6d, %6d, %6d %6d\n", tnow.tv_nsec/1000, dtmin, dtmax, dtmaxmax, OD_performance[ODA_performance_timerCycleMaxTime]);
             cnt = 0; dtmin = 1000; dtmax = 0;
         }
 #endif
@@ -468,7 +488,7 @@ static void* tmrTask_thread(void* arg) {
             /* just for safety. If some error in CO_SYNC.c, force unlocking CANrx_sem. */
             else if(CANrx_semCnt > 0){
                 if((CANrx_semCnt++) > 3){
-                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_GENERIC, 0x2000);
+                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000004);
                     CANrx_unlock();
                 }
             }
@@ -482,12 +502,34 @@ static void* tmrTask_thread(void* arg) {
         /* Unlock */
         CO_UNLOCK_OD();
 
+
+        /* Calculate maximum interval in microseconds (informative) */
+        clock_gettime(CLOCK_MONOTONIC, &tmrMeasure);
+        if(tmrMeasure.tv_sec == tmrVal->tv_sec){
+            long dt = tmrMeasure.tv_nsec - tmrVal->tv_nsec;
+            dt /= 1000;
 #if 0
-        /* verify overflow */
-        if(timer_overflow) {
-            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0);
-        }
+            if(dt > TMR_TASK_INTERVAL) {
+                CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x31000000L | dt);
+            }
 #endif
+            dt += TMR_TASK_INTERVAL;
+            if(dt > 0xFFFF){
+                OD_performance[ODA_performance_timerCycleMaxTime] = 0xFFFF;
+            }else if(dt > OD_performance[ODA_performance_timerCycleMaxTime]){
+                OD_performance[ODA_performance_timerCycleMaxTime] = (uint16_t) dt;
+            }
+        }
+
+
+        /* Calculate next shot for the timer */
+        tmrVal->tv_nsec += (TMR_TASK_INTERVAL*1000);
+        if(tmrVal->tv_nsec >= NSEC_PER_SEC) {
+            tmrVal->tv_nsec -= NSEC_PER_SEC;
+            tmrVal->tv_sec++;
+        }
+        if(timerfd_settime(timerFd, TFD_TIMER_ABSTIME, &timerSpec, NULL) == -1)
+            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000003L);
 
     }
 
@@ -514,7 +556,7 @@ static void* CANrx_thread(void* arg) {
         n = read(CANsocket0, &msg, size);
         if(CAN_OK){
             if(n != size) {
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_GENERIC, n);
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x40000000L | n);
             }else{
                 CO_CANreceive(CO->CANmodule[0], &msg);
             }

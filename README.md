@@ -10,7 +10,7 @@ canopend
 canopend is an implementation of CANopen device with master functionality.
 
 
-**First words on CAN bus (updated):**
+**First words on CAN bus (update 2):**
 
 To clone the project with submodules use:
 
@@ -72,9 +72,24 @@ candump in second terminal will show:
 
 canopend accepted NMT commands as seen in responded heartbeat messages (CO_NMT_OPERATIONAL=0x05, CO_NMT_PRE_OPERATIONA=0x7F). Event triggered PDO was resent after entered operational.
 
-No further tests were made.
+Now let's try to do some raw SDO access. We will access Object Dictionary(OD) variable "Producer heartbeat time". Inside OD it is on index 0x1017, subindex 0x00, as specified by standard. Curent default value is 1000. This means, Heartbeat is sent every 1000 milliseconds. Let's simulate the master and read the value:
 
-*At this point canopend may be fully functional CANopen device.* (No master functionality yet.)
+    $ cansend vcan0 603#40.1710.00.00000000
+
+candump shows response:
+
+    vcan0  583   [8]  4B 17 10 00 E8 03 00 00
+
+We sent command on CAN address 0x600+nodeId and received response from CAN address 0x580+nodeId. First data byte from command or response is SDO command specifier. Response includes length information (two bytes). For more info see file CO_SDO.h. "1710" actually means 0x1017. Please note, CANopen itself is little endian. Fourth byte is subindex. "E8 03" from response means 0x03E8, which is equivalent to 1000. 
+Now change Heartbeat producer, so it will send heartbeats every 5 seconds (5000 == 0x1388):
+
+    $ cansend vcan0 603#2B.1710.00.8813.0000
+
+candump shows, that Heartbeat interval is now longer.
+This way it is possible to access any variable not longer than 4 bytes on any CANopen device. However, this is only basic, raw access.
+
+
+*At this point canopend may be fully functional CANopen device.* (Still no master functionality.)
 
 
 To be continued ...
