@@ -15,6 +15,7 @@ INCLUDE_DIRS =  $(CANOPEN_SRC)  \
 
 SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
                 $(STACKDRV_SRC)/eeprom.c        \
+                $(STACKDRV_SRC)/main_utils.c    \
                 $(STACK_SRC)/crc16-ccitt.c      \
                 $(STACK_SRC)/CO_SDO.c           \
                 $(STACK_SRC)/CO_Emergency.c     \

@@ -16,7 +16,7 @@ To clone the project with submodules use:
 
     $ git clone --recursive https://github.com/CANopenNode/CANopenSocket.git
 
-In case of git update, it is also necessary to update the submodules:
+Or in case of git update, it is also necessary to update the submodules:
 
     $ git pull
     $ git submodule update
