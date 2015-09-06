@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <strings.h>
+#include <string.h>
 #include <time.h>
 #include <signal.h>
 #include <linux/reboot.h>
@@ -58,6 +58,7 @@
     static volatile bool_t  CAN_OK = false;     /* CAN in normal mode indicator */
     static int              rtPriority = 1;     /* Real time priority, configurable by arguments. */
     static int              CANsocket0 = -1;    /* CAN socket[0] */
+    static taskMain_t       taskMain;           /* Object for Mainline task */
     static taskTmr_t        taskTmr;            /* Object for Timer interval task */
 
 //    CO_EE_t             CO_EEO;             /* EEprom object */
@@ -145,12 +146,12 @@ int main (int argc, char *argv[]){
     int CANdeviceIndex = 0;
     struct sockaddr_can CANsocket0Addr;
     int opt;
-    int mainlineTimerFd;
-    struct itimerspec mainlineTimerSpec;
 
     char* CANdevice = NULL;//CAN device, configurable by arguments.
     int nodeId = -1;    //Set to 1..127 by arguments
     bool_t rebootEnable = false;
+
+    if(argc < 3 || strcmp(argv[1], "--help") == 0) usageExit(argv[0]);
 
     /* Get program options */
     while((opt = getopt(argc, argv, "i:p:r")) != -1) {
@@ -214,10 +215,15 @@ int main (int argc, char *argv[]){
         CO_errExit("Program init - Socket binding failed");
 
 
-    /* Mainline control */
-    mainlineTimerFd = timerfd_create(CLOCK_MONOTONIC, 0);
-    if(mainlineTimerFd == -1)
-        CO_errExit("Program init - mainlineTimerFd creation failed");
+    /* task control (timers, delays) */
+    if(taskMain_init(&taskMain, &CO_timer1ms, &OD_performance[ODA_performance_mainCycleMaxTime]) != 0)
+        CO_errExit("Program init -taskMain_init failed");
+
+    if(taskTmr_init(&taskTmr, TMR_TASK_INTERVAL_NS, &OD_performance[ODA_performance_timerCycleMaxTime]) != 0)
+        CO_errExit("Program init  - taskTmr_init failed");
+
+    OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_US;
+
 
 
     /* CANrx semaphore */
@@ -302,7 +308,6 @@ int main (int argc, char *argv[]){
     while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && endProgram == 0){
 /* CANopen communication reset - initialize CANopen objects *******************/
         CO_ReturnError_t err;
-        uint16_t timer1msPrevious;
 
         printf("%s - communication reset ...\n", argv[0]);
 
@@ -344,63 +349,34 @@ int main (int argc, char *argv[]){
         CAN_OK = true;
 
         reset = CO_RESET_NOT;
-        timer1msPrevious = CO_timer1ms;
-        bzero(&mainlineTimerSpec, sizeof(mainlineTimerSpec));
-        mainlineTimerSpec.it_value.tv_nsec = 1;
-        if(timerfd_settime(mainlineTimerFd, 0, &mainlineTimerSpec, NULL) == -1)
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x10000001L);
 
         printf("%s - running ...\n", argv[0]);
 
-#if 0
-        struct can_filter rfilter[50];
-        can_err_mask_t err_mask;
-        int loopback, recv_own_msgs, enable_can_fd;
-        socklen_t len1 = sizeof(rfilter);
-        socklen_t len2 = sizeof(err_mask);
-        socklen_t len3 = sizeof(loopback);
-        socklen_t len4 = sizeof(recv_own_msgs);
-        socklen_t len5 = sizeof(enable_can_fd);
-
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, &len1);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_ERR_FILTER, &err_mask, &len2);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_LOOPBACK, &loopback, &len3);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_RECV_OWN_MSGS, &recv_own_msgs, &len4);
-        getsockopt(CANsocket0, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &enable_can_fd, &len5);
-        int ifil;
-        for(ifil=0; ifil<50; ifil++)
-            printf("filter[%2d].id=%08X, filter[%2d].mask=%08X\n", ifil, rfilter[ifil].can_id, ifil, rfilter[ifil].can_mask);
-        printf("filterSize=%d, singleFilterSize=%ld, errMask=%x, loopback=%d, recv_own_msgs=%d, enable_can_fd=%d\n",
-               len1, sizeof(struct can_filter), err_mask, loopback, recv_own_msgs, enable_can_fd);
-#endif
 
         while(reset == CO_RESET_NOT && endProgram == 0){
 /* loop for normal program execution ******************************************/
-            uint16_t timer1msCopy, timer1msDiff;
+            uint16_t timer1msDiff;
             uint16_t timerNext = 50;
-            uint64_t tmrExp;
 
-            /* Sleep for specific time. */
-            if(read(mainlineTimerFd, &tmrExp, sizeof(tmrExp)) != sizeof(uint64_t))
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000001L);
-
-
-            /* Calculate timer1msDiff form global CO_timer1ms */
-            timer1msCopy = CO_timer1ms;
-            timer1msDiff = timer1msCopy - timer1msPrevious;
-            timer1msPrevious = timer1msCopy;
-
+            /* Wait for timer to expire */
+            if(taskMain_wait(&taskMain, &timer1msDiff) != 0)
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000000L | errno);
 
             /* CANopen process */
             reset = CO_process(CO, timer1msDiff, &timerNext);
 
             /* Nonblocking application code may go here. */
-printf("%2d ", timer1msDiff); fflush(stdout);
+#if 1
+        static uint16_t maxIntervalMain = 0;
+        if(maxIntervalMain < timer1msDiff){
+            maxIntervalMain = timer1msDiff;
+            printf("Maximum main interval time: %d milliseconds\n", maxIntervalMain);
+        }
+#endif
 
-            /* Set time for next sleep. */
-            mainlineTimerSpec.it_value.tv_nsec = (long)(++timerNext) * NSEC_PER_MSEC;
-            if(timerfd_settime(mainlineTimerFd, 0, &mainlineTimerSpec, NULL) == -1)
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000002L);
+            /* Set delay for next sleep. */
+            if(taskMain_setDelay(&taskMain, timerNext) != 0)
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000002L | errno);
 
 
             //            CgiLogEmcyProcess(CgiLog);
@@ -418,8 +394,7 @@ printf("%2d ", timer1msDiff); fflush(stdout);
     CAN_OK = false;
 
     /* delete objects from memory */
-    /* tasks; CO_delete(CANsocket0); ...; close(CANsocket0), will be closed on exit */
-
+    close(CANsocket0);
 
     printf("%s - finished.\n", argv[0]);
 
@@ -438,12 +413,6 @@ printf("%2d ", timer1msDiff); fflush(stdout);
 /* timer thread executes in constant intervals ********************************/
 static void* tmrTask_thread(void* arg) {
 
-    if(taskTmr_init(&taskTmr, TMR_TASK_INTERVAL_NS, &OD_performance[ODA_performance_timerCycleMaxTime]) != 0)
-        CO_errExit("tmrTask - taskTmr_init failed");
-
-    OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_US;
-
-
     /* Endless loop */
     for(;;){
 
@@ -457,27 +426,10 @@ static void* tmrTask_thread(void* arg) {
 
 
 #if 1
-        /* trace timing */
-        long dt = 1000;    //delta-time in microseconds
-        struct timespec tnow;
-        static struct timespec tprev;
-        static int cnt = -1, dtmin = 1000, dtmax= 0, dtmaxmax = 0;
-
-        clock_gettime(CLOCK_MONOTONIC, &tnow);
-        if(cnt >= 0) {
-            dt = (tnow.tv_sec - tprev.tv_sec) * 1000000;
-            dt += (tnow.tv_nsec - tprev.tv_nsec) / 1000;
-        }
-        tprev.tv_sec = tnow.tv_sec;
-        tprev.tv_nsec = tnow.tv_nsec;
-
-        if(dt < dtmin) dtmin = dt;
-        if(dt > dtmax) dtmax = dt;
-        if(dt > dtmaxmax) dtmaxmax = dt;
-
-        if(++cnt == 1000) {
-            printf("tmr: %9ld, %6d, %6d, %6d %6d\n", tnow.tv_nsec/1000, dtmin, dtmax, dtmaxmax, OD_performance[ODA_performance_timerCycleMaxTime]);
-            cnt = 0; dtmin = 1000; dtmax = 0;
+        static uint16_t maxInterval = 0;
+        if(maxInterval < OD_performance[ODA_performance_timerCycleMaxTime]){
+            maxInterval = OD_performance[ODA_performance_timerCycleMaxTime];
+            printf("Maximum timer interval time: %5d microseconds\n", maxInterval);
         }
 #endif
 
