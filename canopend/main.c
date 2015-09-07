@@ -50,14 +50,12 @@
 
 #define TMR_TASK_INTERVAL_NS    (1000000)       /* Interval of taskTmr in nanoseconds */
 #define TMR_TASK_INTERVAL_US    (1000)          /* Interval of taskTmr in microseconds */
-#define INCREMENT_1MS(var)      (var++)         /* Increment 1ms variable in tmrTask */
+#define INCREMENT_1MS(var)      (var++)         /* Increment 1ms variable in taskTmr */
 
 
 /* Global variables and objects */
     volatile uint16_t       CO_timer1ms = 0U;   /* variable increments each millisecond */
-    static volatile bool_t  CAN_OK = false;     /* CAN in normal mode indicator */
     static int              rtPriority = 1;     /* Real time priority, configurable by arguments. */
-    static int              CANsocket0 = -1;    /* CAN socket[0] */
     static taskMain_t       taskMain;           /* Object for Mainline task */
     static taskTmr_t        taskTmr;            /* Object for Timer interval task */
 
@@ -82,7 +80,7 @@
  * For info on critical sections see CANopenNode/stack/drvTemplate/CO_driver.h. */
 
 /* Timer periodic thread */
-    static void* tmrTask_thread(void* arg);
+    static void* rt_thread(void* arg);
 
 /* CAN Receive thread and locking */
     static void* CANrx_thread(void* arg);
@@ -142,9 +140,8 @@ static void usageExit(char *progName){
 int main (int argc, char *argv[]){
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     uint8_t powerOn = 1;
-    pthread_t tmrTask_id, CANrx_id;
-    int CANdeviceIndex = 0;
-    struct sockaddr_can CANsocket0Addr;
+    pthread_t rt_thread_id, CANrx_id;
+    int CANdevice0Index = 0;
     int opt;
 
     char* CANdevice = NULL;//CAN device, configurable by arguments.
@@ -165,7 +162,7 @@ int main (int argc, char *argv[]){
 
     if(optind < argc){
         CANdevice = argv[optind];
-        CANdeviceIndex = if_nametoindex(CANdevice);
+        CANdevice0Index = if_nametoindex(CANdevice);
     }
 
     if(nodeId < 1 || nodeId > 127){
@@ -179,10 +176,10 @@ int main (int argc, char *argv[]){
         usageExit(argv[0]);
     }
 
-    if(CANdeviceIndex == 0){
-        char err[120];
-        snprintf(err, 120, "Can't find CAN device \"%s\"", CANdevice);
-        CO_errExit(err);
+    if(CANdevice0Index == 0){
+        char s[120];
+        snprintf(s, 120, "Can't find CAN device \"%s\"", CANdevice);
+        CO_errExit(s);
     }
 
 
@@ -204,17 +201,6 @@ int main (int argc, char *argv[]){
     }
 
 
-    /* Create and bind socket */
-    CANsocket0 = socket(AF_CAN, SOCK_RAW, CAN_RAW);
-    if(CANsocket0 < 0)
-        CO_errExit("Program init - Socket creation failed");
-
-    CANsocket0Addr.can_family = AF_CAN;
-    CANsocket0Addr.can_ifindex = CANdeviceIndex;
-    if(bind(CANsocket0, (struct sockaddr*)&CANsocket0Addr, sizeof(CANsocket0Addr)) != 0)
-        CO_errExit("Program init - Socket binding failed");
-
-
     /* task control (timers, delays) */
     if(taskMain_init(&taskMain, &CO_timer1ms, &OD_performance[ODA_performance_mainCycleMaxTime]) != 0)
         CO_errExit("Program init -taskMain_init failed");
@@ -232,8 +218,8 @@ int main (int argc, char *argv[]){
 
 
     /* Generate thread with constant interval and thread for CAN receive */
-    if(pthread_create(&tmrTask_id, NULL, tmrTask_thread, NULL) != 0)
-        CO_errExit("Program init - tmrTask thread creation failed");
+    if(pthread_create(&rt_thread_id, NULL, rt_thread, NULL) != 0)
+        CO_errExit("Program init - rt_thread creation failed");
     if(pthread_create(&CANrx_id, NULL, CANrx_thread, NULL) != 0)
         CO_errExit("Program init - CANrx thread creation failed");
 
@@ -242,8 +228,8 @@ int main (int argc, char *argv[]){
         struct sched_param param;
 
         param.sched_priority = rtPriority + 1;
-        if(pthread_setschedparam(tmrTask_id, SCHED_FIFO, &param) != 0)
-            CO_errExit("Program init - tmrTask thread set scheduler failed");
+        if(pthread_setschedparam(rt_thread_id, SCHED_FIFO, &param) != 0)
+            CO_errExit("Program init - rt_thread set scheduler failed");
 
         param.sched_priority = rtPriority;
         if(pthread_setschedparam(CANrx_id, SCHED_FIFO, &param) != 0)
@@ -311,19 +297,18 @@ int main (int argc, char *argv[]){
 
         printf("%s - communication reset ...\n", argv[0]);
 
-        /* Wait tmrTask, then configure CAN */
+        /* Wait rt_thread, then configure CAN */
         CO_LOCK_OD();
-        CAN_OK = false;
-        CO_UNLOCK_OD();
 
-        CO_CANsetConfigurationMode(CANsocket0);
+        CO_CANsetConfigurationMode(CANdevice0Index);
 
 
         /* initialize CANopen */
-        err = CO_init(CANsocket0, nodeId, 0);
+        err = CO_init(CANdevice0Index, nodeId, 0);
         if(err != CO_ERROR_NO){
-            fprintf(stderr, "Communication reset - %s - CANopen initialization failed.\n", argv[0]);
-            exit(EXIT_FAILURE);
+            char s[120];
+            snprintf(s, 120, "Communication reset - CANopen initialization failed, err=%d", err);
+            CO_errExit(s);
         }
 
         /* set callback functions for task control. */
@@ -346,7 +331,7 @@ int main (int argc, char *argv[]){
 
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
-        CAN_OK = true;
+        CO_UNLOCK_OD();
 
         reset = CO_RESET_NOT;
 
@@ -376,7 +361,7 @@ int main (int argc, char *argv[]){
 
             /* Set delay for next sleep. */
             if(taskMain_setDelay(&taskMain, timerNext) != 0)
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20000002L | errno);
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x20020000L | errno);
 
 
             //            CgiLogEmcyProcess(CgiLog);
@@ -391,10 +376,9 @@ int main (int argc, char *argv[]){
 /* program exit ***************************************************************/
     /* lock threads */
     CO_LOCK_OD();
-    CAN_OK = false;
 
     /* delete objects from memory */
-    close(CANsocket0);
+    CO_delete(CANdevice0Index);
 
     printf("%s - finished.\n", argv[0]);
 
@@ -411,7 +395,7 @@ int main (int argc, char *argv[]){
 
 
 /* timer thread executes in constant intervals ********************************/
-static void* tmrTask_thread(void* arg) {
+static void* rt_thread(void* arg) {
 
     /* Endless loop */
     for(;;){
@@ -421,7 +405,7 @@ static void* tmrTask_thread(void* arg) {
             CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000000L | errno);
 
         if(*taskTmr.maxTime > (TMR_TASK_INTERVAL_US*3) && rtPriority > 0){
-            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x31000000L | *taskTmr.maxTime);
+            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x30010000L | *taskTmr.maxTime);
         }
 
 
@@ -438,7 +422,7 @@ static void* tmrTask_thread(void* arg) {
 
         INCREMENT_1MS(CO_timer1ms);
 
-        if(CAN_OK) {
+        if(CO->CANmodule[0]->CANnormal) {
             bool_t syncWas;
 
             /* Process Sync and read inputs */
@@ -451,7 +435,7 @@ static void* tmrTask_thread(void* arg) {
             /* just for safety. If some error in CO_SYNC.c, force unlocking CANrx_sem. */
             else if(CANrx_semCnt > 0){
                 if((CANrx_semCnt++) > 3){
-                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000004);
+                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30100000);
                     CANrx_unlock();
                 }
             }
@@ -473,29 +457,8 @@ static void* tmrTask_thread(void* arg) {
 
 /* CAN receive thread *********************************************************/
 static void* CANrx_thread(void* arg) {
-    /* should be RT thread with higher priority than mainline, because CAN_OK
-     * don't lock perfectly in case of CANopen NMT resets.*/
-
     for(;;){
-        struct can_frame msg;
-        int n, size;
-
-        size = sizeof(struct can_frame);
-
-        /* Wait here, if locked by sync. */
-        sem_wait(&CANrx_sem);
-        sem_post(&CANrx_sem);
-
-        /* Read socket and pre-process message */
-        n = read(CANsocket0, &msg, size);
-        if(CAN_OK){
-            if(n != size){
-                /* This happens only once after error occurred (network down or something). */
-                CO_errorReport(CO->em, CO_EM_CAN_RXB_OVERFLOW, CO_EMC_COMMUNICATION, 0x40000000L | (n+1));
-            }else{
-                CO_CANreceive(CO->CANmodule[0], &msg);
-            }
-        }
+        CO_CANrxWait(CO->CANmodule[0]);//may be segmentation fault
     }
 
     return NULL;
