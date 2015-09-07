@@ -35,17 +35,17 @@
 #include <string.h>
 #include <time.h>
 #include <signal.h>
-#include <linux/reboot.h>
-#include <sys/reboot.h>
 #include <errno.h>
 
 #include <pthread.h>
-#include <semaphore.h>
-#include <sys/timerfd.h>
 
+#include <sys/timerfd.h>
+#include <sys/epoll.h>
 #include <net/if.h>
 #include <sys/socket.h>
 #include <linux/can.h>
+#include <linux/reboot.h>
+#include <sys/reboot.h>
 
 
 #define TMR_TASK_INTERVAL_NS    (1000000)       /* Interval of taskTmr in nanoseconds */
@@ -58,6 +58,9 @@
     static int              rtPriority = 1;     /* Real time priority, configurable by arguments. */
     static taskMain_t       taskMain;           /* Object for Mainline task */
     static taskTmr_t        taskTmr;            /* Object for Timer interval task */
+    static bool_t CANrx_taskTmr_process(int fd);/* Timer interval and CANrx tasks */
+
+    static void* rt_thread(void* arg);          /* Realtime thread */
 
 //    CO_EE_t             CO_EEO;             /* EEprom object */
 
@@ -75,14 +78,8 @@
 //    uint8_t CgiCliSDObuf[CgiCliSDObufSize];
 
 
-/* Threads and synchronization *************************************************
- * For program structure see CANopenNode/README.
- * For info on critical sections see CANopenNode/stack/drvTemplate/CO_driver.h. */
-
-/* Timer periodic thread */
-    static void* rt_thread(void* arg);
-
 /* CAN Receive thread and locking */
+#if 0
     static void* CANrx_thread(void* arg);
     /* After presence of SYNC message on CANopen bus, CANrx should be
      * temporary disabled until all receive PDOs are processed. See
@@ -108,6 +105,8 @@
         }
         CANrx_semCnt = 0;
     }
+#endif
+
 
 /* Signal handler */
     static volatile sig_atomic_t endProgram = 0;
@@ -125,8 +124,8 @@ void CO_errExit(char* msg){
 static void usageExit(char *progName){
     fprintf(stderr, "Usage: %s <device> -i <Node ID (1..127)> [options]\n", progName);
     fprintf(stderr, "Options:\n");
-    fprintf(stderr, "  -p <RT priority>    Realtime priority of CANrx thread (default=1). Timer\n");
-    fprintf(stderr, "                      thread has priority of CANrx + 1. If -1, no RT is used.\n");
+    fprintf(stderr, "  -p <RT priority>    Realtime priority of rt_thread (default=1).\n");
+    fprintf(stderr, "                      If specified as -1, realtime scheduler is not used.\n");
     fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
@@ -140,13 +139,14 @@ static void usageExit(char *progName){
 int main (int argc, char *argv[]){
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     uint8_t powerOn = 1;
-    pthread_t rt_thread_id, CANrx_id;
     int CANdevice0Index = 0;
     int opt;
+    bool_t firstRun = true;
+    pthread_t rt_thread_id;
 
-    char* CANdevice = NULL;//CAN device, configurable by arguments.
-    int nodeId = -1;    //Set to 1..127 by arguments
-    bool_t rebootEnable = false;
+    char* CANdevice = NULL;     /* CAN device, configurable by arguments. */
+    int nodeId = -1;            /* Set to 1..127 by arguments */
+    bool_t rebootEnable = false;/* Configurable by arguments */
 
     if(argc < 3 || strcmp(argv[1], "--help") == 0) usageExit(argv[0]);
 
@@ -171,7 +171,7 @@ int main (int argc, char *argv[]){
     }
 
     if(rtPriority != -1 && (rtPriority < sched_get_priority_min(SCHED_FIFO)
-                   || (rtPriority + 1) > sched_get_priority_max(SCHED_FIFO))){
+                         || rtPriority > sched_get_priority_max(SCHED_FIFO))){
         fprintf(stderr, "Wrong RT priority (%d)\n", rtPriority);
         usageExit(argv[0]);
     }
@@ -209,32 +209,6 @@ int main (int argc, char *argv[]){
         CO_errExit("Program init  - taskTmr_init failed");
 
     OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_US;
-
-
-
-    /* CANrx semaphore */
-    if(CANrx_semInit() != 0)
-        CO_errExit("Program init - CANrx_sem init failed");
-
-
-    /* Generate thread with constant interval and thread for CAN receive */
-    if(pthread_create(&rt_thread_id, NULL, rt_thread, NULL) != 0)
-        CO_errExit("Program init - rt_thread creation failed");
-    if(pthread_create(&CANrx_id, NULL, CANrx_thread, NULL) != 0)
-        CO_errExit("Program init - CANrx thread creation failed");
-
-    /* Set threads as Realtime */
-    if(rtPriority > 0){
-        struct sched_param param;
-
-        param.sched_priority = rtPriority + 1;
-        if(pthread_setschedparam(rt_thread_id, SCHED_FIFO, &param) != 0)
-            CO_errExit("Program init - rt_thread set scheduler failed");
-
-        param.sched_priority = rtPriority;
-        if(pthread_setschedparam(CANrx_id, SCHED_FIFO, &param) != 0)
-            CO_errExit("Program init - CANrx thread set scheduler failed");
-    }
 
 
 //    /* initialize battery powered SRAM */
@@ -312,7 +286,7 @@ int main (int argc, char *argv[]){
         }
 
         /* set callback functions for task control. */
-        CO_SYNC_initCallback(CO->SYNC, CANrx_lockCbSync);
+        CO_SYNC_initCallback(CO->SYNC, NULL);
         /* Prepare function, which will wake this task after CAN SDO response is */
         /* received (inside CAN receive interrupt). */
 //        CO->SDO->pFunctSignal = wakeUpTask;    /* will wake from RTX_Sleep_Time() */
@@ -331,8 +305,26 @@ int main (int argc, char *argv[]){
 
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
-        CO_UNLOCK_OD();
 
+
+        /* Generate realtime thread and set scheduler. */
+        if(firstRun){
+            firstRun = false;
+
+            if(pthread_create(&rt_thread_id, NULL, rt_thread, NULL) != 0)
+                CO_errExit("Program init - rt_thread creation failed");
+
+            if(rtPriority > 0){
+                struct sched_param param;
+
+                param.sched_priority = rtPriority;
+                if(pthread_setschedparam(rt_thread_id, SCHED_FIFO, &param) != 0)
+                    CO_errExit("Program init - rt_thread set scheduler failed");
+            }
+        }
+
+
+        CO_UNLOCK_OD();
         reset = CO_RESET_NOT;
 
         printf("%s - running ...\n", argv[0]);
@@ -374,19 +366,22 @@ int main (int argc, char *argv[]){
 
 
 /* program exit ***************************************************************/
-    /* lock threads */
-    CO_LOCK_OD();
+    /* join threads */
+    endProgram = 1;
+    if(pthread_join(rt_thread_id, NULL) != 0){
+        CO_errExit("Program end - pthread_join failed");
+    }
 
     /* delete objects from memory */
     CO_delete(CANdevice0Index);
 
-    printf("%s - finished.\n", argv[0]);
+    printf("%s on %s(nodeId=0x%02X) - finished.\n", argv[0], CANdevice, nodeId);
 
     /* Flush all buffers (and reboot) */
     sync();
     if(rebootEnable && reset == CO_RESET_APP){
         if(reboot(LINUX_REBOOT_CMD_RESTART) != 0){
-            CO_errExit("Program end - Reboot failed");
+            CO_errExit("Program end - reboot failed");
         }
     }
 
@@ -394,18 +389,67 @@ int main (int argc, char *argv[]){
 }
 
 
-/* timer thread executes in constant intervals ********************************/
-static void* rt_thread(void* arg) {
+/* Realtime thread for CAN receive and taskTmr ********************************/
+static void* rt_thread(void* arg){
+    int epfd;
+    struct epoll_event ev;
+
+    /* Configure epoll */
+    epfd = epoll_create(2);
+    if(epfd == -1)
+        CO_errExit("rt_thread init - epoll_create failed");
+
+    ev.events = EPOLLIN;
+    ev.data.fd = CO->CANmodule[0]->fd;
+    if(epoll_ctl(epfd, EPOLL_CTL_ADD, CO->CANmodule[0]->fd, &ev) == -1)
+        CO_errExit("rt_thread init - epoll_ctl CANmodule failed");
+
+    ev.events = EPOLLIN;
+    ev.data.fd = taskTmr.fd;
+    if(epoll_ctl(epfd, EPOLL_CTL_ADD, taskTmr.fd, &ev) == -1)
+        CO_errExit("rt_thread init - epoll_ctl taskTmr failed");
 
     /* Endless loop */
-    for(;;){
+    while(endProgram == 0){
+        int ready;
 
-        /* Wait for timer to expire */
+        ready = epoll_wait(epfd, &ev, 1, -1);
+
+        if(ready != 1){
+            if(errno != EINTR){
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30100000L | errno);
+            }
+        }
+
+        else{
+            if(CANrx_taskTmr_process(ev.data.fd) == false){
+                /* No file descriptor was processed. */
+                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30110000L);
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+/* Process CAN receive and taskTmr (use after epoll) **************************/
+static bool_t CANrx_taskTmr_process(int fd){
+    bool_t wasProcessed = true;
+
+    /* Get received CAN message. */
+    if(fd == CO->CANmodule[0]->fd){
+        CO_CANrxWait(CO->CANmodule[0]);
+    }
+
+
+    /* Execute taskTmr */
+    else if(fd == taskTmr.fd){
         if(taskTmr_wait(&taskTmr, NULL) != 0)
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30000000L | errno);
+            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30200000L | errno);
 
         if(*taskTmr.maxTime > (TMR_TASK_INTERVAL_US*3) && rtPriority > 0){
-            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x30010000L | *taskTmr.maxTime);
+            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x30210000L | *taskTmr.maxTime);
         }
 
 
@@ -429,16 +473,6 @@ static void* rt_thread(void* arg) {
             syncWas = CO_process_SYNC_RPDO(CO, TMR_TASK_INTERVAL_US);
 
             /* Re-enable CANrx, if it was disabled by SYNC callback */
-            if(syncWas){
-                CANrx_unlock();
-            }
-            /* just for safety. If some error in CO_SYNC.c, force unlocking CANrx_sem. */
-            else if(CANrx_semCnt > 0){
-                if((CANrx_semCnt++) > 3){
-                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x30100000);
-                    CANrx_unlock();
-                }
-            }
 
             /* Further I/O or nonblocking application code may go here. */
 
@@ -448,18 +482,11 @@ static void* rt_thread(void* arg) {
 
         /* Unlock */
         CO_UNLOCK_OD();
-
     }
 
-    return NULL;
-}
-
-
-/* CAN receive thread *********************************************************/
-static void* CANrx_thread(void* arg) {
-    for(;;){
-        CO_CANrxWait(CO->CANmodule[0]);//may be segmentation fault
+    else{
+        wasProcessed = false;
     }
 
-    return NULL;
+    return wasProcessed;
 }
