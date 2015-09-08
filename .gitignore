@@ -4,9 +4,9 @@ canopend
 
 doc/
 
-#eclipse
-CANopend/.cproject
-CANopend/.project
+# eclipse
+# CANopend/.cproject
+# CANopend/.project
 CANopend/Debug/
 CANopend/Release/
 CANopend/.settings/

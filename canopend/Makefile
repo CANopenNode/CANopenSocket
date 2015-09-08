@@ -15,7 +15,6 @@ INCLUDE_DIRS =  $(CANOPEN_SRC)  \
 
 SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
                 $(STACKDRV_SRC)/eeprom.c        \
-                $(STACKDRV_SRC)/main_utils.c    \
                 $(STACK_SRC)/crc16-ccitt.c      \
                 $(STACK_SRC)/CO_SDO.c           \
                 $(STACK_SRC)/CO_Emergency.c     \
@@ -34,6 +33,7 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
 OBJS = ${SOURCES:%.c=%.o}
 CC = gcc
 CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -pthread
+#CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -DCO_SINGLE_THREAD
 
 
 .PHONY: all clean
