@@ -25,7 +25,7 @@
 
 
 #include "CANopen.h"
-//#include "eeprom.h"
+#include "eeprom.h"
 //#include "CgiLog.h"
 //#include "CgiOD.h"
 #include <stdio.h>
@@ -61,6 +61,7 @@
     volatile uint16_t       CO_timer1ms = 0U;   /* variable increments each millisecond */
     static int              rtPriority = -1;    /* Real time priority, configurable by arguments. (-1=RT disabled) */
     static int              mainline_epoll_fd;  /* epoll file descriptor for mainline */
+    CO_EE_t                 CO_EEO;             /* EEprom object */
 
 
 /* Realtime thread */
@@ -70,7 +71,6 @@
     static int              rt_thread_epoll_fd;
 #endif
 
-//    CO_EE_t             CO_EEO;             /* EEprom object */
 
 //    CgiLog_t            CgiLogObj;
 //    CgiCli_t            CgiCliObj;
@@ -107,10 +107,6 @@ static void usageExit(char *progName){
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
 }
-
-//static void wakeUpTask(uint32_t arg){
-//    RTX_Wakeup(arg);
-//}
 
 
 /******************************************************************************/
@@ -268,7 +264,7 @@ static bool_t taskMain_process(int fd, CO_NMT_reset_cmd_t *reset){
 
 
         /* Process EEPROM */
-//            CO_EE_process(&CO_EEO);
+            CO_EE_process(&CO_EEO);
 
     }
 
@@ -483,6 +479,7 @@ static void CANrx_lockCbSync(bool_t syncReceived){
 /******************************************************************************/
 int main (int argc, char *argv[]){
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
+    CO_ReturnError_t eeStatus;
     uint8_t powerOn = 1;
     int CANdevice0Index = 0;
     int opt;
@@ -572,9 +569,9 @@ int main (int argc, char *argv[]){
 //    }
 
 
-//    /* initialize EEPROM - part 1 */
-//    CO_ReturnError_t eeStatus = CO_EE_init_1(&CO_EEO, SRAM.EEPROMptr, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM),
-//                            (uint8_t*) &CO_OD_ROM, sizeof(CO_OD_ROM));
+    /* initialize EEPROM - part 1 */
+    eeStatus = CO_EE_init_1(&CO_EEO, NULL, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM),
+                            (uint8_t*) &CO_OD_ROM, sizeof(CO_OD_ROM));
 
 
 //    /* initialize CGI interface. These functions are bound with a fixed name and */
@@ -625,8 +622,8 @@ int main (int argc, char *argv[]){
         }
 
 
-//        /* initialize eeprom - part 2 */
-//        CO_EE_init_2(&CO_EEO, eeStatus, CO->SDO, CO->em);
+        /* initialize eeprom - part 2 */
+        CO_EE_init_2(&CO_EEO, eeStatus, CO->SDO, CO->em);
 
 
         /* just for info */
