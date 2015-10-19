@@ -32,8 +32,8 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
 
 OBJS = ${SOURCES:%.c=%.o}
 CC = gcc
-CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -pthread
-#CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -DCO_SINGLE_THREAD
+CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -lrt -pthread
+#CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -lrt -DCO_SINGLE_THREAD
 
 
 .PHONY: all clean
