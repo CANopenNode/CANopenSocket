@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>CANopend</name>
+	<name>canopend</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -27,7 +27,7 @@
 		<link>
 			<name>CANopenNode</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/CANopenNode</locationURI>
+			<locationURI>WORKSPACE_LOC/CANopenNode</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -1,16 +1,19 @@
 # Makefile for CANopend.
 
 
-STACK_SRC =     ../CANopenNode/stack
 STACKDRV_SRC =  ../CANopenNode/stack/socketCAN
+STACK_SRC =     ../CANopenNode/stack
 CANOPEN_SRC =   ../CANopenNode
 APPL_SRC =      .
 
 
-INCLUDE_DIRS =  $(CANOPEN_SRC)  \
-              -I$(STACK_SRC)    \
-              -I$(STACKDRV_SRC) \
-              -I$(APPL_SRC)
+LINK_TARGET  =  canopend
+
+
+INCLUDE_DIRS = -I$(STACKDRV_SRC) \
+               -I$(STACK_SRC)    \
+               -I$(CANOPEN_SRC)  \
+               -I$(APPL_SRC)
 
 
 SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
@@ -30,22 +33,21 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
 #                $(APPL_SRC)/CgiOD.c             \
 
 
-OBJS = ${SOURCES:%.c=%.o}
+OBJS = $(SOURCES:%.c=%.o)
 CC = gcc
-CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -lrt -pthread
-#CFLAGS = -Wall -g -I$(INCLUDE_DIRS) -lrt -DCO_SINGLE_THREAD
+CFLAGS = -Wall -g $(INCLUDE_DIRS)#-DCO_SINGLE_THREAD
+LDFLAGS = -lrt -pthread
 
 
 .PHONY: all clean
 
-all: canopend
+all: clean $(LINK_TARGET)
 
 clean:
-	rm -f $(OBJS) canopend
+	rm -f $(OBJS) $(LINK_TARGET)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $*.o $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
-canopend: $(OBJS)
-	$(CC) $(CFLAGS)  $(OBJS) -o $@
-
+$(LINK_TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) $^ -o $@
