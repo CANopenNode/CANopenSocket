@@ -3,6 +3,7 @@
 *.bak
 
 /doc/
+/mdShow*
 
 # eclipse
 .metadata/

@@ -26,6 +26,7 @@
 
 #include "CANopen.h"
 #include "eeprom.h"
+#include "Linux_tasks.h"
 //#include "CgiLog.h"
 //#include "CgiOD.h"
 #include <stdio.h>
@@ -53,7 +54,7 @@
 #define NSEC_PER_SEC            (1000000000)    /* The number of nanoseconds per second. */
 #define NSEC_PER_MSEC           (1000000)       /* The number of nanoseconds per millisecond. */
 #define TMR_TASK_INTERVAL_NS    (1000000)       /* Interval of taskTmr in nanoseconds */
-#define TMR_TASK_INTERVAL_US    (1000)          /* Interval of taskTmr in microseconds */
+#define TMR_TASK_OVERFLOW_US    (3000)          /* Overflow detect limit for taskTmr in microseconds */
 #define INCREMENT_1MS(var)      (var++)         /* Increment 1ms variable in taskTmr */
 
 
@@ -106,371 +107,6 @@ static void usageExit(char *progName){
     fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
-}
-
-
-/******************************************************************************/
-/** Mainline task (taskMain)                                                 **/
-/******************************************************************************/
-/* Part of mainline thread. Processing of CANopen tasks, which don't require
- * realtime. Mainline task executes cyclically with maximum interval of 50ms.
- * In case on event, mainline task executes immediately. */
-
-/* globals */
-static struct{
-    int                 fdTmr;          /* file descriptor for taskTmr */
-    int                 fdPipe[2];      /* file descriptors for pipe [0]=read, [1]=write */
-    struct itimerspec   tmrSpec;
-    uint16_t            tmr1msPrev;
-    uint16_t           *maxTime;
-}taskMain;
-
-/* Create Linux timerfd and configure globals. 'fdEpoll' is file descriptor for
- * Linux epoll API, where events are added. 'maxTime' is optional external
- * variable, where longest interval will be written [in milliseconds]. */
-static void taskMain_init(int fdEpoll, uint16_t *maxTime){
-    struct epoll_event ev;
-    int flags;
-
-    /* Prepare pipe for triggering events. For example, if new SDO request
-     * arrives from CAN network, CANrx callback writes a byte into the pipe.
-     * This immediately triggers (via epoll) processing of SDO server, which
-     * generates response. Read and write ends of pipe are nonblocking.
-     * (See 'self pipe trick'.) */
-    if(pipe(taskMain.fdPipe) == -1)
-        CO_errExit("taskMain_init - pipe failed");
-
-    flags = fcntl(taskMain.fdPipe[0], F_GETFL);
-    if(flags == -1)
-        CO_errExit("taskMain_init - fcntl-F_GETFL[0] failed");
-    flags |= O_NONBLOCK;
-    if(fcntl(taskMain.fdPipe[0], F_SETFL, flags) == -1)
-        CO_errExit("taskMain_init - fcntl-F_SETFL[0] failed");
-
-    flags = fcntl(taskMain.fdPipe[1], F_GETFL);
-    if(flags == -1)
-        CO_errExit("taskMain_init - fcntl-F_GETFL[1] failed");
-    flags |= O_NONBLOCK;
-    if(fcntl(taskMain.fdPipe[1], F_SETFL, flags) == -1)
-        CO_errExit("taskMain_init - fcntl-F_SETFL[1] failed");
-
-    /* get file descriptor for timer */
-    taskMain.fdTmr = timerfd_create(CLOCK_MONOTONIC, 0);
-    if(taskMain.fdTmr == -1)
-        CO_errExit("taskMain_init - timerfd_create failed");
-
-    /* add events for epoll */
-    ev.events = EPOLLIN;
-    ev.data.fd = taskMain.fdPipe[0];
-    if(epoll_ctl(fdEpoll, EPOLL_CTL_ADD, taskMain.fdPipe[0], &ev) == -1)
-        CO_errExit("taskMain_init - epoll_ctl CANrx failed");
-
-    ev.events = EPOLLIN;
-    ev.data.fd = taskMain.fdTmr;
-    if(epoll_ctl(fdEpoll, EPOLL_CTL_ADD, taskMain.fdTmr, &ev) == -1)
-        CO_errExit("taskMain_init - epoll_ctl taskTmr failed");
-
-    /* Prepare timer, use no interval, delay time will be set each cycle. */
-    taskMain.tmrSpec.it_interval.tv_sec = 0;
-    taskMain.tmrSpec.it_interval.tv_nsec = 0;
-
-    taskMain.tmrSpec.it_value.tv_sec = 0;
-    taskMain.tmrSpec.it_value.tv_nsec = 1;
-
-    if(timerfd_settime(taskMain.fdTmr, 0, &taskMain.tmrSpec, NULL) != 0)
-        CO_errExit("taskMain_init - timerfd_settime failed");
-
-    taskMain.tmr1msPrev = CO_timer1ms;
-    taskMain.maxTime = maxTime;
-}
-
-/* cleanup */
-static void taskMain_close(void){
-    close(taskMain.fdPipe[0]);
-    close(taskMain.fdPipe[1]);
-    close(taskMain.fdTmr);
-}
-
-/* Function is called after epoll. 'fd' is available file descriptor from
- * epoll(). If 'fd' was matched inside this function, it returns true.
- * 'reset' is return value. */
-static bool_t taskMain_process(int fd, CO_NMT_reset_cmd_t *reset){
-    bool_t wasProcessed = true;
-
-    /* Signal from pipe, consume all bytes. */
-    if(fd == taskMain.fdPipe[0]){
-        for(;;){
-            char ch;
-            if(read(taskMain.fdPipe[0], &ch, 1) == -1){
-                if (errno == EAGAIN)
-                    break;  /* No more bytes. */
-                else
-                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x21100000L | errno);
-            }
-        }
-    }
-
-    /* Timer expired. */
-    else if(fd == taskMain.fdTmr){
-        uint64_t tmrExp;
-        if(read(taskMain.fdTmr, &tmrExp, sizeof(tmrExp)) != sizeof(uint64_t))
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x21200000L | errno);
-    }
-    else{
-        wasProcessed = false;
-    }
-
-    /* Process mainline. */
-    if(wasProcessed){
-        uint16_t tmr1msCopy;
-        uint16_t timer1msDiff;
-        uint16_t timerNext = 50;
-
-        /* Calculate time difference */
-        tmr1msCopy = CO_timer1ms;
-        timer1msDiff = tmr1msCopy - taskMain.tmr1msPrev;
-        taskMain.tmr1msPrev = tmr1msCopy;
-
-        /* Calculate maximum interval in milliseconds (informative) */
-        if(taskMain.maxTime != NULL){
-            if(timer1msDiff > *taskMain.maxTime){
-                *taskMain.maxTime = timer1msDiff;
-            }
-        }
-
-
-        /* CANopen process */
-        *reset = CO_process(CO, timer1msDiff, &timerNext);
-
-
-        /* Nonblocking application code may go here. */
-#if 0
-        static uint16_t maxIntervalMain = 0;
-        if(maxIntervalMain < timer1msDiff){
-            maxIntervalMain = timer1msDiff;
-            printf("Maximum main interval time: %d milliseconds\n", maxIntervalMain);
-        }
-        printf("%2d ", timer1msDiff);
-#endif
-
-
-        /* Set delay for next sleep. */
-        taskMain.tmrSpec.it_value.tv_nsec = (long)(++timerNext) * NSEC_PER_MSEC;
-        if(timerfd_settime(taskMain.fdTmr, 0, &taskMain.tmrSpec, NULL) == -1)
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x21500000L | errno);
-
-
-        //            CgiLogEmcyProcess(CgiLog);
-
-
-        /* Process EEPROM */
-            CO_EE_process(&CO_EEO);
-
-    }
-
-    return wasProcessed;
-}
-
-
-/* Callback function is called, if new CAN message receives and should be
- * processed by taskMain_process. */
-static void taskMain_cbSignal(void){
-    if(write(taskMain.fdPipe[1], "x", 1) == -1)
-        CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x23100000L | errno);
-}
-
-
-/******************************************************************************/
-/** Realtime task (taskRT): CAN receive (CANrx) and  Periodic timer (tmrTask)**/
-/******************************************************************************/
-/* Part of RT (or mainline) thread. Processing of two tasks: CAN receive (CANrx)
- * and periodic timer interval (taskTmr). taskTmr is realtime task, which
- * typically executes in 1ms intervals and processes CANopen SYNC message,
- * RPDOs(inputs) and TPDOs(outputs). Between inputs and outputs can also be
- * executed some realtime application code. */
-
-/* globals */
-static struct{
-    int                 fdRx0;          /* file descriptor for CANrx */
-    int                 fdTmr;          /* file descriptor for taskTmr */
-    struct itimerspec   tmrSpec;
-    struct timespec    *tmrVal;
-    long                intervalns;
-    uint16_t            intervalus;
-    uint16_t           *maxTime;
-    int                 fdEpoll;
-    bool_t              CANrx_locked;
-}taskRT;
-
-/* Create Linux timerfd and configure globals. 'fdEpoll' is file descriptor for
- * Linux epoll API, where events are added. 'intervalns' is interval of
- * periodic timer in nanoseconds. 'maxTime' is optional external variable,
- * where longest interval will be written [in microseconds]. */
-static void CANrx_taskTmr_init(int fdEpoll, long intervalns, uint16_t *maxTime){
-    struct epoll_event ev;
-
-    /* get file descriptors */
-    taskRT.fdRx0 = CO->CANmodule[0]->fd;
-
-    taskRT.fdTmr = timerfd_create(CLOCK_MONOTONIC, 0);
-    if(taskRT.fdTmr == -1)
-        CO_errExit("CANrx_taskTmr_init - timerfd_create failed");
-
-    /* add events for epoll */
-    ev.events = EPOLLIN;
-    ev.data.fd = taskRT.fdRx0;
-    if(epoll_ctl(fdEpoll, EPOLL_CTL_ADD, taskRT.fdRx0, &ev) == -1)
-        CO_errExit("CANrx_taskTmr_init - epoll_ctl CANrx failed");
-
-    ev.events = EPOLLIN;
-    ev.data.fd = taskRT.fdTmr;
-    if(epoll_ctl(fdEpoll, EPOLL_CTL_ADD, taskRT.fdTmr, &ev) == -1)
-        CO_errExit("CANrx_taskTmr_init - epoll_ctl taskTmr failed");
-
-    /* Prepare timer (one shot, each time calculate new expiration time) It is
-     * necessary not to use taskRT.tmrSpec.it_interval, because it is sliding. */
-    taskRT.tmrSpec.it_interval.tv_sec = 0;
-    taskRT.tmrSpec.it_interval.tv_nsec = 0;
-
-    taskRT.tmrVal = &taskRT.tmrSpec.it_value;
-    if(clock_gettime(CLOCK_MONOTONIC, taskRT.tmrVal) != 0)
-        CO_errExit("CANrx_taskTmr_init - clock_gettime failed");
-
-    if(timerfd_settime(taskRT.fdTmr, TFD_TIMER_ABSTIME, &taskRT.tmrSpec, NULL) != 0)
-        CO_errExit("CANrx_taskTmr_init - timerfd_settime failed");
-
-    taskRT.intervalns = intervalns;
-    taskRT.intervalus = (int16_t)(intervalns / 1000);
-    taskRT.maxTime = maxTime;
-
-    /* used for CANrx_lockCbSync() */
-    taskRT.fdEpoll = fdEpoll;
-    taskRT.CANrx_locked = false;
-}
-
-/* cleanup */
-static void CANrx_taskTmr_close(void){
-    close(taskRT.fdTmr);
-}
-
-/* Function is called after epoll. 'fd' is available file descriptor from
- * epoll(). If 'fd' was matched inside this function, it returns true. */
-static bool_t CANrx_taskTmr_process(int fd){
-    bool_t wasProcessed = true;
-
-    /* Get received CAN message. */
-    if(fd == taskRT.fdRx0){
-        CO_CANrxWait(CO->CANmodule[0]);
-    }
-
-    /* Execute taskTmr */
-    else if(fd == taskRT.fdTmr){
-        uint64_t tmrExp;
-
-        /* Wait for timer to expire */
-        if(read(taskRT.fdTmr, &tmrExp, sizeof(tmrExp)) != sizeof(uint64_t))
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x22100000L | errno);
-
-        /* Calculate maximum interval in microseconds (informative) */
-        if(taskRT.maxTime != NULL){
-            struct timespec tmrMeasure;
-            if(clock_gettime(CLOCK_MONOTONIC, &tmrMeasure) == -1)
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x22200000L | errno);
-            if(tmrMeasure.tv_sec == taskRT.tmrVal->tv_sec){
-                long dt = tmrMeasure.tv_nsec - taskRT.tmrVal->tv_nsec;
-                dt /= 1000;
-                dt += taskRT.intervalus;
-                if(dt > 0xFFFF){
-                    *taskRT.maxTime = 0xFFFF;
-                }else if(dt > *taskRT.maxTime){
-                    *taskRT.maxTime = (uint16_t) dt;
-                }
-            }
-        }
-
-        /* Calculate next shot for the timer */
-        taskRT.tmrVal->tv_nsec += taskRT.intervalns;
-        if(taskRT.tmrVal->tv_nsec >= NSEC_PER_SEC){
-            taskRT.tmrVal->tv_nsec -= NSEC_PER_SEC;
-            taskRT.tmrVal->tv_sec++;
-        }
-        if(timerfd_settime(taskRT.fdTmr, TFD_TIMER_ABSTIME, &taskRT.tmrSpec, NULL) == -1)
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x22300000L | errno);
-
-
-        if(*taskRT.maxTime > (TMR_TASK_INTERVAL_US*3) && rtPriority > 0){
-            CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | *taskRT.maxTime);
-        }
-
-#if 0
-        static uint16_t maxInterval = 0;
-        static uint16_t cntxx = 0;
-        if(maxInterval < OD_performance[ODA_performance_timerCycleMaxTime]){
-            maxInterval = OD_performance[ODA_performance_timerCycleMaxTime];
-            printf("Maximum timer interval time: %5d microseconds\n", maxInterval);
-        }
-        if(++cntxx == 1000){
-            cntxx = 0;
-            printf("\n");
-        }
-#endif
-
-        /* Lock PDOs and OD */
-        CO_LOCK_OD();
-
-        INCREMENT_1MS(CO_timer1ms);
-
-        if(CO->CANmodule[0]->CANnormal) {
-            bool_t syncWas;
-
-            /* Process Sync and read inputs */
-            syncWas = CO_process_SYNC_RPDO(CO, TMR_TASK_INTERVAL_US);
-
-            /* Re-enable CANrx, if it was disabled by SYNC callback */
-            if(taskRT.CANrx_locked){
-                struct epoll_event ev;
-
-                /* enable epool event */
-                ev.events = EPOLLIN;
-                ev.data.fd = taskRT.fdRx0;
-                if(epoll_ctl(taskRT.fdEpoll, EPOLL_CTL_MOD, taskRT.fdRx0, &ev) == -1)
-                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x22500000L | errno);
-
-                taskRT.CANrx_locked = false;
-            }
-
-            /* Further I/O or nonblocking application code may go here. */
-
-            /* Write outputs */
-            CO_process_TPDO(CO, syncWas, TMR_TASK_INTERVAL_US);
-        }
-
-        /* Unlock */
-        CO_UNLOCK_OD();
-    }
-
-    else{
-        wasProcessed = false;
-    }
-
-    return wasProcessed;
-}
-
-
-/* Callback function is called at SYNC message on CAN bus.
- * It disables CAN receive thread until RPDOs are processed. */
-static void CANrx_lockCbSync(bool_t syncReceived){
-    if(syncReceived){
-        struct epoll_event ev;
-
-        /* disable epool event */
-        ev.events = 0;
-        ev.data.fd = taskRT.fdRx0;
-        if(epoll_ctl(taskRT.fdEpoll, EPOLL_CTL_MOD, taskRT.fdRx0, &ev) == -1)
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x24100000L | errno);
-
-        taskRT.CANrx_locked = true;
-    }
 }
 
 
@@ -658,7 +294,7 @@ int main (int argc, char *argv[]){
             /* Init taskRT */
             CANrx_taskTmr_init(mainline_epoll_fd, TMR_TASK_INTERVAL_NS, &OD_performance[ODA_performance_timerCycleMaxTime]);
 
-            OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_US; /* informative */
+            OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_NS/1000; /* informative */
 
             /* Set priority for mainline */
             if(rtPriority > 0){
@@ -677,7 +313,7 @@ int main (int argc, char *argv[]){
             /* Init taskRT */
             CANrx_taskTmr_init(rt_thread_epoll_fd, TMR_TASK_INTERVAL_NS, &OD_performance[ODA_performance_timerCycleMaxTime]);
 
-            OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_US; /* informative */
+            OD_performance[ODA_performance_timerCycleTime] = TMR_TASK_INTERVAL_NS/1000; /* informative */
 
             /* Create rt_thread */
             if(pthread_create(&rt_thread_id, NULL, rt_thread, NULL) != 0)
@@ -718,12 +354,27 @@ int main (int argc, char *argv[]){
 
 #ifdef CO_SINGLE_THREAD
             else if(CANrx_taskTmr_process(ev.data.fd)){
-                /* code was processed in the above function */
+                /* code was processed in the above function. Additional code process below */
+                INCREMENT_1MS(CO_timer1ms);
+                /* Detect timer large overflow */
+                if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0){
+                    CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | OD_performance[ODA_performance_timerCycleMaxTime]);
+                }
             }
 #endif
 
-            else if(taskMain_process(ev.data.fd, &reset)){
-                /* code was processed in the above function */
+            else if(taskMain_process(ev.data.fd, &reset, CO_timer1ms)){
+                /* code was processed in the above function. Additional code process below */
+                //            CgiLogEmcyProcess(CgiLog);
+				CO_EE_process(&CO_EEO);
+#if 0
+				static uint16_t maxIntervalMain = 0;
+				if(maxIntervalMain < timer1msDiff){
+					maxIntervalMain = timer1msDiff;
+					printf("Maximum main interval time: %d milliseconds\n", maxIntervalMain);
+				}
+				printf("%2d ", timer1msDiff);
+#endif
             }
 
             else{
@@ -780,7 +431,24 @@ static void* rt_thread(void* arg){
         }
 
         else if(CANrx_taskTmr_process(ev.data.fd)){
-            /* code was processed in the above function */
+            /* code was processed in the above function. Additional code process below */
+            INCREMENT_1MS(CO_timer1ms);
+            /* Detect timer large overflow */
+            if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0){
+                CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | OD_performance[ODA_performance_timerCycleMaxTime]);
+            }
+#if 0
+			static uint16_t maxInterval = 0;
+			static uint16_t cntxx = 0;
+			if(maxInterval < OD_performance[ODA_performance_timerCycleMaxTime]){
+				maxInterval = OD_performance[ODA_performance_timerCycleMaxTime];
+				printf("Maximum timer interval time: %5d microseconds\n", maxInterval);
+			}
+			if(++cntxx == 1000){
+				cntxx = 0;
+				printf("\n");
+			}
+#endif
         }
 
         else{
