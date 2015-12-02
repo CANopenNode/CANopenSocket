@@ -17,7 +17,8 @@ INCLUDE_DIRS = -I$(STACKDRV_SRC) \
 
 
 SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
-                $(STACKDRV_SRC)/eeprom.c        \
+                $(STACKDRV_SRC)/CO_OD_storage.c \
+                $(STACKDRV_SRC)/CO_Linux_tasks.c\
                 $(STACK_SRC)/crc16-ccitt.c      \
                 $(STACK_SRC)/CO_SDO.c           \
                 $(STACK_SRC)/CO_Emergency.c     \
