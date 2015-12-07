@@ -27,6 +27,7 @@
 #include "CANopen.h"
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
+#include "CO_command.h"
 //#include "CgiLog.h"
 //#include "CgiOD.h"
 #include <stdio.h>
@@ -85,9 +86,9 @@ static int                  rt_thread_epoll_fd;
 
 
 /* Signal handler */
-static volatile sig_atomic_t endProgram = 0;
+volatile sig_atomic_t CO_endProgram = 0;
 static void sigHandler(int sig) {
-    endProgram = 1;
+    CO_endProgram = 1;
 }
 
 
@@ -96,6 +97,12 @@ void CO_errExit(char* msg) {
     perror(msg);
     exit(EXIT_FAILURE);
 }
+
+/* send CANopen generic emergency message */
+void CO_error(const uint32_t info) {
+    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, info);
+}
+
 
 static void usageExit(char *progName) {
     fprintf(stderr, "Usage: %s <device> -i <Node ID (1..127)> [options]\n", progName);
@@ -181,6 +188,12 @@ int main (int argc, char *argv[]) {
     odStorStatus_eeprom = CO_OD_storage_init(&odStorAuto, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM), odStorFile_eeprom);
 
 
+    /* Initialize socket command interface */
+    if(CO_command_init() != 0) {
+        CO_errExit("Socket command interface initialization failed");
+    }
+
+
 //    /* initialize CGI interface. These functions are bound with a fixed name and */
 //    /* are executed by the Web server task, if a HTTP request with such a fixed */
 //    /* name comes in. This mechanism allows dynamic usage of the IPC@CHIP Web server. */
@@ -204,7 +217,7 @@ int main (int argc, char *argv[]) {
     OD_powerOnCounter++;
 
 
-    while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && endProgram == 0) {
+    while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && CO_endProgram == 0) {
 /* CANopen communication reset - initialize CANopen objects *******************/
         CO_ReturnError_t err;
 
@@ -317,7 +330,7 @@ int main (int argc, char *argv[]) {
         printf("%s - running ...\n", argv[0]);
 
 
-        while(reset == CO_RESET_NOT && endProgram == 0) {
+        while(reset == CO_RESET_NOT && CO_endProgram == 0) {
 /* loop for normal program execution ******************************************/
             int ready;
             struct epoll_event ev;
@@ -326,7 +339,7 @@ int main (int argc, char *argv[]) {
 
             if(ready != 1) {
                 if(errno != EINTR) {
-                    CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x11100000L | errno);
+                    CO_error(0x11100000L | errno);
                 }
             }
 
@@ -346,18 +359,18 @@ int main (int argc, char *argv[]) {
                 //            CgiLogEmcyProcess(CgiLog);
                 CO_OD_storage_autoSave(&odStorAuto, CO_timer1ms, 60000);
 #if 0
-				static uint16_t maxIntervalMain = 0;
-				if(maxIntervalMain < timer1msDiff) {
-					maxIntervalMain = timer1msDiff;
-					printf("Maximum main interval time: %d milliseconds\n", maxIntervalMain);
-				}
-				printf("%2d ", timer1msDiff);
+                static uint16_t maxIntervalMain = 0;
+                if(maxIntervalMain < timer1msDiff) {
+                    maxIntervalMain = timer1msDiff;
+                    printf("Maximum main interval time: %d milliseconds\n", maxIntervalMain);
+                }
+                printf("%2d ", timer1msDiff);
 #endif
             }
 
             else {
                 /* No file descriptor was processed. */
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x11200000L);
+                CO_error(0x11200000L);
             }
         }
     }
@@ -365,12 +378,16 @@ int main (int argc, char *argv[]) {
 
 /* program exit ***************************************************************/
     /* join threads */
-    endProgram = 1;
+    CO_endProgram = 1;
 #ifndef CO_SINGLE_THREAD
     if(pthread_join(rt_thread_id, NULL) != 0) {
         CO_errExit("Program end - pthread_join failed");
     }
 #endif
+
+    if(CO_command_clear() != 0) {
+        CO_errExit("Socket command interface removal failed");
+    }
 
     /* Store CO_OD_EEPROM */
     CO_OD_storage_autoSave(&odStorAuto, 0, 0);
@@ -400,7 +417,7 @@ int main (int argc, char *argv[]) {
 static void* rt_thread(void* arg) {
 
     /* Endless loop */
-    while(endProgram == 0) {
+    while(CO_endProgram == 0) {
         int ready;
         struct epoll_event ev;
 
@@ -408,7 +425,7 @@ static void* rt_thread(void* arg) {
 
         if(ready != 1) {
             if(errno != EINTR) {
-                CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x12100000L | errno);
+                CO_error(0x12100000L | errno);
             }
         }
 
@@ -420,22 +437,22 @@ static void* rt_thread(void* arg) {
                 CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | OD_performance[ODA_performance_timerCycleMaxTime]);
             }
 #if 0
-			static uint16_t maxInterval = 0;
-			static uint16_t cntxx = 0;
-			if(maxInterval < OD_performance[ODA_performance_timerCycleMaxTime]) {
-				maxInterval = OD_performance[ODA_performance_timerCycleMaxTime];
-				printf("Maximum timer interval time: %5d microseconds\n", maxInterval);
-			}
-			if(++cntxx == 1000) {
-				cntxx = 0;
-				printf("\n");
-			}
+            static uint16_t maxInterval = 0;
+            static uint16_t cntxx = 0;
+            if(maxInterval < OD_performance[ODA_performance_timerCycleMaxTime]) {
+                maxInterval = OD_performance[ODA_performance_timerCycleMaxTime];
+                printf("Maximum timer interval time: %5d microseconds\n", maxInterval);
+            }
+            if(++cntxx == 1000) {
+                cntxx = 0;
+                printf("\n");
+            }
 #endif
         }
 
         else {
             /* No file descriptor was processed. */
-            CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, 0x12200000L);
+            CO_error(0x12200000L);
         }
     }
 

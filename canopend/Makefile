@@ -29,6 +29,7 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
                 $(STACK_SRC)/CO_SDOmaster.c     \
                 $(CANOPEN_SRC)/CANopen.c        \
                 $(APPL_SRC)/CO_OD.c             \
+                $(APPL_SRC)/CO_command.c        \
                 $(APPL_SRC)/main.c
 #                $(APPL_SRC)/CgiLog.c            \
 #                $(APPL_SRC)/CgiOD.c             \
