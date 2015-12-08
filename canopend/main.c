@@ -105,7 +105,7 @@ void CO_error(const uint32_t info) {
 
 
 static void usageExit(char *progName) {
-    fprintf(stderr, "Usage: %s <device> -i <Node ID (1..127)> [options]\n", progName);
+    fprintf(stderr, "Usage: %s <CAN device name> -i <Node ID (1..127)> [options]\n", progName);
     fprintf(stderr, "Options:\n");
     fprintf(stderr, "  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n");
     fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");

@@ -37,9 +37,6 @@
 #include <sys/socket.h>
 
 
-
-
-#define SOCKET_BUF_SIZE     1000
 #define LISTEN_BACKLOG      50
 
 
@@ -54,14 +51,15 @@ char                       *CO_command_socketPath = "/tmp/CO_command_socket";  /
 
 
 /* Variables */
-static void*                CO_command_thread(void* arg);
-static pthread_t            CO_command_thread_id;
+static void*                command_thread(void* arg);
+static pthread_t            command_thread_id;
+static void                 command_process(int fd, char* command, size_t commandLength);
 static int                  fdSocket;
 
 
 /******************************************************************************/
 int CO_command_init(void) {
-    static struct sockaddr_un addr;
+    struct sockaddr_un addr;
 
     /* Create, bind and listen socket */
     fdSocket = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -86,7 +84,7 @@ int CO_command_init(void) {
     }
 
     /* Create thread */
-    if(pthread_create(&CO_command_thread_id, NULL, CO_command_thread, NULL) != 0) {
+    if(pthread_create(&command_thread_id, NULL, command_thread, NULL) != 0) {
         CO_errExit("CO_command_init - thread creation failed");
     }
 
@@ -99,7 +97,7 @@ int CO_command_clear(void) {
     static struct sockaddr_un addr;
     int fd;
 
-    /* Establish a client socket connection to finish the CO_command_thread. */
+    /* Establish a client socket connection to finish the command_thread. */
     fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if(fd == -1) {
         return -1;
@@ -116,7 +114,7 @@ int CO_command_clear(void) {
     close(fd);
 
     /* Wait for thread to finish. */
-    if(pthread_join(CO_command_thread_id, NULL) != 0) {
+    if(pthread_join(command_thread_id, NULL) != 0) {
         return -1;
     }
 
@@ -130,10 +128,10 @@ int CO_command_clear(void) {
 
 
 /******************************************************************************/
-static void* CO_command_thread(void* arg) {
+static void* command_thread(void* arg) {
     int fd;
     ssize_t n;
-    char buf[SOCKET_BUF_SIZE];
+    char buf[1000];
 
     /* Almost endless loop */
     while(CO_endProgram == 0) {
@@ -145,19 +143,35 @@ static void* CO_command_thread(void* arg) {
         }
 
         /* Read command and send answer. */
-        while ((n = read(fd, buf, SOCKET_BUF_SIZE)) > 0) {
-            printf("serv:%s\n", buf);
+        while ((n = read(fd, buf, sizeof(buf)-1)) > 0) {
+            buf[n++] = 0; /* terminate input string */
+            command_process(fd, buf, n);
         }
 
-        /* close current communication */
         if(n == -1){
             CO_error(0x15800000L);
         }
 
+        /* close current communication */
         if(close(fd) == -1) {
             CO_error(0x15900000L);
         }
     }
 
     return NULL;
+}
+
+
+static void command_process(int fd, char* command, size_t commandLength) {
+    char buf[1000];
+    int buflen;
+
+    printf("rcvCommand:%s\n", command);
+
+    buflen = sprintf(buf, "Received %lu bytes", commandLength);
+    buf[buflen++] = 0; /* terminate string */
+
+    if (write(fd, buf, buflen) != buflen) {
+        CO_error(0x15200000L);
+    }
 }
