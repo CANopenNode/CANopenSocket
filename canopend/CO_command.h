@@ -28,7 +28,36 @@
 #define COMMAND_CO_SOCKET_H
 
 
-int CO_command_init(void);
+#include <signal.h>
+
+
+/* Functions from external */
+void CO_errExit(char* msg);
+void CO_error(const uint32_t info);
+
+
+/**
+ * Path for local type  socket. External process can access command interface
+ * over this socket. By default its path is "/tmp/CO_command_socket".
+ */
+extern char *CO_command_socketPath;
+
+
+/**
+ * Initialize thread and create socket for command interface.
+ *
+ * @param CO_SDOclient Pointer to CANopen SDO client object.
+ *
+ * @return 0 on success.
+ */
+int CO_command_init(CO_SDOclient_t *CO_SDOclient);
+
+
+/**
+ * Terminate thread and remove socket.
+ *
+ * @return 0 on success.
+ */
 int CO_command_clear(void);
 
 

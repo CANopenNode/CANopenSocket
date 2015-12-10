@@ -188,12 +188,6 @@ int main (int argc, char *argv[]) {
     odStorStatus_eeprom = CO_OD_storage_init(&odStorAuto, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM), odStorFile_eeprom);
 
 
-    /* Initialize socket command interface */
-    if(CO_command_init() != 0) {
-        CO_errExit("Socket command interface initialization failed");
-    }
-
-
 //    /* initialize CGI interface. These functions are bound with a fixed name and */
 //    /* are executed by the Web server task, if a HTTP request with such a fixed */
 //    /* name comes in. This mechanism allows dynamic usage of the IPC@CHIP Web server. */
@@ -319,6 +313,11 @@ int main (int argc, char *argv[]) {
                     CO_errExit("Program init - rt_thread set scheduler failed");
             }
 #endif
+
+            /* Initialize socket command interface */
+            if(CO_command_init(CO->SDOclient) != 0) {
+                CO_errExit("Socket command interface initialization failed");
+            }
         }
 
 
@@ -378,16 +377,16 @@ int main (int argc, char *argv[]) {
 
 /* program exit ***************************************************************/
     /* join threads */
+    if(CO_command_clear() != 0) {
+        CO_errExit("Socket command interface removal failed");
+    }
+
     CO_endProgram = 1;
 #ifndef CO_SINGLE_THREAD
     if(pthread_join(rt_thread_id, NULL) != 0) {
         CO_errExit("Program end - pthread_join failed");
     }
 #endif
-
-    if(CO_command_clear() != 0) {
-        CO_errExit("Socket command interface removal failed");
-    }
 
     /* Store CO_OD_EEPROM */
     CO_OD_storage_autoSave(&odStorAuto, 0, 0);

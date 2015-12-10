@@ -35,8 +35,6 @@
 #include <sys/socket.h>
 
 
-
-
 #define BUF_SIZE            10000
 
 
@@ -51,11 +49,31 @@ static void usageExit(char *progName) {
     fprintf(stderr, "Options:\n");
     fprintf(stderr, "  -s <socket path>    Path of the socket (default '/tmp/CO_command_socket').\n");
     fprintf(stderr, "\n");
-    fprintf(stderr, "Command string:\n");
-    fprintf(stderr, "  -s <socket path>    Path of the socket (default '/tmp/CO_command_socket').\n");
+    fprintf(stderr, "Command strings according to CiA 309 standard:\n");
+    fprintf(stderr, "  - SDO upload:   \"[\"<sequence>\"]\" [[net] node] r[ead]  <index> <subindex> [<datatype>]\n");
+    fprintf(stderr, "  - SDO download: \"[\"<sequence>\"]\" [[net] node] w[rite] <index> <subindex> <datatype> <value>\n");
+    fprintf(stderr, "\n");
+    fprintf(stderr, "  - Datatypes:\n");
+    fprintf(stderr, "      - b - Boolean.\n");
+    fprintf(stderr, "      - u8, u16, u32, u64 - Unsigned integers.\n");
+    fprintf(stderr, "      - i8, i16, i32, i64 - Signed integers.\n");
+    fprintf(stderr, "      - r32, r64 - Real numbers.\n");
+    fprintf(stderr, "      - t, td - Time of day, time difference.\n");
+    fprintf(stderr, "      - vs - Visible string (between double quotes).\n");
+    fprintf(stderr, "      - os, us, d - Octet string, unicode string, domain (mime-base64 (RFC2045) should be used).\n");
+    fprintf(stderr, "\n");
+    fprintf(stderr, "  - Response: \"[\"<sequence>\"]\" (<value> | ERROR: (<SDO-abort-code> | <internal-error-code>))\n");
+    fprintf(stderr, "\n");
+    fprintf(stderr, "  - Internal error codes:\n");
+    fprintf(stderr, "      - 100 - Command not supported.\n");
+    fprintf(stderr, "      - 101 - Syntax error.\n");
+    fprintf(stderr, "      - 105 - No default node set.\n");
+    fprintf(stderr, "      - 106 - Unsupported net.\n");
+    fprintf(stderr, "      - 107 - Unsupported node.\n");
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
 }
+
 
 static void sendCommand(int fd, char* command, size_t commandLength);
 
@@ -132,8 +150,6 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
     size_t n;
     char buf[1000];
 
-    printf("com:%s\n", command);
-
     if (write(fd, command, commandLength) != commandLength) {
         errExit("Socket write failed");
     }
@@ -144,6 +160,6 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
         errExit("Socket read failed");
     }
 
-    printf("ans:%s\n", buf);
+    printf("%s", buf);
 }
 
