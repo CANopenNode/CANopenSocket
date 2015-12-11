@@ -28,8 +28,6 @@
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
 #include "CO_command.h"
-//#include "CgiLog.h"
-//#include "CgiOD.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -78,20 +76,6 @@ static int                  rt_thread_epoll_fd;
 #endif
 
 
-//    CgiLog_t            CgiLogObj;
-//    CgiCli_t            CgiCliObj;
-//    CgiLog_t           *CgiLog = &CgiLogObj;
-//    CgiCli_t           *CgiCli = &CgiCliObj;
-//
-//    #define CgiCANLogBufSize    0x80000L
-//    #define CgiCliBufSize       0x10000
-//    #define CgiCliSDObufSize    0x800
-//    uint8_t CgiCANLogBuf0[CgiCANLogBufSize];
-//    uint8_t CgiCANLogBuf1[CgiCANLogBufSize];
-//    char_t CgiCliBuf[CgiCliBufSize];
-//    uint8_t CgiCliSDObuf[CgiCliSDObufSize];
-
-
 /* Signal handler */
 volatile sig_atomic_t CO_endProgram = 0;
 static void sigHandler(int sig) {
@@ -133,7 +117,6 @@ static void usageExit(char *progName) {
 int main (int argc, char *argv[]) {
     CO_NMT_reset_cmd_t reset = CO_RESET_NOT;
     CO_ReturnError_t odStorStatus_rom, odStorStatus_eeprom;
-    uint8_t powerOn = 1;
     int CANdevice0Index = 0;
     int opt;
     bool_t firstRun = true;
@@ -185,7 +168,7 @@ int main (int argc, char *argv[]) {
     }
 
 
-    printf("%s - starting CANopen device with Node ID %d(0x%02X) ...\n", argv[0], nodeId, nodeId);
+    printf("%s - starting CANopen device with Node ID %d(0x%02X)", argv[0], nodeId, nodeId);
 
 
     /* Verify, if OD structures have proper alignment of initial values */
@@ -208,19 +191,6 @@ int main (int argc, char *argv[]) {
     odStorStatus_eeprom = CO_OD_storage_init(&odStorAuto, (uint8_t*) &CO_OD_EEPROM, sizeof(CO_OD_EEPROM), odStorFile_eeprom);
 
 
-//    /* initialize CGI interface. These functions are bound with a fixed name and */
-//    /* are executed by the Web server task, if a HTTP request with such a fixed */
-//    /* name comes in. This mechanism allows dynamic usage of the IPC@CHIP Web server. */
-//    OD_CANopenLog.CANLogSize = CgiCANLogBufSize;
-//
-//    if(   CgiLog_init_1(CgiLog, SRAM.emcyBufPtr, SRAM.emcyBufSize, CgiCANLogBuf0,
-//                        CgiCANLogBuf1, CgiCANLogBufSize, OD_CANopenLog.maxDumpFiles)
-//       || CgiCli_init_1(CgiCli, CgiCliBuf, CgiCliBufSize, CgiCliSDObuf, CgiCliSDObufSize))
-//    {
-//        printf("\nError: CGI initialization failed.");
-//        exit(EXIT_FAILURE);
-//    }
-
     /* Catch signals SIGINT and SIGTERM */
     if(signal(SIGINT, sigHandler) == SIG_ERR)
         CO_errExit("Program init - SIGINIT handler creation failed");
@@ -228,7 +198,7 @@ int main (int argc, char *argv[]) {
         CO_errExit("Program init - SIGTERM handler creation failed");
 
     /* increase variable each startup. Variable is automatically stored in non-volatile memory. */
-    OD_powerOnCounter++;
+    printf(", count=%u ...\n", ++OD_powerOnCounter);
 
 
     while(reset != CO_RESET_APP && reset != CO_RESET_QUIT && CO_endProgram == 0) {
@@ -271,13 +241,6 @@ int main (int argc, char *argv[]) {
         }
         if(odStorStatus_eeprom != CO_ERROR_NO) {
             CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_eeprom + 1000);
-        }
-
-
-        /* just for info */
-        if(powerOn) {
-            CO_errorReport(CO->em, CO_EM_MICROCONTROLLER_RESET, CO_EMC_NO_ERROR, OD_powerOnCounter);
-            powerOn = 0;
         }
 
 
@@ -387,16 +350,8 @@ int main (int argc, char *argv[]) {
 
             else if(taskMain_process(ev.data.fd, &reset, CO_timer1ms)) {
                 /* code was processed in the above function. Additional code process below */
-                //            CgiLogEmcyProcess(CgiLog);
+
                 CO_OD_storage_autoSave(&odStorAuto, CO_timer1ms, 60000);
-#if 0
-                static uint16_t maxIntervalMain = 0;
-                if(maxIntervalMain < timer1msDiff) {
-                    maxIntervalMain = timer1msDiff;
-                    printf("Maximum main interval time: %d milliseconds\n", maxIntervalMain);
-                }
-                printf("%2d ", timer1msDiff);
-#endif
             }
 
             else {
@@ -469,18 +424,6 @@ static void* rt_thread(void* arg) {
             if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0) {
                 CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | OD_performance[ODA_performance_timerCycleMaxTime]);
             }
-#if 0
-            static uint16_t maxInterval = 0;
-            static uint16_t cntxx = 0;
-            if(maxInterval < OD_performance[ODA_performance_timerCycleMaxTime]) {
-                maxInterval = OD_performance[ODA_performance_timerCycleMaxTime];
-                printf("Maximum timer interval time: %5d microseconds\n", maxInterval);
-            }
-            if(++cntxx == 1000) {
-                cntxx = 0;
-                printf("\n");
-            }
-#endif
         }
 
         else {
