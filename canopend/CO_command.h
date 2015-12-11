@@ -24,11 +24,8 @@
  */
 
 
-#ifndef COMMAND_CO_SOCKET_H
-#define COMMAND_CO_SOCKET_H
-
-
-#include <signal.h>
+#ifndef CO_COMMAND_H
+#define CO_COMMAND_H
 
 
 /* Functions from external */

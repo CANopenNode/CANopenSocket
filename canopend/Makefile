@@ -30,9 +30,8 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
                 $(CANOPEN_SRC)/CANopen.c        \
                 $(APPL_SRC)/CO_OD.c             \
                 $(APPL_SRC)/CO_command.c        \
+                $(APPL_SRC)/CO_commandAscii.c   \
                 $(APPL_SRC)/main.c
-#                $(APPL_SRC)/CgiLog.c            \
-#                $(APPL_SRC)/CgiOD.c             \
 
 
 OBJS = $(SOURCES:%.c=%.o)

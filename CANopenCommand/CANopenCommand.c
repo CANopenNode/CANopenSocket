@@ -46,10 +46,16 @@ void errExit(char* msg) {
 
 static void usageExit(char *progName) {
     fprintf(stderr, "Usage: %s [options] <command string>\n", progName);
-    fprintf(stderr, "Options:\n");
-    fprintf(stderr, "  -s <socket path>    Path of the socket (default '/tmp/CO_command_socket').\n");
     fprintf(stderr, "\n");
-    fprintf(stderr, "Command strings according to CiA 309 standard:\n");
+    fprintf(stderr, "Program reads arguments or standard input or file. It sends commands to\n");
+    fprintf(stderr, "canopend via socket, line after line. Result is printed to standard output.\n");
+    fprintf(stderr, "For more information see http://www.can-cia.org/, CiA 309 standard.\n");
+    fprintf(stderr, "\n");
+    fprintf(stderr, "Options:\n");
+    fprintf(stderr, "  -f <input file path>  Path of the input file.\n");
+    fprintf(stderr, "  -s <socket path>      Path of the socket (default '/tmp/CO_command_socket').\n");
+    fprintf(stderr, "\n");
+    fprintf(stderr, "Command strings:\n");
     fprintf(stderr, "  - SDO upload:   \"[\"<sequence>\"]\" [[net] node] r[ead]  <index> <subindex> [<datatype>]\n");
     fprintf(stderr, "  - SDO download: \"[\"<sequence>\"]\" [[net] node] w[rite] <index> <subindex> <datatype> <value>\n");
     fprintf(stderr, "\n");
@@ -62,11 +68,12 @@ static void usageExit(char *progName) {
     fprintf(stderr, "      - vs - Visible string (between double quotes).\n");
     fprintf(stderr, "      - os, us, d - Octet string, unicode string, domain (mime-base64 (RFC2045) should be used).\n");
     fprintf(stderr, "\n");
-    fprintf(stderr, "  - Response: \"[\"<sequence>\"]\" (<value> | ERROR: (<SDO-abort-code> | <internal-error-code>))\n");
+    fprintf(stderr, "  - Response: \"[\"<sequence>\"]\" (OK | <value> | ERROR: (<SDO-abort-code> | <internal-error-code>))\n");
     fprintf(stderr, "\n");
     fprintf(stderr, "  - Internal error codes:\n");
-    fprintf(stderr, "      - 100 - Command not supported.\n");
+    fprintf(stderr, "      - 100 - Request not supported.\n");
     fprintf(stderr, "      - 101 - Syntax error.\n");
+    fprintf(stderr, "      - 102 - Request not processed due to internal state.\n");
     fprintf(stderr, "      - 105 - No default node set.\n");
     fprintf(stderr, "      - 106 - Unsupported net.\n");
     fprintf(stderr, "      - 107 - Unsupported node.\n");
@@ -81,6 +88,7 @@ static void sendCommand(int fd, char* command, size_t commandLength);
 /******************************************************************************/
 int main (int argc, char *argv[]) {
     char *socketPath = "/tmp/CO_command_socket";  /* Name of the local domain socket, configurable by arguments. */
+    char *inputFilePath = NULL;
 
     char buf[BUF_SIZE];
     int fd;
@@ -93,9 +101,14 @@ int main (int argc, char *argv[]) {
     }
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "s:")) != -1) {
+    while((opt = getopt(argc, argv, "s:f:")) != -1) {
         switch (opt) {
-            case 's': socketPath = optarg;     break;
+            case 'f':
+                inputFilePath = optarg;
+                break;
+            case 's':
+                socketPath = optarg;
+                break;
             default:  usageExit(argv[0]);
         }
     }
@@ -115,8 +128,22 @@ int main (int argc, char *argv[]) {
     }
 
 
+    /* get commands from input file, line after line */
+    if(inputFilePath != NULL) {
+        FILE *fp = fopen(inputFilePath, "r");
+        if(fp == NULL) {
+            errExit("Can't open input file");
+        }
+
+        while(fgets(buf, BUF_SIZE, fp) != NULL) {
+            sendCommand(fd, buf, strlen(buf));
+        }
+
+        fclose(fp);
+    }
+
     /* get command from arguments */
-    if(optind < argc) {
+    else if(optind < argc) {
         buf[0] = 0;
         size_t buflen = 0;
 
@@ -137,7 +164,7 @@ int main (int argc, char *argv[]) {
     else {
         while(fgets(buf, BUF_SIZE, stdin) != NULL) {
             sendCommand(fd, buf, strlen(buf));
-        };
+        }
     }
 
     close(fd);

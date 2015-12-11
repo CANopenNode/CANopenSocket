@@ -48,7 +48,7 @@ static void CgiLogTimestamp(uint8_t *buf, uint8_t disi){
         RTX_Get_TimeDate_us(&timeDate);
     }
 
-    CO_memcpySwap4(buf, (uint8_t*) &tickCount); buf += 4;
+    CO_memcpySwap4(buf, &tickCount); buf += 4;
     *buf++ = 16;
     *buf++ = 0;
     *buf++ = 0;
@@ -59,7 +59,7 @@ static void CgiLogTimestamp(uint8_t *buf, uint8_t disi){
     *buf++ = timeDate.hr;
     *buf++ = timeDate.min;
     *buf++ = timeDate.sec;
-    CO_memcpySwap2(buf, (uint8_t*) &timeDate.msec);
+    CO_memcpySwap2(buf, &timeDate.msec);
 }
 
 
@@ -94,7 +94,7 @@ static void huge _pascal CgiLogCANFunction(rpCgiPtr CgiRequest){
     /* calculate size and write pointer of the oldest message */
     if(CgiLog->CANBufOvf){
         bufLen = CgiLog->CANBufSize;
-        CO_memcpySwap4(buf+4, (uint8_t*) &CgiLog->CANBufOfs);
+        CO_memcpySwap4(buf+4, &CgiLog->CANBufOfs);
     }
     else{
         bufLen = CgiLog->CANBufOfs;
@@ -259,9 +259,9 @@ make it reentrant or use mutex
         /* emergency + CAN buffer */
         emcyBuf = (uint32_t*)(CgiLog->emcyTempBuf + emcyBufOffset);
 
-        CO_memcpySwap4((uint8_t*) CANbuf++, (uint8_t*) &timeStamp);
+        CO_memcpySwap4(CANbuf++, &timeStamp);
         *emcyBuf++ = timeStamp;
-        CO_memcpySwap4((uint8_t*) CANbuf++, (uint8_t*) &id_len);
+        CO_memcpySwap4(CANbuf++, &id_len);
         *emcyBuf++ = id_len;
         *CANbuf = *(CANbuf+1) = 0;
         memcpy(CANbuf, msg->data, len);
@@ -270,8 +270,8 @@ make it reentrant or use mutex
     }
     else{
         /* CAN buffer only */
-        CO_memcpySwap4((uint8_t*) CANbuf++, (uint8_t*) &timeStamp);
-        CO_memcpySwap4((uint8_t*) CANbuf++, (uint8_t*) &id_len);
+        CO_memcpySwap4(CANbuf++, &timeStamp);
+        CO_memcpySwap4(CANbuf++, &id_len);
         *CANbuf = *(CANbuf+1) = 0;
         memcpy(CANbuf, msg->data, len);
     }
@@ -292,7 +292,7 @@ void CgiLogSaveBuffer(CgiLog_t *CgiLog){
     /* calculate size and write pointer of the oldest message */
     if(CgiLog->CANBufOvf){
         bufLen = CgiLog->CANBufSize;
-        CO_memcpySwap4(buf+4, (uint8_t*) &CgiLog->CANBufOfs);
+        CO_memcpySwap4(buf+4, &CgiLog->CANBufOfs);
     }
     else{
         bufLen = CgiLog->CANBufOfs;
@@ -398,7 +398,7 @@ void CgiLogEmcyProcess(CgiLog_t *CgiLog){
         uint8_t  errorRegister  = tBuf[start+10];
         uint8_t  errorIndex     = tBuf[start+11];
         uint32_t info;
-        CO_memcpySwap4((uint8_t*)&info, &tBuf[start+12]);
+        CO_memcpySwap4(&info, &tBuf[start+12]);
 
         SramOfs += sprintf((CgiLog->emcyBuf+SramOfs),
                 "%s - %02X - %04X %02X %02X %08X\n",

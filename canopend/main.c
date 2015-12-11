@@ -106,9 +106,15 @@ void CO_error(const uint32_t info) {
 
 static void usageExit(char *progName) {
     fprintf(stderr, "Usage: %s <CAN device name> -i <Node ID (1..127)> [options]\n", progName);
+    fprintf(stderr, "\n");
     fprintf(stderr, "Options:\n");
     fprintf(stderr, "  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n");
     fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");
+    fprintf(stderr, "  -c <Socket path>    Enable command interface for master functionality. \n");
+    fprintf(stderr, "                      If socket path is specified as empty string \"\",\n");
+    fprintf(stderr, "                      default '%s' will be used.\n", CO_command_socketPath);
+    fprintf(stderr, "                      Note that location of socket path may affect security.\n");
+    fprintf(stderr, "                      See 'CANopenCommand/canopencomm --help' for more info.\n");
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
 }
@@ -125,19 +131,26 @@ int main (int argc, char *argv[]) {
     int opt;
     bool_t firstRun = true;
 
-    char* CANdevice = NULL;     /* CAN device, configurable by arguments. */
-    int nodeId = -1;            /* Set to 1..127 by arguments */
-    bool_t rebootEnable = false;/* Configurable by arguments */
+    char* CANdevice = NULL;         /* CAN device, configurable by arguments. */
+    int nodeId = -1;                /* Set to 1..127 by arguments */
+    bool_t rebootEnable = false;    /* Configurable by arguments */
+    bool_t commandEnable = false;   /* Configurable by arguments */
 
     if(argc < 3 || strcmp(argv[1], "--help") == 0) usageExit(argv[0]);
 
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "i:p:r")) != -1) {
+    while((opt = getopt(argc, argv, "i:p:rc:")) != -1) {
         switch (opt) {
             case 'i': nodeId = strtol(optarg, NULL, 0);     break;
             case 'p': rtPriority = strtol(optarg, NULL, 0); break;
             case 'r': rebootEnable = true;                  break;
+            case 'c':
+                if(strlen(optarg) != 0) {
+                    CO_command_socketPath = optarg;
+                }
+                commandEnable = true;
+                break;
             default:  usageExit(argv[0]);
         }
     }
@@ -315,8 +328,11 @@ int main (int argc, char *argv[]) {
 #endif
 
             /* Initialize socket command interface */
-            if(CO_command_init(CO->SDOclient) != 0) {
-                CO_errExit("Socket command interface initialization failed");
+            if(commandEnable) {
+                if(CO_command_init(CO->SDOclient) != 0) {
+                    CO_errExit("Socket command interface initialization failed");
+                }
+                printf("%s - Command interface on socket '%s' started ...\n", argv[0], CO_command_socketPath);
             }
         }
 
@@ -377,8 +393,10 @@ int main (int argc, char *argv[]) {
 
 /* program exit ***************************************************************/
     /* join threads */
-    if(CO_command_clear() != 0) {
-        CO_errExit("Socket command interface removal failed");
+    if(commandEnable) {
+        if(CO_command_clear() != 0) {
+            CO_errExit("Socket command interface removal failed");
+        }
     }
 
     CO_endProgram = 1;
