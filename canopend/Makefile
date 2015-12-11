@@ -30,7 +30,8 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
                 $(CANOPEN_SRC)/CANopen.c        \
                 $(APPL_SRC)/CO_OD.c             \
                 $(APPL_SRC)/CO_command.c        \
-                $(APPL_SRC)/CO_commandAscii.c   \
+                $(APPL_SRC)/CO_comm_helpers.c   \
+                $(APPL_SRC)/CO_master.c         \
                 $(APPL_SRC)/main.c
 
 

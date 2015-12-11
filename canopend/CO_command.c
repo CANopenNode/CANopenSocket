@@ -26,7 +26,8 @@
 
 #include "CANopen.h"
 #include "CO_command.h"
-#include "CO_commandAscii.h"
+#include "CO_comm_helpers.h"
+#include "CO_master.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -56,8 +57,8 @@ static CO_SDOclient_t      *SDOclient;
 static int                  fdSocket;
 static uint16_t             comm_net = 1;   /* default CAN net number */
 static uint8_t              comm_node = 0;  /* CANopen Node ID number is undefined by default */
+static uint16_t             SDOtimeoutTime = 500; /* Timeout time for SDO transfer in milliseconds, if no response */
 static uint8_t              blockTransferEnable = 0; /* SDO block transfer enabled? */
-static uint8_t              comm_nodePrevious = 0;
 static volatile int         endProgram = 0;
 
 
@@ -254,8 +255,8 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
         /* Upload SDO command - 'r[ead] <index> <subindex> <datatype>' */
         if(strcmp(token, "r") == 0 || strcmp(token, "read") == 0) {
-            uint16_t index;
-            uint8_t subindex;
+            uint16_t idx;
+            uint8_t subidx;
             const dataType_t *datatype; /* optional token */
             int errTokDt = 0;
             int errDt = 0;
@@ -266,10 +267,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
             uint32_t dataRxLen;  /* Length of received data */
 
             token = getTok(NULL, spaceDelim, &err);
-            index = (uint16_t)getU32(token, 0, 0xFFFF, &err);
+            idx = (uint16_t)getU32(token, 0, 0xFFFF, &err);
 
             token = getTok(NULL, spaceDelim, &err);
-            subindex = (uint8_t)getU32(token, 0, 0xFF, &err);
+            subidx = (uint8_t)getU32(token, 0, 0xFF, &err);
 
             token = getTok(NULL, spaceDelim, &errTokDt);
             datatype = getDataType(token, &errDt);
@@ -286,40 +287,23 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 respErrorCode = respErrorNoDefaultNodeSet;
             }
 
-            /* setup client if necessary */
-            if(err == 0 && comm_node != comm_nodePrevious) {
-                if(CO_SDOclient_setup(SDOclient, 0, 0, comm_node) != CO_SDOcli_ok_communicationEnd) {
+            /* Make CANopen SDO transfer */
+            if(err == 0) {
+                err = sdoClientUpload(
+                        SDOclient,
+                        comm_node,
+                        idx,
+                        subidx,
+                        dataRx,
+                        sizeof(dataRx),
+                        &dataRxLen,
+                        &SDOabortCode,
+                        SDOtimeoutTime,
+                        blockTransferEnable);
+
+                if(err != 0){
                     respErrorCode = respErrorInternalState;
-                    err = 1;
-                } else {
-                    comm_nodePrevious = comm_node;
                 }
-            }
-
-            /* initiate upload */
-            if(err == 0){
-                if(CO_SDOclientUploadInitiate(SDOclient, index, subindex, dataRx,
-                        sizeof(dataRx), blockTransferEnable) != CO_SDOcli_ok_communicationEnd)
-                {
-                    respErrorCode = respErrorInternalState;
-                    err = 1;
-                }
-            }
-
-            /* Upload data. Loop in 10 ms intervals, SDO timeout is 500ms. */
-            if(err == 0){
-                CO_SDOclient_return_t ret;
-                struct timespec sleepTime;
-
-                sleepTime.tv_sec = 0;
-                sleepTime.tv_nsec = 10000;
-                do {
-                    ret = CO_SDOclientUpload(SDOclient, 10, 500, &dataRxLen, &SDOabortCode);
-                    nanosleep(&sleepTime, NULL);
-                } while(ret > 0);
-
-                CO_SDOclientClose(SDOclient);
-
             }
 
             /* output result */
@@ -343,8 +327,8 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
         /* Download SDO command - w[rite] <index> <subindex> <datatype> <value> */
         else if(strcmp(token, "w") == 0 || strcmp(token, "write") == 0) {
-            uint16_t index;
-            uint8_t subindex;
+            uint16_t idx;
+            uint8_t subidx;
             const dataType_t *datatype;
             int errTokLast = 0;
             uint32_t SDOabortCode = 1;
@@ -353,10 +337,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
             uint32_t dataTxLen = 0;  /* Length of data to transmit. */
 
             token = getTok(NULL, spaceDelim, &err);
-            index = (uint16_t)getU32(token, 0, 0xFFFF, &err);
+            idx = (uint16_t)getU32(token, 0, 0xFFFF, &err);
 
             token = getTok(NULL, spaceDelim, &err);
-            subindex = (uint8_t)getU32(token, 0, 0xFF, &err);
+            subidx = (uint8_t)getU32(token, 0, 0xFF, &err);
 
             token = getTok(NULL, spaceDelim, &err);
             datatype = getDataType(token, &err);
@@ -380,40 +364,22 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 respErrorCode = respErrorNoDefaultNodeSet;
             }
 
-            /* setup client if necessary */
-            if(err == 0 && comm_node != comm_nodePrevious) {
-                if(CO_SDOclient_setup(SDOclient, 0, 0, comm_node) != CO_SDOcli_ok_communicationEnd) {
+            /* Make CANopen SDO transfer */
+            if(err == 0) {
+                err = sdoClientDownload(
+                        SDOclient,
+                        comm_node,
+                        idx,
+                        subidx,
+                        dataTx,
+                        dataTxLen,
+                        &SDOabortCode,
+                        SDOtimeoutTime,
+                        blockTransferEnable);
+
+                if(err != 0){
                     respErrorCode = respErrorInternalState;
-                    err = 1;
-                } else {
-                    comm_nodePrevious = comm_node;
                 }
-            }
-
-            /* initiate download */
-            if(err == 0){
-                if(CO_SDOclientDownloadInitiate(SDOclient, index, subindex, dataTx,
-                        dataTxLen, blockTransferEnable) != CO_SDOcli_ok_communicationEnd)
-                {
-                    respErrorCode = respErrorInternalState;
-                    err = 1;
-                }
-            }
-
-            /* Download data. Loop in 5 ms intervals, SDO timeout is 500ms. */
-            if(err == 0){
-                CO_SDOclient_return_t ret;
-                struct timespec sleepTime;
-
-                sleepTime.tv_sec = 0;
-                sleepTime.tv_nsec = 5000;
-                do {
-                    ret = CO_SDOclientDownload(SDOclient, 5, 500, &SDOabortCode);
-                    nanosleep(&sleepTime, NULL);
-                } while(ret > 0);
-
-                CO_SDOclientClose(SDOclient);
-
             }
 
             /* output result */

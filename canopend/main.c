@@ -53,8 +53,15 @@
 #define INCREMENT_1MS(var)      (var++)         /* Increment 1ms variable in taskTmr */
 
 
-/* Global variables and objects */
-volatile uint16_t           CO_timer1ms = 0U;   /* variable increments each millisecond */
+/* Global variable increments each millisecond. */
+volatile uint16_t           CO_timer1ms = 0U;
+
+/* Mutex is locked, when CAN is not valid (configuration state). May be used
+ *  from other threads. RT threads may use CO->CANmodule[0]->CANnormal instead. */
+pthread_mutex_t             CO_CAN_VALID_mtx = PTHREAD_MUTEX_INITIALIZER;
+
+
+/* Other variables and objects */
 static int                  rtPriority = -1;    /* Real time priority, configurable by arguments. (-1=RT disabled) */
 static int                  mainline_epoll_fd;  /* epoll file descriptor for mainline */
 static CO_OD_storage_t      odStor;             /* Object Dictionary storage object for CO_OD_ROM */
@@ -230,13 +237,20 @@ int main (int argc, char *argv[]) {
 
         printf("%s - communication reset ...\n", argv[0]);
 
-        /* Wait rt_thread, then configure CAN */
+
+        /* Wait other threads. */
+        pthread_mutex_lock(&CO_CAN_VALID_mtx);
+
+
+        /* Wait rt_thread. */
         if(!firstRun) {
             CO_LOCK_OD();
             CO->CANmodule[0]->CANnormal = false;
             CO_UNLOCK_OD();
         }
 
+
+        /* Enter CAN configuration. */
         CO_CANsetConfigurationMode(CANdevice0Index);
 
 
@@ -339,6 +353,8 @@ int main (int argc, char *argv[]) {
 
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
+        pthread_mutex_unlock(&CO_CAN_VALID_mtx);
+
 
         reset = CO_RESET_NOT;
 
