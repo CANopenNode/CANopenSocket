@@ -43,11 +43,11 @@ extern char *CO_command_socketPath;
 /**
  * Initialize thread and create socket for command interface.
  *
- * @param CO_SDOclient Pointer to CANopen SDO client object.
+ * Make sure, that global variable CO was properly initialized before this call.
  *
  * @return 0 on success.
  */
-int CO_command_init(CO_SDOclient_t *CO_SDOclient);
+int CO_command_init(void);
 
 
 /**

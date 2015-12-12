@@ -1,5 +1,5 @@
 /canopend/canopend
-/CANopenCommand/canopencomm
+/canopencomm/canopencomm
 *.o
 *.bak
 

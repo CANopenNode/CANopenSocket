@@ -53,7 +53,6 @@ char                       *CO_command_socketPath = "/tmp/CO_command_socket";  /
 static void*                command_thread(void* arg);
 static pthread_t            command_thread_id;
 static void                 command_process(int fd, char* command, size_t commandLength);
-static CO_SDOclient_t      *SDOclient;
 static int                  fdSocket;
 static uint16_t             comm_net = 1;   /* default CAN net number */
 static uint8_t              comm_node = 0;  /* CANopen Node ID number is undefined by default */
@@ -63,10 +62,10 @@ static volatile int         endProgram = 0;
 
 
 /******************************************************************************/
-int CO_command_init(CO_SDOclient_t *CO_SDOclient) {
+int CO_command_init(void) {
     struct sockaddr_un addr;
 
-    if((SDOclient = CO_SDOclient) == NULL){
+    if(CO == NULL || CO->SDOclient == NULL){
         CO_errExit("CO_command_init - Wrong arguments");
     }
 
@@ -290,7 +289,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientUpload(
-                        SDOclient,
+                        CO->SDOclient,
                         comm_node,
                         idx,
                         subidx,
@@ -367,7 +366,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientDownload(
-                        SDOclient,
+                        CO->SDOclient,
                         comm_node,
                         idx,
                         subidx,
@@ -389,6 +388,100 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 }
                 else{
                     respLen = sprintf(resp, "[%d] ERROR: 0x%08X", sequence, SDOabortCode);
+                }
+            }
+        }
+
+        /* NMT start node */
+        else if(strcmp(token, "start") == 0) {
+            int errTokLast = 0; /* Last token must be NULL */
+            if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
+
+            if(err == 0) {
+                err = CO_sendNMTcommand(CO, CO_NMT_ENTER_OPERATIONAL, comm_node) ? 1:0;
+                if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+            }
+        }
+
+        /* NMT stop node */
+        else if(strcmp(token, "stop") == 0) {
+            int errTokLast = 0; /* Last token must be NULL */
+            if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
+
+            if(err == 0) {
+                err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, comm_node) ? 1:0;
+                if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+            }
+        }
+
+        /* NMT Set node to pre-operational */
+        else if(strcmp(token, "preop") == 0 || strcmp(token, "preoperational") == 0) {
+            int errTokLast = 0; /* Last token must be NULL */
+            if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
+
+            if(err == 0) {
+                err = CO_sendNMTcommand(CO, CO_NMT_ENTER_PRE_OPERATIONAL, comm_node) ? 1:0;
+                if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+            }
+        }
+
+        /* NMT reset (node or communication) */
+        else if(strcmp(token, "reset") == 0) {
+
+            token = getTok(NULL, spaceDelim, &err);
+            if(err == 0) {
+                if(strcmp(token, "node") == 0) {
+                    int errTokLast = 0; /* Last token must be NULL */
+                    if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
+
+                    if(err == 0) {
+                        err = CO_sendNMTcommand(CO, CO_NMT_RESET_NODE, comm_node) ? 1:0;
+                        if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+                    }
+                }
+                else if(strcmp(token, "comm") == 0 || strcmp(token, "communication") == 0) {
+                    int errTokLast = 0; /* Last token must be NULL */
+                    if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
+
+                    if(err == 0) {
+                        err = CO_sendNMTcommand(CO, CO_NMT_RESET_COMMUNICATION, comm_node) ? 1:0;
+                        if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
+                    }
+                }
+
+                else {
+                    err = 1;
+                }
+            }
+        }
+
+        /* set command - multiple settings */
+        else if(strcmp(token, "set") == 0) {
+
+            token = getTok(NULL, spaceDelim, &err);
+            if(err == 0) {
+                /* sdo_timeout <value> */
+                if(strcmp(token, "sdo_timeout") == 0) {
+                    int errTokLast = 0;
+                    uint16_t tmout;
+
+                    tmout = (uint16_t)getU32(token, 0, 10000, &err);
+
+                    /* Last token must be NULL */
+                    if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) {
+                        err = 1;
+                    }
+
+                    /* Write to variable */
+                    if(err == 0) {
+                        SDOtimeoutTime = tmout;
+                        respLen = sprintf(resp, "[%d] OK", sequence);
+                    }
+                }
+
+                /* Unknown command */
+                else {
+                    err = 1;
                 }
             }
         }

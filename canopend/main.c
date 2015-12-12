@@ -27,11 +27,11 @@
 #include "CANopen.h"
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
-#include "CO_command.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sched.h>
 #include <signal.h>
 #include <errno.h>
 #include <sys/epoll.h>
@@ -40,6 +40,7 @@
 #include <sys/reboot.h>
 
 #ifndef CO_SINGLE_THREAD
+#include "CO_command.h"
 #include <pthread.h>
 #endif
 
@@ -56,8 +57,9 @@ volatile uint16_t           CO_timer1ms = 0U;
 
 /* Mutex is locked, when CAN is not valid (configuration state). May be used
  *  from other threads. RT threads may use CO->CANmodule[0]->CANnormal instead. */
+#ifndef CO_SINGLE_THREAD
 pthread_mutex_t             CO_CAN_VALID_mtx = PTHREAD_MUTEX_INITIALIZER;
-
+#endif
 
 /* Other variables and objects */
 static int                  rtPriority = -1;    /* Real time priority, configurable by arguments. (-1=RT disabled) */
@@ -101,11 +103,16 @@ static void usageExit(char *progName) {
     fprintf(stderr, "Options:\n");
     fprintf(stderr, "  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n");
     fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");
+    fprintf(stderr, "  -s <ODstorage file> Set Filename for OD storage ('od_storage' default).\n");
+    fprintf(stderr, "  -a <ODstorageAuto>  Set Filename for automatic storage variables from\n");
+    fprintf(stderr, "                      Object dictionary. ('od_storage_auto' default).\n");
+#ifndef CO_SINGLE_THREAD
     fprintf(stderr, "  -c <Socket path>    Enable command interface for master functionality. \n");
     fprintf(stderr, "                      If socket path is specified as empty string \"\",\n");
     fprintf(stderr, "                      default '%s' will be used.\n", CO_command_socketPath);
     fprintf(stderr, "                      Note that location of socket path may affect security.\n");
     fprintf(stderr, "                      See 'CANopenCommand/canopencomm --help' for more info.\n");
+#endif
     fprintf(stderr, "\n");
     exit(EXIT_FAILURE);
 }
@@ -124,23 +131,30 @@ int main (int argc, char *argv[]) {
     char* CANdevice = NULL;         /* CAN device, configurable by arguments. */
     int nodeId = -1;                /* Set to 1..127 by arguments */
     bool_t rebootEnable = false;    /* Configurable by arguments */
+#ifndef CO_SINGLE_THREAD
     bool_t commandEnable = false;   /* Configurable by arguments */
+#endif
 
     if(argc < 3 || strcmp(argv[1], "--help") == 0) usageExit(argv[0]);
 
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "i:p:rc:")) != -1) {
+    while((opt = getopt(argc, argv, "i:p:rc:s:a:")) != -1) {
         switch (opt) {
             case 'i': nodeId = strtol(optarg, NULL, 0);     break;
             case 'p': rtPriority = strtol(optarg, NULL, 0); break;
             case 'r': rebootEnable = true;                  break;
+#ifndef CO_SINGLE_THREAD
             case 'c':
+                /* In case of empty string keep default name, just enable interface. */
                 if(strlen(optarg) != 0) {
                     CO_command_socketPath = optarg;
                 }
                 commandEnable = true;
                 break;
+#endif
+            case 's': odStorFile_rom = optarg;              break;
+            case 'a': odStorFile_eeprom = optarg;           break;
             default:  usageExit(argv[0]);
         }
     }
@@ -208,9 +222,10 @@ int main (int argc, char *argv[]) {
         printf("%s - communication reset ...\n", argv[0]);
 
 
-        /* Wait other threads. */
+#ifndef CO_SINGLE_THREAD
+        /* Wait other threads (command interface). */
         pthread_mutex_lock(&CO_CAN_VALID_mtx);
-
+#endif
 
         /* Wait rt_thread. */
         if(!firstRun) {
@@ -304,19 +319,23 @@ int main (int argc, char *argv[]) {
             }
 #endif
 
+#ifndef CO_SINGLE_THREAD
             /* Initialize socket command interface */
             if(commandEnable) {
-                if(CO_command_init(CO->SDOclient) != 0) {
+                if(CO_command_init() != 0) {
                     CO_errExit("Socket command interface initialization failed");
                 }
                 printf("%s - Command interface on socket '%s' started ...\n", argv[0], CO_command_socketPath);
             }
+#endif
         }
 
 
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
+#ifndef CO_SINGLE_THREAD
         pthread_mutex_unlock(&CO_CAN_VALID_mtx);
+#endif
 
 
         reset = CO_RESET_NOT;
@@ -364,11 +383,13 @@ int main (int argc, char *argv[]) {
 
 /* program exit ***************************************************************/
     /* join threads */
+#ifndef CO_SINGLE_THREAD
     if(commandEnable) {
         if(CO_command_clear() != 0) {
             CO_errExit("Socket command interface removal failed");
         }
     }
+#endif
 
     CO_endProgram = 1;
 #ifndef CO_SINGLE_THREAD
