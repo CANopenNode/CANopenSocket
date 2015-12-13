@@ -46,12 +46,14 @@ second, with nodeID = 3, will have master functionality.
 ### Get the project
 
 Clone the project from git repoitory and get submodules:
+
     $ git clone https://github.com/CANopenNode/CANopenSocket.git
     $ cd CANopenSocket
     $ git submodule init
     $ git submodule update
 
 (If you want to work on submodule CANopenNode, you can apply git commands directly on it:)
+
     $ cd CANopenNode
     $ git checkout master
     $ git remote -v
@@ -64,11 +66,13 @@ Clone the project from git repoitory and get submodules:
 ### First terminal: CAN dump
 
 Prepare CAN virtual (or real) device:
+
     $ sudo modprobe vcan
     $ sudo ip link add dev vcan0 type vcan
     $ sudo ip link set up vcan0
 
 Run candump from [can-utils](https://github.com/linux-can/can-utils):
+
     $ sudo apt-get install can-utils
     $ candump vcan0
 
@@ -78,6 +82,7 @@ It will show all CAN trafic on vcan0.
 ### Second terminal: canopend
 
 Start second terminal, compile and start *canopend*.
+
     $ cd CANopenSocket/canopend
     $ make
     $ ./canopend --help
@@ -85,6 +90,7 @@ Start second terminal, compile and start *canopend*.
 
 You should now see CAN messages on CAN dump terminal. Wait few seconds and
 press CTRL-C.
+
     vcan0  704   [1]  00                        # Bootup message.
     vcan0  084   [8]  00 50 01 2F F3 FF FF FF   # Emergency message.
     vcan0  704   [1]  7F                        # Heartbeat messages
@@ -101,6 +107,7 @@ node is not able to enter operational and PDOs can not be exchanged with it.
 
 You can follow the reason of the problem inside the source code. However,
 there are missing non-default storage files. Add them and run it again.
+
     $ echo - > od4_storage
     $ echo - > od4_storage_auto
     $ ./canopend vcan0 -i 4 -s od4_storage -a od4_storage_auto
@@ -117,6 +124,7 @@ documentation.
 Start also second instance of *canopend* (master on nodeID=3) in the same
 window (*canopend terminal*). Use default od_storage files and default
 socket for command interface.
+
     $ # press CTRL-Z
     $ bg
     $ ./canopend vcan0 -i 3 -c ""
@@ -125,6 +133,7 @@ socket for command interface.
 ### Third terminal: canopencomm
 
 Start third terminal, compile and start canopencomm.
+
     $ cd CANopenSocket/canopencomm
     $ make
     $ ./canopencomm --help
@@ -133,6 +142,7 @@ Start third terminal, compile and start canopencomm.
 
 Play with it and also observe CAN dump teminal. First Hertbeat at
 index 0x1017, subindex 0, 16-bit integer, on nodeID 4.
+
     $ ./canopencomm [1] 4 read 0x1017 0 i16
     $ ./canopencomm [1] 4 write 0x1017 0 i16 5000
 
@@ -140,6 +150,7 @@ In CAN dump you can see some SDO communication. You will notice, that
 Heartbeats from node 4 are coming in 5 second interval now. You can do
 the same also for node 3. Now store Object dictionary, so it will preserve
 variables on next start of the program.
+
     $ ./canopencomm 4 w 0x1010 1 u32 0x65766173
 
 You can read more about Object dictionary variables for this
@@ -150,6 +161,7 @@ CANopenNode in [canopend/CANopenSocket.html].
 If node is operational (started), it can exchange all objects, including
 PDO, SDO, etc. In pre-operational, PDOs are disabled, SDOs works. In stopped
 only NMT messages are accepted.
+
     $ ./canopencomm 4 preop
     $ ./canopencomm 4 start
     $ ./canopencomm 4 stop
