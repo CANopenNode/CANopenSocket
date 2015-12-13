@@ -10,7 +10,7 @@ typical master/slave protocol. It is more like producer/consumer protocol. It is
 possible to operate CANopen network without a master. Pre-configured process data (PDO)
 are transmitted from producers. Each PDO may be consumed by multiple nodes.
 
-CANopen master of CANopenNode functionality contains command line interface with SDO and NMT master
+Master functionality of CANopenNode contains command line interface with SDO and NMT master
 commands. With SDO master (or SDO client) it is possible to read or write any variable on any device
 on the CANopen Network. NMT master can start, stop or reset nodes.
 
@@ -52,7 +52,7 @@ Clone the project from git repoitory and get submodules:
     $ git submodule init
     $ git submodule update
 
-(If you want to work on submodule CANopenNode, you can apply git commands directly on it:)
+(If you want to work on submodule CANopenNode, you can apply git commands directly on it.)
 
     $ cd CANopenNode
     $ git checkout master
