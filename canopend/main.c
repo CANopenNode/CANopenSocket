@@ -97,24 +97,34 @@ void CO_error(const uint32_t info) {
 }
 
 
-static void usageExit(char *progName) {
-    fprintf(stderr, "Usage: %s <CAN device name> -i <Node ID (1..127)> [options]\n", progName);
-    fprintf(stderr, "\n");
-    fprintf(stderr, "Options:\n");
-    fprintf(stderr, "  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n");
-    fprintf(stderr, "  -r                  Enable reboot on CANopen NMT reset_node command. \n");
-    fprintf(stderr, "  -s <ODstorage file> Set Filename for OD storage ('od_storage' default).\n");
-    fprintf(stderr, "  -a <ODstorageAuto>  Set Filename for automatic storage variables from\n");
-    fprintf(stderr, "                      Object dictionary. ('od_storage_auto' default).\n");
+static void printUsage(char *progName) {
+fprintf(stderr,
+"Usage: %s <CAN device name> -i <Node ID (1..127)> [options]\n", progName);
+fprintf(stderr,
+"\n"
+"Options:\n"
+"  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n"
+"  -r                  Enable reboot on CANopen NMT reset_node command. \n"
+"  -s <ODstorage file> Set Filename for OD storage ('od_storage' is default).\n"
+"  -a <ODstorageAuto>  Set Filename for automatic storage variables from\n"
+"                      Object dictionary. ('od_storage_auto' is default).\n");
 #ifndef CO_SINGLE_THREAD
-    fprintf(stderr, "  -c <Socket path>    Enable command interface for master functionality. \n");
-    fprintf(stderr, "                      If socket path is specified as empty string \"\",\n");
-    fprintf(stderr, "                      default '%s' will be used.\n", CO_command_socketPath);
-    fprintf(stderr, "                      Note that location of socket path may affect security.\n");
-    fprintf(stderr, "                      See 'CANopenCommand/canopencomm --help' for more info.\n");
+fprintf(stderr,
+"  -c <Socket path>    Enable command interface for master functionality. \n"
+"                      If socket path is specified as empty string \"\",\n"
+"                      default '%s' will be used.\n"
+"                      Note that location of socket path may affect security.\n"
+"                      See 'canopencomm/canopencomm --help' for more info.\n"
+, CO_command_socketPath);
 #endif
-    fprintf(stderr, "\n");
-    exit(EXIT_FAILURE);
+fprintf(stderr,
+"\n"
+"LICENSE\n"
+"    This program is part of CANopenSocket and can be downloaded from:\n"
+"    https://github.com/CANopenNode/CANopenSocket\n"
+"    Permission is granted to copy, distribute and/or modify this document\n"
+"    under the terms of the GNU General Public License, Version 2.\n"
+"\n");
 }
 
 
@@ -135,7 +145,10 @@ int main (int argc, char *argv[]) {
     bool_t commandEnable = false;   /* Configurable by arguments */
 #endif
 
-    if(argc < 3 || strcmp(argv[1], "--help") == 0) usageExit(argv[0]);
+    if(argc < 3 || strcmp(argv[1], "--help") == 0){
+        printUsage(argv[0]);
+        exit(EXIT_SUCCESS);
+    }
 
 
     /* Get program options */
@@ -155,7 +168,9 @@ int main (int argc, char *argv[]) {
 #endif
             case 's': odStorFile_rom = optarg;              break;
             case 'a': odStorFile_eeprom = optarg;           break;
-            default:  usageExit(argv[0]);
+            default:
+                printUsage(argv[0]);
+                exit(EXIT_FAILURE);
         }
     }
 
@@ -166,13 +181,15 @@ int main (int argc, char *argv[]) {
 
     if(nodeId < 1 || nodeId > 127) {
         fprintf(stderr, "Wrong node ID (%d)\n", nodeId);
-        usageExit(argv[0]);
+        printUsage(argv[0]);
+        exit(EXIT_FAILURE);
     }
 
     if(rtPriority != -1 && (rtPriority < sched_get_priority_min(SCHED_FIFO)
                          || rtPriority > sched_get_priority_max(SCHED_FIFO))) {
         fprintf(stderr, "Wrong RT priority (%d)\n", rtPriority);
-        usageExit(argv[0]);
+        printUsage(argv[0]);
+        exit(EXIT_FAILURE);
     }
 
     if(CANdevice0Index == 0) {

@@ -105,6 +105,19 @@ char *getTok(char* initStr, const char *delim, int *err);
 
 
 /**
+ * Verify, if there are no more tokens.
+ *
+ * Function calls getTok and if there is another token and that token doesn't
+ * start with '#', it sets err to 1. (Comments are ignored.)
+ *
+ * @param initStr Same as in getTok.
+ * @param delim Same as in getTok.
+ * @param err Same as in getTok.
+ */
+void lastTok(char* initStr, const char *delim, int *err);
+
+
+/**
  * Get number from token.
  *
  * Token must contain no other characters and number must be inside limits.

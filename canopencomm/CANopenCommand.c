@@ -45,52 +45,63 @@ void errExit(char* msg) {
 }
 
 
-static int printErrorDescription = 1;
+static int printErrorDescription = 0;
 
 static void sendCommand(int fd, char* command, size_t commandLength);
 
 
-static void usageExit(char *progName) {
-    fprintf(stderr, "Usage: %s [options] <command string>\n", progName);
-    fprintf(stderr, "\n");
-    fprintf(stderr, "Program reads arguments or standard input or file. It sends commands to\n");
-    fprintf(stderr, "canopend via socket, line after line. Result is printed to standard output.\n");
-    fprintf(stderr, "For more information see http://www.can-cia.org/, CiA 309 standard.\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "Options:\n");
-    fprintf(stderr, "  -f <input file path>  Path of the input file.\n");
-    fprintf(stderr, "  -s <socket path>      Path of the socket (default '/tmp/CO_command_socket').\n");
-    fprintf(stderr, "  -n                    Display no description of error codes.\n");
-    fprintf(stderr, "  --help                Display this help.\n");
-    fprintf(stderr, "  --helpall             Display this help, internal error codes and SDO abort codes.\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "Command strings must start with \"[\"<sequence>\"]\" (except if from arguments):\n");
-    fprintf(stderr, "  - SDO upload:   [[net] node] r[ead]  <index> <subindex> [<datatype>]\n");
-    fprintf(stderr, "  - SDO download: [[net] node] w[rite] <index> <subindex>  <datatype> <value>\n");
-    fprintf(stderr, "  - Configure SDO time-out: [net] set sdo_timeout <value>\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "  - Start node:                  [[net] node] start\n");
-    fprintf(stderr, "  - Stop node:                   [[net] node] stop\n");
-    fprintf(stderr, "  - Set node to pre-operational: [[net] node] preop[erational]\n");
-    fprintf(stderr, "  - Reset node:                  [[net] node] reset node\n");
-    fprintf(stderr, "  - Reset communication:         [[net] node] reset comm[unication]\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "Datatypes:\n");
-    fprintf(stderr, "  - b                 - Boolean.\n");
-    fprintf(stderr, "  - u8, u16, u32, u64 - Unsigned integers.\n");
-    fprintf(stderr, "  - i8, i16, i32, i64 - Signed integers.\n");
-    fprintf(stderr, "  - r32, r64          - Real numbers.\n");
-    fprintf(stderr, "  - t, td             - Time of day, time difference.\n");
-    fprintf(stderr, "  - vs                - Visible string (between double quotes).\n");
-    fprintf(stderr, "  - os, us, d         - Octet string, unicode string, domain\n");
-    fprintf(stderr, "                        (mime-base64 (RFC2045) should be used).\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "\n");
-    fprintf(stderr, "Response: \"[\"<sequence>\"]\" \\\n");
-    fprintf(stderr, "    (OK | <value> | ERROR: (<SDO-abort-code> | <internal-error-code>))\n");
-    fprintf(stderr, "\n");
+static void printUsage(char *progName) {
+fprintf(stderr,
+"Usage: %s [options] <command string>\n", progName);
+fprintf(stderr,
+"\n"
+"Program reads arguments or standard input or file. It sends commands to\n"
+"canopend via socket, line after line. Result is printed to standard output.\n"
+"For more information see http://www.can-cia.org/, CiA 309 standard.\n"
+"\n"
+"Options:\n"
+"  -f <input file path>  Path of the input file.\n"
+"  -s <socket path>      Path of the socket (default '/tmp/CO_command_socket').\n"
+"  -h                    Display description of error codes in case of error.\n"
+"                        (Default, if command is passed by program arguments.)\n"
+"  --help                Display this help.\n"
+"  --helpall             Display this help, internal and SDO error codes.\n"
+"\n"
+"Comments started with # are ignored.\n"
+"\n"
+"Command strings must start with \"[\"<sequence>\"]\" (except if from arguments):\n"
+"  - SDO upload:   [[net] node] r[ead]  <index> <subindex> [<datatype>]\n"
+"  - SDO download: [[net] node] w[rite] <index> <subindex>  <datatype> <value>\n"
+"  - Configure SDO time-out: [net] set sdo_timeout <value>\n"
+"\n"
+"  - Start node:                  [[net] node] start\n"
+"  - Stop node:                   [[net] node] stop\n"
+"  - Set node to pre-operational: [[net] node] preop[erational]\n"
+"  - Reset node:                  [[net] node] reset node\n"
+"  - Reset communication:         [[net] node] reset comm[unication]\n"
+"\n"
+"\n"
+"Datatypes:\n"
+"  - b                 - Boolean.\n"
+"  - u8, u16, u32, u64 - Unsigned integers.\n"
+"  - i8, i16, i32, i64 - Signed integers.\n"
+"  - r32, r64          - Real numbers.\n"
+"  - t, td             - Time of day, time difference.\n"
+"  - vs                - Visible string (between double quotes).\n"
+"  - os, us, d         - Octet string, unicode string, domain\n"
+"                        (mime-base64 (RFC2045) should be used).\n"
+"\n"
+"\n"
+"Response: \"[\"<sequence>\"]\" \\\n"
+"    OK | <value> | ERROR: (<SDO-abort-code> | <internal-error-code>)\n"
+"\n"
+"LICENSE\n"
+"    This program is part of CANopenSocket and can be downloaded from:\n"
+"    https://github.com/CANopenNode/CANopenSocket\n"
+"    Permission is granted to copy, distribute and/or modify this document\n"
+"    under the terms of the GNU General Public License, Version 2.\n"
+"\n"
+);
 }
 
 
@@ -201,17 +212,17 @@ int main (int argc, char *argv[]) {
     int i;
 
     if(argc >= 2 && strcmp(argv[1], "--help") == 0) {
-        usageExit(argv[0]);
+        printUsage(argv[0]);
         exit(EXIT_SUCCESS);
     }
     if(argc >= 2 && strcmp(argv[1], "--helpall") == 0) {
-        usageExit(argv[0]);
+        printUsage(argv[0]);
         printErrorDescs();
         exit(EXIT_SUCCESS);
     }
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "s:f:n")) != -1) {
+    while((opt = getopt(argc, argv, "s:f:h")) != -1) {
         switch (opt) {
             case 'f':
                 inputFilePath = optarg;
@@ -219,11 +230,11 @@ int main (int argc, char *argv[]) {
             case 's':
                 socketPath = optarg;
                 break;
-            case 'n':
-                printErrorDescription = 0;
+            case 'h':
+                printErrorDescription = 1;
                 break;
             default:
-                usageExit(argv[0]);
+                printUsage(argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -277,6 +288,8 @@ int main (int argc, char *argv[]) {
             }
         }
         buf[buflen - 1] = '\n'; /* replace last space with newline */
+
+        printErrorDescription = 1;
         sendCommand(fd, buf, buflen);
     }
 

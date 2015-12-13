@@ -215,6 +215,20 @@ char *getTok(char* initStr, const char *delim, int *err) {
 }
 
 
+void lastTok(char* initStr, const char *delim, int *err) {
+    char *token;
+    int errTokLast = 0;
+
+    token = getTok(initStr, delim, &errTokLast);
+
+    if(token != NULL) {
+        if(*token != '#') {
+            *err = 1;
+        }
+    }
+}
+
+
 uint32_t getU32(char *token, uint32_t min, uint32_t max, int *err) {
     uint32_t num;
     char *sRet = NULL;

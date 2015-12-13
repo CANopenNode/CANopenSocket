@@ -196,6 +196,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
     if(err == 0) {
         if(token[0] != '[' || token[strlen(token)-1] != ']') {
             err = 1;
+            if(token[0] == '#') {
+                /* If comment, respond with empty line. */
+                emptyLine = 1;
+            }
         }
         else {
             token[strlen(token)-1] = '\0';
@@ -259,7 +263,6 @@ static void command_process(int fd, char* command, size_t commandLength) {
             const dataType_t *datatype; /* optional token */
             int errTokDt = 0;
             int errDt = 0;
-            int errTokLast = 0;
             uint32_t SDOabortCode = 1;
 
             uint8_t dataRx[SDO_BUFFER_SIZE]; /* SDO receive buffer */
@@ -274,12 +277,12 @@ static void command_process(int fd, char* command, size_t commandLength) {
             token = getTok(NULL, spaceDelim, &errTokDt);
             datatype = getDataType(token, &errDt);
 
-            token = getTok(NULL, spaceDelim, &errTokLast); /* must be null */
-
-            /* Datatype must be correct, if present. Last token must be NULL */
-            if((errTokDt == 0 && errDt != 0) || errTokLast == 0) {
+            /* Datatype must be correct, if present. */
+            if(errTokDt == 0 && errDt != 0) {
                 err = 1;
             }
+
+            lastTok(NULL, spaceDelim, &err);
 
             if(err == 0 && comm_node == 0) {
                 err = 1;
@@ -329,7 +332,6 @@ static void command_process(int fd, char* command, size_t commandLength) {
             uint16_t idx;
             uint8_t subidx;
             const dataType_t *datatype;
-            int errTokLast = 0;
             uint32_t SDOabortCode = 1;
 
             uint8_t dataTx[SDO_BUFFER_SIZE]; /* SDO transmit buffer */
@@ -349,12 +351,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 dataTxLen = datatype->dataTypeScan((char*)dataTx, sizeof(dataTx), token);
             }
 
-            token = getTok(NULL, spaceDelim, &errTokLast);
+            lastTok(NULL, spaceDelim, &err);
 
-            /* Length must match, must not be zero and last token must be NULL */
-            if((datatype->length != 0 && datatype->length != dataTxLen)
-                    || dataTxLen == 0 || errTokLast == 0)
-            {
+            /* Length must match and must not be zero. */
+            if((datatype->length != 0 && datatype->length != dataTxLen) || dataTxLen == 0) {
                 err = 1;
             }
 
@@ -394,9 +394,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
         /* NMT start node */
         else if(strcmp(token, "start") == 0) {
-            int errTokLast = 0; /* Last token must be NULL */
-            if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
-
+            lastTok(NULL, spaceDelim, &err);
             if(err == 0) {
                 err = CO_sendNMTcommand(CO, CO_NMT_ENTER_OPERATIONAL, comm_node) ? 1:0;
                 if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -405,9 +403,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
         /* NMT stop node */
         else if(strcmp(token, "stop") == 0) {
-            int errTokLast = 0; /* Last token must be NULL */
-            if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
-
+            lastTok(NULL, spaceDelim, &err);
             if(err == 0) {
                 err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, comm_node) ? 1:0;
                 if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -416,9 +412,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
         /* NMT Set node to pre-operational */
         else if(strcmp(token, "preop") == 0 || strcmp(token, "preoperational") == 0) {
-            int errTokLast = 0; /* Last token must be NULL */
-            if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
-
+            lastTok(NULL, spaceDelim, &err);
             if(err == 0) {
                 err = CO_sendNMTcommand(CO, CO_NMT_ENTER_PRE_OPERATIONAL, comm_node) ? 1:0;
                 if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -431,18 +425,14 @@ static void command_process(int fd, char* command, size_t commandLength) {
             token = getTok(NULL, spaceDelim, &err);
             if(err == 0) {
                 if(strcmp(token, "node") == 0) {
-                    int errTokLast = 0; /* Last token must be NULL */
-                    if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
-
+                    lastTok(NULL, spaceDelim, &err);
                     if(err == 0) {
                         err = CO_sendNMTcommand(CO, CO_NMT_RESET_NODE, comm_node) ? 1:0;
                         if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
                     }
                 }
                 else if(strcmp(token, "comm") == 0 || strcmp(token, "communication") == 0) {
-                    int errTokLast = 0; /* Last token must be NULL */
-                    if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) err = 1;
-
+                    lastTok(NULL, spaceDelim, &err);
                     if(err == 0) {
                         err = CO_sendNMTcommand(CO, CO_NMT_RESET_COMMUNICATION, comm_node) ? 1:0;
                         if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -462,15 +452,11 @@ static void command_process(int fd, char* command, size_t commandLength) {
             if(err == 0) {
                 /* sdo_timeout <value> */
                 if(strcmp(token, "sdo_timeout") == 0) {
-                    int errTokLast = 0;
                     uint16_t tmout;
 
                     tmout = (uint16_t)getU32(token, 0, 10000, &err);
 
-                    /* Last token must be NULL */
-                    if((token = getTok(NULL, spaceDelim, &errTokLast)) != NULL) {
-                        err = 1;
-                    }
+                    lastTok(NULL, spaceDelim, &err);
 
                     /* Write to variable */
                     if(err == 0) {
