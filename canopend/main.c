@@ -266,8 +266,8 @@ int main (int argc, char *argv[]) {
 
 
         /* initialize OD objects 1010 and 1011 and verify errors. */
-        CO_OD_configure(CO->SDO, OD_H1010_STORE_PARAM_FUNC, CO_ODF_1010, (void*)&odStor, 0, 0U);
-        CO_OD_configure(CO->SDO, OD_H1011_REST_PARAM_FUNC, CO_ODF_1011, (void*)&odStor, 0, 0U);
+        CO_OD_configure(CO->SDO[0], OD_H1010_STORE_PARAM_FUNC, CO_ODF_1010, (void*)&odStor, 0, 0U);
+        CO_OD_configure(CO->SDO[0], OD_H1011_REST_PARAM_FUNC, CO_ODF_1011, (void*)&odStor, 0, 0U);
         if(odStorStatus_rom != CO_ERROR_NO) {
             CO_errorReport(CO->em, CO_EM_NON_VOLATILE_MEMORY, CO_EMC_HARDWARE, (uint32_t)odStorStatus_rom);
         }
@@ -278,7 +278,7 @@ int main (int argc, char *argv[]) {
 
         /* Configure callback functions for task control */
         CO_EM_initCallback(CO->em, taskMain_cbSignal);
-        CO_SDO_initCallback(CO->SDO, taskMain_cbSignal);
+        CO_SDO_initCallback(CO->SDO[0], taskMain_cbSignal);
         CO_SDOclient_initCallback(CO->SDOclient, taskMain_cbSignal);
 
         CO_SYNC_initCallback(CO->SYNC, CANrx_lockCbSync);
