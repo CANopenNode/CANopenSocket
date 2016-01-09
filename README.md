@@ -2,8 +2,14 @@ CANopenSocket
 =============
 
 CANopenSocket is a collection of CANopen tools running on Linux with socketCAN interface.
-It is based on CANopenNode, which is an opensource [CANopen](http://can-cia.org/) Stack
-([CiA301](http://can-cia.org/standardization/technical-documents)) and is included as a git submodule.
+
+It is based on [CANopenNode](https://github.com/CANopenNode/CANopenNode),
+which is free and open source CANopen Stack and is included as a git submodule.
+
+CANopen is the internationally standardized (EN 50325-4)
+([CiA301](http://can-cia.org/standardization/technical-documents))
+CAN-based higher-layer protocol for embedded control system. For more
+information on CANopen see http://www.can-cia.org/
 
 CANopenSocket may be used as a master or a slave device. However, CANopen itself is not a
 typical master/slave protocol. It is more like producer/consumer protocol. It is also
@@ -18,12 +24,11 @@ CANopenNode should run on any Linux machine. Examples below was tested on Debian
 including **Ubuntu**, **Beaglebone Black** and **Raspberry PI**. It is possible to run tests described
 below without real CAN interface, because Linux kernel already contains virtual CAN interface.
 
-CANopenSocket consists of two applocations: **canopend**, which runs in background, and
+CANopenSocket consists of two applications: **canopend**, which runs in background, and
 **canopencomm**, command interface for SDO and NMT master.
 
 
 ### canopend
-
 **canopend** is an implementation of CANopen device with master functionality. It runs within three
 threads. Realtime thread processes CANopen SYNC and PDO objects. Mainline thread processes other
 non time critical objects. Both are nonblocking. Command interface thread is blocking. It accepts
@@ -36,6 +41,22 @@ or from standard input or from file. It sends commands to *canopend* via socket,
 Received result is printed to standard output. It is implementation of the CiA 309 standard.
 
 
+License
+-------
+CANopenSocket is free and open source software: you can redistribute
+it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 2 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
 Getting started with CANopen Socket
 -----------------------------------
 
@@ -45,22 +66,18 @@ second, with nodeID = 3, will have master functionality.
 
 ### Get the project
 
-Clone the project from git repoitory and get submodules:
+Clone the project from git repository and get submodules:
 
     $ git clone https://github.com/CANopenNode/CANopenSocket.git
     $ cd CANopenSocket
     $ git submodule init
     $ git submodule update
 
-(If you want to work on submodule CANopenNode, you can apply git commands directly on it.)
-
-    $ cd CANopenNode
-    $ git checkout master
-    $ git remote -v
-    $ git remote set-url origin {url-of-your-git-repository}
-    $ git remote add {yourName} {url-of-your-git-repository} # alternative
-    $ git pull ({yourName} {yourbranch})
-    $ # etc.
+(If you want to work on submodule CANopenNode, you can `cd CANopenNode`,
+and apply git commands directly on it. Initially is in head detached state,
+so you have to `git checkout master` first. Then you can control submodule
+separately, for example `git remote add {yourName} {url-of-your-git-repository}`,
+and `git pull {yourName} {yourbranch}`)
 
 
 ### First terminal: CAN dump
@@ -76,7 +93,7 @@ Run candump from [can-utils](https://github.com/linux-can/can-utils):
     $ sudo apt-get install can-utils
     $ candump vcan0
 
-It will show all CAN trafic on vcan0.
+It will show all CAN traffic on vcan0.
 
 
 ### Second terminal: canopend
@@ -140,7 +157,7 @@ Start third terminal, compile and start canopencomm.
 
 #### SDO master
 
-Play with it and also observe CAN dump teminal. First Hertbeat at
+Play with it and also observe CAN dump terminal. First Heartbeat at
 index 0x1017, subindex 0, 16-bit integer, on nodeID 4.
 
     $ ./canopencomm [1] 4 read 0x1017 0 i16

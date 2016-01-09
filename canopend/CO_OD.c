@@ -1,38 +1,34 @@
-/*******************************************************************************
-
-   File - CO_OD.c
-   CANopen Object Dictionary.
-
-   Copyright (C) 2004-2008 Janez Paternoster
-
-   License: GNU Lesser General Public License (LGPL).
-
-   <http://canopennode.sourceforge.net>
-
-   (For more information see <CO_SDO.h>.)
-*/
-/*
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation, either version 2.1 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-   Author: Janez Paternoster
-
-
-   This file was automatically generated with CANopenNode Object
-   Dictionary Editor. DON'T EDIT THIS FILE MANUALLY !!!!
-
-*******************************************************************************/
+/**
+ * CANopen Object Dictionary.
+ *
+ * This file was automatically generated with CANopenNode Object
+ * Dictionary Editor. DON'T EDIT THIS FILE MANUALLY !!!!
+ * Object Dictionary Editor is currently an older, but functional web
+ * application. For more info see See 'Object_Dictionary_Editor/about.html' in
+ * <http://sourceforge.net/p/canopennode/code_complete/ci/master/tree/>
+ * For more information on CANopen Object Dictionary see <CO_SDO.h>.
+ *
+ * @file        CO_OD.c
+ * @author      Janez Paternoster
+ * @copyright   2010 - 2015 Janez Paternoster
+ *
+ * This file is part of CANopenNode, an opensource CANopen Stack.
+ * Project home page is <https://github.com/CANopenNode/CANopenNode>.
+ * For more information on CANopen see <http://www.can-cia.org/>.
+ *
+ * CANopenNode is free and open source software: you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 
 #include "CO_driver.h"
