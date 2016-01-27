@@ -1,10 +1,10 @@
 /canopend/canopend
 /canopencomm/canopencomm
+/canopencgi/canopen.cgi
 *.o
 *.bak
 
 /doc/
-/mdShow*
 
 # eclipse
 .metadata/

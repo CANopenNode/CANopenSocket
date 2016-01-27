@@ -1,7 +1,7 @@
 /*
  * Client socket command interface for CANopenSocket.
  *
- * @file        CO_command.c
+ * @file        CANopenCommand.c
  * @author      Janez Paternoster
  * @copyright   2015 Janez Paternoster
  *
@@ -27,10 +27,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
-#include <signal.h>
-#include <errno.h>
-#include <pthread.h>
 #include <sys/un.h>
 #include <sys/socket.h>
 
@@ -250,7 +246,7 @@ int main (int argc, char *argv[]) {
     strncpy(addr.sun_path, socketPath, sizeof(addr.sun_path) - 1);
 
     if(connect(fd, (struct sockaddr *)&addr, sizeof(struct sockaddr_un)) == -1) {
-        errExit("Socket connect failed");
+        errExit("Socket connection failed");
     }
 
 
