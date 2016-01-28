@@ -47,21 +47,75 @@ static void errExit(char* msg) {
     exit(EXIT_FAILURE);
 }
 
-static void sendCommand(int fd, int sequence, char* command);
+static void strcpyToUpper(char *dest, const char *src) {
+    char in;
 
-static int commandSuccessfull = 0;
+    do {
+        in = *(src++);
+        *(dest++) = toupper(in);
+    } while(in != 0);
+}
+
+static void strToUpper(char *str) {
+    char c;
+
+    do {
+        c = *(str);
+        *(str++) = toupper(c);
+    } while(c != 0);
+}
+
+static void strToLower(char *str) {
+    char c;
+
+    do {
+        c = *(str);
+        *(str++) = tolower(c);
+    } while(c != 0);
+}
+
+/* Decode hex string 'str' of length 'len' and return numerical value.
+ * In case of error in string, set 'err' to 1. */
+static unsigned int hex2dec(const char *str, int len, int *err){
+    unsigned int val = 0;
+    int i;
+
+    for(i=0; i<len; i++) {
+        char c = str[i];
+        if(c >= '0' && c <= '9') {
+            c = c - '0';
+        } else if (c >= 'A' && c <= 'F') {
+            c = c - ('A' - 10);
+        }
+        else {
+            *err = 1;
+            return 0;
+        }
+        val = val << 4 | c;
+    }
+    return val;
+}
+
+static void sendCommand(int fd, int sequence, char* command);
 
 static void printUsage(void) {
 printf(
-"Usage: canopen.cgi?wnniiiissll=xxxx[&rnniiiissll=]\n"
+"Usage: canopen.cgi?wnniiiissdd=xxxx[&rnniiiissdd=]\n"
+"  - w    - One digit - 'W'rite or 'R'ead.\n"
+"  - nn   - Two hex digits of node ID.\n"
+"  - iiii - Four hex digits of Object Dictionary Index.\n"
+"  - ss   - Two hex digits of Object Dictionary Subindex.\n"
+"  - dd   - One to three digits of data type.\n"
+"  - xxxx - Value to be written.\n"
 "\n"
-"Where w(r), nn, iiii, ss, ll, xxxx are fixed width fields with the following meaning:\n"
-"  w    - 'w'rite or 'r'ead.\n"
-"  nn   - node ID in hex format.\n"
-"  iiii - Object dictionary index in hex format.\n"
-"  ss   - Object dictionary subindex in hex format.\n"
-"  ll   - length of variable (1 to FFFFFFFF) in hex format. If reading, this value is ignored.\n"
-"  xxxx - Value to be written in hex and little endian format. If reading, this value is ignored.\n"
+"Datatypes:\n"
+"  - b                 - Boolean.\n"
+"  - u8, u16, u32, u64 - Unsigned integers.\n"
+"  - i8, i16, i32, i64 - Signed integers.\n"
+"  - r32, r64          - Real numbers.\n"
+"  - t, td             - Time of day, time difference.\n"
+"  - vs                - Visible string (between double quotes).\n"
+"  - os, us, d         - Octet string, unicode string, domain."
 );
 }
 
@@ -74,6 +128,7 @@ int main (int argc, char *argv[], char *env[]) {
     int fdSocket;
     struct sockaddr_un addr;
     char *queryString;
+    int queryStringAllocated = 0;
 
     /* whitelist and blacklist are arrays of null separated strings, which
      * contains patterns for comparision with commands from query string. */
@@ -134,7 +189,7 @@ int main (int argc, char *argv[], char *env[]) {
                         errExitErrno("Whitelist can't be allocated.");
                     }
                 }
-                strcpy(&whitelist[prevDataSize], token);
+                strcpyToUpper(&whitelist[prevDataSize], token);
                 whitelistLen ++;
             }
             else if(strcasecmp(token, "deny") == 0) {
@@ -149,7 +204,7 @@ int main (int argc, char *argv[], char *env[]) {
                         errExitErrno("Blacklist can't be allocated.");
                     }
                 }
-                strcpy(&blacklist[prevDataSize], token);
+                strcpyToUpper(&blacklist[prevDataSize], token);
                 blacklistLen ++;
             }
         }
@@ -173,14 +228,28 @@ int main (int argc, char *argv[], char *env[]) {
     }
 
 
-    /* get commands from query string */
-    queryString = getenv("QUERY_STRING");
+    /* get query string */
+    queryString = getenv("QUERY_STRING"); /* HTTP GET method. */
+    if(queryString != NULL && strlen(queryString) == 0) {
+        queryString = malloc(10000);
+        if(queryString == NULL) {
+            errExitErrno("queryString can't be allocated.");
+        }
+        queryStringAllocated = 1;
+        fgets(queryString, 10000, stdin); /* HTTP POST method. */
+    }
     if(queryString == NULL && argc >= 2) {
         queryString = argv[1];  /* If no query string, try first argument. */
     }
-    if(queryString != NULL) {
+
+
+    /* get commands from query string */
+    if(queryString != NULL && strlen(queryString) > 0) {
         char *command;
         int sequence = 1;
+
+        /* put whole query string to upper case */
+        strToUpper(queryString);
 
         command = strtok(queryString, "&");
         while(command != NULL) {
@@ -211,11 +280,16 @@ int main (int argc, char *argv[], char *env[]) {
             }
 
             /* Send command or error message */
-            if(passed == 1) {
+            if(strlen(command) < 9) {
+                printf("? %s [%d] ERROR: 101 - Syntax error in command.\n", command, sequence);
+            }
+            else if(passed == 1) {
                 sendCommand(fdSocket, sequence, command);
             }
             else {
-                printf("[%d] ERROR: 100 - Access restriction, command %s.\n",
+                printf("%c %c%c%c%c%c%c%c%c [%d] ERROR: 100 - Access restriction, command %s.\n",
+                    command[0], command[1], command[2], command[3], command[4],
+                    command[5], command[6], command[7], command[8],
                     sequence, (passed==0)?"not on whitelist":" on blacklist");
             }
 
@@ -223,14 +297,16 @@ int main (int argc, char *argv[], char *env[]) {
             sequence ++;
         }
     }
+    else {
+        printUsage();
+    }
 
 
     close(fdSocket);
     free(whitelist);
     free(blacklist);
-
-    if(commandSuccessfull == 0) {
-        printUsage();
+    if(queryStringAllocated == 1) {
+        free(queryString);
     }
 
     exit(EXIT_SUCCESS);
@@ -238,23 +314,74 @@ int main (int argc, char *argv[], char *env[]) {
 
 
 static void sendCommand(int fd, int sequence, char* command) {
-    size_t commandLength, n;
-    char bufWrite[1000];
-    char bufRead[1000];
+    int i, err;
+    char comm;
+    unsigned int nodeId, idx, sidx;
+    char dataType[4];
+    char *value = "";
 
-    commandLength = strlen(command);
-    
-    if (write(fd, command, commandLength) != commandLength) {
-        errExit("Socket write failed");
+    char buf[1000];
+
+    /* Parse command. It is at least 8 characters long. */
+    err = 0;
+
+    comm = command[0];
+    if(comm != 'R' && comm != 'W') {
+        err = 1;
     }
 
-    n = read(fd, bufRead, sizeof(bufRead));
-
-    if(n == -1) {
-        errExit("Socket read failed");
+    nodeId = hex2dec(&command[1], 2, &err);
+    if(nodeId < 1 || nodeId > 127) {
+        err = 1;
     }
 
-    printf("%s", bufRead);
+    idx = hex2dec(&command[3], 4, &err);
+    sidx = hex2dec(&command[7], 2, &err);
 
-    commandSuccessfull = 1;
+    for(i=0; i<sizeof(dataType); i++) {
+        char c = command[9+i];
+
+        if(c == '=' || c == 0) {
+            dataType[i] = 0;
+            if(c == '=') {
+                value = &command[10+i];
+            }
+            break;
+        }
+        dataType[i] = c;
+    }
+    if(i > 3) {
+        err = 1;
+        dataType[0] = 0;
+    }
+    if(strlen(value) > (sizeof(buf) - 50)) {
+        err = 1;
+    }
+
+    /* Write command according to CiA309-3. */
+    if(err == 0) {
+        size_t wlen, rlen;
+
+        strToLower(dataType);
+
+        wlen = sprintf(buf, "[%d] 0x%02X %c 0x%04X 0x%02X %s %s\n",
+                sequence, nodeId, tolower(comm), idx, sidx, dataType, value);
+
+        if (write(fd, buf, wlen) != wlen) {
+            errExit("Socket write failed");
+        }
+
+        rlen = read(fd, buf, sizeof(buf));
+
+        if(rlen == -1) {
+            errExit("Socket read failed");
+        }
+
+        printf("%c %02X%04X%02X %s",
+            comm, nodeId, idx, sidx, buf);
+    }
+    else {
+        printf("? %s [%d] ERROR: 101 - Syntax error in command.\n",
+                    command, sequence);
+    }
 }
