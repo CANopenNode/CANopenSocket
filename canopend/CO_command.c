@@ -346,7 +346,9 @@ static void command_process(int fd, char* command, size_t commandLength) {
             token = getTok(NULL, spaceDelim, &err);
             datatype = getDataType(token, &err);
 
-            token = getTok(NULL, "\n\r\f", &err); /* whole string */
+            /* take whole string or single token, depending on datatype. Comment may follow. */
+            token = getTok(NULL, (datatype->length == 0) ? "\n\r\f" : spaceDelim, &err);
+
             if(err == 0){
                 dataTxLen = datatype->dataTypeScan((char*)dataTx, sizeof(dataTx), token);
 
@@ -454,6 +456,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 if(strcmp(token, "sdo_timeout") == 0) {
                     uint16_t tmout;
 
+                    token = getTok(NULL, spaceDelim, &err);
                     tmout = (uint16_t)getU32(token, 0, 10000, &err);
 
                     lastTok(NULL, spaceDelim, &err);
@@ -461,6 +464,22 @@ static void command_process(int fd, char* command, size_t commandLength) {
                     /* Write to variable */
                     if(err == 0) {
                         SDOtimeoutTime = tmout;
+                        respLen = sprintf(resp, "[%d] OK", sequence);
+                    }
+                }
+
+                /* node <value> */
+                if(strcmp(token, "node") == 0) {
+                    uint16_t node;
+
+                    token = getTok(NULL, spaceDelim, &err);
+                    node = (uint16_t)getU32(token, 0, 127, &err);
+
+                    lastTok(NULL, spaceDelim, &err);
+
+                    /* Write to variable */
+                    if(err == 0) {
+                        comm_node = node;
                         respLen = sprintf(resp, "[%d] OK", sequence);
                     }
                 }

@@ -118,7 +118,7 @@ int dtsHex(char* bufSdo, int bufSdoSize, char *strin) {
 
         /* Tokens must be two digit hex characters. Verify also memory overflow */
         if(strlen(token) != 2 || len >= bufSdoSize) {
-            return 0;
+            return (*token == '#') ? len : 0;
         }
         ubuf[len++] = (uint8_t)strtoul(token, &sRet, 16);
 
