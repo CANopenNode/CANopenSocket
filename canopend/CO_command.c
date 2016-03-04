@@ -349,14 +349,14 @@ static void command_process(int fd, char* command, size_t commandLength) {
             token = getTok(NULL, "\n\r\f", &err); /* whole string */
             if(err == 0){
                 dataTxLen = datatype->dataTypeScan((char*)dataTx, sizeof(dataTx), token);
+
+                /* Length must match and must not be zero. */
+                if((datatype->length != 0 && datatype->length != dataTxLen) || dataTxLen == 0) {
+                    err = 1;
+                }
             }
 
             lastTok(NULL, spaceDelim, &err);
-
-            /* Length must match and must not be zero. */
-            if((datatype->length != 0 && datatype->length != dataTxLen) || dataTxLen == 0) {
-                err = 1;
-            }
 
             if(err == 0 && comm_node == 0) {
                 err = 1;
