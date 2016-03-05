@@ -76,7 +76,7 @@ int dtpHex(char *strout, int stroutSize, char* bufSdo, int bufLen);
 /**
  * Data type scan function.
  *
- * Functions scans input string strin and writes binary data to bufSdo.
+ * Functions scans input string string and writes binary data to bufSdo.
  * dtsHex scans from hex format (two hex digits, space separated).
  * There are other dts functions inside dataTypes[] array.
  *

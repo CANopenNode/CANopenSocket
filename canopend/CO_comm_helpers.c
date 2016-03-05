@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <ctype.h>
 
 
 const char spaceDelim[] = " \t\n\r\f\v";
@@ -77,7 +78,7 @@ static int dtpStr(char *strout, int stroutSize, char* bufSdo, int bufLen) {
     for(i=0; i<bufLen; i++) {
         char c = bufSdo[i];
 
-        if(n >= stroutSize) {
+        if(n >= stroutSize || c == 0) {
             break;
         }
 
@@ -116,10 +117,16 @@ int dtsHex(char* bufSdo, int bufSdoSize, char *strin) {
     while(token != NULL) {
         char *sRet;
 
+        /* Finish if comment */
+        if(*token == '#') {
+            return len;
+        }
+
         /* Tokens must be two digit hex characters. Verify also memory overflow */
         if(strlen(token) != 2 || len >= bufSdoSize) {
-            return (*token == '#') ? len : 0;
+            return 0;
         }
+
         ubuf[len++] = (uint8_t)strtoul(token, &sRet, 16);
 
         if(sRet != strchr(token, '\0')) {
@@ -134,35 +141,66 @@ int dtsHex(char* bufSdo, int bufSdoSize, char *strin) {
 
 static int dtsStr(char* bufSdo, int bufSdoSize, char *strin) {
     size_t len = strlen(strin);
-    int i, j;
+    int in = 0;
+    int out = 0;
+    int string_closed = 0;
 
-    /* remove start and end quotes */
-    if(len < 2 || strin[0] != '"' || strin[len-1] != '"') {
-        return 0;
-    }
-    strin[len-1] = 0;
-    strin++;
-    len -= 2;
+    /* Remove blank spaces. Must begin with double quote. */
+    while(in < len) {
+        char c = strin[in++];
 
-    /* change "" into " inside string */
-    for(i=0, j=0; i<len; i++) {
-        char c = strin[i];
-
-        /* verify overflow */
-        if(j >= bufSdoSize) {
-            return 0;
-        }
-
-        if(c == '"'){
-            c = strin[++i];
-            if(c != '"') {
+        if(isspace(c) == 0) {
+            if(c == '"') {
+                break;
+            }
+            else {
                 return 0;
             }
         }
-        strin[j++] = c;
     }
 
-    return j;
+    /* Get string between double quotes. Change "" into " inside string. */
+    while(in < len) {
+        char c = strin[in++];
+
+        /* verify overflow */
+        if(out >= bufSdoSize) {
+            return 0;
+        }
+
+        /* "" inside string means ". Single " ends the string. */
+        if(c == '"'){
+            c = strin[in++];
+            if(c != '"') {
+                string_closed = 1;
+                break;
+            }
+        }
+        bufSdo[out++] = c;
+    }
+
+    /* Verify tail of string. */
+    if(string_closed == 1) {
+        /* Comment or nothing is allowed to follow. */
+        while(in < len) {
+            char c = strin[in++];
+
+            if(isspace(c) == 0) {
+                if(c == '#') {
+                    break;
+                }
+                else {
+                    return 0;
+                }
+            }
+        }
+    }
+    else {
+        /* There was no ending quote. */
+        return 0;
+    }
+
+    return out;
 }
 
 static int dtsU8 (char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint8_t   num = (uint8_t) getU32(strin, 0,        UCHAR_MAX, &err); if(err != 0) return 0; memcpy(bufSdo, &num, 1);      return 1;}
