@@ -55,7 +55,7 @@ static pthread_t            command_thread_id;
 static void                 command_process(int fd, char* command, size_t commandLength);
 static int                  fdSocket;
 static uint16_t             comm_net = 1;   /* default CAN net number */
-static uint8_t              comm_node = 0;  /* CANopen Node ID number is undefined by default */
+static uint8_t              comm_node_default = 0xFF;  /* CANopen Node ID number is undefined at startup. */
 static uint16_t             SDOtimeoutTime = 500; /* Timeout time for SDO transfer in milliseconds, if no response */
 static uint8_t              blockTransferEnable = 0; /* SDO block transfer enabled? */
 static volatile int         endProgram = 0;
@@ -180,6 +180,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
     char *token;
     int i;
     uint32_t ui[3];
+    uint8_t comm_node = 0xFF; /* undefined */
 
     char resp[STRING_BUFFER_SIZE];
     int respLen = 0;
@@ -223,7 +224,9 @@ static void command_process(int fd, char* command, size_t commandLength) {
     }
     if(err == 0) {
         switch(i) {
-        /* case 0: only <command> (pointed by token) */
+        case 0: /* only <command> (pointed by token) */
+            comm_node = comm_node_default; /* may be undefined */
+            break;
         case 1: /* <node> and <command> tokens */
             if(ui[0] < 0 || ui[0] > 127) {
                 err = 1;
@@ -284,9 +287,13 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
             lastTok(NULL, spaceDelim, &err);
 
-            if(err == 0 && comm_node == 0) {
+            if(err == 0 && (comm_node < 1 || comm_node > 127)) {
                 err = 1;
-                respErrorCode = respErrorNoDefaultNodeSet;
+                if(comm_node == 0xFF) {
+                    respErrorCode = respErrorNoDefaultNodeSet;
+                } else {
+                    respErrorCode = respErrorUnsupportedNode;
+                }
             }
 
             /* Make CANopen SDO transfer */
@@ -346,10 +353,12 @@ static void command_process(int fd, char* command, size_t commandLength) {
             token = getTok(NULL, spaceDelim, &err);
             datatype = getDataType(token, &err);
 
-            /* take whole string or single token, depending on datatype. Comment may follow. */
-            token = getTok(NULL, (datatype->length == 0) ? "\n\r\f" : spaceDelim, &err);
+            if(err == 0) {
+                /* take whole string or single token, depending on datatype. Comment may follow. */
+                token = getTok(NULL, (datatype->length == 0) ? "\n\r\f" : spaceDelim, &err);
+            }
 
-            if(err == 0){
+            if(err == 0) {
                 dataTxLen = datatype->dataTypeScan((char*)dataTx, sizeof(dataTx), token);
 
                 /* Length must match and must not be zero. */
@@ -360,9 +369,13 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
             lastTok(NULL, spaceDelim, &err);
 
-            if(err == 0 && comm_node == 0) {
+            if(err == 0 && (comm_node < 1 || comm_node > 127)) {
                 err = 1;
-                respErrorCode = respErrorNoDefaultNodeSet;
+                if(comm_node == 0xFF) {
+                    respErrorCode = respErrorNoDefaultNodeSet;
+                } else {
+                    respErrorCode = respErrorUnsupportedNode;
+                }
             }
 
             /* Make CANopen SDO transfer */
@@ -397,6 +410,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
         /* NMT start node */
         else if(strcmp(token, "start") == 0) {
             lastTok(NULL, spaceDelim, &err);
+            if(err == 0 && comm_node > 127) {
+                err = 1;
+                respErrorCode = respErrorNoDefaultNodeSet;
+            }
             if(err == 0) {
                 err = CO_sendNMTcommand(CO, CO_NMT_ENTER_OPERATIONAL, comm_node) ? 1:0;
                 if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -406,6 +423,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
         /* NMT stop node */
         else if(strcmp(token, "stop") == 0) {
             lastTok(NULL, spaceDelim, &err);
+            if(err == 0 && comm_node > 127) {
+                err = 1;
+                respErrorCode = respErrorNoDefaultNodeSet;
+            }
             if(err == 0) {
                 err = CO_sendNMTcommand(CO, CO_NMT_ENTER_STOPPED, comm_node) ? 1:0;
                 if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -415,6 +436,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
         /* NMT Set node to pre-operational */
         else if(strcmp(token, "preop") == 0 || strcmp(token, "preoperational") == 0) {
             lastTok(NULL, spaceDelim, &err);
+            if(err == 0 && comm_node > 127) {
+                err = 1;
+                respErrorCode = respErrorNoDefaultNodeSet;
+            }
             if(err == 0) {
                 err = CO_sendNMTcommand(CO, CO_NMT_ENTER_PRE_OPERATIONAL, comm_node) ? 1:0;
                 if(err == 0) respLen = sprintf(resp, "[%d] OK", sequence);
@@ -425,6 +450,10 @@ static void command_process(int fd, char* command, size_t commandLength) {
         else if(strcmp(token, "reset") == 0) {
 
             token = getTok(NULL, spaceDelim, &err);
+            if(err == 0 && comm_node > 127) {
+                err = 1;
+                respErrorCode = respErrorNoDefaultNodeSet;
+            }
             if(err == 0) {
                 if(strcmp(token, "node") == 0) {
                     lastTok(NULL, spaceDelim, &err);
@@ -469,17 +498,17 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 }
 
                 /* node <value> */
-                if(strcmp(token, "node") == 0) {
+                else if(strcmp(token, "node") == 0) {
                     uint16_t node;
 
                     token = getTok(NULL, spaceDelim, &err);
-                    node = (uint16_t)getU32(token, 0, 127, &err);
+                    node = (uint16_t)getU32(token, 1, 127, &err);
 
                     lastTok(NULL, spaceDelim, &err);
 
                     /* Write to variable */
                     if(err == 0) {
-                        comm_node = node;
+                        comm_node_default = node;
                         respLen = sprintf(resp, "[%d] OK", sequence);
                     }
                 }
