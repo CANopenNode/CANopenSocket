@@ -1,15 +1,16 @@
 /**
  * CANopen master functions
  *
- * @file        CO_master..h
+ * @file        CO_master.h
  * @author      Janez Paternoster
  * @copyright   2015 Janez Paternoster
  *
- * This file is part of CANopenNode, an opensource CANopen Stack.
- * Project home page is <https://github.com/CANopenNode/CANopenNode>.
- * For more information on CANopen see <http://www.can-cia.org/>.
+ * This file is part of CANopenSocket, a Linux implementation of CANopen
+ * stack with master functionality. Project home page is
+ * <https://github.com/CANopenNode/CANopenSocket>. CANopenSocket is based
+ * on CANopenNode: <https://github.com/CANopenNode/CANopenNode>.
  *
- * CANopenNode is free and open source software: you can redistribute
+ * CANopenSocket is free and open source software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 2 of the
  * License, or (at your option) any later version.
