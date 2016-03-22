@@ -50,7 +50,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CANopenNode/stack/STM32|CANopenNode/stack/SAM3X|CANopenNode/stack/PIC32|CANopenNode/stack/PIC24_dsPIC33|CANopenNode/stack/MCF5282|CANopenNode/stack/LPC177x_8x|CANopenNode/stack/eCos|CANopenNode/stack/dsPIC30F|CANopenNode/stack/drvTemplate|CANopenNode/example" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CANopenNode/stack/STM32F3|CANopenNode/stack/STM32|CANopenNode/stack/SAM3X|CANopenNode/stack/PIC32|CANopenNode/stack/PIC24_dsPIC33|CANopenNode/stack/MCF5282|CANopenNode/stack/LPC177x_8x|CANopenNode/stack/eCos|CANopenNode/stack/dsPIC30F|CANopenNode/stack/drvTemplate|CANopenNode/example" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -105,7 +105,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="CANopenNode/stack/STM32|CANopenNode/stack/SAM3X|CANopenNode/stack/PIC32|CANopenNode/stack/PIC24_dsPIC33|CANopenNode/stack/MCF5282|CANopenNode/stack/LPC177x_8x|CANopenNode/stack/eCos|CANopenNode/stack/dsPIC30F|CANopenNode/stack/drvTemplate|CANopenNode/example" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="CANopenNode/stack/STM32F3|CANopenNode/stack/STM32|CANopenNode/stack/SAM3X|CANopenNode/stack/PIC32|CANopenNode/stack/PIC24_dsPIC33|CANopenNode/stack/MCF5282|CANopenNode/stack/LPC177x_8x|CANopenNode/stack/eCos|CANopenNode/stack/dsPIC30F|CANopenNode/stack/drvTemplate|CANopenNode/example" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

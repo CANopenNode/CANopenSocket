@@ -32,6 +32,7 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
                 $(APPL_SRC)/CO_command.c        \
                 $(APPL_SRC)/CO_comm_helpers.c   \
                 $(APPL_SRC)/CO_master.c         \
+                $(APPL_SRC)/CO_time.c           \
                 $(APPL_SRC)/main.c
 
 

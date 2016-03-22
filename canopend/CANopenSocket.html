@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
   <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-  <title>CANopenNode</title>
+  <title>CANopenSocket - CANopenNode</title>
   <link rel='stylesheet' type='text/css' href='lib/CANopenUI.css'/>
   <style type='text/css'>
      body{background-color: rgb(165, 186, 221);}
@@ -77,7 +77,7 @@
   </script>
 </head>
 <body>
-  <h3>CANopen object dictionary</h3>
+  <h3>CANopen object dictionary for CANopenSocket</h3>
   <ul id="ODList">
     <li class="expandable">
       <h2>Device information</h2>
@@ -90,23 +90,23 @@
             <table>
               <tr>
                 <th>File Name</th>
-                <td>SC243</td>
+                <td>CANopenSocket</td>
               </tr>
               <tr>
                 <th>File Version</th>
-                <td>3.0</td>
+                <td>-</td>
               </tr>
               <tr>
                 <th>Creation Time</th>
-                <td>16:45:39</td>
+                <td>15:55:55</td>
               </tr>
               <tr>
                 <th>Creation Date</th>
-                <td>2013-03-10</td>
+                <td>2016-03-22</td>
               </tr>
               <tr>
                 <th>Created By</th>
-                <td>-</td>
+                <td>JP</td>
               </tr>
             </table>
           </ul>
@@ -119,7 +119,7 @@
             <table>
               <tr>
                 <th>Vendor name</th>
-                <td>Paternoster</td>
+                <td>CANopenNode</td>
               </tr>
               <tr>
                 <th>Product Name</th>
@@ -133,12 +133,6 @@
                     <div>CANopenNode is an open source software stack used for serial communication of multiple devices over the CAN/CANopen Network.</div>
                     <a href="http://canopennode.sourceforge.net" target="infoWindow">More...</a>
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <th>Version</th>
-                <td>
-                  <div>Version Type=FW, version=3.00</div>
                 </td>
               </tr>
             </table>
@@ -371,6 +365,34 @@
                 <div>NMT master can send CANopen NMT command, which can start, stop or reset nodes.</div>
               </div>
             </div>
+            <div id="feature_TRACE" class="elements">
+              <h3>Trace, value = 1</h3>
+              <h4>Associated objects:</h4>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Index</th>
+                  <th>Max Index</th>
+                  <th>Index step</th>
+                </tr>
+                <tr>
+                  <td>Trace config</td>
+                  <td>2300</td>
+                  <td>231F</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Trace</td>
+                  <td>2400</td>
+                  <td>241F</td>
+                  <td>1</td>
+                </tr>
+              </table>
+              <div class="description lang_en">
+                <h4>en: Trace</h4>
+                <div>Trace is used for recording variables.</div>
+              </div>
+            </div>
           </ul>
         </li>
       </ul>
@@ -385,22 +407,22 @@
           <input type="button" pf="butWrite" value="Write marked"/>
         </li>
         <li>
-          <a docref="SC243_1000">1000</a>
+          <a docref="CANopenSocket_1000">1000</a>
           - Device type:
           <input addr="1000000004" format="X32" pf="ro" value="0x00000000"/>
         </li>
         <li>
-          <a docref="SC243_1001">1001</a>
+          <a docref="CANopenSocket_1001">1001</a>
           - Error register:
           <input addr="1001000001" format="U08" pf="rro" value="0"/>
         </li>
         <li>
-          <a docref="SC243_1002">1002</a>
+          <a docref="CANopenSocket_1002">1002</a>
           - Manufacturer status register:
           <input addr="1002000004" format="U32" pf="rro" value="0"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_1003">1003 - Pre-defined error field</a>
+          <a docref="CANopenSocket_1003">1003 - Pre-defined error field</a>
           <ul>
             <li>
               00 - Number of errors:
@@ -441,37 +463,37 @@
           </ul>
         </li>
         <li>
-          <a docref="SC243_1005">1005</a>
+          <a docref="CANopenSocket_1005">1005</a>
           - COB-ID SYNC message:
           <input addr="1005000004" format="X32" pf="rw" value="0x00000080"/>
         </li>
         <li>
-          <a docref="SC243_1006">1006</a>
+          <a docref="CANopenSocket_1006">1006</a>
           - Communication cycle period:
           <input addr="1006000004" format="U32" pf="rw" value="0"/>
         </li>
         <li>
-          <a docref="SC243_1007">1007</a>
+          <a docref="CANopenSocket_1007">1007</a>
           - Synchronous window length:
           <input addr="1007000004" format="U32" pf="rw" value="0"/>
         </li>
         <li>
-          <a docref="SC243_1008">1008</a>
+          <a docref="CANopenSocket_1008">1008</a>
           - Manufacturer device name:
           <input addr="1008000011" format="S0b" pf="ro" value="CANopenNode"/>
         </li>
         <li>
-          <a docref="SC243_1009">1009</a>
+          <a docref="CANopenSocket_1009">1009</a>
           - Manufacturer hardware version:
           <input addr="1009000004" format="S04" pf="ro" value="3.00"/>
         </li>
         <li>
-          <a docref="SC243_100A">100A</a>
+          <a docref="CANopenSocket_100A">100A</a>
           - Manufacturer software version:
           <input addr="100A000004" format="S04" pf="ro" value="3.00"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_1010">1010 - Store parameters</a>
+          <a docref="CANopenSocket_1010">1010 - Store parameters</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -484,7 +506,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1011">1011 - Restore default parameters</a>
+          <a docref="CANopenSocket_1011">1011 - Restore default parameters</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -497,17 +519,17 @@
           </ul>
         </li>
         <li>
-          <a docref="SC243_1014">1014</a>
+          <a docref="CANopenSocket_1014">1014</a>
           - COB-ID EMCY:
           <input addr="1014000004" format="X32" pf="ro" value="$NODEID+0x80"/>
         </li>
         <li>
-          <a docref="SC243_1015">1015</a>
+          <a docref="CANopenSocket_1015">1015</a>
           - inhibit time EMCY:
           <input addr="1015000002" format="U16" pf="rw" value="100"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_1016">1016 - Consumer heartbeat time</a>
+          <a docref="CANopenSocket_1016">1016 - Consumer heartbeat time</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -532,12 +554,12 @@
           </ul>
         </li>
         <li>
-          <a docref="SC243_1017">1017</a>
+          <a docref="CANopenSocket_1017">1017</a>
           - Producer heartbeat time:
           <input addr="1017000002" format="U16" pf="rw" value="1000"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_1018">1018 - Identity</a>
+          <a docref="CANopenSocket_1018">1018 - Identity</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -562,12 +584,12 @@
           </ul>
         </li>
         <li>
-          <a docref="SC243_1019">1019</a>
+          <a docref="CANopenSocket_1019">1019</a>
           - Synchronous counter overflow value:
           <input addr="1019000001" format="U08" pf="rw" value="0"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_1029">1029 - Error behavior</a>
+          <a docref="CANopenSocket_1029">1029 - Error behavior</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -600,7 +622,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1200">1200 - SDO server parameter</a>
+          <a docref="CANopenSocket_1200">1200 - SDO server parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -617,7 +639,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1280">1280 - SDO client parameter</a>
+          <a docref="CANopenSocket_1280">1280 - SDO client parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -638,7 +660,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1400">1400 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1400">1400 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -655,7 +677,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1401">1401 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1401">1401 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -672,7 +694,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1402">1402 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1402">1402 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -689,7 +711,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1403">1403 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1403">1403 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -706,7 +728,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1404">1404 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1404">1404 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -723,7 +745,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1405">1405 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1405">1405 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -740,7 +762,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1406">1406 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1406">1406 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -757,7 +779,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1407">1407 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1407">1407 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -774,7 +796,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1408">1408 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1408">1408 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -791,7 +813,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1409">1409 - RPDO communication parameter</a>
+          <a docref="CANopenSocket_1409">1409 - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -808,7 +830,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_140A">140A - RPDO communication parameter</a>
+          <a docref="CANopenSocket_140A">140A - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -825,7 +847,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_140B">140B - RPDO communication parameter</a>
+          <a docref="CANopenSocket_140B">140B - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -842,7 +864,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_140C">140C - RPDO communication parameter</a>
+          <a docref="CANopenSocket_140C">140C - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -859,7 +881,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_140D">140D - RPDO communication parameter</a>
+          <a docref="CANopenSocket_140D">140D - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -876,7 +898,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_140E">140E - RPDO communication parameter</a>
+          <a docref="CANopenSocket_140E">140E - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -893,7 +915,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_140F">140F - RPDO communication parameter</a>
+          <a docref="CANopenSocket_140F">140F - RPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -910,7 +932,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1600">1600 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1600">1600 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -951,7 +973,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1601">1601 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1601">1601 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -992,7 +1014,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1602">1602 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1602">1602 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1033,7 +1055,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1603">1603 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1603">1603 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1074,7 +1096,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1604">1604 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1604">1604 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1115,7 +1137,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1605">1605 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1605">1605 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1156,7 +1178,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1606">1606 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1606">1606 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1197,7 +1219,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1607">1607 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1607">1607 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1238,7 +1260,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1608">1608 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1608">1608 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1279,7 +1301,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1609">1609 - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_1609">1609 - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1320,7 +1342,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_160A">160A - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_160A">160A - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1361,7 +1383,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_160B">160B - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_160B">160B - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1402,7 +1424,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_160C">160C - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_160C">160C - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1443,7 +1465,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_160D">160D - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_160D">160D - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1484,7 +1506,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_160E">160E - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_160E">160E - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1525,7 +1547,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_160F">160F - RPDO mapping parameter</a>
+          <a docref="CANopenSocket_160F">160F - RPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -1566,7 +1588,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1800">1800 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1800">1800 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1599,7 +1621,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1801">1801 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1801">1801 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1632,7 +1654,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1802">1802 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1802">1802 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1665,7 +1687,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1803">1803 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1803">1803 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1698,7 +1720,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1804">1804 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1804">1804 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1731,7 +1753,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1805">1805 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1805">1805 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1764,7 +1786,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1806">1806 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1806">1806 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1797,7 +1819,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1807">1807 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1807">1807 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1830,7 +1852,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1808">1808 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1808">1808 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1863,7 +1885,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1809">1809 - TPDO communication parameter</a>
+          <a docref="CANopenSocket_1809">1809 - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1896,7 +1918,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_180A">180A - TPDO communication parameter</a>
+          <a docref="CANopenSocket_180A">180A - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1929,7 +1951,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_180B">180B - TPDO communication parameter</a>
+          <a docref="CANopenSocket_180B">180B - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1962,7 +1984,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_180C">180C - TPDO communication parameter</a>
+          <a docref="CANopenSocket_180C">180C - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -1995,7 +2017,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_180D">180D - TPDO communication parameter</a>
+          <a docref="CANopenSocket_180D">180D - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2028,7 +2050,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_180E">180E - TPDO communication parameter</a>
+          <a docref="CANopenSocket_180E">180E - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2061,7 +2083,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_180F">180F - TPDO communication parameter</a>
+          <a docref="CANopenSocket_180F">180F - TPDO communication parameter</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2094,7 +2116,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A00">1A00 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A00">1A00 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2135,7 +2157,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A01">1A01 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A01">1A01 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2176,7 +2198,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A02">1A02 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A02">1A02 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2217,7 +2239,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A03">1A03 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A03">1A03 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2258,7 +2280,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A04">1A04 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A04">1A04 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2299,7 +2321,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A05">1A05 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A05">1A05 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2340,7 +2362,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A06">1A06 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A06">1A06 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2381,7 +2403,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A07">1A07 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A07">1A07 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2422,7 +2444,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A08">1A08 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A08">1A08 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2463,7 +2485,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A09">1A09 - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A09">1A09 - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2504,7 +2526,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A0A">1A0A - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A0A">1A0A - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2545,7 +2567,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A0B">1A0B - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A0B">1A0B - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2586,7 +2608,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A0C">1A0C - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A0C">1A0C - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2627,7 +2649,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A0D">1A0D - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A0D">1A0D - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2668,7 +2690,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A0E">1A0E - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A0E">1A0E - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2709,7 +2731,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_1A0F">1A0F - TPDO mapping parameter</a>
+          <a docref="CANopenSocket_1A0F">1A0F - TPDO mapping parameter</a>
           <ul>
             <li>
               00 - Number of mapped objects:
@@ -2750,7 +2772,7 @@
           </ul>
         </li>
         <li>
-          <a docref="SC243_1F80">1F80</a>
+          <a docref="CANopenSocket_1F80">1F80</a>
           - NMT startup:
           <input addr="1F80000004" format="X32" pf="rw" value="0x00000000"/>
         </li>
@@ -2766,37 +2788,37 @@
           <input type="button" pf="butWrite" value="Write marked"/>
         </li>
         <li>
-          <a docref="SC243_2100">2100</a>
+          <a docref="CANopenSocket_2100">2100</a>
           - Error status bits:
           <input addr="2100000010" format="O0a" pf="rro" value="00 00 00 00 00 00 00 00 00 00"/>
         </li>
         <li>
-          <a docref="SC243_2101">2101</a>
+          <a docref="CANopenSocket_2101">2101</a>
           - CAN node ID:
           <input addr="2101000001" format="X08" pf="rw" value="0x20"/>
         </li>
         <li>
-          <a docref="SC243_2102">2102</a>
+          <a docref="CANopenSocket_2102">2102</a>
           - CAN bit rate:
           <input addr="2102000002" format="U16" pf="rw" value="250"/>
         </li>
         <li>
-          <a docref="SC243_2103">2103</a>
+          <a docref="CANopenSocket_2103">2103</a>
           - SYNC counter:
           <input addr="2103000002" format="U16" pf="rrw" value="0"/>
         </li>
         <li>
-          <a docref="SC243_2104">2104</a>
+          <a docref="CANopenSocket_2104">2104</a>
           - SYNC time:
           <input addr="2104000002" format="U16" pf="rro" value="0"/>
         </li>
         <li>
-          <a docref="SC243_2106">2106</a>
+          <a docref="CANopenSocket_2106">2106</a>
           - Power-on counter:
           <input addr="2106000004" format="U32" pf="ro" value="0"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_2107">2107 - Performance</a>
+          <a docref="CANopenSocket_2107">2107 - Performance</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2825,7 +2847,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2108">2108 - Temperature</a>
+          <a docref="CANopenSocket_2108">2108 - Temperature</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2838,7 +2860,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2109">2109 - Voltage</a>
+          <a docref="CANopenSocket_2109">2109 - Voltage</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2851,7 +2873,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2110">2110 - Variable Int32</a>
+          <a docref="CANopenSocket_2110">2110 - Variable Int32</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2924,7 +2946,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2111">2111 - Variable ROM Int32</a>
+          <a docref="CANopenSocket_2111">2111 - Variable ROM Int32</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -2997,7 +3019,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2112">2112 - Variable NV Int32</a>
+          <a docref="CANopenSocket_2112">2112 - Variable NV Int32</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3070,7 +3092,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2120">2120 - test var</a>
+          <a docref="CANopenSocket_2120">2120 - test var</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3099,7 +3121,28 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_2200">2200 - CANopen Log</a>
+          <a docref="CANopenSocket_2130">2130 - Time</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2130000001" format="U08" pf="rro" value="3"/>
+            </li>
+            <li>
+              01 - String:
+              <input addr="21300100" format="S" pf="rro" value="-                             "/>
+            </li>
+            <li>
+              02 - Epoch time base ms:
+              <input addr="2130020008" format="U64" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Epoch time offset ms:
+              <input addr="2130030004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2200">2200 - CANopen Log</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3119,6 +3162,80 @@
             </li>
           </ul>
         </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2300">2300 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2300000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2300010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2300020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23000300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23000400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2300050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Print unsigned:
+              <input addr="2300060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2300070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2300080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2400">2400 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2400000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2400010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2400020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2400030004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2400040004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="24000500" format="S" pf="rro" value="-"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2400060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li class="expandable">
@@ -3131,7 +3248,7 @@
           <input type="button" pf="butWrite" value="Write marked"/>
         </li>
         <li class="expandable">
-          <a docref="SC243_6000">6000 - Read input 8 bit</a>
+          <a docref="CANopenSocket_6000">6000 - Read input 8 bit</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3172,7 +3289,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_6200">6200 - Write output 8 bit</a>
+          <a docref="CANopenSocket_6200">6200 - Write output 8 bit</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3213,7 +3330,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_6401">6401 - Read analogue input 16 bit</a>
+          <a docref="CANopenSocket_6401">6401 - Read analogue input 16 bit</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3270,7 +3387,7 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="SC243_6411">6411 - Write analogue output 16 bit</a>
+          <a docref="CANopenSocket_6411">6411 - Write analogue output 16 bit</a>
           <ul>
             <li>
               00 - max sub-index:
@@ -3314,7 +3431,7 @@
     </li>
   </ul>
   <ul id="ODDoc">
-    <li id="SC243_1000">
+    <li id="CANopenSocket_1000">
       <h3>1000 - Device type</h3>
       <table>
         <tr>
@@ -3347,7 +3464,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1001">
+    <li id="CANopenSocket_1001">
       <h3>1001 - Error register</h3>
       <table>
         <tr>
@@ -3392,7 +3509,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1002">
+    <li id="CANopenSocket_1002">
       <h3>1002 - Manufacturer status register</h3>
       <table>
         <tr>
@@ -3421,7 +3538,7 @@
         <div>bit 0-31: Not used by stack (available for user)</div>
       </div>
     </li>
-    <li id="SC243_1003">
+    <li id="CANopenSocket_1003">
       <h3>1003 - Pre-defined error field</h3>
       <table>
         <tr>
@@ -3522,7 +3639,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1005">
+    <li id="CANopenSocket_1005">
       <h3>1005 - COB-ID SYNC message</h3>
       <table>
         <tr>
@@ -3559,7 +3676,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1006">
+    <li id="CANopenSocket_1006">
       <h3>1006 - Communication cycle period</h3>
       <table>
         <tr>
@@ -3588,7 +3705,7 @@
         <div>bit 0-31:  period of SYNC transmission in µs (0 = no transmission, no checking)</div>
       </div>
     </li>
-    <li id="SC243_1007">
+    <li id="CANopenSocket_1007">
       <h3>1007 - Synchronous window length</h3>
       <table>
         <tr>
@@ -3617,7 +3734,7 @@
         <div>bit 0-31:  window leghth after SYNC when PDOS must be transmited in µs, (0 = not used)</div>
       </div>
     </li>
-    <li id="SC243_1008">
+    <li id="CANopenSocket_1008">
       <h3>1008 - Manufacturer device name</h3>
       <table>
         <tr>
@@ -3646,7 +3763,7 @@
         <div>Name of the manufacturer as string</div>
       </div>
     </li>
-    <li id="SC243_1009">
+    <li id="CANopenSocket_1009">
       <h3>1009 - Manufacturer hardware version</h3>
       <table>
         <tr>
@@ -3675,7 +3792,7 @@
         <div>Name of the hardware version as string</div>
       </div>
     </li>
-    <li id="SC243_100A">
+    <li id="CANopenSocket_100A">
       <h3>100A - Manufacturer software version</h3>
       <table>
         <tr>
@@ -3704,7 +3821,7 @@
         <div>Name of the software version as string.</div>
       </div>
     </li>
-    <li id="SC243_1010">
+    <li id="CANopenSocket_1010">
       <h3>1010 - Store parameters</h3>
       <table>
         <tr>
@@ -3752,7 +3869,7 @@
         <div>Writing value 0x65766173 ('s','a','v','e' from LSB to MSB) into this location stores all ROM variables into EEPROM.</div>
       </div>
     </li>
-    <li id="SC243_1011">
+    <li id="CANopenSocket_1011">
       <h3>1011 - Restore default parameters</h3>
       <table>
         <tr>
@@ -3800,7 +3917,7 @@
         <div>Writing value 0x64616F6C ('l','o','a','d' from LSB to MSB) into this location restores all ROM and EEPROM variables after reset. (After reset read form EEPROM is not performed, so default values are used.)</div>
       </div>
     </li>
-    <li id="SC243_1014">
+    <li id="CANopenSocket_1014">
       <h3>1014 - COB-ID EMCY</h3>
       <table>
         <tr>
@@ -3835,7 +3952,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1015">
+    <li id="CANopenSocket_1015">
       <h3>1015 - inhibit time EMCY</h3>
       <table>
         <tr>
@@ -3864,7 +3981,7 @@
         <div>bit 0-15: Inhibit time of emergency message in 100µs</div>
       </div>
     </li>
-    <li id="SC243_1016">
+    <li id="CANopenSocket_1016">
       <h3>1016 - Consumer heartbeat time</h3>
       <table>
         <tr>
@@ -3941,7 +4058,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1017">
+    <li id="CANopenSocket_1017">
       <h3>1017 - Producer heartbeat time</h3>
       <table>
         <tr>
@@ -3970,7 +4087,7 @@
         <div>bit 0-15: Heartbeat producer time in ms (0 = disable transmission)</div>
       </div>
     </li>
-    <li id="SC243_1018">
+    <li id="CANopenSocket_1018">
       <h3>1018 - Identity</h3>
       <table>
         <tr>
@@ -4076,7 +4193,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1019">
+    <li id="CANopenSocket_1019">
       <h3>1019 - Synchronous counter overflow value</h3>
       <table>
         <tr>
@@ -4113,7 +4230,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1029">
+    <li id="CANopenSocket_1029">
       <h3>1029 - Error behavior</h3>
       <table>
         <tr>
@@ -4215,7 +4332,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1200">
+    <li id="CANopenSocket_1200">
       <h3>1200 - SDO server parameter</h3>
       <table>
         <tr>
@@ -4317,7 +4434,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1280">
+    <li id="CANopenSocket_1280">
       <h3>1280 - SDO client parameter</h3>
       <table>
         <tr>
@@ -4412,7 +4529,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1400">
+    <li id="CANopenSocket_1400">
       <h3>1400 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4500,7 +4617,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1401">
+    <li id="CANopenSocket_1401">
       <h3>1401 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4562,7 +4679,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1402">
+    <li id="CANopenSocket_1402">
       <h3>1402 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4624,7 +4741,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1403">
+    <li id="CANopenSocket_1403">
       <h3>1403 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4686,7 +4803,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1404">
+    <li id="CANopenSocket_1404">
       <h3>1404 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4748,7 +4865,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1405">
+    <li id="CANopenSocket_1405">
       <h3>1405 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4810,7 +4927,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1406">
+    <li id="CANopenSocket_1406">
       <h3>1406 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4872,7 +4989,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1407">
+    <li id="CANopenSocket_1407">
       <h3>1407 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4934,7 +5051,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1408">
+    <li id="CANopenSocket_1408">
       <h3>1408 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -4996,7 +5113,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1409">
+    <li id="CANopenSocket_1409">
       <h3>1409 - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5058,7 +5175,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_140A">
+    <li id="CANopenSocket_140A">
       <h3>140A - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5120,7 +5237,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_140B">
+    <li id="CANopenSocket_140B">
       <h3>140B - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5182,7 +5299,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_140C">
+    <li id="CANopenSocket_140C">
       <h3>140C - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5244,7 +5361,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_140D">
+    <li id="CANopenSocket_140D">
       <h3>140D - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5306,7 +5423,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_140E">
+    <li id="CANopenSocket_140E">
       <h3>140E - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5368,7 +5485,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_140F">
+    <li id="CANopenSocket_140F">
       <h3>140F - RPDO communication parameter</h3>
       <table>
         <tr>
@@ -5430,7 +5547,7 @@
         <div>0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</div>
       </div>
     </li>
-    <li id="SC243_1600">
+    <li id="CANopenSocket_1600">
       <h3>1600 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -5565,7 +5682,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1601">
+    <li id="CANopenSocket_1601">
       <h3>1601 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -5687,7 +5804,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1602">
+    <li id="CANopenSocket_1602">
       <h3>1602 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -5809,7 +5926,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1603">
+    <li id="CANopenSocket_1603">
       <h3>1603 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -5931,7 +6048,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1604">
+    <li id="CANopenSocket_1604">
       <h3>1604 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6053,7 +6170,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1605">
+    <li id="CANopenSocket_1605">
       <h3>1605 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6175,7 +6292,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1606">
+    <li id="CANopenSocket_1606">
       <h3>1606 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6297,7 +6414,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1607">
+    <li id="CANopenSocket_1607">
       <h3>1607 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6419,7 +6536,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1608">
+    <li id="CANopenSocket_1608">
       <h3>1608 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6541,7 +6658,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1609">
+    <li id="CANopenSocket_1609">
       <h3>1609 - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6663,7 +6780,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_160A">
+    <li id="CANopenSocket_160A">
       <h3>160A - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6785,7 +6902,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_160B">
+    <li id="CANopenSocket_160B">
       <h3>160B - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -6907,7 +7024,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_160C">
+    <li id="CANopenSocket_160C">
       <h3>160C - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -7029,7 +7146,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_160D">
+    <li id="CANopenSocket_160D">
       <h3>160D - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -7151,7 +7268,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_160E">
+    <li id="CANopenSocket_160E">
       <h3>160E - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -7273,7 +7390,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_160F">
+    <li id="CANopenSocket_160F">
       <h3>160F - RPDO mapping parameter</h3>
       <table>
         <tr>
@@ -7395,7 +7512,7 @@
         <div>0x1600 - 0x17FF RPDO mapping parameter (see description for 0x1600)</div>
       </div>
     </li>
-    <li id="SC243_1800">
+    <li id="CANopenSocket_1800">
       <h3>1800 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -7549,7 +7666,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1801">
+    <li id="CANopenSocket_1801">
       <h3>1801 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -7651,7 +7768,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1802">
+    <li id="CANopenSocket_1802">
       <h3>1802 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -7753,7 +7870,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1803">
+    <li id="CANopenSocket_1803">
       <h3>1803 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -7855,7 +7972,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1804">
+    <li id="CANopenSocket_1804">
       <h3>1804 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -7957,7 +8074,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1805">
+    <li id="CANopenSocket_1805">
       <h3>1805 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8059,7 +8176,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1806">
+    <li id="CANopenSocket_1806">
       <h3>1806 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8161,7 +8278,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1807">
+    <li id="CANopenSocket_1807">
       <h3>1807 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8263,7 +8380,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1808">
+    <li id="CANopenSocket_1808">
       <h3>1808 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8365,7 +8482,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1809">
+    <li id="CANopenSocket_1809">
       <h3>1809 - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8467,7 +8584,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_180A">
+    <li id="CANopenSocket_180A">
       <h3>180A - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8569,7 +8686,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_180B">
+    <li id="CANopenSocket_180B">
       <h3>180B - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8671,7 +8788,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_180C">
+    <li id="CANopenSocket_180C">
       <h3>180C - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8773,7 +8890,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_180D">
+    <li id="CANopenSocket_180D">
       <h3>180D - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8875,7 +8992,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_180E">
+    <li id="CANopenSocket_180E">
       <h3>180E - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -8977,7 +9094,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_180F">
+    <li id="CANopenSocket_180F">
       <h3>180F - TPDO communication parameter</h3>
       <table>
         <tr>
@@ -9079,7 +9196,7 @@
         <div>0x1800 - 0x19FF TPDO communication parameter (see description for 0x1800)</div>
       </div>
     </li>
-    <li id="SC243_1A00">
+    <li id="CANopenSocket_1A00">
       <h3>1A00 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9214,7 +9331,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_1A01">
+    <li id="CANopenSocket_1A01">
       <h3>1A01 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9336,7 +9453,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A02">
+    <li id="CANopenSocket_1A02">
       <h3>1A02 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9458,7 +9575,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A03">
+    <li id="CANopenSocket_1A03">
       <h3>1A03 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9580,7 +9697,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A04">
+    <li id="CANopenSocket_1A04">
       <h3>1A04 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9702,7 +9819,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A05">
+    <li id="CANopenSocket_1A05">
       <h3>1A05 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9824,7 +9941,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A06">
+    <li id="CANopenSocket_1A06">
       <h3>1A06 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -9946,7 +10063,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A07">
+    <li id="CANopenSocket_1A07">
       <h3>1A07 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10068,7 +10185,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A08">
+    <li id="CANopenSocket_1A08">
       <h3>1A08 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10190,7 +10307,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A09">
+    <li id="CANopenSocket_1A09">
       <h3>1A09 - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10312,7 +10429,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A0A">
+    <li id="CANopenSocket_1A0A">
       <h3>1A0A - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10434,7 +10551,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A0B">
+    <li id="CANopenSocket_1A0B">
       <h3>1A0B - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10556,7 +10673,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A0C">
+    <li id="CANopenSocket_1A0C">
       <h3>1A0C - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10678,7 +10795,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A0D">
+    <li id="CANopenSocket_1A0D">
       <h3>1A0D - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10800,7 +10917,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A0E">
+    <li id="CANopenSocket_1A0E">
       <h3>1A0E - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -10922,7 +11039,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1A0F">
+    <li id="CANopenSocket_1A0F">
       <h3>1A0F - TPDO mapping parameter</h3>
       <table>
         <tr>
@@ -11044,7 +11161,7 @@
         <div>0x1A00 - 0x1BFF TPDO mapping parameter (see description for 0x1A00)</div>
       </div>
     </li>
-    <li id="SC243_1F80">
+    <li id="CANopenSocket_1F80">
       <h3>1F80 - NMT startup</h3>
       <table>
         <tr>
@@ -11092,7 +11209,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_2100">
+    <li id="CANopenSocket_2100">
       <h3>2100 - Error status bits</h3>
       <table>
         <tr>
@@ -11245,7 +11362,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_2101">
+    <li id="CANopenSocket_2101">
       <h3>2101 - CAN node ID</h3>
       <table>
         <tr>
@@ -11279,7 +11396,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_2102">
+    <li id="CANopenSocket_2102">
       <h3>2102 - CAN bit rate</h3>
       <table>
         <tr>
@@ -11315,7 +11432,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_2103">
+    <li id="CANopenSocket_2103">
       <h3>2103 - SYNC counter</h3>
       <table>
         <tr>
@@ -11344,7 +11461,7 @@
         <div>SYNC Counter is incremented each time, SYNC message is received or transmitted.</div>
       </div>
     </li>
-    <li id="SC243_2104">
+    <li id="CANopenSocket_2104">
       <h3>2104 - SYNC time</h3>
       <table>
         <tr>
@@ -11373,7 +11490,7 @@
         <div>SYNC Time is incremented each timer period and reset to zero, each time SYNC is received or transmitted.</div>
       </div>
     </li>
-    <li id="SC243_2106">
+    <li id="CANopenSocket_2106">
       <h3>2106 - Power-on counter</h3>
       <table>
         <tr>
@@ -11402,7 +11519,7 @@
         <div>Power on Counter counts total microcontroller resets in it's lifetime. Variable is an example of EEPROM usage.</div>
       </div>
     </li>
-    <li id="SC243_2107">
+    <li id="CANopenSocket_2107">
       <h3>2107 - Performance</h3>
       <table>
         <tr>
@@ -11487,7 +11604,7 @@
         </div>
       </div>
     </li>
-    <li id="SC243_2108">
+    <li id="CANopenSocket_2108">
       <h3>2108 - Temperature</h3>
       <table>
         <tr>
@@ -11535,7 +11652,7 @@
         <div>Current temperature on device in 0,1°C.</div>
       </div>
     </li>
-    <li id="SC243_2109">
+    <li id="CANopenSocket_2109">
       <h3>2109 - Voltage</h3>
       <table>
         <tr>
@@ -11583,7 +11700,7 @@
         <div>Current voltage on device in 0,1V.</div>
       </div>
     </li>
-    <li id="SC243_2110">
+    <li id="CANopenSocket_2110">
       <h3>2110 - Variable Int32</h3>
       <table>
         <tr>
@@ -11721,7 +11838,7 @@
         <div>Vartiable is free to use by application.</div>
       </div>
     </li>
-    <li id="SC243_2111">
+    <li id="CANopenSocket_2111">
       <h3>2111 - Variable ROM Int32</h3>
       <table>
         <tr>
@@ -11859,7 +11976,7 @@
         <div>Vartiable is free to use by application.</div>
       </div>
     </li>
-    <li id="SC243_2112">
+    <li id="CANopenSocket_2112">
       <h3>2112 - Variable NV Int32</h3>
       <table>
         <tr>
@@ -11997,7 +12114,7 @@
         <div>Vartiable is free to use by application. Variable is stored to internal baterry powered SRAM.</div>
       </div>
     </li>
-    <li id="SC243_2120">
+    <li id="CANopenSocket_2120">
       <h3>2120 - test var</h3>
       <table>
         <tr>
@@ -12085,7 +12202,87 @@
         </tr>
       </table>
     </li>
-    <li id="SC243_2200">
+    <li id="CANopenSocket_2130">
+      <h3>2130 - Time</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>4</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>3</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>String</td>
+          <td>VISIBLE_STRING</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>-</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Epoch time base ms</td>
+          <td>UNSIGNED64</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Epoch time offset ms</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+      <div class="description lang_en">
+        <h4>en: Time</h4>
+        <div>
+          Variable displays current time.
+          <br/>
+          <br/>
+          String - returns current time as string.
+          <br/>
+          <br/>
+          Epoch time ms - Milliseconds since unix epoch (1.1.1970, 00:00:00, UTC). It is calculated as base + offset. Base is calculated on startup of program and offset increments continuously since then. 'Epoch time offset ms' overflows each 49,7 days. 'Epoch time base ms' is recalculated in case of overflow or in case of write to 'Epoch time offset ms'.
+        </div>
+      </div>
+    </li>
+    <li id="CANopenSocket_2200">
       <h3>2200 - CANopen Log</h3>
       <table>
         <tr>
@@ -12178,7 +12375,277 @@
         </div>
       </div>
     </li>
-    <li id="SC243_6000">
+    <li id="CANopenSocket_2300">
+      <h3>2300 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Print unsigned</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+      <div class="description lang_en">
+        <h4>en: Trace config</h4>
+        <div>
+          Trace is used for recording variables.
+          <br/>
+          <br/>
+          See also Trace.
+          <br/>
+          <br/>
+          Size - Maximum number of trace records in circular buffer.
+          <br/>
+          <br/>
+          Axis no - If value is different than zero, trace is enabled. Value is informative and describes group of traces (Multiple traces can belong to single axis.).
+          <br/>
+          <br/>
+          Name - name of the trace as a string (informative).
+          <br/>
+          <br/>
+          Color - color of the trace as a string (informative).
+          <br/>
+          <br/>
+          Map - Map to variable in object dictionary.
+          <br/>
+          <br/>
+          Print unsigned - Use variable as unsigned.
+          <br/>
+          <br/>
+          Trigger - 0=disabled, 1=rising edge, 2=falling edge, 3=both edges.
+          <br/>
+          <br/>
+          Threshold - If integer value passes threshold (based on trigger setting), time is recorded into 'trigger time'.
+        </div>
+      </div>
+    </li>
+    <li id="CANopenSocket_2400">
+      <h3>2400 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>VISIBLE_STRING</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>-</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+      <div class="description lang_en">
+        <h4>en: Trace</h4>
+        <div>
+          Trace is used for recording variables.
+          <br/>
+          <br/>
+          See also Trace config.
+          <br/>
+          <br/>
+          Size - Number of current records in circular buffer.
+          <br/>
+          <br/>
+          Value - Latest value.
+          <br/>
+          <br/>
+          Plot - SVG path generated from the values from circular buffer. For time axis is used Time-&gt;'Epoch time offset ms'. When Plot is read, circular buffer is emptied.
+          <br/>
+          <br/>
+          Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is recorded into this variable.
+        </div>
+      </div>
+    </li>
+    <li id="CANopenSocket_6000">
       <h3>6000 - Read input 8 bit</h3>
       <table>
         <tr>
@@ -12268,7 +12735,7 @@
         <div>Digital inputs from hardware.</div>
       </div>
     </li>
-    <li id="SC243_6200">
+    <li id="CANopenSocket_6200">
       <h3>6200 - Write output 8 bit</h3>
       <table>
         <tr>
@@ -12358,7 +12825,7 @@
         <div>Digital outputs on hardware.</div>
       </div>
     </li>
-    <li id="SC243_6401">
+    <li id="CANopenSocket_6401">
       <h3>6401 - Read analogue input 16 bit</h3>
       <table>
         <tr>
@@ -12472,7 +12939,7 @@
         <div>Analogue inputs from hardware. The integer value is left adjusted.</div>
       </div>
     </li>
-    <li id="SC243_6411">
+    <li id="CANopenSocket_6411">
       <h3>6411 - Write analogue output 16 bit</h3>
       <table>
         <tr>

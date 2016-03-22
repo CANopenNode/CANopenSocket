@@ -5,18 +5,18 @@
 
 
 [FileInfo]
-FileName=SC243
-FileVersion=3.0
+FileName=CANopenSocket
+FileVersion=-
 FileRevision=0
 EDSVersion=4.0
 Description=Open Source CANopen implementation
-CreationTime=16:45:39
-CreationDate=2013-03-10
-CreatedBy=-
+CreationTime=15:55:55
+CreationDate=2016-03-22
+CreatedBy=JP
 
 
 [DeviceInfo]
-VendorName=Paternoster
+VendorName=CANopenNode
 VendorNumber=0
 ProductName=CANopenNode
 ProductNumber=0
@@ -158,7 +158,7 @@ SupportedObjects=87
 
 
 [ManufacturerObjects]
-SupportedObjects=14
+SupportedObjects=17
 1=0x2100
 2=0x2101
 3=0x2102
@@ -172,7 +172,10 @@ SupportedObjects=14
 11=0x2111
 12=0x2112
 13=0x2120
-14=0x2200
+14=0x2130
+15=0x2200
+16=0x2300
+17=0x2400
 
 [1000]
 ParameterName=Device type
@@ -5145,6 +5148,43 @@ AccessType=rw
 PDOMapping=0
 DefaultValue=0
 
+[2130]
+ParameterName=Time
+ObjectType=9
+SubNumber=4
+
+[2130sub0]
+ParameterName=max sub-index
+ObjectType=7
+DataType=0x0005
+AccessType=ro
+PDOMapping=0
+DefaultValue=3
+
+[2130sub1]
+ParameterName=String
+ObjectType=7
+DataType=0x0009
+AccessType=ro
+PDOMapping=0
+DefaultValue=-                             
+
+[2130sub2]
+ParameterName=Epoch time base ms
+ObjectType=7
+DataType=0x001B
+AccessType=ro
+PDOMapping=0
+DefaultValue=0
+
+[2130sub3]
+ParameterName=Epoch time offset ms
+ObjectType=7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
+
 [2200]
 ParameterName=CANopen Log
 ObjectType=9
@@ -5181,6 +5221,144 @@ DataType=0x0007
 AccessType=rw
 PDOMapping=0
 DefaultValue=10
+
+[2300]
+ParameterName=Trace config
+ObjectType=9
+SubNumber=9
+
+[2300sub0]
+ParameterName=max sub-index
+ObjectType=7
+DataType=0x0005
+AccessType=ro
+PDOMapping=0
+DefaultValue=8
+
+[2300sub1]
+ParameterName=Size
+ObjectType=7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+DefaultValue=1000
+
+[2300sub2]
+ParameterName=Axis no
+ObjectType=7
+DataType=0x0005
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
+
+[2300sub3]
+ParameterName=Name
+ObjectType=7
+DataType=0x0009
+AccessType=rw
+PDOMapping=0
+DefaultValue=name                          
+
+[2300sub4]
+ParameterName=Color
+ObjectType=7
+DataType=0x0009
+AccessType=rw
+PDOMapping=0
+DefaultValue=red                 
+
+[2300sub5]
+ParameterName=Map
+ObjectType=7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+DefaultValue=0x00000000
+
+[2300sub6]
+ParameterName=Print unsigned
+ObjectType=7
+DataType=0x0005
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
+
+[2300sub7]
+ParameterName=Trigger
+ObjectType=7
+DataType=0x0005
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
+
+[2300sub8]
+ParameterName=Threshold
+ObjectType=7
+DataType=0x0004
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
+
+[2400]
+ParameterName=Trace
+ObjectType=9
+SubNumber=7
+
+[2400sub0]
+ParameterName=max sub-index
+ObjectType=7
+DataType=0x0005
+AccessType=ro
+PDOMapping=0
+DefaultValue=6
+
+[2400sub1]
+ParameterName=Size
+ObjectType=7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
+
+[2400sub2]
+ParameterName=Value
+ObjectType=7
+DataType=0x0004
+AccessType=ro
+PDOMapping=0
+DefaultValue=0
+
+[2400sub3]
+ParameterName=Min
+ObjectType=7
+DataType=0x0004
+AccessType=ro
+PDOMapping=0
+DefaultValue=0
+
+[2400sub4]
+ParameterName=Max
+ObjectType=7
+DataType=0x0004
+AccessType=ro
+PDOMapping=0
+DefaultValue=0
+
+[2400sub5]
+ParameterName=Plot
+ObjectType=7
+DataType=0x0009
+AccessType=ro
+PDOMapping=0
+DefaultValue=-
+
+[2400sub6]
+ParameterName=Trigger time
+ObjectType=7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+DefaultValue=0
 
 [6000]
 ParameterName=Read input 8 bit
@@ -5521,4 +5699,5 @@ DataType=0x0003
 AccessType=rww
 PDOMapping=1
 DefaultValue=0
+
 

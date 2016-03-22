@@ -28,6 +28,7 @@
 #include "CANopen.h"
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
+#include "CO_time.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -69,7 +70,7 @@ static CO_OD_storage_t      odStor;             /* Object Dictionary storage obj
 static CO_OD_storage_t      odStorAuto;         /* Object Dictionary storage object for CO_OD_EEPROM */
 static char                *odStorFile_rom    = "od_storage";       /* Name of the file */
 static char                *odStorFile_eeprom = "od_storage_auto";  /* Name of the file */
-
+static CO_time_t            CO_time;            /* Object for current time */
 
 /* Realtime thread */
 #ifndef CO_SINGLE_THREAD
@@ -349,6 +350,10 @@ int main (int argc, char *argv[]) {
         }
 
 
+        /* Initialize time */
+        CO_time_init(&CO_time, CO->SDO[0], &OD_time.epochTimeBaseMs, &OD_time.epochTimeOffsetMs, 0x2130);
+
+
         /* start CAN */
         CO_CANsetNormalMode(CO->CANmodule[0]);
 #ifndef CO_SINGLE_THREAD
@@ -459,6 +464,9 @@ static void* rt_thread(void* arg) {
         else if(CANrx_taskTmr_process(ev.data.fd)) {
             /* code was processed in the above function. Additional code process below */
             INCREMENT_1MS(CO_timer1ms);
+
+            CO_time_process(&CO_time);
+
             /* Detect timer large overflow */
             if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0 && CO->CANmodule[0]->CANnormal) {
                 CO_errorReport(CO->em, CO_EM_ISR_TIMER_OVERFLOW, CO_EMC_SOFTWARE_INTERNAL, 0x22400000L | OD_performance[ODA_performance_timerCycleMaxTime]);
