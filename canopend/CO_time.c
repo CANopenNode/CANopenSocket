@@ -32,12 +32,15 @@
 
 /* Set epochTime base and offset */
 static void timeZero(CO_time_t *tm) {
-    struct timespec tp;
+    struct timespec tspec;
+    struct tm *tstruct;
 
-    clock_gettime(CLOCK_REALTIME, &tp);
+    clock_gettime(CLOCK_REALTIME, &tspec);
+    tstruct = localtime(&tspec.tv_sec);
 
-    *tm->epochTimeBaseMs = ((uint64_t) tp.tv_sec) * 1000;
-    *tm->epochTimeOffsetMs = tp.tv_nsec / 1000000;
+    /* epochTimeBaseMs is rounded to minutes, 0 seconds, 0 ms. */
+    *tm->epochTimeBaseMs = ((uint64_t) (tspec.tv_sec - tstruct->tm_sec)) * 1000;
+    *tm->epochTimeOffsetMs = (tspec.tv_nsec / 1000000) + (tstruct->tm_sec * 1000);
 }
 
 
