@@ -31,8 +31,9 @@
 #include <sys/socket.h>
 
 
-#define BUF_SIZE            10000
-
+#ifndef BUF_SIZE
+#define BUF_SIZE            100000
+#endif
 
 /* Helper functions */
 void errExit(char* msg) {
@@ -66,8 +67,8 @@ fprintf(stderr,
 "Command strings must start with \"[\"<sequence>\"]\" (except if from arguments):\n"
 "  - SDO upload:   [[<net>] <node>] r[ead]  <index> <subindex> [<datatype>]\n"
 "  - SDO download: [[<net>] <node>] w[rite] <index> <subindex>  <datatype> <value>\n"
-"                  (For SDO block upload or download use commands rb or wb.)\n"
 "  - Configure SDO time-out: [<net>] set sdo_timeout <value>\n"
+"  - Enable SDO block transfer: [<net>] set sdo_block <value>\n"
 "  - Set default node: [<net>] set node <value>\n"
 "\n"
 "  - Start node:                  [[<net>] <node>] start\n"
@@ -310,7 +311,7 @@ int main (int argc, char *argv[]) {
 
 static void sendCommand(int fd, char* command, size_t commandLength) {
     size_t n;
-    char buf[1000];
+    char buf[BUF_SIZE];
 
     if (write(fd, command, commandLength) != commandLength) {
         errExit("Socket write failed");

@@ -57,8 +57,8 @@
    FILE INFO:
       FileName:     CANopenSocket
       FileVersion:  -
-      CreationTime: 15:55:55
-      CreationDate: 2016-03-22
+      CreationTime: 00:15:43
+      CreationDate: 2016-03-25
       CreatedBy:    JP
 *******************************************************************************/
 
@@ -82,13 +82,13 @@
    #define CO_NO_RPDO                     16  //Associated objects from index 1400 to 160F, count = 32
    #define CO_NO_TPDO                     16  //Associated objects from index 1800 to 1A0F, count = 32
    #define CO_NO_NMT_MASTER               1   
-   #define CO_NO_TRACE                    1   //Associated objects: 2300, 2400
+   #define CO_NO_TRACE                    16  //Associated objects from index 2300 to 240F, count = 32
 
 
 /*******************************************************************************
    OBJECT DICTIONARY
 *******************************************************************************/
-   #define CO_OD_NoOfElements             107
+   #define CO_OD_NoOfElements             136
 
 
 /*******************************************************************************
@@ -171,32 +171,25 @@
                UNSIGNED32     epochTimeOffsetMs;
                }              OD_time_t;
 
-/*2200      */ typedef struct{
-               UNSIGNED8      maxSubIndex;
-               UNSIGNED32     emcySRAMSize;
-               UNSIGNED32     CANLogSize;
-               UNSIGNED32     maxDumpFiles;
-               }              OD_CANopenLog_t;
-
-/*2300[1]   */ typedef struct{
+/*2300[16]  */ typedef struct{
                UNSIGNED8      maxSubIndex;
                UNSIGNED32     size;
                UNSIGNED8      axisNo;
                VISIBLE_STRING name[30];
                VISIBLE_STRING color[20];
                UNSIGNED32     map;
-               UNSIGNED8      printUnsigned;
+               UNSIGNED8      format;
                UNSIGNED8      trigger;
                INTEGER32      threshold;
                }              OD_traceConfig_t;
 
-/*2400[1]   */ typedef struct{
+/*2400[16]  */ typedef struct{
                UNSIGNED8      maxSubIndex;
                UNSIGNED32     size;
                INTEGER32      value;
                INTEGER32      min;
                INTEGER32      max;
-               VISIBLE_STRING plot[1];
+               DOMAIN         plot;
                UNSIGNED32     triggerTime;
                }              OD_trace_t;
 
@@ -225,7 +218,7 @@ struct sCO_OD_RAM{
 /*2110      */ INTEGER32      variableInt32[16];
 /*2120      */ OD_testVar_t   testVar;
 /*2130      */ OD_time_t      time;
-/*2400[1]   */ OD_trace_t     trace[1];
+/*2400[16]  */ OD_trace_t     trace[16];
 /*6000      */ UNSIGNED8      readInput8Bit[8];
 /*6200      */ UNSIGNED8      writeOutput8Bit[8];
 /*6401      */ INTEGER16      readAnalogueInput16Bit[12];
@@ -272,8 +265,7 @@ struct sCO_OD_ROM{
 /*2101      */ UNSIGNED8      CANNodeID;
 /*2102      */ UNSIGNED16     CANBitRate;
 /*2111      */ INTEGER32      variableROMInt32[16];
-/*2200      */ OD_CANopenLog_t CANopenLog;
-/*2300[1]   */ OD_traceConfig_t traceConfig[1];
+/*2300[16]  */ OD_traceConfig_t traceConfig[16];
 
                UNSIGNED32     LastWord;
 };
@@ -440,13 +432,10 @@ extern struct sCO_OD_ROM CO_OD_ROM;
 /*2130, Data Type: OD_time_t */
       #define OD_time                                    CO_OD_RAM.time
 
-/*2200, Data Type: OD_CANopenLog_t */
-      #define OD_CANopenLog                              CO_OD_ROM.CANopenLog
-
-/*2300[1], Data Type: OD_traceConfig_t, Array[1] */
+/*2300[16], Data Type: OD_traceConfig_t, Array[16] */
       #define OD_traceConfig                             CO_OD_ROM.traceConfig
 
-/*2400[1], Data Type: OD_trace_t, Array[1] */
+/*2400[16], Data Type: OD_trace_t, Array[16] */
       #define OD_trace                                   CO_OD_RAM.trace
 
 /*6000, Data Type: UNSIGNED8, Array[8] */

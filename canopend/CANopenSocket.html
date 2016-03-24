@@ -98,11 +98,11 @@
               </tr>
               <tr>
                 <th>Creation Time</th>
-                <td>15:55:55</td>
+                <td>00:15:43</td>
               </tr>
               <tr>
                 <th>Creation Date</th>
-                <td>2016-03-22</td>
+                <td>2016-03-25</td>
               </tr>
               <tr>
                 <th>Created By</th>
@@ -366,7 +366,7 @@
               </div>
             </div>
             <div id="feature_TRACE" class="elements">
-              <h3>Trace, value = 1</h3>
+              <h3>Trace, value = 16</h3>
               <h4>Associated objects:</h4>
               <table>
                 <tr>
@@ -3142,27 +3142,6 @@
           </ul>
         </li>
         <li class="expandable">
-          <a docref="CANopenSocket_2200">2200 - CANopen Log</a>
-          <ul>
-            <li>
-              00 - max sub-index:
-              <input addr="2200000001" format="U08" pf="ro" value="3"/>
-            </li>
-            <li>
-              01 - Emcy SRAM size:
-              <input addr="2200010004" format="U32" pf="ro" value="4096"/>
-            </li>
-            <li>
-              02 - CAN log size:
-              <input addr="2200020004" format="U32" pf="rw" value="524288"/>
-            </li>
-            <li>
-              03 - Max dump files:
-              <input addr="2200030004" format="U32" pf="rw" value="10"/>
-            </li>
-          </ul>
-        </li>
-        <li class="expandable">
           <a docref="CANopenSocket_2300">2300 - Trace config</a>
           <ul>
             <li>
@@ -3190,7 +3169,7 @@
               <input addr="2300050004" format="X32" pf="rw" value="0x00000000"/>
             </li>
             <li>
-              06 - Print unsigned:
+              06 - Format:
               <input addr="2300060001" format="U08" pf="rw" value="0"/>
             </li>
             <li>
@@ -3200,6 +3179,621 @@
             <li>
               08 - Threshold:
               <input addr="2300080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2301">2301 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2301000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2301010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2301020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23010300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23010400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2301050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2301060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2301070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2301080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2302">2302 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2302000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2302010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2302020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23020300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23020400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2302050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2302060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2302070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2302080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2303">2303 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2303000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2303010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2303020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23030300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23030400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2303050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2303060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2303070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2303080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2304">2304 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2304000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2304010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2304020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23040300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23040400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2304050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2304060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2304070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2304080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2305">2305 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2305000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2305010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2305020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23050300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23050400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2305050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2305060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2305070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2305080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2306">2306 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2306000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2306010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2306020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23060300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23060400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2306050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2306060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2306070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2306080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2307">2307 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2307000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2307010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2307020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23070300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23070400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2307050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2307060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2307070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2307080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2308">2308 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2308000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2308010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2308020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23080300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23080400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2308050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2308060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2308070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2308080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2309">2309 - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2309000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2309010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="2309020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="23090300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="23090400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="2309050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="2309060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="2309070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="2309080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_230A">230A - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="230A000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="230A010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="230A020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="230A0300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="230A0400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="230A050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="230A060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="230A070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="230A080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_230B">230B - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="230B000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="230B010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="230B020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="230B0300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="230B0400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="230B050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="230B060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="230B070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="230B080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_230C">230C - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="230C000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="230C010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="230C020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="230C0300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="230C0400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="230C050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="230C060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="230C070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="230C080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_230D">230D - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="230D000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="230D010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="230D020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="230D0300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="230D0400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="230D050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="230D060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="230D070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="230D080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_230E">230E - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="230E000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="230E010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="230E020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="230E0300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="230E0400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="230E050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="230E060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="230E070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="230E080004" format="I32" pf="rw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_230F">230F - Trace config</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="230F000001" format="U08" pf="ro" value="8"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="230F010004" format="U32" pf="rw" value="1000"/>
+            </li>
+            <li>
+              02 - Axis no:
+              <input addr="230F020001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              03 - Name:
+              <input addr="230F0300" format="S" pf="rw" value="name                          "/>
+            </li>
+            <li>
+              04 - Color:
+              <input addr="230F0400" format="S" pf="rw" value="red                 "/>
+            </li>
+            <li>
+              05 - Map:
+              <input addr="230F050004" format="X32" pf="rw" value="0x00000000"/>
+            </li>
+            <li>
+              06 - Format:
+              <input addr="230F060001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              07 - Trigger:
+              <input addr="230F070001" format="U08" pf="rw" value="0"/>
+            </li>
+            <li>
+              08 - Threshold:
+              <input addr="230F080004" format="I32" pf="rw" value="0"/>
             </li>
           </ul>
         </li>
@@ -3220,19 +3814,514 @@
             </li>
             <li>
               03 - Min:
-              <input addr="2400030004" format="I32" pf="rro" value="0"/>
+              <input addr="2400030004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               04 - Max:
-              <input addr="2400040004" format="I32" pf="rro" value="0"/>
+              <input addr="2400040004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               05 - Plot:
-              <input addr="24000500" format="S" pf="rro" value="-"/>
+              <input addr="2400050000" format="Dxx" pf="rro" value="0"/>
             </li>
             <li>
               06 - Trigger time:
               <input addr="2400060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2401">2401 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2401000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2401010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2401020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2401030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2401040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2401050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2401060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2402">2402 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2402000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2402010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2402020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2402030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2402040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2402050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2402060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2403">2403 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2403000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2403010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2403020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2403030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2403040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2403050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2403060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2404">2404 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2404000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2404010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2404020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2404030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2404040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2404050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2404060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2405">2405 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2405000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2405010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2405020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2405030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2405040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2405050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2405060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2406">2406 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2406000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2406010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2406020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2406030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2406040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2406050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2406060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2407">2407 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2407000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2407010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2407020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2407030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2407040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2407050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2407060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2408">2408 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2408000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2408010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2408020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2408030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2408040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2408050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2408060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_2409">2409 - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="2409000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="2409010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="2409020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="2409030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="2409040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="2409050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="2409060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_240A">240A - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="240A000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="240A010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="240A020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="240A030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="240A040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="240A050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="240A060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_240B">240B - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="240B000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="240B010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="240B020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="240B030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="240B040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="240B050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="240B060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_240C">240C - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="240C000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="240C010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="240C020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="240C030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="240C040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="240C050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="240C060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_240D">240D - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="240D000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="240D010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="240D020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="240D030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="240D040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="240D050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="240D060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_240E">240E - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="240E000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="240E010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="240E020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="240E030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="240E040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="240E050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="240E060004" format="U32" pf="rrw" value="0"/>
+            </li>
+          </ul>
+        </li>
+        <li class="expandable">
+          <a docref="CANopenSocket_240F">240F - Trace</a>
+          <ul>
+            <li>
+              00 - max sub-index:
+              <input addr="240F000001" format="U08" pf="rro" value="6"/>
+            </li>
+            <li>
+              01 - Size:
+              <input addr="240F010004" format="U32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              02 - Value:
+              <input addr="240F020004" format="I32" pf="rro" value="0"/>
+            </li>
+            <li>
+              03 - Min:
+              <input addr="240F030004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              04 - Max:
+              <input addr="240F040004" format="I32" pf="rrw" value="0"/>
+            </li>
+            <li>
+              05 - Plot:
+              <input addr="240F050000" format="Dxx" pf="rro" value="0"/>
+            </li>
+            <li>
+              06 - Trigger time:
+              <input addr="240F060004" format="U32" pf="rrw" value="0"/>
             </li>
           </ul>
         </li>
@@ -12263,7 +13352,7 @@
           <td>Epoch time offset ms</td>
           <td>UNSIGNED32</td>
           <td>rw</td>
-          <td>no</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -12278,100 +13367,7 @@
           String - returns current time as string.
           <br/>
           <br/>
-          Epoch time ms - Milliseconds since unix epoch (1.1.1970, 00:00:00, UTC). It is calculated as base + offset. Base is calculated on startup of program and offset increments continuously since then. 'Epoch time offset ms' overflows each 49,7 days. 'Epoch time base ms' is recalculated in case of overflow or in case of write to 'Epoch time offset ms'.
-        </div>
-      </div>
-    </li>
-    <li id="CANopenSocket_2200">
-      <h3>2200 - CANopen Log</h3>
-      <table>
-        <tr>
-          <th>Object Type</th>
-          <th>Sub Number</th>
-          <th>Memory Type</th>
-        </tr>
-        <tr>
-          <td>Record</td>
-          <td>4</td>
-          <td>ROM</td>
-        </tr>
-      </table>
-      <br/>
-      <table>
-        <tr>
-          <th>Subindex</th>
-          <th>Name</th>
-          <th>Data Type</th>
-          <th>Access Type</th>
-          <th>PDO Mapping</th>
-          <th>TPDO detects COS</th>
-          <th>Default value</th>
-          <th>Actual value</th>
-        </tr>
-        <tr>
-          <td>00</td>
-          <td>max sub-index</td>
-          <td>UNSIGNED8</td>
-          <td>ro</td>
-          <td>no</td>
-          <td>no</td>
-          <td>3</td>
-          <td/>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>Emcy SRAM size</td>
-          <td>UNSIGNED32</td>
-          <td>ro</td>
-          <td>no</td>
-          <td>no</td>
-          <td>4096</td>
-          <td/>
-        </tr>
-        <tr>
-          <td>02</td>
-          <td>CAN log size</td>
-          <td>UNSIGNED32</td>
-          <td>rw</td>
-          <td>no</td>
-          <td>no</td>
-          <td>524288</td>
-          <td/>
-        </tr>
-        <tr>
-          <td>03</td>
-          <td>Max dump files</td>
-          <td>UNSIGNED32</td>
-          <td>rw</td>
-          <td>no</td>
-          <td>no</td>
-          <td>10</td>
-          <td/>
-        </tr>
-      </table>
-      <div class="description lang_en">
-        <h4>en: CANopen Log</h4>
-        <div>
-          Object controls CANopen message logging.
-          <br/>
-          <br/>
-          Emergency message logging:
-          <br/>
-          Emergency messages from CAN bus are first stored to battery powered SRAM. Contents of SRAM can be read via http://host/emcy. After midnight contents of SRAM are append to file http://host/emcy.log.
-          <br/>
-          <br/>
-          CAN message logging:
-          <br/>
-          All can messages are logged to internal circular RAM buffer. Binary buffer is accessible via http://host/CANlog. In case of fatal error, dump of buffer is automatically copied to file http://host/dump/YYMMDDHHMM.dmp.
-          <br/>
-          <br/>
-          Parameters:
-          <br/>
-          'Emergency SRAM size' - Size in bytes in SRAM for emergency messages. It limits maximum messages per day and prevents from too large log file.
-          <br/>
-          'CAN log size' - Size of CAN log buffer in bytes (two buffers of that size are generated).
-          <br/>
-          'Max dump files' - maximum number of CAN log dump files. Oldest dump files are automatically deleted. Limit prevents disk full problems.
+          Epoch time ms - Milliseconds since unix epoch (1.1.1970, 00:00:00, UTC). It is calculated as base + offset. Base is calculated on startup of program and offset increments continuously since then. 'Epoch time offset ms' overflows each 49,7 days. 'Epoch time base ms' is recalculated in case of overflow or in case of write to 'Epoch time offset ms'. It is rounded to one minute.
         </div>
       </div>
     </li>
@@ -12463,7 +13459,7 @@
         </tr>
         <tr>
           <td>06</td>
-          <td>Print unsigned</td>
+          <td>Format</td>
           <td>UNSIGNED8</td>
           <td>rw</td>
           <td>no</td>
@@ -12501,10 +13497,10 @@
           See also Trace.
           <br/>
           <br/>
-          Size - Maximum number of trace records in circular buffer.
+          Size - Maximum number of trace records in circular buffer. By reading it returns actual buffer size (If zero, malloc may had been failed at startup). By writing it sets the size, which will be valid after next reboot. (It is necessary to store parameters before (0x1010).)
           <br/>
           <br/>
-          Axis no - If value is different than zero, trace is enabled. Value is informative and describes group of traces (Multiple traces can belong to single axis.).
+          Axis no - If value is different than zero, trace is enabled. Value is informative and describes group of traces (Multiple traces can belong to single axis.). By reading it returns zero if trace is disabled or if it is not configured properly. When trace is enabled, internal buffer is cleared.
           <br/>
           <br/>
           Name - name of the trace as a string (informative).
@@ -12513,10 +13509,10 @@
           Color - color of the trace as a string (informative).
           <br/>
           <br/>
-          Map - Map to variable in object dictionary.
+          Map - Map to variable in object dictionary. Trace must be disabled, if mapping is written (Axis no set to 0).
           <br/>
           <br/>
-          Print unsigned - Use variable as unsigned.
+          Format - If first bit is zero, then value is used as signed integer otherwise as unsigned integer. If format is 0 or 1, text points are generated for time and value: "123;321\n140;345\n..." If format is 2 or 3, binary data is generated: 4-byte timestamp and 4-byte value. If format is 4 or 5, SVG path is generated: "M123,321H140V345...".
           <br/>
           <br/>
           Trigger - 0=disabled, 1=rising edge, 2=falling edge, 3=both edges.
@@ -12525,6 +13521,1776 @@
           Threshold - If integer value passes threshold (based on trigger setting), time is recorded into 'trigger time'.
         </div>
       </div>
+    </li>
+    <li id="CANopenSocket_2301">
+      <h3>2301 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2302">
+      <h3>2302 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2303">
+      <h3>2303 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2304">
+      <h3>2304 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2305">
+      <h3>2305 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2306">
+      <h3>2306 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2307">
+      <h3>2307 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2308">
+      <h3>2308 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2309">
+      <h3>2309 - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_230A">
+      <h3>230A - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_230B">
+      <h3>230B - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_230C">
+      <h3>230C - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_230D">
+      <h3>230D - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_230E">
+      <h3>230E - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_230F">
+      <h3>230F - Trace config</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>9</td>
+          <td>ROM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>8</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>1000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Axis no</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Name</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>name</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Color</td>
+          <td>VISIBLE_STRING</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>red</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Map</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0x00000000</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Format</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Trigger</td>
+          <td>UNSIGNED8</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Threshold</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
     </li>
     <li id="CANopenSocket_2400">
       <h3>2400 - Trace</h3>
@@ -12567,7 +15333,7 @@
           <td>Size</td>
           <td>UNSIGNED32</td>
           <td>rw</td>
-          <td>no</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -12577,7 +15343,7 @@
           <td>Value</td>
           <td>INTEGER32</td>
           <td>ro</td>
-          <td>no</td>
+          <td>TPDO</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -12586,8 +15352,8 @@
           <td>03</td>
           <td>Min</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>no</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -12596,8 +15362,8 @@
           <td>04</td>
           <td>Max</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>no</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -12605,11 +15371,11 @@
         <tr>
           <td>05</td>
           <td>Plot</td>
-          <td>VISIBLE_STRING</td>
+          <td>DOMAIN</td>
           <td>ro</td>
           <td>no</td>
           <td>no</td>
-          <td>-</td>
+          <td>0</td>
           <td/>
         </tr>
         <tr>
@@ -12617,7 +15383,7 @@
           <td>Trigger time</td>
           <td>UNSIGNED32</td>
           <td>rw</td>
-          <td>no</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -12632,18 +15398,1491 @@
           See also Trace config.
           <br/>
           <br/>
-          Size - Number of current records in circular buffer.
+          Size - Number of current records in buffer.
           <br/>
           <br/>
           Value - Latest value.
           <br/>
           <br/>
-          Plot - SVG path generated from the values from circular buffer. For time axis is used Time-&gt;'Epoch time offset ms'. When Plot is read, circular buffer is emptied.
+          Min, Max - Minimum and maximum value.
+          <br/>
+          <br/>
+          Plot - SVG path generated from the values from circular buffer. For time axis is used Time-&gt;'Epoch time offset ms'. When Plot is read, internal buffer is emptied.
           <br/>
           <br/>
           Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is recorded into this variable.
         </div>
       </div>
+    </li>
+    <li id="CANopenSocket_2401">
+      <h3>2401 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2402">
+      <h3>2402 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2403">
+      <h3>2403 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2404">
+      <h3>2404 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2405">
+      <h3>2405 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2406">
+      <h3>2406 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2407">
+      <h3>2407 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2408">
+      <h3>2408 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_2409">
+      <h3>2409 - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_240A">
+      <h3>240A - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_240B">
+      <h3>240B - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_240C">
+      <h3>240C - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_240D">
+      <h3>240D - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_240E">
+      <h3>240E - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
+    </li>
+    <li id="CANopenSocket_240F">
+      <h3>240F - Trace</h3>
+      <table>
+        <tr>
+          <th>Object Type</th>
+          <th>Sub Number</th>
+          <th>Memory Type</th>
+        </tr>
+        <tr>
+          <td>Record</td>
+          <td>7</td>
+          <td>RAM</td>
+        </tr>
+      </table>
+      <br/>
+      <table>
+        <tr>
+          <th>Subindex</th>
+          <th>Name</th>
+          <th>Data Type</th>
+          <th>Access Type</th>
+          <th>PDO Mapping</th>
+          <th>TPDO detects COS</th>
+          <th>Default value</th>
+          <th>Actual value</th>
+        </tr>
+        <tr>
+          <td>00</td>
+          <td>max sub-index</td>
+          <td>UNSIGNED8</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>6</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>Size</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Value</td>
+          <td>INTEGER32</td>
+          <td>ro</td>
+          <td>TPDO</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Min</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Max</td>
+          <td>INTEGER32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Plot</td>
+          <td>DOMAIN</td>
+          <td>ro</td>
+          <td>no</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>Trigger time</td>
+          <td>UNSIGNED32</td>
+          <td>rw</td>
+          <td>optional</td>
+          <td>no</td>
+          <td>0</td>
+          <td/>
+        </tr>
+      </table>
     </li>
     <li id="CANopenSocket_6000">
       <h3>6000 - Read input 8 bit</h3>

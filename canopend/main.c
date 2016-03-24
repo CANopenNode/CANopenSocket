@@ -286,6 +286,10 @@ int main (int argc, char *argv[]) {
         CO_SYNC_initCallback(CO->SYNC, CANrx_lockCbSync);
 
 
+        /* Initialize time */
+        CO_time_init(&CO_time, CO->SDO[0], &OD_time.epochTimeBaseMs, &OD_time.epochTimeOffsetMs, 0x2130);
+
+
         /* First time only initialization. */
         if(firstRun) {
             firstRun = false;
@@ -348,10 +352,6 @@ int main (int argc, char *argv[]) {
             }
 #endif
         }
-
-
-        /* Initialize time */
-        CO_time_init(&CO_time, CO->SDO[0], &OD_time.epochTimeBaseMs, &OD_time.epochTimeOffsetMs, 0x2130);
 
 
         /* start CAN */
@@ -462,10 +462,15 @@ static void* rt_thread(void* arg) {
         }
 
         else if(CANrx_taskTmr_process(ev.data.fd)) {
+            int i;
+
             /* code was processed in the above function. Additional code process below */
             INCREMENT_1MS(CO_timer1ms);
 
             CO_time_process(&CO_time);
+            for(i=0; i<CO_NO_TRACE; i++) {
+                CO_trace_process(CO->trace[i], *CO_time.epochTimeOffsetMs);
+            }
 
             /* Detect timer large overflow */
             if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0 && CO->CANmodule[0]->CANnormal) {

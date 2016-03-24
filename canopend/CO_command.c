@@ -43,7 +43,7 @@
 
 /* Maximum size of Object Dictionary variable transmitted via SDO. */
 #ifndef CO_COMMAND_SDO_BUFFER_SIZE
-#define CO_COMMAND_SDO_BUFFER_SIZE     10000
+#define CO_COMMAND_SDO_BUFFER_SIZE     100000
 #endif
 
 #define STRING_BUFFER_SIZE  (CO_COMMAND_SDO_BUFFER_SIZE * 4 + 100)
@@ -62,6 +62,7 @@ static int                  fdSocket;
 static uint16_t             comm_net = 1;   /* default CAN net number */
 static uint8_t              comm_node_default = 0xFF;  /* CANopen Node ID number is undefined at startup. */
 static uint16_t             SDOtimeoutTime = 500; /* Timeout time for SDO transfer in milliseconds, if no response */
+static uint8_t              blockTransferEnable = 0; /* SDO block transfer enabled? */
 static volatile int         endProgram = 0;
 
 
@@ -264,8 +265,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
     if(err == 0) {
 
         /* Upload SDO command - 'r[ead] <index> <subindex> <datatype>' */
-        if(strcmp(token, "r") == 0 || strcmp(token, "read") == 0 || strcmp(token, "rb") == 0) {
-            uint8_t blockTransferEnable = 0;
+        if(strcmp(token, "r") == 0 || strcmp(token, "read") == 0) {
             uint16_t idx;
             uint8_t subidx;
             const dataType_t *datatype; /* optional token */
@@ -275,10 +275,6 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
             uint8_t dataRx[CO_COMMAND_SDO_BUFFER_SIZE]; /* SDO receive buffer */
             uint32_t dataRxLen;  /* Length of received data */
-
-            if(strcmp(token, "rb") == 0) {
-                blockTransferEnable = 1;
-            }
 
             token = getTok(NULL, spaceDelim, &err);
             idx = (uint16_t)getU32(token, 0, 0xFFFF, &err);
@@ -344,8 +340,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
         }
 
         /* Download SDO command - w[rite] <index> <subindex> <datatype> <value> */
-        else if(strcmp(token, "w") == 0 || strcmp(token, "write") == 0 || strcmp(token, "wb") == 0) {
-            uint8_t blockTransferEnable = 0;
+        else if(strcmp(token, "w") == 0 || strcmp(token, "write") == 0) {
             uint16_t idx;
             uint8_t subidx;
             const dataType_t *datatype;
@@ -353,10 +348,6 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
             uint8_t dataTx[CO_COMMAND_SDO_BUFFER_SIZE]; /* SDO transmit buffer */
             uint32_t dataTxLen = 0;  /* Length of data to transmit. */
-
-            if(strcmp(token, "wb") == 0) {
-                blockTransferEnable = 1;
-            }
 
             token = getTok(NULL, spaceDelim, &err);
             idx = (uint16_t)getU32(token, 0, 0xFFFF, &err);
@@ -507,6 +498,22 @@ static void command_process(int fd, char* command, size_t commandLength) {
                     /* Write to variable */
                     if(err == 0) {
                         SDOtimeoutTime = tmout;
+                        respLen = sprintf(resp, "[%d] OK", sequence);
+                    }
+                }
+
+                /* sdo_block <value> */
+                if(strcmp(token, "sdo_block") == 0) {
+                    uint8_t blk;
+
+                    token = getTok(NULL, spaceDelim, &err);
+                    blk = (uint8_t)getU32(token, 0, 1, &err);
+
+                    lastTok(NULL, spaceDelim, &err);
+
+                    /* Write to variable */
+                    if(err == 0) {
+                        blockTransferEnable = blk;
                         respLen = sprintf(resp, "[%d] OK", sequence);
                     }
                 }
