@@ -468,7 +468,7 @@ static void* rt_thread(void* arg) {
             INCREMENT_1MS(CO_timer1ms);
 
             CO_time_process(&CO_time);
-            for(i=0; i<CO_NO_TRACE; i++) {
+            for(i=0; i<OD_traceEnable && i<CO_NO_TRACE; i++) {
                 CO_trace_process(CO->trace[i], *CO_time.epochTimeOffsetMs);
             }
 

@@ -59,8 +59,9 @@ Permissible value for TPDO is 0 to 16. For larger value Max Index must be change
     <feature name="Trace" value="16">
       <label lang="en">Trace</label>
       <description lang="en">Trace is used for recording variables.</description>
-      <associatedObject index="2300" indexMax="231F" indexStep="1"/>
-      <associatedObject index="2400" indexMax="241F" indexStep="1"/>
+      <associatedObject index="2301" indexMax="2320" indexStep="1"/>
+      <associatedObject index="2400"/>
+      <associatedObject index="2401" indexMax="2420" indexStep="1"/>
     </feature>
   </features>
   <CANopenObjectList>
@@ -1263,7 +1264,7 @@ Epoch time ms - Milliseconds since unix epoch (1.1.1970, 00:00:00, UTC). It is c
       <CANopenSubObject subIndex="02" name="Epoch time base ms" objectType="7" dataType="1B" accessType="ro" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="03" name="Epoch time offset ms" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
     </CANopenObject>
-    <CANopenObject index="2300" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+    <CANopenObject index="2301" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
       <label lang="en">Trace config</label>
       <description lang="en">Trace is used for recording variables.
 
@@ -1287,18 +1288,7 @@ Threshold - If integer value passes threshold (based on trigger setting), time i
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
       <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
       <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
-      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
-      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
-      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
-      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
-      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
-      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
-    </CANopenObject>
-    <CANopenObject index="2301" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
-      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
-      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
-      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
-      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="Trace1                        "/>
       <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
       <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
       <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -1309,8 +1299,8 @@ Threshold - If integer value passes threshold (based on trigger setting), time i
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
       <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
       <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
-      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
-      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="Trace2                        "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="green               "/>
       <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
       <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -1459,7 +1449,22 @@ Threshold - If integer value passes threshold (based on trigger setting), time i
       <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
     </CANopenObject>
-    <CANopenObject index="2400" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+    <CANopenObject index="2310" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2400" name="Trace enable" objectType="7" memoryType="RAM" dataType="05" accessType="rw" PDOmapping="optional" defaultValue="0">
+      <label lang="en">Trace enable</label>
+      <description lang="en">This object controls, how many trace objects (beginning from index 0x2401) are enabled. If zero, all traces are disabled.</description>
+    </CANopenObject>
+    <CANopenObject index="2401" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
       <label lang="en">Trace</label>
       <description lang="en">Trace is used for recording variables.
 
@@ -1474,15 +1479,6 @@ Min, Max - Minimum and maximum value.
 Plot - SVG path generated from the values from circular buffer. For time axis is used Time-&gt;'Epoch time offset ms'. When Plot is read, internal buffer is emptied.
 
 Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is recorded into this variable.</description>
-      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
-      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="ro" PDOmapping="TPDO" defaultValue="0"/>
-      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
-      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
-      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
-      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
-    </CANopenObject>
-    <CANopenObject index="2401" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
       <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
       <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="ro" PDOmapping="TPDO" defaultValue="0"/>
@@ -1617,31 +1613,40 @@ Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is
       <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
     </CANopenObject>
+    <CANopenObject index="2410" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="ro" PDOmapping="TPDO" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
     <CANopenObject index="6000" name="Read input 8 bit" objectType="8" subNumber="9" memoryType="RAM" dataType="05" accessType="ro" PDOmapping="optional" TPDOdetectCOS="true">
       <label lang="en">Read input 8 bit</label>
       <description lang="en">Digital inputs from hardware.</description>
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
-      <CANopenSubObject subIndex="01" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="02" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="03" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="04" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="05" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="06" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="07" name="Input" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="08" name="Input" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="01" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="02" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="03" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="04" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="05" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="06" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="07" name="Input" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="08" name="Input" objectType="7" defaultValue="0x00"/>
     </CANopenObject>
     <CANopenObject index="6200" name="Write output 8 bit" objectType="8" subNumber="9" memoryType="RAM" dataType="05" accessType="rw" PDOmapping="optional">
       <label lang="en">Write output 8 bit</label>
       <description lang="en">Digital outputs on hardware.</description>
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
-      <CANopenSubObject subIndex="01" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="02" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="03" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="04" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="05" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="06" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="07" name="Output" objectType="7" defaultValue="0"/>
-      <CANopenSubObject subIndex="08" name="Output" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="01" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="02" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="03" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="04" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="05" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="06" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="07" name="Output" objectType="7" defaultValue="0x00"/>
+      <CANopenSubObject subIndex="08" name="Output" objectType="7" defaultValue="0x00"/>
     </CANopenObject>
     <CANopenObject index="6401" name="Read analogue input 16 bit" objectType="8" subNumber="13" memoryType="RAM" dataType="03" accessType="ro" PDOmapping="optional">
       <label lang="en">Read analogue input 16 bit</label>
@@ -1675,7 +1680,7 @@ Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is
     </CANopenObject>
   </CANopenObjectList>
   <other>
-    <file fileName="CANopenSocket" fileCreator="JP" fileCreationDate="2016-03-25" fileCreationTime="00:15:43" fileVersion="-"/>
+    <file fileName="CANopenSocket" fileCreator="JP" fileCreationDate="2016-03-25" fileCreationTime="17:29:46" fileVersion="-"/>
     <DeviceIdentity>
       <vendorName>CANopenNode</vendorName>
       <productName>CANopenNode</productName>
