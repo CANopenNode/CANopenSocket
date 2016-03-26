@@ -4,6 +4,7 @@
 STACKDRV_SRC =  ../CANopenNode/stack/socketCAN
 STACK_SRC =     ../CANopenNode/stack
 CANOPEN_SRC =   ../CANopenNode
+CANOPEND_SRC =  ./lib
 APPL_SRC =      .
 
 
@@ -13,28 +14,30 @@ LINK_TARGET  =  canopend
 INCLUDE_DIRS = -I$(STACKDRV_SRC) \
                -I$(STACK_SRC)    \
                -I$(CANOPEN_SRC)  \
+               -I$(CANOPEND_SRC) \
                -I$(APPL_SRC)
 
 
-SOURCES =       $(STACKDRV_SRC)/CO_driver.c     \
-                $(STACKDRV_SRC)/CO_OD_storage.c \
-                $(STACKDRV_SRC)/CO_Linux_tasks.c\
-                $(STACK_SRC)/crc16-ccitt.c      \
-                $(STACK_SRC)/CO_SDO.c           \
-                $(STACK_SRC)/CO_Emergency.c     \
-                $(STACK_SRC)/CO_NMT_Heartbeat.c \
-                $(STACK_SRC)/CO_SYNC.c          \
-                $(STACK_SRC)/CO_PDO.c           \
-                $(STACK_SRC)/CO_HBconsumer.c    \
-                $(STACK_SRC)/CO_SDOmaster.c     \
-                $(STACK_SRC)/CO_trace.c         \
-                $(CANOPEN_SRC)/CANopen.c        \
-                $(APPL_SRC)/CO_OD.c             \
-                $(APPL_SRC)/CO_command.c        \
-                $(APPL_SRC)/CO_comm_helpers.c   \
-                $(APPL_SRC)/CO_master.c         \
-                $(APPL_SRC)/CO_time.c           \
-                $(APPL_SRC)/main.c
+SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
+                $(STACKDRV_SRC)/CO_OD_storage.c     \
+                $(STACKDRV_SRC)/CO_Linux_tasks.c    \
+                $(STACK_SRC)/crc16-ccitt.c          \
+                $(STACK_SRC)/CO_SDO.c               \
+                $(STACK_SRC)/CO_Emergency.c         \
+                $(STACK_SRC)/CO_NMT_Heartbeat.c     \
+                $(STACK_SRC)/CO_SYNC.c              \
+                $(STACK_SRC)/CO_PDO.c               \
+                $(STACK_SRC)/CO_HBconsumer.c        \
+                $(STACK_SRC)/CO_SDOmaster.c         \
+                $(STACK_SRC)/CO_trace.c             \
+                $(CANOPEN_SRC)/CANopen.c            \
+                $(CANOPEND_SRC)/CO_command.c        \
+                $(CANOPEND_SRC)/CO_comm_helpers.c   \
+                $(CANOPEND_SRC)/CO_master.c         \
+                $(CANOPEND_SRC)/CO_time.c           \
+                $(CANOPEND_SRC)/main.c              \
+                $(APPL_SRC)/CO_OD.c                 \
+                $(APPL_SRC)/application.c
 
 
 # canopend is three-threaded application: nonblocking mainline, nonblocking

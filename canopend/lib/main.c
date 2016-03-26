@@ -29,6 +29,7 @@
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
 #include "CO_time.h"
+#include "application.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -351,7 +352,14 @@ int main (int argc, char *argv[]) {
                 printf("%s - Command interface on socket '%s' started ...\n", argv[0], CO_command_socketPath);
             }
 #endif
+
+            /* Execute optional additional application code */
+            app_programStart();
         }
+
+
+        /* Execute optional additional application code */
+        app_communicationReset();
 
 
         /* start CAN */
@@ -391,7 +399,17 @@ int main (int argc, char *argv[]) {
 #endif
 
             else if(taskMain_process(ev.data.fd, &reset, CO_timer1ms)) {
+                uint16_t timer1msDiff;
+                static uint16_t tmr1msPrev = 0;
+
+                /* Calculate time difference */
+                timer1msDiff = CO_timer1ms - tmr1msPrev;
+                tmr1msPrev = CO_timer1ms;
+
                 /* code was processed in the above function. Additional code process below */
+
+                /* Execute optional additional application code */
+                app_programAsync(timer1msDiff);
 
                 CO_OD_storage_autoSave(&odStorAuto, CO_timer1ms, 60000);
             }
@@ -420,6 +438,9 @@ int main (int argc, char *argv[]) {
         CO_errExit("Program end - pthread_join failed");
     }
 #endif
+
+    /* Execute optional additional application code */
+    app_programEnd();
 
     /* Store CO_OD_EEPROM */
     CO_OD_storage_autoSave(&odStorAuto, 0, 0);
@@ -467,10 +488,16 @@ static void* rt_thread(void* arg) {
             /* code was processed in the above function. Additional code process below */
             INCREMENT_1MS(CO_timer1ms);
 
+            /* Monitor variables with trace objects */
             CO_time_process(&CO_time);
+#if CO_NO_TRACE > 0
             for(i=0; i<OD_traceEnable && i<CO_NO_TRACE; i++) {
                 CO_trace_process(CO->trace[i], *CO_time.epochTimeOffsetMs);
             }
+#endif
+
+            /* Execute optional additional application code */
+            app_program1ms();
 
             /* Detect timer large overflow */
             if(OD_performance[ODA_performance_timerCycleMaxTime] > TMR_TASK_OVERFLOW_US && rtPriority > 0 && CO->CANmodule[0]->CANnormal) {
