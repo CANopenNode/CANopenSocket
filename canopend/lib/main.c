@@ -51,7 +51,7 @@
 #define NSEC_PER_SEC            (1000000000)    /* The number of nanoseconds per second. */
 #define NSEC_PER_MSEC           (1000000)       /* The number of nanoseconds per millisecond. */
 #define TMR_TASK_INTERVAL_NS    (1000000)       /* Interval of taskTmr in nanoseconds */
-#define TMR_TASK_OVERFLOW_US    (3000)          /* Overflow detect limit for taskTmr in microseconds */
+#define TMR_TASK_OVERFLOW_US    (5000)          /* Overflow detect limit for taskTmr in microseconds */
 #define INCREMENT_1MS(var)      (var++)         /* Increment 1ms variable in taskTmr */
 
 
@@ -97,6 +97,7 @@ void CO_errExit(char* msg) {
 /* send CANopen generic emergency message */
 void CO_error(const uint32_t info) {
     CO_errorReport(CO->em, CO_EM_GENERIC_SOFTWARE_ERROR, CO_EMC_SOFTWARE_INTERNAL, info);
+    fprintf(stderr, "canopend generic error: 0x%X\n", info);
 }
 
 
@@ -383,7 +384,7 @@ int main (int argc, char *argv[]) {
 
             if(ready != 1) {
                 if(errno != EINTR) {
-                    CO_error(0x11100000L | errno);
+                    CO_error(0x11100000L + errno);
                 }
             }
 
@@ -478,7 +479,7 @@ static void* rt_thread(void* arg) {
 
         if(ready != 1) {
             if(errno != EINTR) {
-                CO_error(0x12100000L | errno);
+                CO_error(0x12100000L + errno);
             }
         }
 

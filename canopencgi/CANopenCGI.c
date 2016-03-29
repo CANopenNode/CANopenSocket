@@ -36,6 +36,11 @@
 #include <sys/socket.h>
 
 
+#ifndef BUF_SIZE
+#define BUF_SIZE            100000
+#endif
+
+
 /* Helper functions */
 static void errExitErrno(char* msg) {
     printf("%s: %s\n", msg, strerror(errno));
@@ -231,12 +236,12 @@ int main (int argc, char *argv[], char *env[]) {
     /* get query string */
     queryString = getenv("QUERY_STRING"); /* HTTP GET method. */
     if(queryString != NULL && strlen(queryString) == 0) {
-        queryString = malloc(10000);
+        queryString = malloc(BUF_SIZE);
         if(queryString == NULL) {
             errExitErrno("queryString can't be allocated.");
         }
         queryStringAllocated = 1;
-        fgets(queryString, 10000, stdin); /* HTTP POST method. */
+        fgets(queryString, BUF_SIZE, stdin); /* HTTP POST method. */
     }
     if(queryString == NULL && argc >= 2) {
         queryString = argv[1];  /* If no query string, try first argument. */
@@ -320,7 +325,7 @@ static void sendCommand(int fd, int sequence, char* command) {
     char dataType[4];
     char *value = "";
 
-    char buf[1000];
+    char buf[BUF_SIZE];
 
     /* Parse command. It is at least 8 characters long. */
     err = 0;

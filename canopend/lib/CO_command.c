@@ -165,7 +165,7 @@ static void* command_thread(void* arg) {
         }
 
         if(n == -1){
-            CO_error(0x15800000L);
+            CO_error(0x15800000L + errno);
         }
 
         /* close current communication */
