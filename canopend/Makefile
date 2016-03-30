@@ -4,18 +4,20 @@
 STACKDRV_SRC =  ../CANopenNode/stack/socketCAN
 STACK_SRC =     ../CANopenNode/stack
 CANOPEN_SRC =   ../CANopenNode
-CANOPEND_SRC =  ./lib
-APPL_SRC =      .
+CANOPEND_SRC =  ./src
+OBJ_DICT_SRC =  ./objDict
+APP_SRC =       ./app
 
 
-LINK_TARGET  =  canopend
+LINK_TARGET  =  $(APP_SRC)/canopend
 
 
 INCLUDE_DIRS = -I$(STACKDRV_SRC) \
                -I$(STACK_SRC)    \
                -I$(CANOPEN_SRC)  \
                -I$(CANOPEND_SRC) \
-               -I$(APPL_SRC)
+               -I$(OBJ_DICT_SRC) \
+               -I$(APP_SRC)
 
 
 SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
@@ -36,8 +38,8 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
                 $(CANOPEND_SRC)/CO_master.c         \
                 $(CANOPEND_SRC)/CO_time.c           \
                 $(CANOPEND_SRC)/main.c              \
-                $(APPL_SRC)/CO_OD.c                 \
-                $(APPL_SRC)/application.c
+                $(OBJ_DICT_SRC)/CO_OD.c             \
+                $(APP_SRC)/application.c
 
 
 # canopend is three-threaded application: nonblocking mainline, nonblocking

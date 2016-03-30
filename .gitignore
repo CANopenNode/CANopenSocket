@@ -1,4 +1,4 @@
-/canopend/canopend
+/canopend/app/canopend
 /canopencomm/canopencomm
 /canopencgi/canopen.cgi
 *.o

@@ -31,7 +31,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/CANopenNode/stack/socketCAN}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/CANopenNode/stack}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/CANopenNode}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/objDict}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/app}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1922337884" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -86,7 +88,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/CANopenNode/stack/socketCAN}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/CANopenNode/stack}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/CANopenNode}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/objDict}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/canopend/app}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.187721026" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -125,5 +129,13 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/canopend"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/canopend"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
