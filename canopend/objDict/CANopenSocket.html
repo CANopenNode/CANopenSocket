@@ -98,11 +98,11 @@
               </tr>
               <tr>
                 <th>Creation Time</th>
-                <td>17:29:46</td>
+                <td>23:56:36</td>
               </tr>
               <tr>
                 <th>Creation Date</th>
-                <td>2016-03-25</td>
+                <td>2016-04-01</td>
               </tr>
               <tr>
                 <th>Created By</th>
@@ -3821,7 +3821,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2401020004" format="I32" pf="rro" value="0"/>
+              <input addr="2401020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -3854,7 +3854,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2402020004" format="I32" pf="rro" value="0"/>
+              <input addr="2402020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -3887,7 +3887,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2403020004" format="I32" pf="rro" value="0"/>
+              <input addr="2403020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -3920,7 +3920,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2404020004" format="I32" pf="rro" value="0"/>
+              <input addr="2404020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -3953,7 +3953,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2405020004" format="I32" pf="rro" value="0"/>
+              <input addr="2405020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -3986,7 +3986,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2406020004" format="I32" pf="rro" value="0"/>
+              <input addr="2406020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4019,7 +4019,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2407020004" format="I32" pf="rro" value="0"/>
+              <input addr="2407020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4052,7 +4052,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2408020004" format="I32" pf="rro" value="0"/>
+              <input addr="2408020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4085,7 +4085,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2409020004" format="I32" pf="rro" value="0"/>
+              <input addr="2409020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4118,7 +4118,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="240A020004" format="I32" pf="rro" value="0"/>
+              <input addr="240A020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4151,7 +4151,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="240B020004" format="I32" pf="rro" value="0"/>
+              <input addr="240B020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4184,7 +4184,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="240C020004" format="I32" pf="rro" value="0"/>
+              <input addr="240C020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4217,7 +4217,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="240D020004" format="I32" pf="rro" value="0"/>
+              <input addr="240D020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4250,7 +4250,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="240E020004" format="I32" pf="rro" value="0"/>
+              <input addr="240E020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4283,7 +4283,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="240F020004" format="I32" pf="rro" value="0"/>
+              <input addr="240F020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -4316,7 +4316,7 @@
             </li>
             <li>
               02 - Value:
-              <input addr="2410020004" format="I32" pf="rro" value="0"/>
+              <input addr="2410020004" format="I32" pf="rrw" value="0"/>
             </li>
             <li>
               03 - Min:
@@ -13520,7 +13520,7 @@
           Color - color of the trace as a string (informative).
           <br/>
           <br/>
-          Map - Map to variable in object dictionary. Trace must be disabled, if mapping is written (Axis no set to 0).
+          Map - Map to variable in object dictionary, similar as PDO map(two bytes of index, one byte of subindex and 1 byte of bitlength. It's value will be copied to trace.value in case index and subindex are correct. If map index and subindex is zero, RPDO may be mapped to trace.value, for example. Valid values of map.bitlength is 08, 10 or 20 or 00, which indicates 8-bit, 16bit, 32-bit or default-size variable. Trace must be disabled, if mapping is written (Axis no set to 0).
           <br/>
           <br/>
           Format - If first bit is zero, then value is used as signed integer otherwise as unsigned integer. If format is 0 or 1, text points are generated for time and value: "123;321\n140;345\n..." If format is 2 or 3, binary data is generated: 4-byte timestamp and 4-byte value. If format is 4 or 5, SVG path is generated: "M123,321H140V345...".
@@ -15382,8 +15382,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -15441,7 +15441,7 @@
           Size - Number of current records in buffer.
           <br/>
           <br/>
-          Value - Latest value.
+          Value - Latest value. If traceConfig.map (index and subindex) is valid, then mapped variable will be copied here.
           <br/>
           <br/>
           Min, Max - Minimum and maximum value.
@@ -15504,8 +15504,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -15602,8 +15602,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -15700,8 +15700,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -15798,8 +15798,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -15896,8 +15896,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -15994,8 +15994,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16092,8 +16092,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16190,8 +16190,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16288,8 +16288,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16386,8 +16386,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16484,8 +16484,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16582,8 +16582,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16680,8 +16680,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16778,8 +16778,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>
@@ -16876,8 +16876,8 @@
           <td>02</td>
           <td>Value</td>
           <td>INTEGER32</td>
-          <td>ro</td>
-          <td>TPDO</td>
+          <td>rw</td>
+          <td>optional</td>
           <td>no</td>
           <td>0</td>
           <td/>

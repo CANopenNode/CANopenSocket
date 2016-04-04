@@ -10,8 +10,8 @@ FileVersion=-
 FileRevision=0
 EDSVersion=4.0
 Description=Open Source CANopen implementation
-CreationTime=17:29:46
-CreationDate=2016-03-25
+CreationTime=23:56:36
+CreationDate=2016-04-01
 CreatedBy=JP
 
 
@@ -6480,7 +6480,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6541,7 +6541,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6602,7 +6602,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6663,7 +6663,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6724,7 +6724,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6785,7 +6785,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6846,7 +6846,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6907,7 +6907,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -6968,7 +6968,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7029,7 +7029,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7090,7 +7090,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7151,7 +7151,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7212,7 +7212,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7273,7 +7273,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7334,7 +7334,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 
@@ -7395,7 +7395,7 @@ DefaultValue=0
 ParameterName=Value
 ObjectType=7
 DataType=0x0004
-AccessType=ro
+AccessType=rww
 PDOMapping=1
 DefaultValue=0
 

@@ -909,7 +909,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2401*/ const CO_OD_entryRecord_t OD_record2401[7] = {
            {(void*)&CO_OD_RAM.trace[0].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[0].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[0].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[0].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[0].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[0].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -917,7 +917,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2402*/ const CO_OD_entryRecord_t OD_record2402[7] = {
            {(void*)&CO_OD_RAM.trace[1].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[1].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[1].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[1].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[1].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[1].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -925,7 +925,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2403*/ const CO_OD_entryRecord_t OD_record2403[7] = {
            {(void*)&CO_OD_RAM.trace[2].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[2].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[2].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[2].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[2].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[2].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -933,7 +933,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2404*/ const CO_OD_entryRecord_t OD_record2404[7] = {
            {(void*)&CO_OD_RAM.trace[3].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[3].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[3].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[3].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[3].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[3].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -941,7 +941,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2405*/ const CO_OD_entryRecord_t OD_record2405[7] = {
            {(void*)&CO_OD_RAM.trace[4].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[4].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[4].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[4].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[4].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[4].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -949,7 +949,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2406*/ const CO_OD_entryRecord_t OD_record2406[7] = {
            {(void*)&CO_OD_RAM.trace[5].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[5].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[5].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[5].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[5].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[5].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -957,7 +957,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2407*/ const CO_OD_entryRecord_t OD_record2407[7] = {
            {(void*)&CO_OD_RAM.trace[6].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[6].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[6].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[6].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[6].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[6].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -965,7 +965,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2408*/ const CO_OD_entryRecord_t OD_record2408[7] = {
            {(void*)&CO_OD_RAM.trace[7].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[7].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[7].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[7].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[7].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[7].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -973,7 +973,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2409*/ const CO_OD_entryRecord_t OD_record2409[7] = {
            {(void*)&CO_OD_RAM.trace[8].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[8].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[8].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[8].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[8].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[8].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -981,7 +981,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x240A*/ const CO_OD_entryRecord_t OD_record240A[7] = {
            {(void*)&CO_OD_RAM.trace[9].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[9].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[9].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[9].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[9].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[9].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -989,7 +989,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x240B*/ const CO_OD_entryRecord_t OD_record240B[7] = {
            {(void*)&CO_OD_RAM.trace[10].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[10].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[10].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[10].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[10].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[10].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -997,7 +997,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x240C*/ const CO_OD_entryRecord_t OD_record240C[7] = {
            {(void*)&CO_OD_RAM.trace[11].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[11].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[11].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[11].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[11].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[11].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -1005,7 +1005,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x240D*/ const CO_OD_entryRecord_t OD_record240D[7] = {
            {(void*)&CO_OD_RAM.trace[12].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[12].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[12].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[12].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[12].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[12].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -1013,7 +1013,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x240E*/ const CO_OD_entryRecord_t OD_record240E[7] = {
            {(void*)&CO_OD_RAM.trace[13].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[13].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[13].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[13].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[13].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[13].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -1021,7 +1021,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x240F*/ const CO_OD_entryRecord_t OD_record240F[7] = {
            {(void*)&CO_OD_RAM.trace[14].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[14].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[14].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[14].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[14].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[14].max, 0xBE,  4},
            {0, 0x06,  0},
@@ -1029,7 +1029,7 @@ struct sCO_OD_EEPROM CO_OD_EEPROM = {
 /*0x2410*/ const CO_OD_entryRecord_t OD_record2410[7] = {
            {(void*)&CO_OD_RAM.trace[15].maxSubIndex, 0x06,  1},
            {(void*)&CO_OD_RAM.trace[15].size, 0xBE,  4},
-           {(void*)&CO_OD_RAM.trace[15].value, 0xA6,  4},
+           {(void*)&CO_OD_RAM.trace[15].value, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[15].min, 0xBE,  4},
            {(void*)&CO_OD_RAM.trace[15].max, 0xBE,  4},
            {0, 0x06,  0},
