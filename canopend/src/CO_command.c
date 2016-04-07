@@ -503,7 +503,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 }
 
                 /* sdo_block <value> */
-                if(strcmp(token, "sdo_block") == 0) {
+                else if(strcmp(token, "sdo_block") == 0) {
                     uint8_t blk;
 
                     token = getTok(NULL, spaceDelim, &err);
