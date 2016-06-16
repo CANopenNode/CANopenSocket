@@ -136,7 +136,8 @@ there are missing non-default storage files. Add them and run it again.
 Now there is operational state (0x05) and there shows one PDO on CAN
 address 0x184. To learn more about PDOs, how to configure communication
 and mapping parameters and how to use them see other sources of CANopen
-documentation.
+documentation (For example article of PDO re-mapping procedure in [CAN
+newsletter magazine, June 2016](http://can-newsletter.org/engineering/engineering-miscellaneous/160601_can-newsletter-magazine-june-2016) ).
 
 Start also second instance of *canopend* (master on nodeID=3) in the same
 window (*canopend terminal*). Use default od_storage files and default
