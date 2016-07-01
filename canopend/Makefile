@@ -43,17 +43,17 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
 
 
 # canopend is three-threaded application: nonblocking mainline, nonblocking
-# rt-thread and blocking command interface thread. 
+# rt-thread and blocking command interface thread.
 # If there is a need to compile canopend as a single-threaded application, then:
 #   - Command interface is not possible, so remove CO_command.c,
 #     CO_comm_helpers.c, CO_master.c (and CO_SDOmaster.c) from SOURCES.
 #   - Add flag -DCO_SINGLE_THREAD to the CFLAGS.
 #   - Remove flag -pthread from LDFLAGS.
-# Flag -lrt in LDFLAGS is necessary only with older kernels. 
+# Flag -lrt in LDFLAGS is necessary only with older kernels.
 
 
 OBJS = $(SOURCES:%.c=%.o)
-CC = gcc
+CC ?= gcc
 CFLAGS = -Wall -g $(INCLUDE_DIRS)
 LDFLAGS = -lrt -pthread
 

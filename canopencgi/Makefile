@@ -14,9 +14,9 @@ SOURCES =       $(APPL_SRC)/CANopenCGI.c
 
 
 OBJS = $(SOURCES:%.c=%.o)
-CC = gcc
+CC ?= gcc
 CFLAGS = -Wall -g $(INCLUDE_DIRS)
-LDFLAGS = 
+LDFLAGS =
 
 
 .PHONY: all clean
