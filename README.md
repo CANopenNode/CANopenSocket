@@ -191,17 +191,31 @@ only NMT messages are accepted.
 In *canopend terminal* you see, that both devices finished. Further commands
 are not possible. If you set so, last command can also reset computer.
 
+
 ### Next steps
 Now you can learn more skills on CANopen from some other sources:
 books, data sheet of some CANopen device, standard CiA 301(it's free), etc.
 Then you can enter the big world of [CANopen devices](http://can-newsletter.org/hardware).
+
+
+Accessing real CANopen devices is the same as described above for virtual CAN interface.
+Some tested USB to CAN interfaces, which are natively integrated into Linux are:
+
+ - Simple serial [USBtin](http://www.fischl.de/usbtin/) - Start with: `sudo slcand -f -o -c -s8 /dev/ttyACM0 can0; sudo ip link set up can0`
+ - [EMS CPC-USB](http://www.ems-wuensche.com/product/datasheet/html/can-usb-adapter-converter-interface-cpcusb.html) - Start with: `sudo ip link set up can0 type can bitrate 250000`
+ - [PCAN-USB FD](http://www.peak-system.com/PCAN-USB-FD.365.0.html?&L=1) - Needs newer Linux kernel, supports CAN flexible data rate.
+ - You can get the idea of other supported CAN interfaces in [Linux kernel source](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/drivers/net/can).
+ - Beaglebone or Paspberry PI or similar has CAN capes available. On RPI worked
+   also the above USB interfaces, but it was necessary to compile the kernel.
+
 
 With [CANopenNode](https://github.com/CANopenNode/CANopenNode) you can also design your
 own device. There are many very useful and high quality specifications for different
 [device profiles](http://www.can-cia.org/standardization/specifications/),
 some of them are public and free to download.
 
+
 Here we played with virtual CAN interface and result shows as pixels on
 screen. If you connect real CAN interface to your computer, things may
-become dangerous. Keep control on your machines!
+become dangerous. Keep control and safety on your machines!
 
