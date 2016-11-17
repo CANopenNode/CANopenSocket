@@ -56,12 +56,12 @@ Permissible value for TPDO is 0 to 16. For larger value Max Index must be change
       <label lang="en">NMT master</label>
       <description lang="en">NMT master can send CANopen NMT command, which can start, stop or reset nodes.</description>
     </feature>
-    <feature name="Trace" value="16">
+    <feature name="Trace" value="32">
       <label lang="en">Trace</label>
       <description lang="en">Trace is used for recording variables.</description>
-      <associatedObject index="2301" indexMax="2320" indexStep="1"/>
+      <associatedObject index="2301" indexMax="2340" indexStep="1"/>
       <associatedObject index="2400"/>
-      <associatedObject index="2401" indexMax="2420" indexStep="1"/>
+      <associatedObject index="2401" indexMax="2440" indexStep="1"/>
     </feature>
   </features>
   <CANopenObjectList>
@@ -316,84 +316,84 @@ value = 255:     asynchronous</description>
     </CANopenObject>
     <CANopenObject index="1404" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="1405" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="1406" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="1407" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="1408" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="1409" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="140A" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="140B" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="140C" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="140D" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="140E" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
     </CANopenObject>
     <CANopenObject index="140F" name="RPDO communication parameter" objectType="9" subNumber="3" memoryType="ROM" accessFunctionName="CO_ODF_RPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="2"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by RPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <label lang="en">RPDO communication parameter</label>
       <description lang="en">0x1400 - 0x15FF RPDO communication parameter (see description for 0x1400)</description>
@@ -686,7 +686,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="1804" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -697,7 +697,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="1805" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -708,7 +708,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="1806" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -719,7 +719,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="1807" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -730,7 +730,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="1808" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -741,7 +741,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="1809" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -752,7 +752,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="180A" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -763,7 +763,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="180B" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -774,7 +774,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="180C" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -785,7 +785,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="180D" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -796,7 +796,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="180E" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -807,7 +807,7 @@ value = 1-240:   The SYNC message with the counter value equal to this value sha
     </CANopenObject>
     <CANopenObject index="180F" name="TPDO communication parameter" objectType="9" subNumber="7" memoryType="ROM" accessFunctionName="CO_ODF_TPDOcom">
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
-      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1"/>
+      <CANopenSubObject subIndex="01" name="COB-ID used by TPDO" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x80000000"/>
       <CANopenSubObject subIndex="02" name="transmission type" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="254"/>
       <CANopenSubObject subIndex="03" name="inhibit time" objectType="7" dataType="06" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="04" name="compatibility entry" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
@@ -1181,10 +1181,10 @@ main cycle max time - maximum mainline function cycle time in percent of timer p
       <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="1"/>
       <CANopenSubObject subIndex="01" name="main PCB supply" objectType="7" defaultValue="0"/>
     </CANopenObject>
-    <CANopenObject index="2110" name="Variable Int32" objectType="8" subNumber="17" memoryType="RAM" dataType="04" accessType="rw" PDOmapping="optional" TPDOdetectCOS="true">
+    <CANopenObject index="2110" name="Variable Int32" objectType="8" subNumber="33" memoryType="RAM" dataType="04" accessType="rw" PDOmapping="optional" TPDOdetectCOS="true">
       <label lang="en">Variable Integer 32bit</label>
       <description lang="en">Vartiable is free to use by application.</description>
-      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="16"/>
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="32"/>
       <CANopenSubObject subIndex="01" name="int32" objectType="7" defaultValue="0"/>
       <CANopenSubObject subIndex="02" name="int32" objectType="7" defaultValue="0"/>
       <CANopenSubObject subIndex="03" name="int32" objectType="7" defaultValue="0"/>
@@ -1201,6 +1201,22 @@ main cycle max time - maximum mainline function cycle time in percent of timer p
       <CANopenSubObject subIndex="0E" name="int32" objectType="7" defaultValue="0"/>
       <CANopenSubObject subIndex="0F" name="int32" objectType="7" defaultValue="0"/>
       <CANopenSubObject subIndex="10" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="11" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="12" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="13" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="14" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="15" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="16" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="17" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="18" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="19" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="1A" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="1B" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="1C" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="1D" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="1E" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="1F" name="int32" objectType="7" defaultValue="0"/>
+      <CANopenSubObject subIndex="20" name="int32" objectType="7" defaultValue="0"/>
     </CANopenObject>
     <CANopenObject index="2111" name="Variable ROM Int32" objectType="8" subNumber="17" memoryType="ROM" dataType="04" accessType="rw" PDOmapping="optional" TPDOdetectCOS="true">
       <label lang="en">Variable ROM Integer 32bit</label>
@@ -1460,6 +1476,182 @@ Threshold - If integer value passes threshold (based on trigger setting), time i
       <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
     </CANopenObject>
+    <CANopenObject index="2311" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2312" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2313" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2314" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2315" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2316" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2317" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2318" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2319" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="231A" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="231B" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="231C" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="231D" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="231E" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="231F" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2320" name="Trace config" objectType="9" subNumber="9" memoryType="ROM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="8"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="1000"/>
+      <CANopenSubObject subIndex="02" name="Axis no" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Name" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="name                          "/>
+      <CANopenSubObject subIndex="04" name="Color" objectType="7" dataType="09" accessType="rw" PDOmapping="no" defaultValue="red                 "/>
+      <CANopenSubObject subIndex="05" name="Map" objectType="7" dataType="07" accessType="rw" PDOmapping="no" defaultValue="0x00000000"/>
+      <CANopenSubObject subIndex="06" name="Format" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="07" name="Trigger" objectType="7" dataType="05" accessType="rw" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="08" name="Threshold" objectType="7" dataType="04" accessType="rw" PDOmapping="no" defaultValue="0"/>
+    </CANopenObject>
     <CANopenObject index="2400" name="Trace enable" objectType="7" memoryType="RAM" dataType="05" accessType="rw" PDOmapping="optional" defaultValue="0">
       <label lang="en">Trace enable</label>
       <description lang="en">This object controls, how many trace objects (beginning from index 0x2401) are enabled. If zero, all traces are disabled.</description>
@@ -1622,6 +1814,150 @@ Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is
       <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
       <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
     </CANopenObject>
+    <CANopenObject index="2411" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2412" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2413" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2414" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2415" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2416" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2417" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2418" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2419" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="241A" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="241B" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="241C" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="241D" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="241E" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="241F" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
+    <CANopenObject index="2420" name="Trace" objectType="9" subNumber="7" memoryType="RAM">
+      <CANopenSubObject subIndex="00" name="max sub-index" objectType="7" dataType="05" accessType="ro" PDOmapping="no" defaultValue="6"/>
+      <CANopenSubObject subIndex="01" name="Size" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="02" name="Value" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="03" name="Min" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="04" name="Max" objectType="7" dataType="04" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+      <CANopenSubObject subIndex="05" name="Plot" objectType="7" dataType="0F" accessType="ro" PDOmapping="no" defaultValue="0"/>
+      <CANopenSubObject subIndex="06" name="Trigger time" objectType="7" dataType="07" accessType="rw" PDOmapping="optional" defaultValue="0"/>
+    </CANopenObject>
     <CANopenObject index="6000" name="Read input 8 bit" objectType="8" subNumber="9" memoryType="RAM" dataType="05" accessType="ro" PDOmapping="optional" TPDOdetectCOS="true">
       <label lang="en">Read input 8 bit</label>
       <description lang="en">Digital inputs from hardware.</description>
@@ -1680,7 +2016,7 @@ Trigger time - If integer value passes 'TraceConfig-&gt;threshold', then time is
     </CANopenObject>
   </CANopenObjectList>
   <other>
-    <file fileName="CANopenSocket" fileCreator="JP" fileCreationDate="2016-04-01" fileCreationTime="23:56:36" fileVersion="-"/>
+    <file fileName="CANopenSocket" fileCreator="JP" fileCreationDate="2016-07-26" fileCreationTime="12:05:34" fileVersion="-"/>
     <DeviceIdentity>
       <vendorName>CANopenNode</vendorName>
       <productName>CANopenNode</productName>

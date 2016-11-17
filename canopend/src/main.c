@@ -285,8 +285,6 @@ int main (int argc, char *argv[]) {
         CO_SDO_initCallback(CO->SDO[0], taskMain_cbSignal);
         CO_SDOclient_initCallback(CO->SDOclient, taskMain_cbSignal);
 
-        CO_SYNC_initCallback(CO->SYNC, CANrx_lockCbSync);
-
 
         /* Initialize time */
         CO_time_init(&CO_time, CO->SDO[0], &OD_time.epochTimeBaseMs, &OD_time.epochTimeOffsetMs, 0x2130);
