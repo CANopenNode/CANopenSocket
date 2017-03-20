@@ -103,10 +103,12 @@ void CO_error(const uint32_t info) {
 
 static void printUsage(char *progName) {
 fprintf(stderr,
-"Usage: %s <CAN device name> -i <Node ID (1..127)> [options]\n", progName);
+"Usage: %s <CAN device name> [options]\n", progName);
 fprintf(stderr,
 "\n"
 "Options:\n"
+"  -i <Node ID>        CANopen Node-id (1..127). If not specified, value from\n"
+"                      Object dictionary (0x2101) is used.\n");
 "  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n"
 "  -r                  Enable reboot on CANopen NMT reset_node command. \n"
 "  -s <ODstorage file> Set Filename for OD storage ('od_storage' is default).\n"
@@ -143,7 +145,7 @@ int main (int argc, char *argv[]) {
     bool_t firstRun = true;
 
     char* CANdevice = NULL;         /* CAN device, configurable by arguments. */
-    int nodeId = -1;                /* Set to 1..127 by arguments */
+    int nodeId = OD_CANNodeID;      /* Use value from Object Dictionary or set to 1..127 by arguments */
     bool_t rebootEnable = false;    /* Configurable by arguments */
 #ifndef CO_SINGLE_THREAD
     bool_t commandEnable = false;   /* Configurable by arguments */
