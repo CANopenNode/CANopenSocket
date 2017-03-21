@@ -108,7 +108,7 @@ fprintf(stderr,
 "\n"
 "Options:\n"
 "  -i <Node ID>        CANopen Node-id (1..127). If not specified, value from\n"
-"                      Object dictionary (0x2101) is used.\n");
+"                      Object dictionary (0x2101) is used.\n"
 "  -p <RT priority>    Realtime priority of RT task (RT disabled by default).\n"
 "  -r                  Enable reboot on CANopen NMT reset_node command. \n"
 "  -s <ODstorage file> Set Filename for OD storage ('od_storage' is default).\n"
@@ -145,13 +145,14 @@ int main (int argc, char *argv[]) {
     bool_t firstRun = true;
 
     char* CANdevice = NULL;         /* CAN device, configurable by arguments. */
-    int nodeId = OD_CANNodeID;      /* Use value from Object Dictionary or set to 1..127 by arguments */
+    bool_t nodeIdFromArgs = false;  /* True, if program arguments are used for CANopen Node Id */
+    int nodeId = -1;                /* Use value from Object Dictionary or set to 1..127 by arguments */
     bool_t rebootEnable = false;    /* Configurable by arguments */
 #ifndef CO_SINGLE_THREAD
     bool_t commandEnable = false;   /* Configurable by arguments */
 #endif
 
-    if(argc < 3 || strcmp(argv[1], "--help") == 0){
+    if(argc < 2 || strcmp(argv[1], "--help") == 0){
         printUsage(argv[0]);
         exit(EXIT_SUCCESS);
     }
@@ -160,7 +161,10 @@ int main (int argc, char *argv[]) {
     /* Get program options */
     while((opt = getopt(argc, argv, "i:p:rc:s:a:")) != -1) {
         switch (opt) {
-            case 'i': nodeId = strtol(optarg, NULL, 0);     break;
+            case 'i':
+                nodeId = strtol(optarg, NULL, 0);
+                nodeIdFromArgs = true;
+                break;
             case 'p': rtPriority = strtol(optarg, NULL, 0); break;
             case 'r': rebootEnable = true;                  break;
 #ifndef CO_SINGLE_THREAD
@@ -185,7 +189,7 @@ int main (int argc, char *argv[]) {
         CANdevice0Index = if_nametoindex(CANdevice);
     }
 
-    if(nodeId < 1 || nodeId > 127) {
+    if(nodeIdFromArgs && (nodeId < 1 || nodeId > 127)) {
         fprintf(stderr, "Wrong node ID (%d)\n", nodeId);
         printUsage(argv[0]);
         exit(EXIT_FAILURE);
@@ -263,6 +267,10 @@ int main (int argc, char *argv[]) {
 
 
         /* initialize CANopen */
+        if(!nodeIdFromArgs) {
+            /* use value from Object dictionary, if not set by program arguments */
+            nodeId = OD_CANNodeID;
+        }
         err = CO_init(CANdevice0Index, nodeId, 0);
         if(err != CO_ERROR_NO) {
             char s[120];

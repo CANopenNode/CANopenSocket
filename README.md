@@ -102,8 +102,8 @@ Start second terminal, compile and start *canopend*.
 
     $ cd CANopenSocket/canopend
     $ make
-    $ ./canopend --help
-    $ ./canopend vcan0 -i 4 -s od4_storage -a od4_storage_auto
+    $ app/canopend --help
+    $ app/canopend vcan0 -i 4 -s od4_storage -a od4_storage_auto
 
 You should now see CAN messages on CAN dump terminal. Wait few seconds and
 press CTRL-C.
@@ -127,7 +127,7 @@ there are missing non-default storage files. Add them and run it again.
 
     $ echo - > od4_storage
     $ echo - > od4_storage_auto
-    $ ./canopend vcan0 -i 4 -s od4_storage -a od4_storage_auto
+    $ app/canopend vcan0 -i 4 -s od4_storage -a od4_storage_auto
 
     vcan0  704   [1]  00
     vcan0  184   [2]  00 00                     # PDO message
@@ -145,7 +145,7 @@ socket for command interface.
 
     $ # press CTRL-Z
     $ bg
-    $ ./canopend vcan0 -i 3 -c ""
+    $ app/canopend vcan0 -i 3 -c ""
 
 
 ### Third terminal: canopencomm
