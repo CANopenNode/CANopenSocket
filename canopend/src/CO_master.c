@@ -69,7 +69,7 @@ int sdoClientUpload(
 
         timer1msPrev = CO_timer1ms;
         sleepTime.tv_sec = 0;
-        sleepTime.tv_nsec = 10000;
+        sleepTime.tv_nsec = 10000000;
 
         do {
             uint16_t timer1ms, timer1msDiff;
@@ -132,7 +132,7 @@ int sdoClientDownload(
 
         timer1msPrev = CO_timer1ms;
         sleepTime.tv_sec = 0;
-        sleepTime.tv_nsec = 5000;
+        sleepTime.tv_nsec = 5000000;
 
         do {
             uint16_t timer1ms, timer1msDiff;
