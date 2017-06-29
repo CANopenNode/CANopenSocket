@@ -31,11 +31,13 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
                 $(STACK_SRC)/CO_PDO.c               \
                 $(STACK_SRC)/CO_HBconsumer.c        \
                 $(STACK_SRC)/CO_SDOmaster.c         \
+                $(STACK_SRC)/CO_LSSmaster.c     		\
                 $(STACK_SRC)/CO_trace.c             \
                 $(CANOPEN_SRC)/CANopen.c            \
                 $(CANOPEND_SRC)/CO_command.c        \
                 $(CANOPEND_SRC)/CO_comm_helpers.c   \
                 $(CANOPEND_SRC)/CO_master.c         \
+                $(CANOPEND_SRC)/CO_LSS_master.c     \
                 $(CANOPEND_SRC)/CO_time.c           \
                 $(CANOPEND_SRC)/main.c              \
                 $(OBJ_DICT_SRC)/CO_OD.c             \

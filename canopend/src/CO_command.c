@@ -29,6 +29,7 @@
 #include "CO_command.h"
 #include "CO_comm_helpers.h"
 #include "CO_master.h"
+#include "CO_LSS_master.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -537,6 +538,193 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 /* Unknown command */
                 else {
                     err = 1;
+                }
+            }
+        }
+
+        /* LSS command */
+        else if (strstr(token, "lss_") != NULL) {
+            err = 0;
+            respLen = 0;
+
+            /* Switch state global command */
+            if(strcmp(token, "lss_switch_glob") == 0) {
+                uint8_t select;
+
+                token = getTok(NULL, spaceDelim, &err);
+                select = (uint8_t)getU32(token, 0, 1, &err);
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    if (select == 0) {
+                        err = lssSwitchStateDeselect(CO->LSSmaster);
+                    }
+                    else {
+                        err = lssSwitchStateSelect(CO->LSSmaster, true, 0, 0, 0, 0);
+                    }
+                }
+            }
+
+            /* Switch state selective command */
+            else if(strcmp(token, "lss_switch_sel") == 0) {
+                uint32_t vendorId;
+                uint32_t productCode;
+                uint32_t revisionNo;
+                uint32_t serialNo;
+
+                token = getTok(NULL, spaceDelim, &err);
+                vendorId = getU32(token, 0, 0xFFFFFFFF, &err);
+
+                token = getTok(NULL, spaceDelim, &err);
+                productCode = getU32(token, 0, 0xFFFFFFFF, &err);
+
+                token = getTok(NULL, spaceDelim, &err);
+                revisionNo = getU32(token, 0, 0xFFFFFFFF, &err);
+
+                token = getTok(NULL, spaceDelim, &err);
+                serialNo = getU32(token, 0, 0xFFFFFFFF, &err);
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssSwitchStateSelect(CO->LSSmaster, false,
+                              vendorId, productCode, revisionNo, serialNo);
+                }
+            }
+
+            /* LSS configure node-ID command */
+            else if(strcmp(token, "lss_set_node") == 0) {
+                uint8_t nid;
+
+                token = getTok(NULL, spaceDelim, &err);
+                nid = (uint8_t)getU32(token, 0, 0xFF, &err);
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssConfigureNodeId(CO->LSSmaster, nid);
+                    if(err == CO_LSSmaster_OK_ILLEGAL_ARGUMENT){
+                        respErrorCode = respErrorLSSnodeIdNotSupported;
+                    }
+                }
+            }
+
+            /* LSS configure bit-rate command */
+            else if(strcmp(token, "lss_conf_bitrate") == 0) {
+                uint8_t tableIndex;
+
+                /* First parameter is table selector. We only support the CiA
+                 * bit timing table from CiA301 ("0") */
+                token = getTok(NULL, spaceDelim, &err);
+                (void)getU32(token, 0, 0, &err);
+
+                /* the table has entries from 0..9 */
+                token = getTok(NULL, spaceDelim, &err);
+                tableIndex = (uint8_t)getU32(token, 0, 9, &err);
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssConfigureBitTiming(CO->LSSmaster, tableIndex);
+                    if(err == CO_LSSmaster_OK_ILLEGAL_ARGUMENT){
+                        respErrorCode = respErrorLSSbitRateNotSupported;
+                    }
+                }
+            }
+
+            /* LSS activate new bit-rate command */
+            else if(strcmp(token, "lss_activate_bitrate") == 0) {
+                uint16_t switchDelay;
+
+                token = getTok(NULL, spaceDelim, &err);
+                switchDelay = (uint16_t)getU32(token, 0, 0xFFFF, &err);
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssActivateBit(CO->LSSmaster, switchDelay);
+                }
+            }
+
+            /* LSS store configuration command */
+            else if(strcmp(token, "lss_store") == 0) {
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssConfigureStore(CO->LSSmaster);
+                    if(err == CO_LSSmaster_OK_ILLEGAL_ARGUMENT){
+                        respErrorCode = respErrorLSSparameterStoringFailed;
+                    }
+                }
+            }
+
+            /* Inquire LSS address command */
+            else if(strcmp(token, "lss_inquire_addr") == 0) {
+                uint32_t vendorId;
+                uint32_t productCode;
+                uint32_t revisionNo;
+                uint32_t serialNo;
+                const dataType_t *datatype;
+
+                datatype = getDataType("u32", &err);
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssInquireLssAddress(CO->LSSmaster,
+                              &vendorId, &productCode, &revisionNo, &serialNo);
+                }
+                if (err == 0) {
+                    respLen = sprintf(resp, "[%d] ", sequence);
+
+                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                                   (char*)&vendorId, sizeof(vendorId));
+                    respLen += sprintf(resp+respLen, " ");
+                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                                   (char*)&productCode, sizeof(productCode));
+                    respLen += sprintf(resp+respLen, " ");
+                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                                   (char*)&revisionNo, sizeof(revisionNo));
+                    respLen += sprintf(resp+respLen, " ");
+                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                                   (char*)&serialNo, sizeof(serialNo));
+                }
+            }
+
+            /* LSS inquire node-ID command */
+            else if(strcmp(token, "lss_get_node") == 0) {
+                uint8_t nid;
+
+                lastTok(NULL, spaceDelim, &err);
+
+                if(err == 0) {
+                    err = lssInquireNodeId(CO->LSSmaster, &nid);
+                }
+                if (err == 0) {
+                    respLen = sprintf(resp, "[%d] %d", sequence, nid);
+                }
+            }
+            else {
+                /* unknown LSS command */
+                respErrorCode = respErrorReqNotSupported;
+                err = 1;
+            }
+
+            /* token / LSS default command result. This info is displayed when
+             * the processed LSS command did not print a specific output. */
+            if (respLen==0 && respErrorCode==0) {
+                if(err == CO_LSSmaster_TIMEOUT){
+                    respErrorCode = respErrorTimeOut;
+                }
+                else if (err == CO_LSSmaster_OK_MANUFACTURER) {
+                    respErrorCode = respErrorLSSmanufacturer;
+                }
+                else if (err < 0) {
+                    respErrorCode = respErrorInternalState;
+                } else {
+                    respLen = sprintf(resp, "[%d] OK", sequence);
                 }
             }
         }
