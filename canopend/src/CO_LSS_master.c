@@ -24,6 +24,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <string.h>
 
 #include "CO_LSS_master.h"
 
@@ -118,7 +119,7 @@ int lssConfigureBitTiming(
     /* convert table to numbers */
     bit = CO_LSS_bitTimingTableLookup[bit];
 
-    /* Select Slave. Loop in 10 ms intervals. */
+    /* Configure Slave. Loop in 10 ms intervals. */
 
     timer1msPrev = CO_timer1ms;
     sleepTime.tv_sec = 0;
@@ -157,7 +158,7 @@ int lssConfigureNodeId(
     /* stay here, if CAN is not configured */
     pthread_mutex_lock(&CO_CAN_VALID_mtx);
 
-    /* Select Slave. Loop in 10 ms intervals. */
+    /* Configure Slave. Loop in 10 ms intervals. */
 
     timer1msPrev = CO_timer1ms;
     sleepTime.tv_sec = 0;
@@ -195,7 +196,7 @@ int lssConfigureStore(
     /* stay here, if CAN is not configured */
     pthread_mutex_lock(&CO_CAN_VALID_mtx);
 
-    /* Select Slave. Loop in 10 ms intervals. */
+    /* Configure Slave. Loop in 10 ms intervals. */
 
     timer1msPrev = CO_timer1ms;
     sleepTime.tv_sec = 0;
@@ -262,7 +263,7 @@ int lssInquireLssAddress(
     /* stay here, if CAN is not configured */
     pthread_mutex_lock(&CO_CAN_VALID_mtx);
 
-    /* Select Slave. Loop in 10 ms intervals. */
+    /* Read value. Loop in 10 ms intervals. */
 
     timer1msPrev = CO_timer1ms;
     sleepTime.tv_sec = 0;
@@ -307,7 +308,7 @@ int lssInquireNodeId(
     /* stay here, if CAN is not configured */
     pthread_mutex_lock(&CO_CAN_VALID_mtx);
 
-    /* Select Slave. Loop in 10 ms intervals. */
+    /* Read value. Loop in 10 ms intervals. */
 
     timer1msPrev = CO_timer1ms;
     sleepTime.tv_sec = 0;
@@ -331,3 +332,147 @@ int lssInquireNodeId(
 
     return ret;
 }
+
+
+int lssIdentifyFastscan(
+        CO_LSSmaster_t *LSSmaster,
+        uint16_t        timeout_ms,
+        uint8_t         scanVendorId,
+        uint32_t       *vendorId,
+        uint8_t         scanProductCode,
+        uint32_t       *productCode,
+        uint8_t         scanRevisionNumber,
+        uint32_t       *revisionNo,
+        uint8_t         scanSerialNo,
+        uint32_t       *serialNo)
+{
+    uint16_t timer1ms;
+    uint16_t timer1msDiff;
+    uint16_t timer1msPrev;
+    CO_LSSmaster_return_t ret;
+    struct timespec sleepTime;
+    CO_LSSmaster_fastscan_t fastscan;
+
+    /* stay here, if CAN is not configured */
+    pthread_mutex_lock(&CO_CAN_VALID_mtx);
+
+    fastscan.scan[CO_LSS_FASTSCAN_VENDOR_ID] = scanVendorId;
+    fastscan.match.vendorID = *vendorId;
+    fastscan.scan[CO_LSS_FASTSCAN_PRODUCT] = scanProductCode;
+    fastscan.match.productCode = *productCode;
+    fastscan.scan[CO_LSS_FASTSCAN_REV] = scanRevisionNumber;
+    fastscan.match.revisionNumber = *revisionNo;
+    fastscan.scan[CO_LSS_FASTSCAN_SERIAL] = scanSerialNo;
+    fastscan.match.serialNumber = *serialNo;
+    /* Do scan. Loop in 5 ms intervals. */
+
+    timer1msPrev = CO_timer1ms;
+    sleepTime.tv_sec = 0;
+    sleepTime.tv_nsec = 5000000;
+
+    CO_LSSmaster_changeTimeout(LSSmaster, timeout_ms);
+
+    timer1msDiff = 0;
+    do {
+        ret = CO_LSSmaster_IdentifyFastscan(LSSmaster, timer1msDiff, &fastscan);
+        if (ret != CO_LSSmaster_WAIT_SLAVE) {
+            break;
+        }
+
+        /* Calculate time difference */
+        timer1ms = CO_timer1ms;
+        timer1msDiff = timer1ms - timer1msPrev;
+        timer1msPrev = timer1ms;
+        nanosleep(&sleepTime, NULL);
+    } while(1);
+
+    CO_LSSmaster_changeTimeout(LSSmaster, CO_LSSmaster_DEFAULT_TIMEOUT);
+
+    *vendorId = fastscan.found.vendorID;
+    *productCode = fastscan.found.productCode;
+    *revisionNo = fastscan.found.revisionNumber;
+    *serialNo = fastscan.found.serialNumber;
+
+    pthread_mutex_unlock(&CO_CAN_VALID_mtx);
+
+    return ret;
+}
+
+
+int lssEnumerateFastscan(
+        CO_LSSmaster_t *LSSmaster,
+        uint16_t        timeout_ms,
+        uint8_t         nodeId,
+        uint8_t        *nodeCount,
+        bool_t          store,
+        uint8_t         scanVendorId,
+        uint32_t        vendorId,
+        uint8_t         scanProductCode,
+        uint32_t        productCode,
+        uint8_t         scanRevisionNumber,
+        uint32_t        revisionNo,
+        uint8_t         scanSerialNo,
+        uint32_t        serialNo)
+{
+    CO_LSSmaster_return_t ret;
+    /* scanning changes those values */
+    uint32_t tmpVendorId;
+    uint32_t tmpProductCode;
+    uint32_t tmpRevisionNo;
+    uint32_t tmpSerialNo;
+
+    /* we scan until no more nodes are found that match the scanning request */
+    *nodeCount = 0;
+    do {
+        /* If we can't assing more node IDs, quit scanning */
+        if (nodeId > 127) {
+            nodeId = 127;
+            ret = CO_LSSmaster_OK;
+            break;
+        }
+
+        /* scanning changes those values */
+        tmpVendorId = vendorId;
+        tmpProductCode = productCode;
+        tmpRevisionNo = revisionNo;
+        tmpSerialNo = serialNo;
+
+        ret = lssIdentifyFastscan(LSSmaster, timeout_ms,
+                  scanVendorId, &tmpVendorId,
+                  scanProductCode, &tmpProductCode,
+                  scanRevisionNumber, &tmpRevisionNo,
+                  scanSerialNo, &tmpSerialNo);
+        if (ret == CO_LSSmaster_SCAN_NOACK) {
+            /* no (more) nodes found */
+            ret = CO_LSSmaster_OK;
+            break;
+        }
+        else if (ret != CO_LSSmaster_SCAN_FINISHED) {
+            /* error occured */
+            break;
+        }
+
+        ret = lssConfigureNodeId(LSSmaster, nodeId);
+        if (ret != CO_LSSmaster_OK) {
+            break;
+        }
+
+        if (store == true) {
+            ret = lssConfigureStore(LSSmaster);
+            if (ret != CO_LSSmaster_OK) {
+                break;
+            }
+        }
+
+        ret = lssSwitchStateDeselect(LSSmaster);
+        if (ret != CO_LSSmaster_OK) {
+            break;
+        }
+
+        nodeId ++;
+        (*nodeCount) ++;
+    } while(1);
+
+    return ret;
+}
+
