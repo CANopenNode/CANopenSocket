@@ -32,6 +32,8 @@
 #include <string.h>
 #include <strings.h>
 #include <fnmatch.h>
+#include <pwd.h>
+#include <grp.h>
 #include <sys/un.h>
 #include <sys/socket.h>
 
@@ -44,6 +46,22 @@
 /* Helper functions */
 static void errExitErrno(char* msg) {
     printf("%s: %s\n", msg, strerror(errno));
+    exit(EXIT_FAILURE);
+}
+
+static void errExitErrnoUGID(char* msg) {
+    struct passwd *user;
+    struct group *grp;
+
+    printf("%s: %s\n", msg, strerror(errno));
+
+    user = getpwuid(getuid());
+    grp = getgrgid(getgid());
+
+    printf("Access from user: %s, group: %s\n",
+        (user == NULL) ? NULL : user->pw_name,
+        (grp == NULL) ? NULL : grp->gr_name);
+
     exit(EXIT_FAILURE);
 }
 
@@ -229,7 +247,7 @@ int main (int argc, char *argv[], char *env[]) {
     strncpy(addr.sun_path, socketPath, sizeof(addr.sun_path) - 1);
 
     if(connect(fdSocket, (struct sockaddr *)&addr, sizeof(struct sockaddr_un)) == -1) {
-        errExitErrno("Socket connection failed");
+        errExitErrnoUGID("Socket connection failed");
     }
 
 
