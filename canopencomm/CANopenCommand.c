@@ -29,6 +29,8 @@
 #include <unistd.h>
 #include <sys/un.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>// inet_aton
 
 
 #ifndef BUF_SIZE
@@ -52,13 +54,16 @@ fprintf(stderr,
 "Usage: %s [options] <command string>\n", progName);
 fprintf(stderr,
 "\n"
-"Program reads arguments or standard input or file. It sends commands to\n"
+"Program reads arguments from standard input or file. It sends commands to\n"
 "canopend via socket, line after line. Result is printed to standard output.\n"
+"Socket is either unix domain socket (default) or a remote tcp socket (option -t)."
 "For more information see http://www.can-cia.org/, CiA 309 standard.\n"
 "\n"
 "Options:\n"
 "  -f <input file path>  Path to the input file.\n"
 "  -s <socket path>      Path to the socket (default '/tmp/CO_command_socket').\n"
+"  -t <ip>               Connect via TCP to remote <ip>.\n"
+"  -p <port>             Tcp port to connect to when using -t. Defaults to 60000\n"
 "  -h                    Display description of error codes in case of error.\n"
 "                        (Default, if command is passed by program arguments.)\n"
 "  --help                Display this help.\n"
@@ -207,12 +212,18 @@ static void printErrorDescs(void) {
 int main (int argc, char *argv[]) {
     char *socketPath = "/tmp/CO_command_socket";  /* Name of the local domain socket, configurable by arguments. */
     char *inputFilePath = NULL;
+    sa_family_t addrFamily = AF_UNIX;
+    in_port_t  tcp_port = 60000; /* default port when used in tcp mode */
 
     char buf[BUF_SIZE];
     int fd;
-    struct sockaddr_un addr;
+    struct sockaddr_un addr_un;
+    struct sockaddr_in addr_in;
     int opt;
     int i;
+
+    memset(&addr_in, 0, sizeof(struct sockaddr_in));
+    addr_in.sin_port = htons(tcp_port); //preset with default port
 
     if(argc >= 2 && strcmp(argv[1], "--help") == 0) {
         printUsage(argv[0]);
@@ -225,7 +236,7 @@ int main (int argc, char *argv[]) {
     }
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "s:f:h")) != -1) {
+    while((opt = getopt(argc, argv, "s:f:hp:t:")) != -1) {
         switch (opt) {
             case 'f':
                 inputFilePath = optarg;
@@ -236,6 +247,18 @@ int main (int argc, char *argv[]) {
             case 'h':
                 printErrorDescription = 1;
                 break;
+            case 't':
+              addrFamily = AF_INET;
+              if(inet_aton (optarg, &addr_in.sin_addr) != 1) {
+                exit(EXIT_FAILURE);
+              }
+              break;
+            case 'p':
+              if(sscanf(optarg, "%hu", &tcp_port) < 1) {
+                exit(EXIT_FAILURE);
+              }
+              addr_in.sin_port = htons(tcp_port);
+              break;
             default:
                 printUsage(argv[0]);
                 exit(EXIT_FAILURE);
@@ -243,17 +266,31 @@ int main (int argc, char *argv[]) {
     }
 
     /* Create and connect client socket */
-    fd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if(fd == -1) {
-        errExit("Socket creation failed");
+    if(addrFamily == AF_INET) {
+      fd = socket(AF_INET, SOCK_STREAM, 0);
+      if(fd == -1) {
+          errExit("Socket creation failed");
+      }
+
+      addr_in.sin_family = addrFamily;
+
+      if(connect(fd, (struct sockaddr *)&addr_in, sizeof(struct sockaddr_in)) == -1) {
+          errExit("Socket connection failed");
+      }
     }
+    else { // addrFamily == AF_UNIX
+      fd = socket(AF_UNIX, SOCK_STREAM, 0);
+      if(fd == -1) {
+          errExit("Socket creation failed");
+      }
 
-    memset(&addr, 0, sizeof(struct sockaddr_un));
-    addr.sun_family = AF_UNIX;
-    strncpy(addr.sun_path, socketPath, sizeof(addr.sun_path) - 1);
+      memset(&addr_un, 0, sizeof(struct sockaddr_un));
+      addr_un.sun_family = addrFamily;
+      strncpy(addr_un.sun_path, socketPath, sizeof(addr_un.sun_path) - 1);
 
-    if(connect(fd, (struct sockaddr *)&addr, sizeof(struct sockaddr_un)) == -1) {
-        errExit("Socket connection failed");
+      if(connect(fd, (struct sockaddr *)&addr_un, sizeof(struct sockaddr_un)) == -1) {
+          errExit("Socket connection failed");
+      }
     }
 
 

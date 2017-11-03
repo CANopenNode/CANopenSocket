@@ -28,6 +28,8 @@
 #ifndef CO_COMMAND_H
 #define CO_COMMAND_H
 
+#include <netinet/in.h>
+
 
 /* Functions from external */
 void CO_errExit(char* msg);
@@ -42,13 +44,22 @@ extern char *CO_command_socketPath;
 
 
 /**
- * Initialize thread and create socket for command interface.
+ * Initialize thread and create local domain socket for command interface.
  *
  * Make sure, that global variable CO was properly initialized before this call.
  *
  * @return 0 on success.
  */
 int CO_command_init(void);
+
+/**
+ * Initialize thread and create tcp socket for command interface.
+ * @param port tcp port to listen
+ *
+ * Make sure, that global variable CO was properly initialized before this call.
+ * @return 0 on success.
+ */
+int CO_command_init_tcp(in_port_t port);
 
 
 /**
@@ -57,6 +68,14 @@ int CO_command_init(void);
  * @return 0 on success.
  */
 int CO_command_clear(void);
+
+/**
+ * Terminate thread and remove tcp socket.
+ * @param port tcp port to connect to
+ *
+ * @return 0 on success.
+ */
+int CO_command_clear_tcp(in_port_t port);
 
 
 #endif
