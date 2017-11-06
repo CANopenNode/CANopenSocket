@@ -28,9 +28,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/un.h>
+#include <sys/types.h>
 #include <sys/socket.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>// inet_aton
+#include <limits.h>
 
 
 #ifndef BUF_SIZE
@@ -62,7 +65,7 @@ fprintf(stderr,
 "Options:\n"
 "  -f <input file path>  Path to the input file.\n"
 "  -s <socket path>      Path to the socket (default '/tmp/CO_command_socket').\n"
-"  -t <ip>               Connect via TCP to remote <ip>.\n"
+"  -t <host>             Connect via tcp to remote <host>.\n"
 "  -p <port>             Tcp port to connect to when using -t. Defaults to 60000\n"
 "  -h                    Display description of error codes in case of error.\n"
 "                        (Default, if command is passed by program arguments.)\n"
@@ -207,23 +210,19 @@ static void printErrorDescs(void) {
     fprintf(stderr, "\n");
 }
 
-
 /******************************************************************************/
 int main (int argc, char *argv[]) {
     char *socketPath = "/tmp/CO_command_socket";  /* Name of the local domain socket, configurable by arguments. */
     char *inputFilePath = NULL;
     sa_family_t addrFamily = AF_UNIX;
-    in_port_t  tcp_port = 60000; /* default port when used in tcp mode */
+    char  tcpPort[20] = "60000"; /* default port when used in tcp mode */
 
     char buf[BUF_SIZE];
+    char hostname[HOST_NAME_MAX];
     int fd;
     struct sockaddr_un addr_un;
-    struct sockaddr_in addr_in;
     int opt;
     int i;
-
-    memset(&addr_in, 0, sizeof(struct sockaddr_in));
-    addr_in.sin_port = htons(tcp_port); //preset with default port
 
     if(argc >= 2 && strcmp(argv[1], "--help") == 0) {
         printUsage(argv[0]);
@@ -248,17 +247,12 @@ int main (int argc, char *argv[]) {
                 printErrorDescription = 1;
                 break;
             case 't':
-              addrFamily = AF_INET;
-              if(inet_aton (optarg, &addr_in.sin_addr) != 1) {
-                exit(EXIT_FAILURE);
-              }
-              break;
+                addrFamily = AF_INET;
+                strncpy(hostname, optarg, sizeof(hostname));
+                break;
             case 'p':
-              if(sscanf(optarg, "%hu", &tcp_port) < 1) {
-                exit(EXIT_FAILURE);
-              }
-              addr_in.sin_port = htons(tcp_port);
-              break;
+                strncpy(tcpPort, optarg, sizeof(tcpPort));
+                break;
             default:
                 printUsage(argv[0]);
                 exit(EXIT_FAILURE);
@@ -267,14 +261,38 @@ int main (int argc, char *argv[]) {
 
     /* Create and connect client socket */
     if(addrFamily == AF_INET) {
-      fd = socket(AF_INET, SOCK_STREAM, 0);
-      if(fd == -1) {
-          errExit("Socket creation failed");
-      }
 
-      addr_in.sin_family = addrFamily;
+        struct addrinfo hints, *res, *rp;
+        int errcode;
 
-      if(connect(fd, (struct sockaddr *)&addr_in, sizeof(struct sockaddr_in)) == -1) {
+        memset(&hints, 0, sizeof(hints));
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = SOCK_STREAM;
+        hints.ai_flags |= AI_CANONNAME;
+
+        errcode = getaddrinfo(hostname, tcpPort, &hints, &res);
+        if (errcode != 0) {
+            fprintf(stderr, "Error! Getaddrinfo for host %s failed\n", hostname);
+            exit(EXIT_FAILURE);
+        }
+
+      /* getaddrinfo() returns a list of address structures.
+         Try each address until we successfully connect.
+         If socket (or connect) fails, we (close the socket
+         and) try the next address. */
+
+      for (rp = res; rp != NULL; rp = rp->ai_next) {
+          fd = socket(rp->ai_family, rp->ai_socktype,
+                       rp->ai_protocol);
+          if (fd == -1) {
+              continue;
+          }
+
+          if (connect(fd, rp->ai_addr, rp->ai_addrlen) != -1) {
+              break;                  /* Success */
+          }
+
+          close(fd);
           errExit("Socket connection failed");
       }
     }
