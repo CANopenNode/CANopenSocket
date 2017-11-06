@@ -125,10 +125,10 @@ fprintf(stderr,
 "                      See 'canopencomm/canopencomm --help' for more info.\n"
 , CO_command_socketPath);
 fprintf(stderr,
-"  -t <port>           Enable command interface for master functionality over tcp. \n"
-"                      If port is not specified, default '%hu' will be used.\n"
+"  -t <port>           Enable command interface for master functionality over tcp, \n"
+"                      listen to <port>.\n"
 "                      Note that using this mode may affect security.\n"
-, CO_command_socket_tcp_port);
+);
 #endif
 fprintf(stderr,
 "\n"
@@ -472,9 +472,7 @@ int main (int argc, char *argv[]) {
         }
         break;
       case CMD_REMOTE:
-//        if (CO_command_clear_tcp(CO_command_socket_tcp_port) != 0) {
-//          CO_errExit("Socket command interface removal failed");
-//        }
+        //nothing to do yet
         break;
       default:
         break;
