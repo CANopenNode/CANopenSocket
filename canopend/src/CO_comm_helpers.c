@@ -204,16 +204,16 @@ static int dtsStr(char* bufSdo, int bufSdoSize, char *strin) {
     return out;
 }
 
-static int dtsU8 (char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint8_t   num = (uint8_t) getU32(strin, 0,        UCHAR_MAX, &err); if(err != 0) return 0; memcpy(bufSdo, &num, 1);      return 1;}
-static int dtsU16(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint16_t  num = (uint16_t)getU32(strin, 0,        USHRT_MAX, &err); if(err != 0) return 0; CO_memcpySwap2(bufSdo, &num); return 2;}
-static int dtsU32(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint32_t  num =           getU64(strin, 0,        UINT_MAX,  &err); if(err != 0) return 0; CO_memcpySwap4(bufSdo, &num); return 4;}
-static int dtsU64(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint64_t  num =           getU64(strin, 0,        ULONG_MAX, &err); if(err != 0) return 0; CO_memcpySwap8(bufSdo, &num); return 8;}
-static int dtsI8 (char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int8_t    num = (int8_t)  getI32(strin, CHAR_MIN, CHAR_MAX,  &err); if(err != 0) return 0; memcpy(bufSdo, &num, 1);      return 1;}
-static int dtsI16(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int16_t   num = (int16_t) getI32(strin, SHRT_MIN, SHRT_MAX,  &err); if(err != 0) return 0; CO_memcpySwap2(bufSdo, &num); return 2;}
-static int dtsI32(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int32_t   num =           getI64(strin, INT_MIN,  INT_MAX,   &err); if(err != 0) return 0; CO_memcpySwap4(bufSdo, &num); return 4;}
-static int dtsI64(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int64_t   num =           getI64(strin, LONG_MIN, LONG_MAX,  &err); if(err != 0) return 0; CO_memcpySwap8(bufSdo, &num); return 8;}
-static int dtsR32(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; float32_t num =           getR32(strin,                      &err); if(err != 0) return 0; CO_memcpySwap4(bufSdo, &num); return 4;}
-static int dtsR64(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; float64_t num =           getR64(strin,                      &err); if(err != 0) return 0; CO_memcpySwap8(bufSdo, &num); return 8;}
+static int dtsU8 (char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint8_t   num = (uint8_t) getU32(strin, 0,        UCHAR_MAX,  &err); if(err != 0) return 0; memcpy(bufSdo, &num, 1);      return 1;}
+static int dtsU16(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint16_t  num = (uint16_t)getU32(strin, 0,        USHRT_MAX,  &err); if(err != 0) return 0; CO_memcpySwap2(bufSdo, &num); return 2;}
+static int dtsU32(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint32_t  num =           getU64(strin, 0,        UINT_MAX,   &err); if(err != 0) return 0; CO_memcpySwap4(bufSdo, &num); return 4;}
+static int dtsU64(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; uint64_t  num =           getU64(strin, 0,        ULLONG_MAX, &err); if(err != 0) return 0; CO_memcpySwap8(bufSdo, &num); return 8;}
+static int dtsI8 (char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int8_t    num = (int8_t)  getI32(strin, CHAR_MIN, CHAR_MAX,   &err); if(err != 0) return 0; memcpy(bufSdo, &num, 1);      return 1;}
+static int dtsI16(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int16_t   num = (int16_t) getI32(strin, SHRT_MIN, SHRT_MAX,   &err); if(err != 0) return 0; CO_memcpySwap2(bufSdo, &num); return 2;}
+static int dtsI32(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int32_t   num =           getI64(strin, INT_MIN,  INT_MAX,    &err); if(err != 0) return 0; CO_memcpySwap4(bufSdo, &num); return 4;}
+static int dtsI64(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; int64_t   num =           getI64(strin, LLONG_MIN, LLONG_MAX, &err); if(err != 0) return 0; CO_memcpySwap8(bufSdo, &num); return 8;}
+static int dtsR32(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; float32_t num =           getR32(strin,                       &err); if(err != 0) return 0; CO_memcpySwap4(bufSdo, &num); return 4;}
+static int dtsR64(char* bufSdo, int bufSdoSize, char *strin) {int err = 0; float64_t num =           getR64(strin,                       &err); if(err != 0) return 0; CO_memcpySwap8(bufSdo, &num); return 8;}
 
 
 static const dataType_t dataTypes[] = {
