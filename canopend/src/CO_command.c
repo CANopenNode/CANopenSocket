@@ -63,6 +63,7 @@ static uint16_t             comm_net = 1;   /* default CAN net number */
 static uint8_t              comm_node_default = 0xFF;  /* CANopen Node ID number is undefined at startup. */
 static uint16_t             SDOtimeoutTime = 500; /* Timeout time for SDO transfer in milliseconds, if no response */
 static uint8_t              blockTransferEnable = 0; /* SDO block transfer enabled? */
+static bool_t               tcpMode = false;
 static volatile int         endProgram = 0;
 
 
@@ -104,6 +105,49 @@ int CO_command_init(void) {
 
 
 /******************************************************************************/
+int CO_command_init_tcp(in_port_t port) {
+    struct sockaddr_in addr;
+
+    if(CO == NULL || CO->SDOclient == NULL){
+        CO_errExit("CO_command_init - Wrong arguments");
+    }
+
+    /* Create, bind and listen socket */
+    fdSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if(fdSocket == -1) {
+        CO_errExit("CO_command_init - socket failed");
+    }
+
+    const int yes = 1;
+    setsockopt(fdSocket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
+
+    memset(&addr, 0, sizeof(struct sockaddr_in));
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    addr.sin_addr.s_addr = INADDR_ANY;
+    //strncpy(addr.sin_port, CO_command_socketPath, sizeof(addr.sin_port) - 1);
+
+    if(bind(fdSocket, (struct sockaddr *) &addr, sizeof(struct sockaddr_in)) == -1) {
+        fprintf(stderr, "Can't bind Socket to path '%s'\n", CO_command_socketPath);
+        CO_errExit("CO_command_init");
+    }
+
+    if(listen(fdSocket, LISTEN_BACKLOG) == -1) {
+        CO_errExit("CO_command_init - listen failed");
+    }
+
+    /* Create thread */
+    endProgram = 0;
+    if(pthread_create(&command_thread_id, NULL, command_thread, NULL) != 0) {
+        CO_errExit("CO_command_init - thread creation failed");
+    }
+
+    tcpMode = true;
+    return 0;
+}
+
+
+/******************************************************************************/
 int CO_command_clear(void) {
 
     static struct sockaddr_un addr;
@@ -138,6 +182,41 @@ int CO_command_clear(void) {
     if(remove(CO_command_socketPath) == -1) {
         return -1;
     }
+
+    return 0;
+}
+
+/******************************************************************************/
+int CO_command_clear_tcp(in_port_t port) {
+
+    static struct sockaddr_in addr;
+    int fd;
+
+    endProgram = 1;
+
+    /* Establish a client socket connection to finish the command_thread. */
+    fd = socket(AF_INET, SOCK_STREAM, 0);
+    if(fd == -1) {
+        return -1;
+    }
+
+    memset(&addr, 0, sizeof(struct sockaddr_un));
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    //addr.sin_addr.s_addr = INADDR_ANY;
+
+    if(connect(fd, (struct sockaddr *) &addr, sizeof(struct sockaddr_un)) == -1) {
+        return -1;
+    }
+
+    close(fd);
+
+    /* Wait for thread to finish. */
+    if(pthread_join(command_thread_id, NULL) != 0) {
+        return -1;
+    }
+
+    close(fdSocket);
 
     return 0;
 }
@@ -561,7 +640,9 @@ static void command_process(int fd, char* command, size_t commandLength) {
     /* Terminate string and send response */
     resp[respLen++] = '\r';
     resp[respLen++] = '\n';
-    resp[respLen++] = '\0';
+    if(!tcpMode) {
+      resp[respLen++] = '\0';
+    }
 
     if(write(fd, resp, respLen) != respLen) {
         CO_error(0x15200000L);

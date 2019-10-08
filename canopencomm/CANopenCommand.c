@@ -28,7 +28,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/un.h>
+#include <sys/types.h>
 #include <sys/socket.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>// inet_aton
+#include <limits.h>
 
 
 #ifndef BUF_SIZE
@@ -52,13 +57,16 @@ fprintf(stderr,
 "Usage: %s [options] <command string>\n", progName);
 fprintf(stderr,
 "\n"
-"Program reads arguments or standard input or file. It sends commands to\n"
+"Program reads arguments from standard input or file. It sends commands to\n"
 "canopend via socket, line after line. Result is printed to standard output.\n"
+"Socket is either unix domain socket (default) or a remote tcp socket (option -t)."
 "For more information see http://www.can-cia.org/, CiA 309 standard.\n"
 "\n"
 "Options:\n"
 "  -f <input file path>  Path to the input file.\n"
 "  -s <socket path>      Path to the socket (default '/tmp/CO_command_socket').\n"
+"  -t <host>             Connect via tcp to remote <host>.\n"
+"  -p <port>             Tcp port to connect to when using -t. Defaults to 60000\n"
 "  -h                    Display description of error codes in case of error.\n"
 "                        (Default, if command is passed by program arguments.)\n"
 "  --help                Display this help.\n"
@@ -202,15 +210,17 @@ static void printErrorDescs(void) {
     fprintf(stderr, "\n");
 }
 
-
 /******************************************************************************/
 int main (int argc, char *argv[]) {
     char *socketPath = "/tmp/CO_command_socket";  /* Name of the local domain socket, configurable by arguments. */
     char *inputFilePath = NULL;
+    sa_family_t addrFamily = AF_UNIX;
+    char  tcpPort[20] = "60000"; /* default port when used in tcp mode */
 
     char buf[BUF_SIZE];
+    char hostname[HOST_NAME_MAX];
     int fd;
-    struct sockaddr_un addr;
+    struct sockaddr_un addr_un;
     int opt;
     int i;
 
@@ -225,7 +235,7 @@ int main (int argc, char *argv[]) {
     }
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "s:f:h")) != -1) {
+    while((opt = getopt(argc, argv, "s:f:hp:t:")) != -1) {
         switch (opt) {
             case 'f':
                 inputFilePath = optarg;
@@ -236,6 +246,13 @@ int main (int argc, char *argv[]) {
             case 'h':
                 printErrorDescription = 1;
                 break;
+            case 't':
+                addrFamily = AF_INET;
+                strncpy(hostname, optarg, sizeof(hostname));
+                break;
+            case 'p':
+                strncpy(tcpPort, optarg, sizeof(tcpPort));
+                break;
             default:
                 printUsage(argv[0]);
                 exit(EXIT_FAILURE);
@@ -243,17 +260,55 @@ int main (int argc, char *argv[]) {
     }
 
     /* Create and connect client socket */
-    fd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if(fd == -1) {
-        errExit("Socket creation failed");
+    if(addrFamily == AF_INET) {
+
+        struct addrinfo hints, *res, *rp;
+        int errcode;
+
+        memset(&hints, 0, sizeof(hints));
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = SOCK_STREAM;
+        hints.ai_flags |= AI_CANONNAME;
+
+        errcode = getaddrinfo(hostname, tcpPort, &hints, &res);
+        if (errcode != 0) {
+            fprintf(stderr, "Error! Getaddrinfo for host %s failed\n", hostname);
+            exit(EXIT_FAILURE);
+        }
+
+      /* getaddrinfo() returns a list of address structures.
+         Try each address until we successfully connect.
+         If socket (or connect) fails, we (close the socket
+         and) try the next address. */
+
+      for (rp = res; rp != NULL; rp = rp->ai_next) {
+          fd = socket(rp->ai_family, rp->ai_socktype,
+                       rp->ai_protocol);
+          if (fd == -1) {
+              continue;
+          }
+
+          if (connect(fd, rp->ai_addr, rp->ai_addrlen) != -1) {
+              break;                  /* Success */
+          }
+
+          close(fd);
+          errExit("Socket connection failed");
+      }
     }
+    else { // addrFamily == AF_UNIX
+      fd = socket(AF_UNIX, SOCK_STREAM, 0);
+      if(fd == -1) {
+          errExit("Socket creation failed");
+      }
 
-    memset(&addr, 0, sizeof(struct sockaddr_un));
-    addr.sun_family = AF_UNIX;
-    strncpy(addr.sun_path, socketPath, sizeof(addr.sun_path) - 1);
+      memset(&addr_un, 0, sizeof(struct sockaddr_un));
+      addr_un.sun_family = addrFamily;
+      strncpy(addr_un.sun_path, socketPath, sizeof(addr_un.sun_path) - 1);
 
-    if(connect(fd, (struct sockaddr *)&addr, sizeof(struct sockaddr_un)) == -1) {
-        errExit("Socket connection failed");
+      if(connect(fd, (struct sockaddr *)&addr_un, sizeof(struct sockaddr_un)) == -1) {
+          errExit("Socket connection failed");
+      }
     }
 
 

@@ -72,6 +72,8 @@ static CO_OD_storage_t      odStorAuto;         /* Object Dictionary storage obj
 static char                *odStorFile_rom    = "od_storage";       /* Name of the file */
 static char                *odStorFile_eeprom = "od_storage_auto";  /* Name of the file */
 static CO_time_t            CO_time;            /* Object for current time */
+static in_port_t            CO_command_socket_tcp_port = 60000; /* default port when used in tcp gateway mode */
+
 
 /* Realtime thread */
 #ifndef CO_SINGLE_THREAD
@@ -122,6 +124,11 @@ fprintf(stderr,
 "                      Note that location of socket path may affect security.\n"
 "                      See 'canopencomm/canopencomm --help' for more info.\n"
 , CO_command_socketPath);
+fprintf(stderr,
+"  -t <port>           Enable command interface for master functionality over tcp, \n"
+"                      listen to <port>.\n"
+"                      Note that using this mode may affect security.\n"
+);
 #endif
 fprintf(stderr,
 "\n"
@@ -149,7 +156,8 @@ int main (int argc, char *argv[]) {
     int nodeId = -1;                /* Use value from Object Dictionary or set to 1..127 by arguments */
     bool_t rebootEnable = false;    /* Configurable by arguments */
 #ifndef CO_SINGLE_THREAD
-    bool_t commandEnable = false;   /* Configurable by arguments */
+    typedef enum CMD_MODE {CMD_NONE, CMD_LOCAL, CMD_REMOTE} cmdMode_t;
+    cmdMode_t commandEnable = CMD_NONE;   /* Configurable by arguments */
 #endif
 
     if(argc < 2 || strcmp(argv[1], "--help") == 0){
@@ -159,7 +167,7 @@ int main (int argc, char *argv[]) {
 
 
     /* Get program options */
-    while((opt = getopt(argc, argv, "i:p:rc:s:a:")) != -1) {
+    while((opt = getopt(argc, argv, "i:p:rc:t:s:a:")) != -1) {
         switch (opt) {
             case 'i':
                 nodeId = strtol(optarg, NULL, 0);
@@ -173,7 +181,19 @@ int main (int argc, char *argv[]) {
                 if(strlen(optarg) != 0) {
                     CO_command_socketPath = optarg;
                 }
-                commandEnable = true;
+                commandEnable = CMD_LOCAL;
+                break;
+            case 't':
+                /* In case of empty string keep default port, just enable interface. */
+                if(strlen(optarg) != 0) {
+                  //CO_command_socket_tcp_port = optarg;
+                  int scanResult = sscanf(optarg, "%hu", &CO_command_socket_tcp_port);
+                  if(scanResult != 1){ //expect one argument to be extracted
+                    printf("ERROR: -t argument \'%s\' is not a valid tcp port\n", optarg);
+                    exit(EXIT_FAILURE);
+                  }
+                }
+                commandEnable = CMD_REMOTE;
                 break;
 #endif
             case 's': odStorFile_rom = optarg;              break;
@@ -354,11 +374,21 @@ int main (int argc, char *argv[]) {
 
 #ifndef CO_SINGLE_THREAD
             /* Initialize socket command interface */
-            if(commandEnable) {
+            switch(commandEnable) {
+              case CMD_LOCAL:
                 if(CO_command_init() != 0) {
                     CO_errExit("Socket command interface initialization failed");
                 }
                 printf("%s - Command interface on socket '%s' started ...\n", argv[0], CO_command_socketPath);
+                break;
+              case CMD_REMOTE:
+                if(CO_command_init_tcp(CO_command_socket_tcp_port) != 0) {
+                    CO_errExit("Socket command interface initialization failed");
+                }
+                printf("%s - Command interface on tcp port '%hu' started ...\n", argv[0], CO_command_socket_tcp_port);
+                break;
+              default:
+                break;
             }
 #endif
 
@@ -434,10 +464,18 @@ int main (int argc, char *argv[]) {
 /* program exit ***************************************************************/
     /* join threads */
 #ifndef CO_SINGLE_THREAD
-    if(commandEnable) {
-        if(CO_command_clear() != 0) {
-            CO_errExit("Socket command interface removal failed");
+    switch (commandEnable)
+    {
+      case CMD_LOCAL:
+        if (CO_command_clear() != 0) {
+          CO_errExit("Socket command interface removal failed");
         }
+        break;
+      case CMD_REMOTE:
+        //nothing to do yet
+        break;
+      default:
+        break;
     }
 #endif
 
