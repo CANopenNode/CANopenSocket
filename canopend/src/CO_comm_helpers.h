@@ -39,13 +39,19 @@ extern const char spaceDelim[];
 
 /** Response errors as specified by CiA 309-3. */
 typedef enum {
-     respErrorNone              = 0,
-     respErrorReqNotSupported   = 100,
-     respErrorSyntax            = 101,
-     respErrorInternalState     = 102,
-     respErrorNoDefaultNodeSet  = 105,
-     respErrorUnsupportedNet    = 106,
-     respErrorUnsupportedNode   = 107
+     respErrorNone                      = 0,
+     respErrorReqNotSupported           = 100,
+     respErrorSyntax                    = 101,
+     respErrorInternalState             = 102,
+     respErrorTimeOut                   = 103,
+     respErrorNoDefaultNodeSet          = 105,
+     respErrorUnsupportedNet            = 106,
+     respErrorUnsupportedNode           = 107,
+     respErrorLSSmanufacturer           = 501,
+     respErrorLSSnodeIdNotSupported     = 502,
+     respErrorLSSbitRateNotSupported    = 503,
+     respErrorLSSparameterStoringFailed = 504,
+     respErrorLSSmediaError             = 505
 } respErrorCode_t;
 
 
