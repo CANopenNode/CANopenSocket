@@ -191,6 +191,20 @@ only NMT messages are accepted.
 In *canopend terminal* you see, that both devices finished. Further commands
 are not possible. If you set so, last command can also reset computer.
 
+#### Combining NMT commands into a single file
+
+Create a `commands.txt` file, and for its content enter your commands.
+Example:
+
+    [1] 3 start
+    [2] 4 start
+
+Make canopencomm use that file:
+
+    $ ./canopencomm -f commands.txt
+    [1] OK
+    [2] OK
+
 
 ### Next steps
 Now you can learn more skills on CANopen from some other sources:
