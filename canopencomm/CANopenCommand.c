@@ -320,6 +320,8 @@ int main (int argc, char *argv[]) {
       }
     }
 
+    printErrorDescription = 1; // always print error description
+
 
     /* get commands from input file, line after line */
     if(inputFilePath != NULL) {
@@ -358,7 +360,6 @@ int main (int argc, char *argv[]) {
         }
         buf[buflen - 1] = '\n'; /* replace last space with newline */
 
-        printErrorDescription = 1;
         sendCommand(fd, buf, buflen);
     }
 
@@ -396,10 +397,12 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
     }
 
     if(printErrorDescription == 1) {
+        //check for error reply
         char *errLoc = strstr(replyBuf, "ERROR:");
         char *endLoc = strstr(replyBuf, "\r\n");
 
         if(errLoc != NULL && endLoc != NULL) {
+            //parse error code
             int num;
             char *sRet = NULL;
 
@@ -411,6 +414,7 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
 
                 len = sizeof(errorDescs) / sizeof(errorDescs_t);
 
+                //lookup error code and print
                 for(i=0; i<len; i++) {
                     const errorDescs_t *ed = &errorDescs[i];
                     if(ed->code == num) {
