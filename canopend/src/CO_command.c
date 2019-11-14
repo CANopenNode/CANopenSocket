@@ -242,8 +242,8 @@ static void* command_thread(void* arg) {
 
         /* Read command and send answer. */
         while((n = read(fd, cmdBuf, cmdBufSize-1)) > 0) {
-            n++;
             *(cmdBuf + n) = 0; /* terminate input string */
+            n++;
             command_process(fd, cmdBuf, n);
         }
 
@@ -456,7 +456,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             }
 
             if(err == 0) {
-                dataTxLen = datatype->dataTypeScan((char*)dataTx, sizeof(dataTx), token);
+                dataTxLen = datatype->dataTypeScan((char*)dataTx, dataTxSize, token);
 
                 /* Length must match and must not be zero. */
                 if((datatype->length != 0 && datatype->length != dataTxLen) || dataTxLen == 0) {
@@ -968,13 +968,13 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
 
     /* Terminate string and send response */
-    respLen++;
     *(resp + respLen) = '\r';
     respLen++;
     *(resp + respLen) = '\n';
+    respLen++;
     if(!tcpMode) {
-        respLen++;
         *(resp + respLen) = '\0';
+        respLen++;
     }
 
     if(write(fd, resp, respLen) != respLen) {
