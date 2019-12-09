@@ -39,7 +39,7 @@
 
 
 #ifndef BUF_SIZE
-#define BUF_SIZE            100000
+#define BUF_SIZE            1000000
 #endif
 
 

@@ -37,7 +37,7 @@
 
 
 #ifndef BUF_SIZE
-#define BUF_SIZE            100000
+#define BUF_SIZE            1000000
 #endif
 
 /* Helper functions */
@@ -217,7 +217,9 @@ int main (int argc, char *argv[]) {
     sa_family_t addrFamily = AF_UNIX;
     char  tcpPort[20] = "60000"; /* default port when used in tcp mode */
 
-    char buf[BUF_SIZE];
+    char* buf;
+    size_t bufSize = sizeof *buf * BUF_SIZE;
+    buf = malloc(bufSize);
     char hostname[HOST_NAME_MAX];
     int fd;
     struct sockaddr_un addr_un;
@@ -226,11 +228,13 @@ int main (int argc, char *argv[]) {
 
     if(argc >= 2 && strcmp(argv[1], "--help") == 0) {
         printUsage(argv[0]);
+        free(buf);
         exit(EXIT_SUCCESS);
     }
     if(argc >= 2 && strcmp(argv[1], "--helpall") == 0) {
         printUsage(argv[0]);
         printErrorDescs();
+        free(buf);
         exit(EXIT_SUCCESS);
     }
 
@@ -255,6 +259,7 @@ int main (int argc, char *argv[]) {
                 break;
             default:
                 printUsage(argv[0]);
+                free(buf);
                 exit(EXIT_FAILURE);
         }
     }
@@ -273,6 +278,7 @@ int main (int argc, char *argv[]) {
         errcode = getaddrinfo(hostname, tcpPort, &hints, &res);
         if (errcode != 0) {
             fprintf(stderr, "Error! Getaddrinfo for host %s failed\n", hostname);
+            free(buf);
             exit(EXIT_FAILURE);
         }
 
@@ -293,12 +299,14 @@ int main (int argc, char *argv[]) {
           }
 
           close(fd);
+          free(buf);
           errExit("Socket connection failed");
       }
     }
     else { // addrFamily == AF_UNIX
       fd = socket(AF_UNIX, SOCK_STREAM, 0);
       if(fd == -1) {
+          free(buf);
           errExit("Socket creation failed");
       }
 
@@ -307,15 +315,19 @@ int main (int argc, char *argv[]) {
       strncpy(addr_un.sun_path, socketPath, sizeof(addr_un.sun_path) - 1);
 
       if(connect(fd, (struct sockaddr *)&addr_un, sizeof(struct sockaddr_un)) == -1) {
+          free(buf);
           errExit("Socket connection failed");
       }
     }
+
+    printErrorDescription = 1; // always print error description
 
 
     /* get commands from input file, line after line */
     if(inputFilePath != NULL) {
         FILE *fp = fopen(inputFilePath, "r");
         if(fp == NULL) {
+            free(buf);
             errExit("Can't open input file");
         }
 
@@ -342,12 +354,12 @@ int main (int argc, char *argv[]) {
             buflen = strlen(buf);
             if(buflen >= (BUF_SIZE - 1)) {
                 fprintf(stderr, "String too long!\n");
+                free(buf);
                 exit(EXIT_FAILURE);
             }
         }
         buf[buflen - 1] = '\n'; /* replace last space with newline */
 
-        printErrorDescription = 1;
         sendCommand(fd, buf, buflen);
     }
 
@@ -360,29 +372,37 @@ int main (int argc, char *argv[]) {
 
     close(fd);
 
+    free(buf);
     exit(EXIT_SUCCESS);
 }
 
 
 static void sendCommand(int fd, char* command, size_t commandLength) {
     size_t n;
-    char buf[BUF_SIZE];
 
+    char* replyBuf;
+    size_t bufSize = sizeof *replyBuf * BUF_SIZE;
+    replyBuf = malloc(bufSize);
+
+    // send command
     if (write(fd, command, commandLength) != commandLength) {
         errExit("Socket write failed");
     }
 
-    n = read(fd, buf, sizeof(buf));
+    //read reply
+    n = read(fd, replyBuf, bufSize);
 
     if(n == -1) {
         errExit("Socket read failed");
     }
 
     if(printErrorDescription == 1) {
-        char *errLoc = strstr(buf, "ERROR:");
-        char *endLoc = strstr(buf, "\r\n");
+        //check for error reply
+        char *errLoc = strstr(replyBuf, "ERROR:");
+        char *endLoc = strstr(replyBuf, "\r\n");
 
         if(errLoc != NULL && endLoc != NULL) {
+            //parse error code
             int num;
             char *sRet = NULL;
 
@@ -394,6 +414,7 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
 
                 len = sizeof(errorDescs) / sizeof(errorDescs_t);
 
+                //lookup error code and print
                 for(i=0; i<len; i++) {
                     const errorDescs_t *ed = &errorDescs[i];
                     if(ed->code == num) {
@@ -405,6 +426,7 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
         }
     }
 
-    printf("%s", buf);
+    printf("%s", replyBuf);
+    free(replyBuf);
 }
 

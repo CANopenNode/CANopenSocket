@@ -44,7 +44,7 @@
 
 /* Maximum size of Object Dictionary variable transmitted via SDO. */
 #ifndef CO_COMMAND_SDO_BUFFER_SIZE
-#define CO_COMMAND_SDO_BUFFER_SIZE     100000
+#define CO_COMMAND_SDO_BUFFER_SIZE     1000000
 #endif
 
 #define STRING_BUFFER_SIZE  (CO_COMMAND_SDO_BUFFER_SIZE * 4 + 100)
@@ -227,7 +227,9 @@ int CO_command_clear_tcp(in_port_t port) {
 static void* command_thread(void* arg) {
     int fd;
     ssize_t n;
-    char buf[STRING_BUFFER_SIZE];
+    char* cmdBuf;
+    size_t cmdBufSize = sizeof *cmdBuf * STRING_BUFFER_SIZE;
+    cmdBuf = malloc(cmdBufSize);
 
     /* Almost endless loop */
     while(endProgram == 0) {
@@ -239,9 +241,10 @@ static void* command_thread(void* arg) {
         }
 
         /* Read command and send answer. */
-        while((n = read(fd, buf, sizeof(buf)-1)) > 0) {
-            buf[n++] = 0; /* terminate input string */
-            command_process(fd, buf, n);
+        while((n = read(fd, cmdBuf, cmdBufSize-1)) > 0) {
+            *(cmdBuf + n) = 0; /* terminate input string */
+            n++;
+            command_process(fd, cmdBuf, n);
         }
 
         if(n == -1){
@@ -254,6 +257,7 @@ static void* command_thread(void* arg) {
         }
     }
 
+    free(cmdBuf);
     return NULL;
 }
 
@@ -267,7 +271,9 @@ static void command_process(int fd, char* command, size_t commandLength) {
     uint32_t ui[3];
     uint8_t comm_node = 0xFF; /* undefined */
 
-    char resp[STRING_BUFFER_SIZE];
+    char* resp;
+    size_t respSize = sizeof *resp * STRING_BUFFER_SIZE;
+    resp = malloc(respSize);
     int respLen = 0;
     respErrorCode_t respErrorCode = respErrorNone;
 
@@ -353,7 +359,9 @@ static void command_process(int fd, char* command, size_t commandLength) {
             int errDt = 0;
             uint32_t SDOabortCode = 1;
 
-            uint8_t dataRx[CO_COMMAND_SDO_BUFFER_SIZE]; /* SDO receive buffer */
+            uint8_t* dataRx; /* SDO receive buffer */
+            size_t dataRxSize = sizeof *dataRx * CO_COMMAND_SDO_BUFFER_SIZE;
+            dataRx = malloc(dataRxSize);
             uint32_t dataRxLen;  /* Length of received data */
 
             token = getTok(NULL, spaceDelim, &err);
@@ -389,7 +397,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
                         idx,
                         subidx,
                         dataRx,
-                        sizeof(dataRx),
+                        dataRxSize,
                         &dataRxLen,
                         &SDOabortCode,
                         SDOtimeoutTime,
@@ -406,17 +414,19 @@ static void command_process(int fd, char* command, size_t commandLength) {
                     respLen = sprintf(resp, "[%d] ", sequence);
 
                     if(datatype == NULL || (datatype->length != 0 && datatype->length != dataRxLen)) {
-                        respLen += dtpHex(resp+respLen, sizeof(resp)-respLen, (char*)dataRx, dataRxLen);
+                        respLen += dtpHex(resp+respLen, respSize-respLen, (char*)dataRx, dataRxLen);
                     }
                     else {
                         respLen += datatype->dataTypePrint(
-                                resp+respLen, sizeof(resp)-respLen, (char*)dataRx, dataRxLen);
+                                resp+respLen, respSize-respLen, (char*)dataRx, dataRxLen);
                     }
                 }
                 else{
                     respLen = sprintf(resp, "[%d] ERROR: 0x%08X", sequence, SDOabortCode);
                 }
             }
+
+            free(dataRx);
         }
 
         /* Download SDO command - w[rite] <index> <subindex> <datatype> <value> */
@@ -426,7 +436,9 @@ static void command_process(int fd, char* command, size_t commandLength) {
             const dataType_t *datatype;
             uint32_t SDOabortCode = 1;
 
-            uint8_t dataTx[CO_COMMAND_SDO_BUFFER_SIZE]; /* SDO transmit buffer */
+            uint8_t* dataTx; /* SDO transmit buffer */
+            size_t dataTxSize = sizeof *dataTx * CO_COMMAND_SDO_BUFFER_SIZE;
+            dataTx = malloc(dataTxSize);
             uint32_t dataTxLen = 0;  /* Length of data to transmit. */
 
             token = getTok(NULL, spaceDelim, &err);
@@ -444,7 +456,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             }
 
             if(err == 0) {
-                dataTxLen = datatype->dataTypeScan((char*)dataTx, sizeof(dataTx), token);
+                dataTxLen = datatype->dataTypeScan((char*)dataTx, dataTxSize, token);
 
                 /* Length must match and must not be zero. */
                 if((datatype->length != 0 && datatype->length != dataTxLen) || dataTxLen == 0) {
@@ -490,6 +502,8 @@ static void command_process(int fd, char* command, size_t commandLength) {
                     respLen = sprintf(resp, "[%d] ERROR: 0x%08X", sequence, SDOabortCode);
                 }
             }
+
+            free(dataTx);
         }
 
         /* NMT start node */
@@ -758,16 +772,16 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 if (err == 0) {
                     respLen = sprintf(resp, "[%d] ", sequence);
 
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&vendorId, sizeof(vendorId));
                     respLen += sprintf(resp+respLen, " ");
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&productCode, sizeof(productCode));
                     respLen += sprintf(resp+respLen, " ");
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&revisionNo, sizeof(revisionNo));
                     respLen += sprintf(resp+respLen, " ");
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&serialNo, sizeof(serialNo));
                 }
             }
@@ -817,16 +831,16 @@ static void command_process(int fd, char* command, size_t commandLength) {
                 if (err == 0) {
                     respLen = sprintf(resp, "[%d] ", sequence);
 
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&vendorId, sizeof(vendorId));
                     respLen += sprintf(resp+respLen, " ");
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&productCode, sizeof(productCode));
                     respLen += sprintf(resp+respLen, " ");
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&revisionNo, sizeof(revisionNo));
                     respLen += sprintf(resp+respLen, " ");
-                    respLen += datatype->dataTypePrint(resp+respLen, sizeof(resp)-respLen,
+                    respLen += datatype->dataTypePrint(resp+respLen, respSize-respLen,
                                    (char*)&serialNo, sizeof(serialNo));
                 }
             }
@@ -954,13 +968,18 @@ static void command_process(int fd, char* command, size_t commandLength) {
 
 
     /* Terminate string and send response */
-    resp[respLen++] = '\r';
-    resp[respLen++] = '\n';
+    *(resp + respLen) = '\r';
+    respLen++;
+    *(resp + respLen) = '\n';
+    respLen++;
     if(!tcpMode) {
-      resp[respLen++] = '\0';
+        *(resp + respLen) = '\0';
+        respLen++;
     }
 
     if(write(fd, resp, respLen) != respLen) {
         CO_error(0x15200000L);
     }
+
+    free(resp);
 }
