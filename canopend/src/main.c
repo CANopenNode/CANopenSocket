@@ -525,7 +525,6 @@ static void* rt_thread(void* arg) {
         }
 
         else if(CANrx_taskTmr_process(ev.data.fd)) {
-            int i;
 
             /* code was processed in the above function. Additional code process below */
             INCREMENT_1MS(CO_timer1ms);
