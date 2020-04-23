@@ -278,7 +278,7 @@ int main (int argc, char *argv[]) {
 
 
         /* Enter CAN configuration. */
-        CO_CANsetConfigurationMode(CANdevice0Index);
+        CO_CANsetConfigurationMode(&CANdevice0Index);
 
 
         /* initialize CANopen */
@@ -286,7 +286,7 @@ int main (int argc, char *argv[]) {
             /* use value from Object dictionary, if not set by program arguments */
             nodeId = OD_CANNodeID;
         }
-        err = CO_init(CANdevice0Index, nodeId, 0);
+        err = CO_init(&CANdevice0Index, nodeId, 0);
         if(err != CO_ERROR_NO) {
             char s[120];
             snprintf(s, 120, "Communication reset - CANopen initialization failed, err=%d", err);
@@ -491,7 +491,7 @@ int main (int argc, char *argv[]) {
     /* delete objects from memory */
     CANrx_taskTmr_close();
     taskMain_close();
-    CO_delete(CANdevice0Index);
+    CO_delete(&CANdevice0Index);
 
     printf("%s on %s (nodeId=0x%02X) - finished.\n\n", argv[0], CANdevice, nodeId);
 
