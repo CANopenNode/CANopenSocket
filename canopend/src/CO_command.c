@@ -266,7 +266,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
     int err = 0; /* syntax or other error, true or false */
     int emptyLine = 0;
     char *token;
-    int i;
+    int i = 0;
     uint32_t ui[3];
     uint8_t comm_node = 0xFF; /* undefined */
 
