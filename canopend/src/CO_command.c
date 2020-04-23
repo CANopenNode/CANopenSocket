@@ -391,7 +391,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientUpload(
-                        CO->SDOclient,
+                        *CO->SDOclient,
                         comm_node,
                         idx,
                         subidx,
@@ -477,7 +477,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientDownload(
-                        CO->SDOclient,
+                        *CO->SDOclient,
                         comm_node,
                         idx,
                         subidx,

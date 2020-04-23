@@ -308,7 +308,7 @@ int main (int argc, char *argv[]) {
         /* Configure callback functions for task control */
         CO_EM_initCallback(CO->em, taskMain_cbSignal);
         CO_SDO_initCallback(CO->SDO[0], taskMain_cbSignal);
-        CO_SDOclient_initCallback(CO->SDOclient, taskMain_cbSignal);
+        CO_SDOclient_initCallback(*CO->SDOclient, taskMain_cbSignal);
 
 
         /* Initialize time */
