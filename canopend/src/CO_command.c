@@ -200,7 +200,7 @@ int CO_command_clear_tcp(in_port_t port) {
         return -1;
     }
 
-    memset(&addr, 0, sizeof(struct sockaddr_un));
+    memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     //addr.sin_addr.s_addr = INADDR_ANY;
