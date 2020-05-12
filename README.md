@@ -59,6 +59,12 @@ limitations under the License.
 Getting started with CANopen Socket
 -----------------------------------
 
+canopend with command interface and "Getting started" is now availabe in base CANopenNode repo. See https://github.com/CANopenNode/CANopenNode/blob/master/doc/gettingStarted.md
+
+**Example below is outdated**
+
+-------------------------
+
 We will run two instances of *CANopend*. First will be basic node with ID=4,
 second, with nodeID = 3, will have master functionality.
 
