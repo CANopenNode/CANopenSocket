@@ -394,10 +394,13 @@ static void sendCommand(int fd, int sequence, char* command) {
             errExit("Socket write failed");
         }
 
-        rlen = read(fd, buf, sizeof(buf));
+        rlen = read(fd, buf, sizeof(buf) - 1);
 
-        if(rlen == -1) {
+        if(rlen < 0) {
             errExit("Socket read failed");
+        }
+        else {
+            buf[rlen] = 0;
         }
 
         printf("%c %02X%04X%02X %s",

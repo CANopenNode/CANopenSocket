@@ -386,10 +386,13 @@ static void sendCommand(int fd, char* command, size_t commandLength) {
     }
 
     //read reply
-    n = read(fd, replyBuf, bufSize);
+    n = read(fd, replyBuf, bufSize - 1);
 
-    if(n == -1) {
+    if(n < 0) {
         errExit("Socket read failed");
+    }
+    else {
+        replyBuf[n] = 0;
     }
 
     if(printErrorDescription == 1) {
