@@ -200,7 +200,7 @@ int CO_command_clear_tcp(in_port_t port) {
         return -1;
     }
 
-    memset(&addr, 0, sizeof(struct sockaddr_un));
+    memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     //addr.sin_addr.s_addr = INADDR_ANY;
@@ -266,7 +266,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
     int err = 0; /* syntax or other error, true or false */
     int emptyLine = 0;
     char *token;
-    int i;
+    int i = 0;
     uint32_t ui[3];
     uint8_t comm_node = 0xFF; /* undefined */
 
@@ -391,7 +391,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientUpload(
-                        CO->SDOclient,
+                        *CO->SDOclient,
                         comm_node,
                         idx,
                         subidx,
@@ -477,7 +477,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientDownload(
-                        CO->SDOclient,
+                        *CO->SDOclient,
                         comm_node,
                         idx,
                         subidx,

@@ -50,10 +50,10 @@ int lssSwitchStateSelect(
 
     /* Fill LSS address struct */
     if (global != true) {
-      lssAddress.vendorID = vendorId;
-      lssAddress.productCode = productCode;
-      lssAddress.revisionNumber = revisionNo;
-      lssAddress.serialNumber = serialNo;
+      lssAddress.identity.vendorID = vendorId;
+      lssAddress.identity.productCode = productCode;
+      lssAddress.identity.revisionNumber = revisionNo;
+      lssAddress.identity.serialNumber = serialNo;
       p = &lssAddress;
     }
     else {
@@ -283,10 +283,10 @@ int lssInquireLssAddress(
     } while(1);
 
     /* Fill LSS address struct */
-    *vendorId = lssAddress.vendorID;
-    *productCode = lssAddress.productCode;
-    *revisionNo = lssAddress.revisionNumber;
-    *serialNo = lssAddress.serialNumber;
+    *vendorId = lssAddress.identity.vendorID;
+    *productCode = lssAddress.identity.productCode;
+    *revisionNo = lssAddress.identity.revisionNumber;
+    *serialNo = lssAddress.identity.serialNumber;
 
     pthread_mutex_unlock(&CO_CAN_VALID_mtx);
 
@@ -356,13 +356,13 @@ int lssIdentifyFastscan(
     pthread_mutex_lock(&CO_CAN_VALID_mtx);
 
     fastscan.scan[CO_LSS_FASTSCAN_VENDOR_ID] = scanVendorId;
-    fastscan.match.vendorID = *vendorId;
+    fastscan.match.identity.vendorID = *vendorId;
     fastscan.scan[CO_LSS_FASTSCAN_PRODUCT] = scanProductCode;
-    fastscan.match.productCode = *productCode;
+    fastscan.match.identity.productCode = *productCode;
     fastscan.scan[CO_LSS_FASTSCAN_REV] = scanRevisionNumber;
-    fastscan.match.revisionNumber = *revisionNo;
+    fastscan.match.identity.revisionNumber = *revisionNo;
     fastscan.scan[CO_LSS_FASTSCAN_SERIAL] = scanSerialNo;
-    fastscan.match.serialNumber = *serialNo;
+    fastscan.match.identity.serialNumber = *serialNo;
     /* Do scan. Loop in 5 ms intervals. */
 
     timer1msPrev = CO_timer1ms;
@@ -387,10 +387,10 @@ int lssIdentifyFastscan(
 
     CO_LSSmaster_changeTimeout(LSSmaster, CO_LSSmaster_DEFAULT_TIMEOUT);
 
-    *vendorId = fastscan.found.vendorID;
-    *productCode = fastscan.found.productCode;
-    *revisionNo = fastscan.found.revisionNumber;
-    *serialNo = fastscan.found.serialNumber;
+    *vendorId = fastscan.found.identity.vendorID;
+    *productCode = fastscan.found.identity.productCode;
+    *revisionNo = fastscan.found.identity.revisionNumber;
+    *serialNo = fastscan.found.identity.serialNumber;
 
     pthread_mutex_unlock(&CO_CAN_VALID_mtx);
 
