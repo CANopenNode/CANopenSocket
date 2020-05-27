@@ -78,6 +78,13 @@ Clone the project from git repository and get submodules:
     $ git submodule init
     $ git submodule update
 
+If you already have the project and just want to update, use:
+
+    cd CANopenSocket
+    git pull # or: git fetch; inspect the changes (gitk); git merge
+    git submodule update
+
+
 (If you want to work on submodule CANopenNode, you can `cd CANopenNode`,
 and apply git commands directly on it. Initially is in head detached state,
 so you have to `git checkout master` first. Then you can control submodule
