@@ -27,7 +27,7 @@
 #include "CANopen.h"
 #include "CO_OD_storage.h"
 #include "CO_Linux_tasks.h"
-#include "CO_time.h"
+#include "CO_timeStamp.h"
 #include "application.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -70,7 +70,7 @@ static CO_OD_storage_t      odStor;             /* Object Dictionary storage obj
 static CO_OD_storage_t      odStorAuto;         /* Object Dictionary storage object for CO_OD_EEPROM */
 static char                *odStorFile_rom    = "od_storage";       /* Name of the file */
 static char                *odStorFile_eeprom = "od_storage_auto";  /* Name of the file */
-static CO_time_t            CO_time;            /* Object for current time */
+static CO_timeStamp_t       CO_timeStamp;       /* Object for current time stamp */
 static in_port_t            CO_command_socket_tcp_port = 60000; /* default port when used in tcp gateway mode */
 
 
@@ -308,11 +308,11 @@ int main (int argc, char *argv[]) {
         /* Configure callback functions for task control */
         CO_EM_initCallback(CO->em, taskMain_cbSignal);
         CO_SDO_initCallback(CO->SDO[0], taskMain_cbSignal);
-        CO_SDOclient_initCallback(*CO->SDOclient, taskMain_cbSignal);
+        CO_SDOclient_initCallback(CO->SDOclient[0], taskMain_cbSignal);
 
 
         /* Initialize time */
-        CO_time_init(&CO_time, CO->SDO[0], &OD_time.epochTimeBaseMs, &OD_time.epochTimeOffsetMs, 0x2130);
+        CO_timeStamp_init(&CO_timeStamp, CO->SDO[0], &OD_time.epochTimeBaseMs, &OD_time.epochTimeOffsetMs, 0x2130);
 
 
         /* First time only initialization. */
@@ -530,10 +530,11 @@ static void* rt_thread(void* arg) {
             INCREMENT_1MS(CO_timer1ms);
 
             /* Monitor variables with trace objects */
-            CO_time_process(&CO_time);
+            CO_timeStamp_process(&CO_timeStamp);
 #if CO_NO_TRACE > 0
+            int i;
             for(i=0; i<OD_traceEnable && i<CO_NO_TRACE; i++) {
-                CO_trace_process(CO->trace[i], *CO_time.epochTimeOffsetMs);
+                CO_trace_process(CO->trace[i], *CO_timeStamp.epochTimeOffsetMs);
             }
 #endif
 

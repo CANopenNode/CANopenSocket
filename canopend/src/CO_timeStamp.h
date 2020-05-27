@@ -1,7 +1,7 @@
 /**
- * CANopen time interface.
+ * CANopen time stamp interface.
  *
- * @file        CO_time.h
+ * @file        CO_timeStamp.h
  * @author      Janez Paternoster
  * @copyright   2016 - 2020 Janez Paternoster
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef CO_TIME_H
-#define CO_TIME_H
+#ifndef CO_TIME_STAMP_H
+#define CO_TIME_STAMP_H
 
 
 #include "CO_driver.h"
@@ -36,9 +36,9 @@
  * Time object, usable for timestamping.
  */
 typedef struct {
-    uint64_t           *epochTimeBaseMs;    /**< From CO_time_init(). */
-    uint32_t           *epochTimeOffsetMs;  /**< From CO_time_init(). */
-} CO_time_t;
+    uint64_t           *epochTimeBaseMs;    /**< From CO_timeStamp_init(). */
+    uint32_t           *epochTimeOffsetMs;  /**< From CO_timeStamp_init(). */
+} CO_timeStamp_t;
 
 
 /**
@@ -52,8 +52,8 @@ typedef struct {
  * @param epochTimeOffsetMs pointer to offset. Set to 0 at program startup and increments since then.
  * @param idx_OD_time Index in Object Dictionary.
  */
-void CO_time_init(
-        CO_time_t              *tm,
+void CO_timeStamp_init(
+        CO_timeStamp_t         *tm,
         CO_SDO_t               *SDO,
         uint64_t               *epochTimeBaseMs,
         uint32_t               *epochTimeOffsetMs,
@@ -67,7 +67,7 @@ void CO_time_init(
  *
  * @param tm This object.
  */
-void CO_time_process(CO_time_t *tm);
+void CO_timeStamp_process(CO_timeStamp_t *tm);
 
 
-#endif
+#endif /* CO_TIME_STAMP_H */

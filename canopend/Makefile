@@ -38,7 +38,7 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
                 $(CANOPEND_SRC)/CO_comm_helpers.c   \
                 $(CANOPEND_SRC)/CO_master.c         \
                 $(CANOPEND_SRC)/CO_LSS_master.c     \
-                $(CANOPEND_SRC)/CO_time.c           \
+                $(CANOPEND_SRC)/CO_timeStamp.c      \
                 $(CANOPEND_SRC)/main.c              \
                 $(OBJ_DICT_SRC)/CO_OD.c             \
                 $(APP_SRC)/application.c

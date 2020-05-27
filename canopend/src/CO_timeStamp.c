@@ -1,7 +1,7 @@
 /*
- * CANopen time interface.
+ * CANopen time stamp interface.
  *
- * @file        CO_time.c
+ * @file        CO_timeStamp.c
  * @author      Janez Paternoster
  * @copyright   2016 - 2020 Janez Paternoster
  *
@@ -24,13 +24,13 @@
  */
 
 
-#include "CO_time.h"
+#include "CO_timeStamp.h"
 #include <time.h>
 #include <string.h>
 
 
 /* Set epochTime base and offset */
-static void timeZero(CO_time_t *tm) {
+static void timeZero(CO_timeStamp_t *tm) {
     struct timespec tspec;
     struct tm *tstruct;
 
@@ -46,10 +46,10 @@ static void timeZero(CO_time_t *tm) {
 /* OD function for accessing _OD_time_ (index 0x2130) from SDO server.
  * For more information see file CO_SDO.h. */
 static CO_SDO_abortCode_t CO_ODF_time(CO_ODF_arg_t *ODF_arg) {
-    CO_time_t *tm;
+    CO_timeStamp_t *tm;
     CO_SDO_abortCode_t ret = CO_SDO_AB_NONE;
 
-    tm = (CO_time_t*) ODF_arg->object;
+    tm = (CO_timeStamp_t*) ODF_arg->object;
 
     /* Reading Object Dictionary variable */
     if(ODF_arg->reading) {
@@ -85,8 +85,8 @@ static CO_SDO_abortCode_t CO_ODF_time(CO_ODF_arg_t *ODF_arg) {
 
 
 /******************************************************************************/
-void CO_time_init(
-        CO_time_t              *tm,
+void CO_timeStamp_init(
+        CO_timeStamp_t         *tm,
         CO_SDO_t               *SDO,
         uint64_t               *epochTimeBaseMs,
         uint32_t               *epochTimeOffsetMs,
@@ -105,7 +105,7 @@ void CO_time_init(
 
 
 /******************************************************************************/
-void CO_time_process(CO_time_t *tm){
+void CO_timeStamp_process(CO_timeStamp_t *tm){
 
     if(++(*tm->epochTimeOffsetMs) == 0) {
         /* overflow happened after ~50 days */

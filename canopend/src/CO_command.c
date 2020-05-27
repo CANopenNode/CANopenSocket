@@ -71,7 +71,7 @@ static volatile int         endProgram = 0;
 int CO_command_init(void) {
     struct sockaddr_un addr;
 
-    if(CO == NULL || CO->SDOclient == NULL){
+    if(CO == NULL || CO->SDOclient[0] == NULL){
         CO_errExit("CO_command_init - Wrong arguments");
     }
 
@@ -108,7 +108,7 @@ int CO_command_init(void) {
 int CO_command_init_tcp(in_port_t port) {
     struct sockaddr_in addr;
 
-    if(CO == NULL || CO->SDOclient == NULL){
+    if(CO == NULL || CO->SDOclient[0] == NULL){
         CO_errExit("CO_command_init - Wrong arguments");
     }
 
@@ -391,7 +391,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientUpload(
-                        *CO->SDOclient,
+                        CO->SDOclient[0],
                         comm_node,
                         idx,
                         subidx,
@@ -477,7 +477,7 @@ static void command_process(int fd, char* command, size_t commandLength) {
             /* Make CANopen SDO transfer */
             if(err == 0) {
                 err = sdoClientDownload(
-                        *CO->SDOclient,
+                        CO->SDOclient[0],
                         comm_node,
                         idx,
                         subidx,

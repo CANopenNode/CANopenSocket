@@ -51,6 +51,21 @@
    typedef oChar_t      OCTET_STRING;
    typedef domain_t     DOMAIN;
 
+   #ifndef timeOfDay_t
+    typedef union {
+        unsigned long long ullValue;
+        struct {
+            unsigned long ms:28;
+            unsigned reserved:4;
+            unsigned days:16;
+            unsigned reserved2:16;
+        };
+    }timeOfDay_t;
+#endif
+
+    typedef timeOfDay_t TIME_OF_DAY;
+    typedef timeOfDay_t TIME_DIFFERENCE;
+
 
 /*******************************************************************************
    FILE INFO:
@@ -75,13 +90,14 @@
    FEATURES
 *******************************************************************************/
    #define CO_NO_SYNC                     1   //Associated objects: 1005, 1006, 1007, 2103, 2104
+   #define CO_NO_TIME                     0   //Associated objects: 1012-1013
    #define CO_NO_EMERGENCY                1   //Associated objects: 1014, 1015
    #define CO_NO_SDO_SERVER               1   //Associated objects: 1200
    #define CO_NO_SDO_CLIENT               1   //Associated objects: 1280
    #define CO_NO_RPDO                     16  //Associated objects from index 1400 to 160F, count = 32
    #define CO_NO_TPDO                     16  //Associated objects from index 1800 to 1A0F, count = 32
    #define CO_NO_NMT_MASTER               1
-   #define CO_NO_TRACE                    32  //Associated objects from index 2301 to 2420, count = 65
+   #define CO_NO_TRACE                    0//32  //Associated objects from index 2301 to 2420, count = 65
    #define CO_NO_LSS_CLIENT               1   //todo - do not add this manually to created file, change editor instead
    #define CO_NO_LSS_SERVER               0   //todo - dito
 
