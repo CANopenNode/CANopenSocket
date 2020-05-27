@@ -278,7 +278,7 @@ int main (int argc, char *argv[]) {
 
 
         /* Enter CAN configuration. */
-        CO_CANsetConfigurationMode(CANdevice0Index);
+        CO_CANsetConfigurationMode(&CANdevice0Index);
 
 
         /* initialize CANopen */
@@ -286,7 +286,7 @@ int main (int argc, char *argv[]) {
             /* use value from Object dictionary, if not set by program arguments */
             nodeId = OD_CANNodeID;
         }
-        err = CO_init(CANdevice0Index, nodeId, 0);
+        err = CO_init(&CANdevice0Index, nodeId, 0);
         if(err != CO_ERROR_NO) {
             char s[120];
             snprintf(s, 120, "Communication reset - CANopen initialization failed, err=%d", err);
@@ -308,7 +308,7 @@ int main (int argc, char *argv[]) {
         /* Configure callback functions for task control */
         CO_EM_initCallback(CO->em, taskMain_cbSignal);
         CO_SDO_initCallback(CO->SDO[0], taskMain_cbSignal);
-        CO_SDOclient_initCallback(CO->SDOclient, taskMain_cbSignal);
+        CO_SDOclient_initCallback(*CO->SDOclient, taskMain_cbSignal);
 
 
         /* Initialize time */
@@ -491,7 +491,7 @@ int main (int argc, char *argv[]) {
     /* delete objects from memory */
     CANrx_taskTmr_close();
     taskMain_close();
-    CO_delete(CANdevice0Index);
+    CO_delete(&CANdevice0Index);
 
     printf("%s on %s (nodeId=0x%02X) - finished.\n\n", argv[0], CANdevice, nodeId);
 
@@ -525,7 +525,6 @@ static void* rt_thread(void* arg) {
         }
 
         else if(CANrx_taskTmr_process(ev.data.fd)) {
-            int i;
 
             /* code was processed in the above function. Additional code process below */
             INCREMENT_1MS(CO_timer1ms);
