@@ -1,0 +1,28 @@
+var structCO__SDO__t =
+[
+    [ "blksize", "structCO__SDO__t.html#af96b56b29a83257c7f52afddd688831c", null ],
+    [ "bufferOffset", "structCO__SDO__t.html#a585510e9aa0dfc0f6ce64e4c91a2050f", null ],
+    [ "CANdevTx", "structCO__SDO__t.html#a8a891c43c044a81225e716ab826a43a6", null ],
+    [ "CANrxData", "structCO__SDO__t.html#a50a4a1b9ba9255cdb55df97a12ef76c8", null ],
+    [ "CANrxNew", "structCO__SDO__t.html#a3171e782f440cb6deb81fa2974167e10", null ],
+    [ "CANtxBuff", "structCO__SDO__t.html#a97480143b4d59e4b8fa903f24cf61c2a", null ],
+    [ "crc", "structCO__SDO__t.html#aceeb824591f1c601e552efa14081d1a0", null ],
+    [ "crcEnabled", "structCO__SDO__t.html#ad7cec6f0b9ac2191afbf35cf0e2efa1f", null ],
+    [ "databuffer", "structCO__SDO__t.html#a7dd3c97e98b19bcfe330a006985109be", null ],
+    [ "endOfTransfer", "structCO__SDO__t.html#a82d30849b94d148d2b7b89c1b866200c", null ],
+    [ "entryNo", "structCO__SDO__t.html#a7240db71d15e7fea5f7ec9e7d43c44a0", null ],
+    [ "functSignalObjectPre", "structCO__SDO__t.html#a9d502c5f4283d65191516fb4a2fc530b", null ],
+    [ "lastLen", "structCO__SDO__t.html#a8c719afd393364c4fd118096f08d8c1a", null ],
+    [ "nodeId", "structCO__SDO__t.html#a094e7fa893babc77e071b48f3b583d9e", null ],
+    [ "OD", "structCO__SDO__t.html#a6d21a62bada06a4d29eeb061b18020f6", null ],
+    [ "ODExtensions", "structCO__SDO__t.html#a230824a44b720460422449f1edee113f", null ],
+    [ "ODF_arg", "structCO__SDO__t.html#adab31f25f03115dc730f2db4e2c4b8ea", null ],
+    [ "ODSize", "structCO__SDO__t.html#aa7d753f132550ac1f64839055afff259", null ],
+    [ "ownOD", "structCO__SDO__t.html#a3a46760b9982e1583180d9cff821419c", null ],
+    [ "pFunctSignalPre", "structCO__SDO__t.html#afc9febdd3fd8603615f9719b96a3bb4f", null ],
+    [ "SDOtimeoutTime_us", "structCO__SDO__t.html#a7e4322ea83d9012c9aad48f98ad2428f", null ],
+    [ "sequence", "structCO__SDO__t.html#a5c663543561178571a88347c79d0fcf7", null ],
+    [ "state", "structCO__SDO__t.html#a00533b11823b70171622189e36927c4a", null ],
+    [ "timeoutSubblockDownolad", "structCO__SDO__t.html#a5ded4b47f5759b507a9feab5d40df37c", null ],
+    [ "timeoutTimer", "structCO__SDO__t.html#a78c74c01c99a05ab5eca9efcb8f60d03", null ]
+];
