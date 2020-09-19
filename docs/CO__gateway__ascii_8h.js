@@ -51,6 +51,8 @@ var CO__gateway__ascii_8h =
     ] ],
     [ "CO_GTWA_init", "group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad", null ],
     [ "CO_GTWA_initRead", "group__CO__CANopen__309__3.html#ga70e27b3b469fbb8d26c964bbecc4702c", null ],
+    [ "CO_GTWA_write_getSpace", "group__CO__CANopen__309__3.html#gad614da9bb171d995c02ffe1940fe7e64", null ],
+    [ "CO_GTWA_write", "group__CO__CANopen__309__3.html#gaae1f01d444be975aa3cb3b2c9ebded3d", null ],
     [ "CO_GTWA_log_print", "group__CO__CANopen__309__3.html#ga20523907b832d55b47b855dd92409996", null ],
     [ "CO_GTWA_process", "group__CO__CANopen__309__3.html#ga4a82ef2ebdd5d5f9d8a7efe84048493d", null ]
 ];

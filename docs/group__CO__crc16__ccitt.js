@@ -1,5 +1,6 @@
 var group__CO__crc16__ccitt =
 [
     [ "crc16-ccitt.h", "crc16-ccitt_8h.html", null ],
-    [ "crc16_ccitt", "group__CO__crc16__ccitt.html#gaacf4bd398ebd47d76a37e066deb2d45f", null ]
+    [ "crc16_ccitt_single", "group__CO__crc16__ccitt.html#gad0ef7bb8f47a7eb3ff71d603beba7f92", null ],
+    [ "crc16_ccitt", "group__CO__crc16__ccitt.html#gab03185ec096eb8792b52d657ed6cbea1", null ]
 ];

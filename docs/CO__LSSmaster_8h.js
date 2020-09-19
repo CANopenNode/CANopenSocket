@@ -18,16 +18,16 @@ var CO__LSSmaster_8h =
       [ "CO_LSSmaster_FS_SKIP", "group__CO__LSSmaster.html#gga6e3f0d07f0712c371fb81cbf4a3dbcb1ae0e6e92e760129fc173a0a4f19a0cf07", null ],
       [ "CO_LSSmaster_FS_MATCH", "group__CO__LSSmaster.html#gga6e3f0d07f0712c371fb81cbf4a3dbcb1ad5a936fd00345aea75e8917f99df4ab3", null ]
     ] ],
-    [ "CO_LSSmaster_ActivateBit", "group__CO__LSSmaster.html#gaa016c0f3dc4dd021801b6139765657ab", null ],
+    [ "CO_LSSmaster_init", "group__CO__LSSmaster.html#ga0675297a7e7e1f472ad2e88d6b7408e7", null ],
     [ "CO_LSSmaster_changeTimeout", "group__CO__LSSmaster.html#gae22758aff11b796cfaed979c5f2808c0", null ],
+    [ "CO_LSSmaster_initCallbackPre", "group__CO__LSSmaster.html#gabfeb7e75d88b76bb00c1740381c7b53f", null ],
+    [ "CO_LSSmaster_switchStateSelect", "group__CO__LSSmaster.html#ga41b4288c03af394261541b9a8395e8f3", null ],
+    [ "CO_LSSmaster_switchStateDeselect", "group__CO__LSSmaster.html#gac0e13ec42e1fd85da5ddef6f654ef1a4", null ],
     [ "CO_LSSmaster_configureBitTiming", "group__CO__LSSmaster.html#ga71a5d90e569ee7e88763a541c286e240", null ],
     [ "CO_LSSmaster_configureNodeId", "group__CO__LSSmaster.html#ga2cdba08d9a564c4a61ebbcd0d10342fd", null ],
     [ "CO_LSSmaster_configureStore", "group__CO__LSSmaster.html#gacea091d379a5338f13963eb745b25b16", null ],
-    [ "CO_LSSmaster_IdentifyFastscan", "group__CO__LSSmaster.html#gad01ce178ea43b1843f541d4dd488f90e", null ],
-    [ "CO_LSSmaster_init", "group__CO__LSSmaster.html#ga0675297a7e7e1f472ad2e88d6b7408e7", null ],
-    [ "CO_LSSmaster_initCallbackPre", "group__CO__LSSmaster.html#gabfeb7e75d88b76bb00c1740381c7b53f", null ],
-    [ "CO_LSSmaster_Inquire", "group__CO__LSSmaster.html#ga22414a7184ca0c9d371dd67e9990d820", null ],
+    [ "CO_LSSmaster_ActivateBit", "group__CO__LSSmaster.html#gaa016c0f3dc4dd021801b6139765657ab", null ],
     [ "CO_LSSmaster_InquireLssAddress", "group__CO__LSSmaster.html#ga1b0a5c9e27e046736c6ec55a0256ed77", null ],
-    [ "CO_LSSmaster_switchStateDeselect", "group__CO__LSSmaster.html#gac0e13ec42e1fd85da5ddef6f654ef1a4", null ],
-    [ "CO_LSSmaster_switchStateSelect", "group__CO__LSSmaster.html#ga41b4288c03af394261541b9a8395e8f3", null ]
+    [ "CO_LSSmaster_Inquire", "group__CO__LSSmaster.html#ga22414a7184ca0c9d371dd67e9990d820", null ],
+    [ "CO_LSSmaster_IdentifyFastscan", "group__CO__LSSmaster.html#gad01ce178ea43b1843f541d4dd488f90e", null ]
 ];

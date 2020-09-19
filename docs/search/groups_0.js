@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ascii_20mapping',['ASCII mapping',['../group__CO__CANopen__309__3.html',1,'']]]
+  ['basic_20definitions_2332',['Basic definitions',['../group__CO__dataTypes.html',1,'']]]
 ];

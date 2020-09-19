@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /home/jani/Dokumenti/CANopen/CANopenSocket/canopencgi
+make
+sudo cp canopen.cgi /usr/lib/cgi-bin/
