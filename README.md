@@ -217,6 +217,20 @@ Make canopencomm use that file:
     [1] OK
     [2] OK
 
+### CANOpen network client
+
+By default **canopencomm** and **canopend** opens a local unix socket to interact.
+That's fine for local usage, but note that TCP sockets are also supported.
+Hence we can interact with our devices from a remote client.
+
+To interact with **canopend** over TCP, specify its TCP port using the -t argument.
+On our embedded linux device:
+
+    $ ./canopend can0 -i 1 -c "" -t 6000
+
+On our linux pc we need to specify the target device using -t, and its port using -p:
+
+    $ ./canopencomm -t 192.168.0.2 -p 6000
 
 ### Next steps
 Now you can learn more skills on CANopen from some other sources:
