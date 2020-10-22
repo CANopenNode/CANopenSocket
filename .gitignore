@@ -1,8 +1,10 @@
 /canopend/app/canopend
 /canopencomm/canopencomm
+/cocomm/cocomm
 /canopencgi/canopen.cgi
 *.o
 *.bak
+tmp
 
 /doc/
 
