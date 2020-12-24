@@ -20,38 +20,30 @@ fi
 
 # prepare files for storage
 mkdir tmp
-echo "-" > tmp/od1_storage
-echo "-" > tmp/od1_storage_auto
-echo "-" > tmp/od4_storage
-echo "-" > tmp/od4_storage_auto
-echo "-" > tmp/od99_storage
-echo "-" > tmp/od99_storage_auto
-echo "-" > tmp/od7f_storage
-echo "-" > tmp/od7f_storage_auto
 
-echo "Starting several CANopen devices on \'$can_device\' in backgroud..."
+echo "Starting several CANopen devices on '$can_device' in backgroud..."
 
 # prepare stop script and run up to four CANopen devices in background
 echo "#!/bin/bash" > $cleanup
 chmod a+x $cleanup
 
 if [[ "$mask" =~ "1" ]] ; then
-    ./canopend $can_device -i 1 -s tmp/od1_storage -a tmp/od1_storage_auto -c "/tmp/CO_command_socket"&
+    ./canopend $can_device -i 1 -c "local-/tmp/CO_command_socket_test"&
     echo kill $! >> $cleanup
     sleep 0.1
 fi
 if [[ "$mask" =~ "2" ]] ; then
-    ./canopend $can_device -i 4 -s tmp/od4_storage -a tmp/od4_storage_auto&
+    ./canopend $can_device -i 4 &
     echo kill $! >> $cleanup
     sleep 0.1
 fi
 if [[ "$mask" =~ "3" ]] ; then
-    ./canopend $can_device -i 99 -s tmp/od99_storage -a tmp/od99_storage_auto&
+    ./canopend $can_device -i 99 &
     echo kill $! >> $cleanup
     sleep 0.1
 fi
 if [[ "$mask" =~ "4" ]] ; then
-    ./canopend $can_device -i 127 -s tmp/od7f_storage -a tmp/od7f_storage_auto&
+    ./canopend $can_device -i 127 &
     echo kill $! >> $cleanup
     sleep 0.1
 fi

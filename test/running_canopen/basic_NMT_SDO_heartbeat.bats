@@ -18,9 +18,8 @@ setup_file() {
 
     #export cocomm_host=
     #export cocomm_port=60000
-    export cocomm_socket=/tmp/CO_command_socket
-    export cocomm_err_desc=1
-    export cocomm_buff_size=1000
+    export cocomm_socket=/tmp/CO_command_socket_test
+    export cocomm_flat=1
     export cocomm_candump=can_test
     export cocomm_candump_count=10
     export cocomm_candump_timeout=$(( $HB * 2 ))

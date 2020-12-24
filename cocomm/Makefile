@@ -7,7 +7,9 @@ SOURCES = $(APPL_SRC)/cocomm.c
 
 OBJS = $(SOURCES:%.c=%.o)
 CC ?= gcc
-CFLAGS = -Wall $(INCLUDE_DIRS)
+OPT = -g
+#OPT = -g -pedantic -Wshadow -fanalyzer
+CFLAGS = -Wall $(OPT) $(INCLUDE_DIRS)
 LDFLAGS =
 
 .PHONY: all clean

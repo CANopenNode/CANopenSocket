@@ -1,16 +1,16 @@
-/canopend/app/canopend
-/canopencomm/canopencomm
 /cocomm/cocomm
 /canopencgi/canopen.cgi
 *.o
 *.bak
 tmp
+index.html
 
-/doc/
+/tools/EDSEditor
 
 # eclipse
-.metadata/
+.cproject
+.project
 .settings/
-Debug/
-Release/
 
+# kdevelop
+*.kdev4
