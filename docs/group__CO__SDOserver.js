@@ -24,7 +24,7 @@ var group__CO__SDOserver =
       [ "finished", "structCO__SDOserver__t.html#a90997c7a119e97d2cb8b9bbc5fb5145f", null ],
       [ "SDOtimeoutTime_us", "structCO__SDOserver__t.html#a09381f3b6885d0a3bc7d1fa96805eb5d", null ],
       [ "timeoutTimer", "structCO__SDOserver__t.html#a69dfa2436ba0bb51c527eb03330b48a7", null ],
-      [ "buf", "structCO__SDOserver__t.html#ab866bef60a888c32cb6d49b1f7f4889c", null ],
+      [ "buf", "structCO__SDOserver__t.html#ab834e69e77b72e1ee1d39d35e21e0df4", null ],
       [ "bufOffsetWr", "structCO__SDOserver__t.html#a69f52a30b4e7dc0a6e55c88b3126f814", null ],
       [ "bufOffsetRd", "structCO__SDOserver__t.html#a93557d1ee64582bc37c76f4d4680f7a5", null ],
       [ "block_SDOtimeoutTime_us", "structCO__SDOserver__t.html#ae1e16955965dced9464abd0a6bf8c2b2", null ],
@@ -111,7 +111,7 @@ var group__CO__SDOserver =
       [ "CO_SDO_RT_endedWithClientAbort", "group__CO__SDOserver.html#gga7f729ab203285c7623df493916f22a73a9aafefd96d032c1b65cb6c23bc53f0aa", null ],
       [ "CO_SDO_RT_endedWithServerAbort", "group__CO__SDOserver.html#gga7f729ab203285c7623df493916f22a73ae2fce3f477766eb188502886705dc177", null ]
     ] ],
-    [ "CO_SDOserver_init", "group__CO__SDOserver.html#ga3138a8f9bc42583e5381c3245062761d", null ],
+    [ "CO_SDOserver_init", "group__CO__SDOserver.html#gac989ba60f25fd2bc48bca6df0c0c1dde", null ],
     [ "CO_SDOserver_initCallbackPre", "group__CO__SDOserver.html#ga3eeea49e2fb36da22dc754c62b03a423", null ],
     [ "CO_SDOserver_process", "group__CO__SDOserver.html#ga360bc6aa1659a5572d4d1077d787433a", null ]
 ];

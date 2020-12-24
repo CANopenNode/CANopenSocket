@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('structCO__t.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
-<p>CANopen object with pointers to all CANopenNode objects.  
+<p>CANopen object - collection of all CANopenNode objects.  
  <a href="structCO__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CANopen_8h_source.html">CANopen.h</a>&gt;</code></p>
@@ -107,83 +107,199 @@ $(document).ready(function(){initNavTree('structCO__t.html',''); initResizable()
 Data Fields</h2></td></tr>
 <tr class="memitem:a139e71d4b3c9f2c072df13e6ac0dbac4"><td class="memItemLeft" align="right" valign="top"><a id="a139e71d4b3c9f2c072df13e6ac0dbac4"></a>
 <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a139e71d4b3c9f2c072df13e6ac0dbac4">nodeIdUnconfigured</a></td></tr>
-<tr class="memdesc:a139e71d4b3c9f2c072df13e6ac0dbac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">True in unconfigured LSS slave. <br /></td></tr>
+<tr class="memdesc:a139e71d4b3c9f2c072df13e6ac0dbac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">True in un-configured LSS slave. <br /></td></tr>
 <tr class="separator:a139e71d4b3c9f2c072df13e6ac0dbac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a976bf4f7bf433cb5c077df13623f61aa"><td class="memItemLeft" align="right" valign="top"><a id="a976bf4f7bf433cb5c077df13623f61aa"></a>
-<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a976bf4f7bf433cb5c077df13623f61aa">CANmodule</a> [1]</td></tr>
-<tr class="memdesc:a976bf4f7bf433cb5c077df13623f61aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN module objects. <br /></td></tr>
-<tr class="separator:a976bf4f7bf433cb5c077df13623f61aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06065c1d3860786cd9fcfc518db1f579"><td class="memItemLeft" align="right" valign="top"><a id="a06065c1d3860786cd9fcfc518db1f579"></a>
-<a class="el" href="structCO__SDOserver__t.html">CO_SDOserver_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a06065c1d3860786cd9fcfc518db1f579">SDO</a> [<a class="el" href="group__CO__NO__OBJ.html#gae05671a26d9dfe361478d5627b18b778">CO_NO_SDO_SERVER</a>]</td></tr>
-<tr class="memdesc:a06065c1d3860786cd9fcfc518db1f579"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO object. <br /></td></tr>
-<tr class="separator:a06065c1d3860786cd9fcfc518db1f579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e4c80d975a5a2207530b72bdbf530b7"><td class="memItemLeft" align="right" valign="top"><a id="a6e4c80d975a5a2207530b72bdbf530b7"></a>
-<a class="el" href="structCO__EM__t.html">CO_EM_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a6e4c80d975a5a2207530b72bdbf530b7">em</a></td></tr>
-<tr class="memdesc:a6e4c80d975a5a2207530b72bdbf530b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emergency object. <br /></td></tr>
-<tr class="separator:a6e4c80d975a5a2207530b72bdbf530b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522a9a56f1256dac8cd305313b3913f1"><td class="memItemLeft" align="right" valign="top"><a id="a522a9a56f1256dac8cd305313b3913f1"></a>
+<a class="el" href="structCO__config__t.html">CO_config_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a522a9a56f1256dac8cd305313b3913f1">config</a></td></tr>
+<tr class="memdesc:a522a9a56f1256dac8cd305313b3913f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remember the configuration parameters. <br /></td></tr>
+<tr class="separator:a522a9a56f1256dac8cd305313b3913f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65bea9a6028917db3b0b3a95a60aea18"><td class="memItemLeft" align="right" valign="top"><a id="a65bea9a6028917db3b0b3a95a60aea18"></a>
+<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a65bea9a6028917db3b0b3a95a60aea18">CANmodule</a></td></tr>
+<tr class="memdesc:a65bea9a6028917db3b0b3a95a60aea18"><td class="mdescLeft">&#160;</td><td class="mdescRight">One CAN module object, initialised by <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d">CO_CANmodule_init()</a> <br /></td></tr>
+<tr class="separator:a65bea9a6028917db3b0b3a95a60aea18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9665dd795f4c5d26910eb1c5b06503e5"><td class="memItemLeft" align="right" valign="top"><a id="a9665dd795f4c5d26910eb1c5b06503e5"></a>
+<a class="el" href="structCO__CANrx__t.html">CO_CANrx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9665dd795f4c5d26910eb1c5b06503e5">CANrx</a></td></tr>
+<tr class="memdesc:a9665dd795f4c5d26910eb1c5b06503e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN receive message objects. <br /></td></tr>
+<tr class="separator:a9665dd795f4c5d26910eb1c5b06503e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a990b6bd828bc23b455887b5a72f79dca"><td class="memItemLeft" align="right" valign="top"><a id="a990b6bd828bc23b455887b5a72f79dca"></a>
+<a class="el" href="structCO__CANtx__t.html">CO_CANtx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a990b6bd828bc23b455887b5a72f79dca">CANtx</a></td></tr>
+<tr class="memdesc:a990b6bd828bc23b455887b5a72f79dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN transmit message objects. <br /></td></tr>
+<tr class="separator:a990b6bd828bc23b455887b5a72f79dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b9bea68bd5c63af52819c3c4cdb7592"><td class="memItemLeft" align="right" valign="top"><a id="a5b9bea68bd5c63af52819c3c4cdb7592"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a5b9bea68bd5c63af52819c3c4cdb7592">CNT_ALL_RX_MSGS</a></td></tr>
+<tr class="memdesc:a5b9bea68bd5c63af52819c3c4cdb7592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of all CAN receive message objects. <br /></td></tr>
+<tr class="separator:a5b9bea68bd5c63af52819c3c4cdb7592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e9e7548a182ed9d4aad12e6a41be495"><td class="memItemLeft" align="right" valign="top"><a id="a9e9e7548a182ed9d4aad12e6a41be495"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9e9e7548a182ed9d4aad12e6a41be495">CNT_ALL_TX_MSGS</a></td></tr>
+<tr class="memdesc:a9e9e7548a182ed9d4aad12e6a41be495"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of all CAN transmit message objects. <br /></td></tr>
+<tr class="separator:a9e9e7548a182ed9d4aad12e6a41be495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fddf777eec75e0cc8fc510a5c4ec8e5"><td class="memItemLeft" align="right" valign="top"><a id="a6fddf777eec75e0cc8fc510a5c4ec8e5"></a>
 <a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a6fddf777eec75e0cc8fc510a5c4ec8e5">NMT</a></td></tr>
-<tr class="memdesc:a6fddf777eec75e0cc8fc510a5c4ec8e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT object. <br /></td></tr>
+<tr class="memdesc:a6fddf777eec75e0cc8fc510a5c4ec8e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT and heartbeat object, initialised by <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259">CO_NMT_init()</a> <br /></td></tr>
 <tr class="separator:a6fddf777eec75e0cc8fc510a5c4ec8e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c704cab995029fd216076523c70d283"><td class="memItemLeft" align="right" valign="top"><a id="a9c704cab995029fd216076523c70d283"></a>
-<a class="el" href="structCO__SYNC__t.html">CO_SYNC_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9c704cab995029fd216076523c70d283">SYNC</a></td></tr>
-<tr class="memdesc:a9c704cab995029fd216076523c70d283"><td class="mdescLeft">&#160;</td><td class="mdescRight">SYNC object. <br /></td></tr>
-<tr class="separator:a9c704cab995029fd216076523c70d283"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80052c25c47be2460e02cf88ff91bbb7"><td class="memItemLeft" align="right" valign="top"><a id="a80052c25c47be2460e02cf88ff91bbb7"></a>
-<a class="el" href="structCO__TIME__t.html">CO_TIME_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a80052c25c47be2460e02cf88ff91bbb7">TIME</a></td></tr>
-<tr class="memdesc:a80052c25c47be2460e02cf88ff91bbb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">TIME object. <br /></td></tr>
-<tr class="separator:a80052c25c47be2460e02cf88ff91bbb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae575e7f158725713c5905db0a915fa12"><td class="memItemLeft" align="right" valign="top"><a id="ae575e7f158725713c5905db0a915fa12"></a>
-<a class="el" href="structCO__RPDO__t.html">CO_RPDO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#ae575e7f158725713c5905db0a915fa12">RPDO</a> [<a class="el" href="group__CO__NO__OBJ.html#ga3fd70c7d577da632c62d4bccef1b410c">CO_NO_RPDO</a>]</td></tr>
-<tr class="memdesc:ae575e7f158725713c5905db0a915fa12"><td class="mdescLeft">&#160;</td><td class="mdescRight">RPDO objects. <br /></td></tr>
-<tr class="separator:ae575e7f158725713c5905db0a915fa12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7afece4510773e21a0b2fa3d2b24a079"><td class="memItemLeft" align="right" valign="top"><a id="a7afece4510773e21a0b2fa3d2b24a079"></a>
-<a class="el" href="structCO__TPDO__t.html">CO_TPDO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a7afece4510773e21a0b2fa3d2b24a079">TPDO</a> [<a class="el" href="group__CO__NO__OBJ.html#ga48e2baafb4253c5d3d6882add81201fc">CO_NO_TPDO</a>]</td></tr>
-<tr class="memdesc:a7afece4510773e21a0b2fa3d2b24a079"><td class="mdescLeft">&#160;</td><td class="mdescRight">TPDO objects. <br /></td></tr>
-<tr class="separator:a7afece4510773e21a0b2fa3d2b24a079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af693786fa6c0923d4c934d09a00820d3"><td class="memItemLeft" align="right" valign="top"><a id="af693786fa6c0923d4c934d09a00820d3"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#af693786fa6c0923d4c934d09a00820d3">RX_IDX_NMT_SLV</a></td></tr>
+<tr class="memdesc:af693786fa6c0923d4c934d09a00820d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:af693786fa6c0923d4c934d09a00820d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77bf70da8db7ecfe78f3720bfca12101"><td class="memItemLeft" align="right" valign="top"><a id="a77bf70da8db7ecfe78f3720bfca12101"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a77bf70da8db7ecfe78f3720bfca12101">TX_IDX_NMT_MST</a></td></tr>
+<tr class="memdesc:a77bf70da8db7ecfe78f3720bfca12101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a77bf70da8db7ecfe78f3720bfca12101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2718c137526676467853885d286fc74"><td class="memItemLeft" align="right" valign="top"><a id="ad2718c137526676467853885d286fc74"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#ad2718c137526676467853885d286fc74">TX_IDX_HB_PROD</a></td></tr>
+<tr class="memdesc:ad2718c137526676467853885d286fc74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:ad2718c137526676467853885d286fc74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eea4e2b8390e1f0ec531248e229cd72"><td class="memItemLeft" align="right" valign="top"><a id="a5eea4e2b8390e1f0ec531248e229cd72"></a>
 <a class="el" href="structCO__HBconsumer__t.html">CO_HBconsumer_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a5eea4e2b8390e1f0ec531248e229cd72">HBcons</a></td></tr>
-<tr class="memdesc:a5eea4e2b8390e1f0ec531248e229cd72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heartbeat consumer object. <br /></td></tr>
+<tr class="memdesc:a5eea4e2b8390e1f0ec531248e229cd72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heartbeat consumer object, initialised by <a class="el" href="group__CO__HBconsumer.html#gacc31c4848a14c9c367505b20e4a6a496">CO_HBconsumer_init()</a> <br /></td></tr>
 <tr class="separator:a5eea4e2b8390e1f0ec531248e229cd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fd234eb27c86a62080b268d306e07e6"><td class="memItemLeft" align="right" valign="top"><a id="a0fd234eb27c86a62080b268d306e07e6"></a>
-<a class="el" href="structCO__SDOclient__t.html">CO_SDOclient_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a0fd234eb27c86a62080b268d306e07e6">SDOclient</a> [<a class="el" href="group__CO__NO__OBJ.html#ga651a131f31175e56783b58bf1d881ef1">CO_NO_SDO_CLIENT</a>]</td></tr>
-<tr class="memdesc:a0fd234eb27c86a62080b268d306e07e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO client object. <br /></td></tr>
-<tr class="separator:a0fd234eb27c86a62080b268d306e07e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a788f815f4d31a4aa11d171114173573e"><td class="memItemLeft" align="right" valign="top"><a id="a788f815f4d31a4aa11d171114173573e"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a788f815f4d31a4aa11d171114173573e">RX_IDX_HB_CONS</a></td></tr>
+<tr class="memdesc:a788f815f4d31a4aa11d171114173573e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a788f815f4d31a4aa11d171114173573e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e4c80d975a5a2207530b72bdbf530b7"><td class="memItemLeft" align="right" valign="top"><a id="a6e4c80d975a5a2207530b72bdbf530b7"></a>
+<a class="el" href="structCO__EM__t.html">CO_EM_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a6e4c80d975a5a2207530b72bdbf530b7">em</a></td></tr>
+<tr class="memdesc:a6e4c80d975a5a2207530b72bdbf530b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emergency object, initialised by <a class="el" href="group__CO__Emergency.html#ga5b80f59df00b71dca7a5c18c139aa71e">CO_EM_init()</a> <br /></td></tr>
+<tr class="separator:a6e4c80d975a5a2207530b72bdbf530b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47df99673e8da6e48c6c17cbf204c16d"><td class="memItemLeft" align="right" valign="top"><a id="a47df99673e8da6e48c6c17cbf204c16d"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a47df99673e8da6e48c6c17cbf204c16d">RX_IDX_EM_CONS</a></td></tr>
+<tr class="memdesc:a47df99673e8da6e48c6c17cbf204c16d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a47df99673e8da6e48c6c17cbf204c16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2f250c5c3bc972ce45418d22e79caa"><td class="memItemLeft" align="right" valign="top"><a id="a3d2f250c5c3bc972ce45418d22e79caa"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a3d2f250c5c3bc972ce45418d22e79caa">TX_IDX_EM_PROD</a></td></tr>
+<tr class="memdesc:a3d2f250c5c3bc972ce45418d22e79caa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a3d2f250c5c3bc972ce45418d22e79caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9fe002954a6b902e594fc47a9f1917b"><td class="memItemLeft" align="right" valign="top"><a id="aa9fe002954a6b902e594fc47a9f1917b"></a>
+<a class="el" href="structCO__SDOserver__t.html">CO_SDOserver_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#aa9fe002954a6b902e594fc47a9f1917b">SDOserver</a></td></tr>
+<tr class="memdesc:aa9fe002954a6b902e594fc47a9f1917b"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO server objects, initialised by <a class="el" href="group__CO__SDOserver.html#gac989ba60f25fd2bc48bca6df0c0c1dde">CO_SDOserver_init()</a> <br /></td></tr>
+<tr class="separator:aa9fe002954a6b902e594fc47a9f1917b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e63b9c217cf4cd7fc8fbc0900bdb01c"><td class="memItemLeft" align="right" valign="top"><a id="a8e63b9c217cf4cd7fc8fbc0900bdb01c"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a8e63b9c217cf4cd7fc8fbc0900bdb01c">RX_IDX_SDO_SRV</a></td></tr>
+<tr class="memdesc:a8e63b9c217cf4cd7fc8fbc0900bdb01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a8e63b9c217cf4cd7fc8fbc0900bdb01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9287e4d62f23f4222fc90c4a6ded2ef0"><td class="memItemLeft" align="right" valign="top"><a id="a9287e4d62f23f4222fc90c4a6ded2ef0"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9287e4d62f23f4222fc90c4a6ded2ef0">TX_IDX_SDO_SRV</a></td></tr>
+<tr class="memdesc:a9287e4d62f23f4222fc90c4a6ded2ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a9287e4d62f23f4222fc90c4a6ded2ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9548e1a85b750b039dcc12bd43bd972"><td class="memItemLeft" align="right" valign="top"><a id="ae9548e1a85b750b039dcc12bd43bd972"></a>
+<a class="el" href="structCO__SDOclient__t.html">CO_SDOclient_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#ae9548e1a85b750b039dcc12bd43bd972">SDOclient</a></td></tr>
+<tr class="memdesc:ae9548e1a85b750b039dcc12bd43bd972"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO client objects, initialised by <a class="el" href="group__CO__SDOclient.html#ga754160e34089aea70f84d22b06eaff9e">CO_SDOclient_init()</a> <br /></td></tr>
+<tr class="separator:ae9548e1a85b750b039dcc12bd43bd972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a2007d87b4fb3608859e251cf8653e"><td class="memItemLeft" align="right" valign="top"><a id="a85a2007d87b4fb3608859e251cf8653e"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a85a2007d87b4fb3608859e251cf8653e">RX_IDX_SDO_CLI</a></td></tr>
+<tr class="memdesc:a85a2007d87b4fb3608859e251cf8653e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a85a2007d87b4fb3608859e251cf8653e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc86b044f08602394cbb4346b41a9a45"><td class="memItemLeft" align="right" valign="top"><a id="adc86b044f08602394cbb4346b41a9a45"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#adc86b044f08602394cbb4346b41a9a45">TX_IDX_SDO_CLI</a></td></tr>
+<tr class="memdesc:adc86b044f08602394cbb4346b41a9a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:adc86b044f08602394cbb4346b41a9a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80052c25c47be2460e02cf88ff91bbb7"><td class="memItemLeft" align="right" valign="top"><a id="a80052c25c47be2460e02cf88ff91bbb7"></a>
+<a class="el" href="structCO__TIME__t.html">CO_TIME_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a80052c25c47be2460e02cf88ff91bbb7">TIME</a></td></tr>
+<tr class="memdesc:a80052c25c47be2460e02cf88ff91bbb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">TIME object, initialised by <a class="el" href="group__CO__TIME.html#ga9e02651c1662d3da13a9a071c73347bb">CO_TIME_init()</a> <br /></td></tr>
+<tr class="separator:a80052c25c47be2460e02cf88ff91bbb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a039a63c4b10f91814775f9d1cef43aad"><td class="memItemLeft" align="right" valign="top"><a id="a039a63c4b10f91814775f9d1cef43aad"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a039a63c4b10f91814775f9d1cef43aad">RX_IDX_TIME</a></td></tr>
+<tr class="memdesc:a039a63c4b10f91814775f9d1cef43aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a039a63c4b10f91814775f9d1cef43aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5cbb43e75d99c5479efb3eddd36ec3d"><td class="memItemLeft" align="right" valign="top"><a id="ad5cbb43e75d99c5479efb3eddd36ec3d"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#ad5cbb43e75d99c5479efb3eddd36ec3d">TX_IDX_TIME</a></td></tr>
+<tr class="memdesc:ad5cbb43e75d99c5479efb3eddd36ec3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:ad5cbb43e75d99c5479efb3eddd36ec3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c704cab995029fd216076523c70d283"><td class="memItemLeft" align="right" valign="top"><a id="a9c704cab995029fd216076523c70d283"></a>
+<a class="el" href="structCO__SYNC__t.html">CO_SYNC_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9c704cab995029fd216076523c70d283">SYNC</a></td></tr>
+<tr class="memdesc:a9c704cab995029fd216076523c70d283"><td class="mdescLeft">&#160;</td><td class="mdescRight">SYNC object, initialised by <a class="el" href="group__CO__SYNC.html#ga3047b679d5e3261eedf1980ea87b5135">CO_SYNC_init()</a> <br /></td></tr>
+<tr class="separator:a9c704cab995029fd216076523c70d283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a378c1e806978f8399bf3f3af7c002"><td class="memItemLeft" align="right" valign="top"><a id="a72a378c1e806978f8399bf3f3af7c002"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a72a378c1e806978f8399bf3f3af7c002">RX_IDX_SYNC</a></td></tr>
+<tr class="memdesc:a72a378c1e806978f8399bf3f3af7c002"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a72a378c1e806978f8399bf3f3af7c002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb3962f37ce7a4b51d8779f96db58bc"><td class="memItemLeft" align="right" valign="top"><a id="a2eb3962f37ce7a4b51d8779f96db58bc"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a2eb3962f37ce7a4b51d8779f96db58bc">TX_IDX_SYNC</a></td></tr>
+<tr class="memdesc:a2eb3962f37ce7a4b51d8779f96db58bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a2eb3962f37ce7a4b51d8779f96db58bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a332fa4512032d94a20af69b5a103e017"><td class="memItemLeft" align="right" valign="top"><a id="a332fa4512032d94a20af69b5a103e017"></a>
+<a class="el" href="structCO__RPDO__t.html">CO_RPDO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a332fa4512032d94a20af69b5a103e017">RPDO</a></td></tr>
+<tr class="memdesc:a332fa4512032d94a20af69b5a103e017"><td class="mdescLeft">&#160;</td><td class="mdescRight">RPDO objects, initialised by <a class="el" href="group__CO__PDO.html#ga92c484ada2ad240c1b8c891c88d56901">CO_RPDO_init()</a> <br /></td></tr>
+<tr class="separator:a332fa4512032d94a20af69b5a103e017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a01e7792c600f5dc1eb2e7676e1e01d"><td class="memItemLeft" align="right" valign="top"><a id="a7a01e7792c600f5dc1eb2e7676e1e01d"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a7a01e7792c600f5dc1eb2e7676e1e01d">RX_IDX_RPDO</a></td></tr>
+<tr class="memdesc:a7a01e7792c600f5dc1eb2e7676e1e01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a7a01e7792c600f5dc1eb2e7676e1e01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5027ca1447bf64e5e93935c1e5466c2"><td class="memItemLeft" align="right" valign="top"><a id="ab5027ca1447bf64e5e93935c1e5466c2"></a>
+<a class="el" href="structCO__TPDO__t.html">CO_TPDO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#ab5027ca1447bf64e5e93935c1e5466c2">TPDO</a></td></tr>
+<tr class="memdesc:ab5027ca1447bf64e5e93935c1e5466c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">TPDO objects, initialised by <a class="el" href="group__CO__PDO.html#ga8fb100744dc91f84b236c55ee37200a1">CO_TPDO_init()</a> <br /></td></tr>
+<tr class="separator:ab5027ca1447bf64e5e93935c1e5466c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9451781c713680d8bab86cda2a1ca570"><td class="memItemLeft" align="right" valign="top"><a id="a9451781c713680d8bab86cda2a1ca570"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9451781c713680d8bab86cda2a1ca570">TX_IDX_TPDO</a></td></tr>
+<tr class="memdesc:a9451781c713680d8bab86cda2a1ca570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a9451781c713680d8bab86cda2a1ca570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4837a9caa7daa219a8ecff5c64bc08ba"><td class="memItemLeft" align="right" valign="top"><a id="a4837a9caa7daa219a8ecff5c64bc08ba"></a>
 <a class="el" href="structCO__LEDs__t.html">CO_LEDs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a4837a9caa7daa219a8ecff5c64bc08ba">LEDs</a></td></tr>
-<tr class="memdesc:a4837a9caa7daa219a8ecff5c64bc08ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">LEDs object. <br /></td></tr>
+<tr class="memdesc:a4837a9caa7daa219a8ecff5c64bc08ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">LEDs object, initialised by <a class="el" href="group__CO__LEDs.html#gadafdaf5de4c227a3df17cbcf1d81be69">CO_LEDs_init()</a> <br /></td></tr>
 <tr class="separator:a4837a9caa7daa219a8ecff5c64bc08ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c6e7b29436b05c8b659502c6fae2a6a"><td class="memItemLeft" align="right" valign="top"><a id="a9c6e7b29436b05c8b659502c6fae2a6a"></a>
 <a class="el" href="structCO__GFC__t.html">CO_GFC_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a9c6e7b29436b05c8b659502c6fae2a6a">GFC</a></td></tr>
-<tr class="memdesc:a9c6e7b29436b05c8b659502c6fae2a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">GFC objects. <br /></td></tr>
+<tr class="memdesc:a9c6e7b29436b05c8b659502c6fae2a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">GFC object, initialised by <a class="el" href="group__CO__GFC.html#ga23d83d03ef1b9ad5ffe68103a627026c">CO_GFC_init()</a> <br /></td></tr>
 <tr class="separator:a9c6e7b29436b05c8b659502c6fae2a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae689666dc05116ce0694d5ea505a2e79"><td class="memItemLeft" align="right" valign="top"><a id="ae689666dc05116ce0694d5ea505a2e79"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#ae689666dc05116ce0694d5ea505a2e79">RX_IDX_GFC</a></td></tr>
+<tr class="memdesc:ae689666dc05116ce0694d5ea505a2e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:ae689666dc05116ce0694d5ea505a2e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a709e86d5401484bb7d0c5f17e824636d"><td class="memItemLeft" align="right" valign="top"><a id="a709e86d5401484bb7d0c5f17e824636d"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a709e86d5401484bb7d0c5f17e824636d">TX_IDX_GFC</a></td></tr>
+<tr class="memdesc:a709e86d5401484bb7d0c5f17e824636d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a709e86d5401484bb7d0c5f17e824636d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a007c96db5b54e91145571feb06e9e683"><td class="memItemLeft" align="right" valign="top"><a id="a007c96db5b54e91145571feb06e9e683"></a>
 <a class="el" href="structCO__SRDOGuard__t.html">CO_SRDOGuard_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a007c96db5b54e91145571feb06e9e683">SRDOGuard</a></td></tr>
-<tr class="memdesc:a007c96db5b54e91145571feb06e9e683"><td class="mdescLeft">&#160;</td><td class="mdescRight">SRDO objects. <br /></td></tr>
+<tr class="memdesc:a007c96db5b54e91145571feb06e9e683"><td class="mdescLeft">&#160;</td><td class="mdescRight">SRDO object, initialised by <a class="el" href="group__CO__SRDO.html#gacd578e8a5a4af024f8e6f8aef87cbd14">CO_SRDOGuard_init()</a>, single SRDOGuard object is included inside all SRDO objects. <br /></td></tr>
 <tr class="separator:a007c96db5b54e91145571feb06e9e683"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac235bc55d06541d646933a2c9deef78"><td class="memItemLeft" align="right" valign="top"><a id="aac235bc55d06541d646933a2c9deef78"></a>
-<a class="el" href="structCO__SRDO__t.html">CO_SRDO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#aac235bc55d06541d646933a2c9deef78">SRDO</a> [CO_NO_SRDO]</td></tr>
-<tr class="memdesc:aac235bc55d06541d646933a2c9deef78"><td class="mdescLeft">&#160;</td><td class="mdescRight">SRDO objects. <br /></td></tr>
-<tr class="separator:aac235bc55d06541d646933a2c9deef78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a65c843c89da67fc049aa285e03243c"><td class="memItemLeft" align="right" valign="top"><a id="a2a65c843c89da67fc049aa285e03243c"></a>
+<a class="el" href="structCO__SRDO__t.html">CO_SRDO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a2a65c843c89da67fc049aa285e03243c">SRDO</a></td></tr>
+<tr class="memdesc:a2a65c843c89da67fc049aa285e03243c"><td class="mdescLeft">&#160;</td><td class="mdescRight">SRDO objects, initialised by <a class="el" href="group__CO__SRDO.html#ga608e6d48e97f1b4da316b36f10e389c6">CO_SRDO_init()</a> <br /></td></tr>
+<tr class="separator:a2a65c843c89da67fc049aa285e03243c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fec2730008c19f6fbc6192937776739"><td class="memItemLeft" align="right" valign="top"><a id="a8fec2730008c19f6fbc6192937776739"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a8fec2730008c19f6fbc6192937776739">RX_IDX_SRDO</a></td></tr>
+<tr class="memdesc:a8fec2730008c19f6fbc6192937776739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a8fec2730008c19f6fbc6192937776739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dbc89e76d1627f2b360ddaefd7a7b51"><td class="memItemLeft" align="right" valign="top"><a id="a3dbc89e76d1627f2b360ddaefd7a7b51"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a3dbc89e76d1627f2b360ddaefd7a7b51">TX_IDX_SRDO</a></td></tr>
+<tr class="memdesc:a3dbc89e76d1627f2b360ddaefd7a7b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a3dbc89e76d1627f2b360ddaefd7a7b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c6ecabcb18ed2bd9eb881f9156482b6"><td class="memItemLeft" align="right" valign="top"><a id="a0c6ecabcb18ed2bd9eb881f9156482b6"></a>
 <a class="el" href="structCO__LSSslave__t.html">CO_LSSslave_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a0c6ecabcb18ed2bd9eb881f9156482b6">LSSslave</a></td></tr>
-<tr class="memdesc:a0c6ecabcb18ed2bd9eb881f9156482b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSS slave object. <br /></td></tr>
+<tr class="memdesc:a0c6ecabcb18ed2bd9eb881f9156482b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSS slave object, initialised by <a class="el" href="group__CO__LSSslave.html#gaaba1fafcd0024609f8a72be4810baf66">CO_LSSslave_init()</a>. <br /></td></tr>
 <tr class="separator:a0c6ecabcb18ed2bd9eb881f9156482b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c230c531fc2a2a09ad33edef582041e"><td class="memItemLeft" align="right" valign="top"><a id="a2c230c531fc2a2a09ad33edef582041e"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a2c230c531fc2a2a09ad33edef582041e">RX_IDX_LSS_SLV</a></td></tr>
+<tr class="memdesc:a2c230c531fc2a2a09ad33edef582041e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:a2c230c531fc2a2a09ad33edef582041e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d1159efd4a31d0701c497d25343073d"><td class="memItemLeft" align="right" valign="top"><a id="a7d1159efd4a31d0701c497d25343073d"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a7d1159efd4a31d0701c497d25343073d">TX_IDX_LSS_SLV</a></td></tr>
+<tr class="memdesc:a7d1159efd4a31d0701c497d25343073d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a7d1159efd4a31d0701c497d25343073d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af586261baf229fe624fb72b712208c86"><td class="memItemLeft" align="right" valign="top"><a id="af586261baf229fe624fb72b712208c86"></a>
 <a class="el" href="structCO__LSSmaster__t.html">CO_LSSmaster_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#af586261baf229fe624fb72b712208c86">LSSmaster</a></td></tr>
-<tr class="memdesc:af586261baf229fe624fb72b712208c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSS master object. <br /></td></tr>
+<tr class="memdesc:af586261baf229fe624fb72b712208c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSS master object, initialised by <a class="el" href="group__CO__LSSmaster.html#ga0675297a7e7e1f472ad2e88d6b7408e7">CO_LSSmaster_init()</a>. <br /></td></tr>
 <tr class="separator:af586261baf229fe624fb72b712208c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c0c6b387e406c67d3b988a744b3b36"><td class="memItemLeft" align="right" valign="top"><a id="aa0c0c6b387e406c67d3b988a744b3b36"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#aa0c0c6b387e406c67d3b988a744b3b36">RX_IDX_LSS_MST</a></td></tr>
+<tr class="memdesc:aa0c0c6b387e406c67d3b988a744b3b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANrx. <br /></td></tr>
+<tr class="separator:aa0c0c6b387e406c67d3b988a744b3b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e102b879d1dd04f69bacac56266fdf"><td class="memItemLeft" align="right" valign="top"><a id="a38e102b879d1dd04f69bacac56266fdf"></a>
+<a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a38e102b879d1dd04f69bacac56266fdf">TX_IDX_LSS_MST</a></td></tr>
+<tr class="memdesc:a38e102b879d1dd04f69bacac56266fdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index in CANtx. <br /></td></tr>
+<tr class="separator:a38e102b879d1dd04f69bacac56266fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa0e937046492a26af9bb5e03c3aab94"><td class="memItemLeft" align="right" valign="top"><a id="afa0e937046492a26af9bb5e03c3aab94"></a>
 <a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#afa0e937046492a26af9bb5e03c3aab94">gtwa</a></td></tr>
-<tr class="memdesc:afa0e937046492a26af9bb5e03c3aab94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gateway-ascii object (CiA309-3) <br /></td></tr>
+<tr class="memdesc:afa0e937046492a26af9bb5e03c3aab94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gateway-ascii object, initialised by <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee">CO_GTWA_init()</a>. <br /></td></tr>
 <tr class="separator:afa0e937046492a26af9bb5e03c3aab94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc692752fc4e8499b8a9a340bd04d29f"><td class="memItemLeft" align="right" valign="top"><a id="afc692752fc4e8499b8a9a340bd04d29f"></a>
-<a class="el" href="structCO__trace__t.html">CO_trace_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#afc692752fc4e8499b8a9a340bd04d29f">trace</a> [<a class="el" href="group__CO__NO__OBJ.html#ga5c94a18cf5ad4f39869c930120c526e0">CO_NO_TRACE</a>]</td></tr>
-<tr class="memdesc:afc692752fc4e8499b8a9a340bd04d29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace object for recording variables. <br /></td></tr>
-<tr class="separator:afc692752fc4e8499b8a9a340bd04d29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f7a05e49ea89178cb61e14c4c4575f1"><td class="memItemLeft" align="right" valign="top"><a id="a4f7a05e49ea89178cb61e14c4c4575f1"></a>
+<a class="el" href="structCO__trace__t.html">CO_trace_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html#a4f7a05e49ea89178cb61e14c4c4575f1">trace</a></td></tr>
+<tr class="memdesc:a4f7a05e49ea89178cb61e14c4c4575f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace object, initialised by <a class="el" href="group__CO__trace.html#ga50621e5b8e28349f7caf260b6cf9962e">CO_trace_init()</a>. <br /></td></tr>
+<tr class="separator:a4f7a05e49ea89178cb61e14c4c4575f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>CANopen object with pointers to all CANopenNode objects. </p>
+<div class="textblock"><p>CANopen object - collection of all CANopenNode objects. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="CANopen_8h_source.html">CANopen.h</a></li>
 </ul>
@@ -193,7 +309,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structCO__t.html">CO_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

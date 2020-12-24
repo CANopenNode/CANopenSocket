@@ -5,6 +5,7 @@ var CO__config_8h =
     [ "CO_CONFIG_FLAG_OD_DYNAMIC", "group__CO__STACK__CONFIG__COMMON.html#gaf0f46ccffdd156cc7c2d8774ecb2060d", null ],
     [ "CO_CONFIG_NMT", "group__CO__STACK__CONFIG__NMT__HB.html#gafa3b1f1b4931175bf9c67a5d45633e76", null ],
     [ "CO_CONFIG_HB_CONS", "group__CO__STACK__CONFIG__NMT__HB.html#ga7368d68cb039983bc8cc164410877098", null ],
+    [ "CO_CONFIG_HB_CONS_SIZE", "group__CO__STACK__CONFIG__NMT__HB.html#ga0cbe9ab929ff9d122ab6727d66fe7752", null ],
     [ "CO_CONFIG_EM", "group__CO__STACK__CONFIG__EMERGENCY.html#ga16aa1479ffd52a627d1053c20f844b62", null ],
     [ "CO_CONFIG_EM_ERR_STATUS_BITS_COUNT", "group__CO__STACK__CONFIG__EMERGENCY.html#gab87776d4802748671b234112263760af", null ],
     [ "CO_CONFIG_EM_BUFFER_SIZE", "group__CO__STACK__CONFIG__EMERGENCY.html#ga3c35cf4947c82a0b15afdbfa43a10d67", null ],
@@ -19,9 +20,9 @@ var CO__config_8h =
     [ "CO_CONFIG_SDO_SRV_BUFFER_SIZE", "group__CO__STACK__CONFIG__SDO.html#gacad3d0d9060469aedcb9e058c1883375", null ],
     [ "CO_CONFIG_SDO_CLI", "group__CO__STACK__CONFIG__SDO.html#gac8ee65cd62dbee2982f5304513402a57", null ],
     [ "CO_CONFIG_SDO_CLI_BUFFER_SIZE", "group__CO__STACK__CONFIG__SDO.html#ga763b09ab827365e46f10234bd9c0acfd", null ],
+    [ "CO_CONFIG_TIME", "group__CO__STACK__CONFIG__TIME.html#gaba4a59929bbd8512ca954ba8fcf1dfe6", null ],
     [ "CO_CONFIG_SYNC", "group__CO__STACK__CONFIG__SYNC__PDO.html#ga7d1d2210fdf2b916ca1d82c4933856bc", null ],
     [ "CO_CONFIG_PDO", "group__CO__STACK__CONFIG__SYNC__PDO.html#gaa20d1b49249b7f5a15963cc1a4611be9", null ],
-    [ "CO_CONFIG_TIME", "group__CO__STACK__CONFIG__TIME.html#gaba4a59929bbd8512ca954ba8fcf1dfe6", null ],
     [ "CO_CONFIG_LEDS", "group__CO__STACK__CONFIG__LEDS.html#ga423160131d618b5d57bc7c016ee369fd", null ],
     [ "CO_CONFIG_GFC", "group__CO__STACK__CONFIG__SRDO.html#ga71d11e8460a5410be21863a0f99cbab2", null ],
     [ "CO_CONFIG_SRDO", "group__CO__STACK__CONFIG__SRDO.html#ga61645e6ad8a02e356abde012434bedf9", null ],
@@ -33,5 +34,6 @@ var CO__config_8h =
     [ "CO_CONFIG_GTWA_LOG_BUF_SIZE", "group__CO__STACK__CONFIG__GATEWAY.html#ga4f471dca1341879dc56c2e0a2c73cb29", null ],
     [ "CO_CONFIG_CRC16", "group__CO__STACK__CONFIG__CRC16.html#ga15737bc0ede4bcd56968e5f96b2e8c9b", null ],
     [ "CO_CONFIG_FIFO", "group__CO__STACK__CONFIG__FIFO.html#ga055654eb6f93ba05e3534b31626eec3a", null ],
-    [ "CO_CONFIG_TRACE", "group__CO__STACK__CONFIG__TRACE.html#ga9d4e333d0b599c2369366defc6ce5e62", null ]
+    [ "CO_CONFIG_TRACE", "group__CO__STACK__CONFIG__TRACE.html#ga9d4e333d0b599c2369366defc6ce5e62", null ],
+    [ "CO_CONFIG_DEBUG", "group__CO__STACK__CONFIG__DEBUG.html#ga1ce7b96c60a5ab9349b66b77f6a6e2a7", null ]
 ];

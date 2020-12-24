@@ -9,7 +9,7 @@ var searchData=
   ['block_5fseqno_13',['block_seqno',['../structCO__SDOclient__t.html#a628780da4dccceab6ce79ad880989b26',1,'CO_SDOclient_t::block_seqno()'],['../structCO__SDOserver__t.html#aeefd77d5200958a30f63f7e1f4f474fa',1,'CO_SDOserver_t::block_seqno()']]],
   ['block_5ftimeouttimer_14',['block_timeoutTimer',['../structCO__SDOclient__t.html#a8a667736bf5d22e7bb76f8b25d8b0268',1,'CO_SDOclient_t::block_timeoutTimer()'],['../structCO__SDOserver__t.html#ad8748718c76f53347dde5248b1152626',1,'CO_SDOserver_t::block_timeoutTimer()']]],
   ['bool_5ft_15',['bool_t',['../group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5',1,'CO_driver.h']]],
-  ['buf_16',['buf',['../structCO__fifo__t.html#aa4a8bae66b107809c099cd1d2de5c966',1,'CO_fifo_t::buf()'],['../structCO__SDOclient__t.html#aa56b1f115aee473f5c264142053ed0ae',1,'CO_SDOclient_t::buf()'],['../structCO__SDOserver__t.html#ab866bef60a888c32cb6d49b1f7f4889c',1,'CO_SDOserver_t::buf()']]],
+  ['buf_16',['buf',['../structCO__fifo__t.html#aa4a8bae66b107809c099cd1d2de5c966',1,'CO_fifo_t::buf()'],['../structCO__SDOclient__t.html#aa56b1f115aee473f5c264142053ed0ae',1,'CO_SDOclient_t::buf()'],['../structCO__SDOserver__t.html#ab834e69e77b72e1ee1d39d35e21e0df4',1,'CO_SDOserver_t::buf()']]],
   ['bufferfull_17',['bufferFull',['../structCO__CANtx__t.html#a305f0687a4ed7cd533e7937d6ff7d31b',1,'CO_CANtx_t']]],
   ['bufferinhibitflag_18',['bufferInhibitFlag',['../structCO__CANmodule__t.html#ad7af19de0bf39c8927c926b095cb5292',1,'CO_CANmodule_t']]],
   ['buffersize_19',['bufferSize',['../structCO__trace__t.html#a3dfe996be2bef106f50de085a7f5ca9f',1,'CO_trace_t']]],

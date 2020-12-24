@@ -1,7 +1,7 @@
 var structCO__TPDO__t =
 [
     [ "em", "structCO__TPDO__t.html#ac7ce3386549e212300bb85bfc5e88f2e", null ],
-    [ "SDO", "structCO__TPDO__t.html#af7a03e67aa025577c958411bea12d76c", null ],
+    [ "SDO", "structCO__TPDO__t.html#a52c1e56f282549b0949721049bcc7e73", null ],
     [ "TPDOCommPar", "structCO__TPDO__t.html#ab9bd2bf1a76f1f0e253dd4c4a941ba67", null ],
     [ "TPDOMapPar", "structCO__TPDO__t.html#a6f6202c2b866f552c512a3513c27be8b", null ],
     [ "operatingState", "structCO__TPDO__t.html#a7ba73f70490869a38ff561aa6c32489f", null ],

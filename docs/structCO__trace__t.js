@@ -1,7 +1,7 @@
 var structCO__trace__t =
 [
     [ "enabled", "structCO__trace__t.html#aefa5e9934aaac1f00d0a1866100dae50", null ],
-    [ "SDO", "structCO__trace__t.html#a8bf359f82a47e624a937d148cd24a4bc", null ],
+    [ "SDO", "structCO__trace__t.html#a33616f410feb93ddb6a2ac238027996b", null ],
     [ "timeBuffer", "structCO__trace__t.html#a83806299bd57a23f5946f81cb05ab41d", null ],
     [ "valueBuffer", "structCO__trace__t.html#abc2f00a5f99453c77dd8515f3526e428", null ],
     [ "bufferSize", "structCO__trace__t.html#a3dfe996be2bef106f50de085a7f5ca9f", null ],

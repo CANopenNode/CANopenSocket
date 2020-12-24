@@ -109,26 +109,22 @@ Data Fields</h2></td></tr>
 <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__entry__t.html#ac27d9d9ac18705e84d64f5226a6e352c">index</a></td></tr>
 <tr class="memdesc:ac27d9d9ac18705e84d64f5226a6e352c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object Dictionary index. <br /></td></tr>
 <tr class="separator:ac27d9d9ac18705e84d64f5226a6e352c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e7b3acc6f56d8f6c955ad732e3cbb14"><td class="memItemLeft" align="right" valign="top"><a id="a7e7b3acc6f56d8f6c955ad732e3cbb14"></a>
-<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__entry__t.html#a7e7b3acc6f56d8f6c955ad732e3cbb14">maxSubIndex</a></td></tr>
-<tr class="memdesc:a7e7b3acc6f56d8f6c955ad732e3cbb14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum sub-index in the OD object. <br /></td></tr>
-<tr class="separator:a7e7b3acc6f56d8f6c955ad732e3cbb14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac82ed68c5e2b8251441accdbcca8e641"><td class="memItemLeft" align="right" valign="top"><a id="ac82ed68c5e2b8251441accdbcca8e641"></a>
-<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__entry__t.html#ac82ed68c5e2b8251441accdbcca8e641">storageGroup</a></td></tr>
-<tr class="memdesc:ac82ed68c5e2b8251441accdbcca8e641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Group for non-volatile storage of the OD object. <br /></td></tr>
-<tr class="separator:ac82ed68c5e2b8251441accdbcca8e641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f8698a482c2994602a24d39d924acc6"><td class="memItemLeft" align="right" valign="top"><a id="a2f8698a482c2994602a24d39d924acc6"></a>
+<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__entry__t.html#a2f8698a482c2994602a24d39d924acc6">subEntriesCount</a></td></tr>
+<tr class="memdesc:a2f8698a482c2994602a24d39d924acc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum sub-index in the OD object. <br /></td></tr>
+<tr class="separator:a2f8698a482c2994602a24d39d924acc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a662107a24527872d92cdb13cad29b"><td class="memItemLeft" align="right" valign="top"><a id="a86a662107a24527872d92cdb13cad29b"></a>
 <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__entry__t.html#a86a662107a24527872d92cdb13cad29b">odObjectType</a></td></tr>
 <tr class="memdesc:a86a662107a24527872d92cdb13cad29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the odObject, indicated by <a class="el" href="group__CO__ODdefinition.html#gaae426e9d66ec1bacfef2d93f096d7805">OD_objectTypes_t</a> enumerator. <br /></td></tr>
 <tr class="separator:a86a662107a24527872d92cdb13cad29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8667e5896b5b001270103e59c92bb181"><td class="memItemLeft" align="right" valign="top"><a id="a8667e5896b5b001270103e59c92bb181"></a>
 const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__entry__t.html#a8667e5896b5b001270103e59c92bb181">odObject</a></td></tr>
-<tr class="memdesc:a8667e5896b5b001270103e59c92bb181"><td class="mdescLeft">&#160;</td><td class="mdescRight">OD object of type indicated by odObjectType, from which <a class="el" href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub()</a> fetches the information. <br /></td></tr>
+<tr class="memdesc:a8667e5896b5b001270103e59c92bb181"><td class="mdescLeft">&#160;</td><td class="mdescRight">OD object of type indicated by odObjectType, from which <a class="el" href="group__CO__ODinterface.html#gaf1f736d4b4d6754d971f0c0a63655bcf">OD_getSub()</a> fetches the information. <br /></td></tr>
 <tr class="separator:a8667e5896b5b001270103e59c92bb181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Object Dictionary entry for one OD object. </p>
-<p>OD entries are collected inside <a class="el" href="structOD__t.html" title="Object Dictionary.">OD_t</a> as array (list). Each OD entry contains basic information about OD object (index, maxSubIndex and storageGroup) and access function together with a pointer to other details of the OD object. </p>
+<p>OD entries are collected inside <a class="el" href="structOD__t.html" title="Object Dictionary.">OD_t</a> as array (list). Each OD entry contains basic information about OD object (index and subEntriesCount) and access function together with a pointer to other details of the OD object. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>301/<a class="el" href="CO__ODinterface_8h_source.html">CO_ODinterface.h</a></li>
 </ul>
@@ -138,7 +134,7 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structOD__entry__t.html">OD_entry_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

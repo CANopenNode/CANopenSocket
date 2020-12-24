@@ -39,7 +39,7 @@ var group__CO__PDO =
     ] ],
     [ "CO_RPDO_t", "structCO__RPDO__t.html", [
       [ "em", "structCO__RPDO__t.html#a5261e898fc67ecba19f0fc146e4a13ef", null ],
-      [ "SDO", "structCO__RPDO__t.html#a0ad44bccf1f8f2764357e7bddb114965", null ],
+      [ "SDO", "structCO__RPDO__t.html#abcf8134da148073ec8e3f1dd6f0c8da1", null ],
       [ "RPDOCommPar", "structCO__RPDO__t.html#a1aaaf9abb01030dbd732985d07ed8c33", null ],
       [ "RPDOMapPar", "structCO__RPDO__t.html#a69ad9068dfcee1d12697430856e62d10", null ],
       [ "operatingState", "structCO__RPDO__t.html#a85583dccb8f2d0515288888e56065e70", null ],
@@ -60,7 +60,7 @@ var group__CO__PDO =
     ] ],
     [ "CO_TPDO_t", "structCO__TPDO__t.html", [
       [ "em", "structCO__TPDO__t.html#ac7ce3386549e212300bb85bfc5e88f2e", null ],
-      [ "SDO", "structCO__TPDO__t.html#af7a03e67aa025577c958411bea12d76c", null ],
+      [ "SDO", "structCO__TPDO__t.html#a52c1e56f282549b0949721049bcc7e73", null ],
       [ "TPDOCommPar", "structCO__TPDO__t.html#ab9bd2bf1a76f1f0e253dd4c4a941ba67", null ],
       [ "TPDOMapPar", "structCO__TPDO__t.html#a6f6202c2b866f552c512a3513c27be8b", null ],
       [ "operatingState", "structCO__TPDO__t.html#a7ba73f70490869a38ff561aa6c32489f", null ],
@@ -80,11 +80,11 @@ var group__CO__PDO =
       [ "CANtxBuff", "structCO__TPDO__t.html#a2a2a10d57e1eeab4e0717caa302a6605", null ],
       [ "CANdevTxIdx", "structCO__TPDO__t.html#ab401d61f30b73d530df3b8d42015407d", null ]
     ] ],
-    [ "CO_RPDO_init", "group__CO__PDO.html#gac43db12f4b327f93d8d139b41a4d3142", null ],
+    [ "CO_RPDO_init", "group__CO__PDO.html#ga92c484ada2ad240c1b8c891c88d56901", null ],
     [ "CO_RPDO_initCallbackPre", "group__CO__PDO.html#ga34532746ccf88ccfa835716e89369478", null ],
-    [ "CO_TPDO_init", "group__CO__PDO.html#ga7eb4dcc360bdd0349ceaddcdda59ef8b", null ],
+    [ "CO_TPDO_init", "group__CO__PDO.html#ga8fb100744dc91f84b236c55ee37200a1", null ],
     [ "CO_TPDOisCOS", "group__CO__PDO.html#gafec3eb12b93146a3706cbf03d3770a8d", null ],
-    [ "CO_TPDOsend", "group__CO__PDO.html#ga322b7f209618709f5a9305685a8f96f5", null ],
+    [ "CO_TPDOsend", "group__CO__PDO.html#ga9b2c8692f74f6a6a389ef88bf9c682a5", null ],
     [ "CO_RPDO_process", "group__CO__PDO.html#gad77bfd4c7f64e75e7ddee5c926477e66", null ],
     [ "CO_TPDO_process", "group__CO__PDO.html#ga0bb0d1b09d37ca19e01d47d8d0004f6b", null ]
 ];

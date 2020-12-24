@@ -29,5 +29,8 @@ var group__CO__ODgetSetters =
     [ "OD_getPtr_u32", "group__CO__ODgetSetters.html#ga92f57ed14ed69ac00c78d48f1e479bb0", null ],
     [ "OD_getPtr_u64", "group__CO__ODgetSetters.html#gad192b1efde6a5bd6fa62fc5a4c484d84", null ],
     [ "OD_getPtr_r32", "group__CO__ODgetSetters.html#gaf4e3f15fc0fbe2b24e88aeb53c9daa61", null ],
-    [ "OD_getPtr_r64", "group__CO__ODgetSetters.html#ga87a34e3e04dd2faa851d2d9c0a24e945", null ]
+    [ "OD_getPtr_r64", "group__CO__ODgetSetters.html#ga87a34e3e04dd2faa851d2d9c0a24e945", null ],
+    [ "OD_getPtr_vs", "group__CO__ODgetSetters.html#gaad4d755515e8dccf3616f14fe3914bde", null ],
+    [ "OD_getPtr_os", "group__CO__ODgetSetters.html#ga06361976dce86f180de76e1fced9a212", null ],
+    [ "OD_getPtr_us", "group__CO__ODgetSetters.html#gaf3efb5f4a50ff7ab17b37bf9c0fcf030", null ]
 ];

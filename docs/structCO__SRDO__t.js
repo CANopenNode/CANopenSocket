@@ -1,7 +1,7 @@
 var structCO__SRDO__t =
 [
     [ "em", "structCO__SRDO__t.html#a1779ab0170d7b604948a9396681212c8", null ],
-    [ "SDO", "structCO__SRDO__t.html#af7d3f8cb5d1460346a992b445c7c39c2", null ],
+    [ "SDO", "structCO__SRDO__t.html#af8121f4d1f0879eba793afaee5c6c804", null ],
     [ "SRDOGuard", "structCO__SRDO__t.html#ab96c524d0b0243527a6b2d3ee89de302", null ],
     [ "mapPointer", "structCO__SRDO__t.html#a3e7570a1aeef89502702175eccb93500", null ],
     [ "dataLength", "structCO__SRDO__t.html#ae994e87a71e85342f3a5b3c046d8a47f", null ],

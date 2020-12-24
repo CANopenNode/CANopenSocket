@@ -11,6 +11,7 @@ var CO__fifo_8h =
     ] ],
     [ "CO_fifo_init", "group__CO__CANopen__301__fifo.html#ga44e8f83feb2dd463b2fbb399dcd4de4d", null ],
     [ "CO_fifo_reset", "group__CO__CANopen__301__fifo.html#ga6817a4baeaee87a578291e9de820b126", null ],
+    [ "CO_fifo_purge", "group__CO__CANopen__301__fifo.html#ga15a27a4871e680475f680c574050844a", null ],
     [ "CO_fifo_getSpace", "group__CO__CANopen__301__fifo.html#ga0d456e83af18cce9db9157b5a30fac21", null ],
     [ "CO_fifo_getOccupied", "group__CO__CANopen__301__fifo.html#ga40ef4fc5dc184ef3c0c2f37eca1bc507", null ],
     [ "CO_fifo_putc", "group__CO__CANopen__301__fifo.html#ga7c2deb5abee499ad2f1b5175a205bc5b", null ],
@@ -23,7 +24,7 @@ var CO__fifo_8h =
     [ "CO_fifo_altGetOccupied", "group__CO__CANopen__301__fifo.html#ga2ee45a0cab19a212022d82987de2a955", null ],
     [ "CO_fifo_altRead", "group__CO__CANopen__301__fifo.html#gaa28339101c4ac5a2c44004276075c759", null ],
     [ "CO_fifo_CommSearch", "group__CO__CANopen__301__fifo.html#ga0dbef46e369e659bab7e29742971134c", null ],
-    [ "CO_fifo_trimSpaces", "group__CO__CANopen__301__fifo.html#ga2df6fbc2e44688a31ae8142102794e8b", null ],
+    [ "CO_fifo_trimSpaces", "group__CO__CANopen__301__fifo.html#gac01a59d65d275bd9f9a7fb0ea04fb915", null ],
     [ "CO_fifo_readToken", "group__CO__CANopen__301__fifo.html#ga87a199708c95d3ca02e2fcc4ca4a6319", null ],
     [ "CO_fifo_readU82a", "group__CO__CANopen__301__fifo.html#ga50b3075a0cfab3ab8608a4ba4977ecd6", null ],
     [ "CO_fifo_readU162a", "group__CO__CANopen__301__fifo.html#ga99072bd50ad3b92c291136e458885ca2", null ],
@@ -41,6 +42,7 @@ var CO__fifo_8h =
     [ "CO_fifo_readR642a", "group__CO__CANopen__301__fifo.html#gadc55fa15874eaf757acf83921d0156c4", null ],
     [ "CO_fifo_readHex2a", "group__CO__CANopen__301__fifo.html#gae9bfcb5f9c52de5f7239ab133fe326ec", null ],
     [ "CO_fifo_readVs2a", "group__CO__CANopen__301__fifo.html#ga8000ba92f2023a88b5f7d0399373b206", null ],
+    [ "CO_fifo_readB642a", "group__CO__CANopen__301__fifo.html#ga7b9dcd98906837e82fa914d10028cf33", null ],
     [ "CO_fifo_cpyTok2U8", "group__CO__CANopen__301__fifo.html#ga1788f69639bcc6bfa59bf85e57e5e13a", null ],
     [ "CO_fifo_cpyTok2U16", "group__CO__CANopen__301__fifo.html#gaf19bdbd45626578afc8a19de43698e0b", null ],
     [ "CO_fifo_cpyTok2U32", "group__CO__CANopen__301__fifo.html#gae2816b287cc2091d2382aaa6ac56e422", null ],
@@ -52,5 +54,6 @@ var CO__fifo_8h =
     [ "CO_fifo_cpyTok2R32", "group__CO__CANopen__301__fifo.html#ga853847c375425a55fc2007880d94c484", null ],
     [ "CO_fifo_cpyTok2R64", "group__CO__CANopen__301__fifo.html#ga8b17d4f3c0d272bb73d82a79cd51cd3d", null ],
     [ "CO_fifo_cpyTok2Hex", "group__CO__CANopen__301__fifo.html#gab3c4acf458a13bd6c4e5b0bc2adca10b", null ],
-    [ "CO_fifo_cpyTok2Vs", "group__CO__CANopen__301__fifo.html#ga8cb3d7032cd46dfeb3b6c0bbd5ed1575", null ]
+    [ "CO_fifo_cpyTok2Vs", "group__CO__CANopen__301__fifo.html#ga8cb3d7032cd46dfeb3b6c0bbd5ed1575", null ],
+    [ "CO_fifo_cpyTok2B64", "group__CO__CANopen__301__fifo.html#gaf11cf0cccc01e86f341e2b31607e90c7", null ]
 ];

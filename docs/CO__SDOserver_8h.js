@@ -74,7 +74,7 @@ var CO__SDOserver_8h =
       [ "CO_SDO_RT_endedWithClientAbort", "group__CO__SDOserver.html#gga7f729ab203285c7623df493916f22a73a9aafefd96d032c1b65cb6c23bc53f0aa", null ],
       [ "CO_SDO_RT_endedWithServerAbort", "group__CO__SDOserver.html#gga7f729ab203285c7623df493916f22a73ae2fce3f477766eb188502886705dc177", null ]
     ] ],
-    [ "CO_SDOserver_init", "group__CO__SDOserver.html#ga3138a8f9bc42583e5381c3245062761d", null ],
+    [ "CO_SDOserver_init", "group__CO__SDOserver.html#gac989ba60f25fd2bc48bca6df0c0c1dde", null ],
     [ "CO_SDOserver_initCallbackPre", "group__CO__SDOserver.html#ga3eeea49e2fb36da22dc754c62b03a423", null ],
     [ "CO_SDOserver_process", "group__CO__SDOserver.html#ga360bc6aa1659a5572d4d1077d787433a", null ]
 ];

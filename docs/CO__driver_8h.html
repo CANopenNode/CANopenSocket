@@ -124,6 +124,14 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga0e351c2972f6d8f2e08fb5ac21a833b8"><td class="memItemLeft" align="right" valign="top">
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__driver.html#ga0e351c2972f6d8f2e08fb5ac21a833b8">CO_VERSION_MAJOR</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:ga0e351c2972f6d8f2e08fb5ac21a833b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Major version number of CANopenNode. <br /></td></tr>
+<tr class="separator:ga0e351c2972f6d8f2e08fb5ac21a833b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac3f110c1dd3cfc2b994b5c20d1c6ace"><td class="memItemLeft" align="right" valign="top">
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__driver.html#gaac3f110c1dd3cfc2b994b5c20d1c6ace">CO_VERSION_MINOR</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:gaac3f110c1dd3cfc2b994b5c20d1c6ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minor version number of CANopenNode. <br /></td></tr>
+<tr class="separator:gaac3f110c1dd3cfc2b994b5c20d1c6ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaed3e1bffaf912485092fc20193705f35"><td class="memItemLeft" align="right" valign="top">
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__dataTypes.html#gaed3e1bffaf912485092fc20193705f35">CO_LITTLE_ENDIAN</a></td></tr>
 <tr class="memdesc:gaed3e1bffaf912485092fc20193705f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">CO_LITTLE_ENDIAN or CO_BIG_ENDIAN must be defined. <br /></td></tr>
@@ -188,6 +196,9 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__critical__sections.html#ga044da4253aeed15c3e0bb7fce13664af">CO_FLAG_CLEAR</a>(rxNew)&#160;&#160;&#160;{ __sync_synchronize(); rxNew = <a class="el" href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>; }</td></tr>
 <tr class="memdesc:ga044da4253aeed15c3e0bb7fce13664af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear new message flag. <br /></td></tr>
 <tr class="separator:ga044da4253aeed15c3e0bb7fce13664af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaa84189910b720ce18c8d83aab405d86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__driver.html#gaaa84189910b720ce18c8d83aab405d86">CO_errinfo</a>(CANmodule,  err)</td></tr>
+<tr class="memdesc:gaaa84189910b720ce18c8d83aab405d86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for passing additional information about error.  <a href="group__CO__driver.html#gaaa84189910b720ce18c8d83aab405d86">More...</a><br /></td></tr>
+<tr class="separator:gaaa84189910b720ce18c8d83aab405d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -339,10 +350,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:gab02a5fe910acf9aa5021f97e523697f9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="group__CO__CAN__Message__reception.html#ga23168979123a5ca8a87d49307eb2990e" title="CAN receive callback function which pre-processes received CAN message.">CANrx_callback()</a> can read pointer to data from received CAN message.  <a href="group__CO__CAN__Message__reception.html#gab02a5fe910acf9aa5021f97e523697f9">More...</a><br /></td></tr>
 <tr class="separator:gab02a5fe910acf9aa5021f97e523697f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga88ef52baae169a80e4c2f2cb93b33747"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__driver.html#ga88ef52baae169a80e4c2f2cb93b33747">CO_CANsetConfigurationMode</a> (void *CANptr)</td></tr>
-<tr class="memdesc:ga88ef52baae169a80e4c2f2cb93b33747"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request CAN configuration (stopped) mode and <em>wait</em> untill it is set.  <a href="group__CO__driver.html#ga88ef52baae169a80e4c2f2cb93b33747">More...</a><br /></td></tr>
+<tr class="memdesc:ga88ef52baae169a80e4c2f2cb93b33747"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request CAN configuration (stopped) mode and <em>wait</em> until it is set.  <a href="group__CO__driver.html#ga88ef52baae169a80e4c2f2cb93b33747">More...</a><br /></td></tr>
 <tr class="separator:ga88ef52baae169a80e4c2f2cb93b33747"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad654edfa651bf7b68263913786697200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__driver.html#gad654edfa651bf7b68263913786697200">CO_CANsetNormalMode</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule)</td></tr>
-<tr class="memdesc:gad654edfa651bf7b68263913786697200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request CAN normal (opearational) mode and <em>wait</em> untill it is set.  <a href="group__CO__driver.html#gad654edfa651bf7b68263913786697200">More...</a><br /></td></tr>
+<tr class="memdesc:gad654edfa651bf7b68263913786697200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request CAN normal (operational) mode and <em>wait</em> until it is set.  <a href="group__CO__driver.html#gad654edfa651bf7b68263913786697200">More...</a><br /></td></tr>
 <tr class="separator:gad654edfa651bf7b68263913786697200"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3a1131813110529494cee5e27c0bf28d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d">CO_CANmodule_init</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, void *CANptr, <a class="el" href="structCO__CANrx__t.html">CO_CANrx_t</a> rxArray[], <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> rxSize, <a class="el" href="structCO__CANtx__t.html">CO_CANtx_t</a> txArray[], <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> txSize, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANbitRate)</td></tr>
 <tr class="memdesc:ga3a1131813110529494cee5e27c0bf28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CAN module object.  <a href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d">More...</a><br /></td></tr>
@@ -401,7 +412,7 @@ static <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ce
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_f17b92000dd778003adbbcb6b5ce4226.html">301</a></li><li class="navelem"><a class="el" href="CO__driver_8h.html">CO_driver.h</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

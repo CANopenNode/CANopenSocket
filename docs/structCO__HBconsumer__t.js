@@ -9,6 +9,6 @@ var structCO__HBconsumer__t =
     [ "NMTisPreOrOperationalPrev", "structCO__HBconsumer__t.html#a2fe3d81e2124918d0d5947e6891a060e", null ],
     [ "CANdevRx", "structCO__HBconsumer__t.html#af5d8828478e2b51fe47a63f24dd896b1", null ],
     [ "CANdevRxIdxStart", "structCO__HBconsumer__t.html#a00d176c84d169115399c276031b71722", null ],
-    [ "pFunctSignalNmtChanged", "structCO__HBconsumer__t.html#a387497807b3fdc2d61ad0fa492502e8b", null ],
+    [ "pFunctSignalNmtChanged", "structCO__HBconsumer__t.html#a58314f7d35efc2dbeae14ba4be76dec1", null ],
     [ "pFunctSignalObjectNmtChanged", "structCO__HBconsumer__t.html#ad583c93f4e59f98669cd18f263aee45a", null ]
 ];

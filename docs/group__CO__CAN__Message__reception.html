@@ -192,7 +192,7 @@ Functions</h2></td></tr>
 
 <p><a class="el" href="group__CO__CAN__Message__reception.html#ga23168979123a5ca8a87d49307eb2990e" title="CAN receive callback function which pre-processes received CAN message.">CANrx_callback()</a> can read CAN identifier from received CAN message. </p>
 <p>Must be defined in the <b><a class="el" href="CO__driver__target_8h.html" title="Linux socketCAN specific definitions for CANopenNode.">CO_driver_target.h</a></b> file.</p>
-<p>This is target specific function and is specific for specific microcontroller. It is best to implement it by using inline function or macro. <code>rxMsg</code> parameter should cast to a ponter to structure. For best efficiency structure may have the same alignment as CAN registers inside CAN module.</p>
+<p>This is target specific function and is specific for specific microcontroller. It is best to implement it by using inline function or macro. <code>rxMsg</code> parameter should cast to a pointer to structure. For best efficiency structure may have the same alignment as CAN registers inside CAN module.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rxMsg</td><td>Pointer to received message </td></tr>
@@ -280,7 +280,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

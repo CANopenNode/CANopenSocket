@@ -290,6 +290,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga8e9bae71814a3e7bbd8d59d721174c2b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__Emergency.html#ga8e9bae71814a3e7bbd8d59d721174c2b">CO_isError</a> (<a class="el" href="structCO__EM__t.html">CO_EM_t</a> *em, const <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> errorBit)</td></tr>
 <tr class="memdesc:ga8e9bae71814a3e7bbd8d59d721174c2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check specific error condition.  <a href="group__CO__Emergency.html#ga8e9bae71814a3e7bbd8d59d721174c2b">More...</a><br /></td></tr>
 <tr class="separator:ga8e9bae71814a3e7bbd8d59d721174c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf0c47186d9e51fb91d48385a9f6bad6b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__Emergency.html#gaf0c47186d9e51fb91d48385a9f6bad6b">CO_getErrorRegister</a> (<a class="el" href="structCO__EM__t.html">CO_EM_t</a> *em)</td></tr>
+<tr class="memdesc:gaf0c47186d9e51fb91d48385a9f6bad6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get error register.  <a href="group__CO__Emergency.html#gaf0c47186d9e51fb91d48385a9f6bad6b">More...</a><br /></td></tr>
+<tr class="separator:gaf0c47186d9e51fb91d48385a9f6bad6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>CANopen Emergency protocol.</p>
@@ -330,7 +333,7 @@ Functions</h2></td></tr>
 <p>CANopen Error register. </p>
 <p>Mandatory for CANopen, resides in object dictionary, index 0x1001.</p>
 <p>Error register is calculated from internal bitfield variable, critical bits. See <a class="el" href="group__CO__Emergency.html#ga587034df9d350c8e121c253f1d4eeacc">CO_EM_errorStatusBits_t</a> and <a class="el" href="group__CO__STACK__CONFIG__EMERGENCY.html">Emergency producer/consumer</a> for error condition macros.</p>
-<p>Internal errors may prevent device to stay in NMT Operational state. Details are described in <em>Error Behavior</em> in Object Dictionary at index 0x1029. </p>
+<p>Internal errors may prevent device to stay in NMT Operational state and changes may switch between the states. See <a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a> for details. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga2cfc261cce03577083ee3f1a31d5e03ca92a7e121ae04a022fc2fe604eb1c148e"></a>CO_ERR_REG_GENERIC_ERR&#160;</td><td class="fielddoc"><p>bit 0, generic error </p>
 </td></tr>
@@ -675,7 +678,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">CANdevTxIdx</td><td>Index of transmit buffer in the above CAN device. </td></tr>
     <tr><td class="paramname">OD_1015_InhTime</td><td>OD entry for 0x1015 - "Inhibit time EMCY", entry is optional (can be NULL), IO extension is optional for runtime configuration. </td></tr>
     <tr><td class="paramname">OD_1003_preDefErr</td><td>OD entry for 0x1003 - "Pre-defined error field". Emergency object has own memory buffer for this entry. Entry is optional, IO extension is required. </td></tr>
-    <tr><td class="paramname">OD_statusBits</td><td>Custom OD entry for accessing errorStatusBits from <a class="el" href="structCO__EM__t.html">CO_EM_t</a>. Entry must have bytestring_t of size (CO_CONFIG_EM_ERR_STATUS_BITS_COUNT/8) bytes available for read/write access on subindex 0. Emergency object has own memory buffer for this entry. Entry is optional, IO extension is required. </td></tr>
+    <tr><td class="paramname">OD_statusBits</td><td>Custom OD entry for accessing errorStatusBits from <a class="el" href="structCO__EM__t.html">CO_EM_t</a>. Entry must have variable of size (CO_CONFIG_EM_ERR_STATUS_BITS_COUNT/8) bytes available for read/write access on subindex 0. Emergency object has own memory buffer for this entry. Entry is optional, IO extension is required. </td></tr>
     <tr><td class="paramname">CANdevRx</td><td>CAN device for Emergency consumer reception. </td></tr>
     <tr><td class="paramname">CANdevRxIdx</td><td>Index of receive buffer in the above CAN device. </td></tr>
     <tr><td class="paramname">nodeId</td><td>CANopen node ID of this device (for default emergency producer)</td></tr>
@@ -816,7 +819,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir"></td><td class="paramname">em</td><td>This object. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">NMTisPreOrOperational</td><td>True if this node is NMT_PRE_OPERATIONAL or NMT_OPERATIONAL state. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in [microseconds]. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -930,12 +933,47 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gaf0c47186d9e51fb91d48385a9f6bad6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0c47186d9e51fb91d48385a9f6bad6b">&#9670;&nbsp;</a></span>CO_getErrorRegister()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> CO_getErrorRegister </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__EM__t.html">CO_EM_t</a> *&#160;</td>
+          <td class="paramname"><em>em</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get error register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">em</td><td>Emergency object.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Error register or 0 if doesn't exist. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

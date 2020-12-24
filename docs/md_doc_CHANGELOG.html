@@ -95,10 +95,22 @@ $(document).ready(function(){initNavTree('md_doc_CHANGELOG.html',''); initResiza
 <div class="title">Change Log </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a href="https://github.com/CANopenNode/CANopenNode">Unreleased master</a> </h1>
+<div class="textblock"><h1><a href="https://github.com/CANopenNode/CANopenNode/tree/newOD">newOD</a> </h1>
 <ul>
-<li><a href="https://github.com/CANopenNode/CANopenNode/compare/v1.3...master">Full ChangeLog</a></li>
-<li>See {TODO diff} for example of change in user application interface. <h2>Removed</h2>
+<li><a href="https://github.com/CANopenNode/CANopenNode/compare/master...newOD">Full ChangeLog</a> <h2>Changed</h2>
+</li>
+</ul>
+<ul>
+<li>New Object dictionary interface. It has very similar principles as before. All parts of CANopenNode objects, which works with OD entries, are rewritten.</li>
+<li>New OD.h and OD.c files, replaces CO_OD files.</li>
+<li>CANopen.c and <a class="el" href="CANopen_8h.html" title="Main CANopenNode file.">CANopen.h</a> files redesigned. Integration of "OD.h" is optional. Configuration of multiple object dictionaries is possible with one CANopen device. Interface is the same, with some changes to function arguments.</li>
+<li>Rewritten SDO server. Object dictionary part is removed.</li>
+<li>CO_Emergency is mostly rewritten. Now is much easier customization.</li>
+<li>CO_NMT_Heartbeat is redesigned.</li>
+</ul>
+<h1><a href="https://github.com/CANopenNode/CANopenNode">Unreleased master</a> </h1>
+<ul>
+<li><a href="https://github.com/CANopenNode/CANopenNode/compare/v1.3...master">Full ChangeLog</a> <h2>Removed</h2>
 </li>
 </ul>
 <ul>
@@ -127,9 +139,11 @@ $(document).ready(function(){initNavTree('md_doc_CHANGELOG.html',''); initResiza
 <ul>
 <li>./stack/socketCAN removed from the project, ./stack/Neuberger-socketCAN moved to ./socketCAN</li>
 <li>driver API updated</li>
-<li><a class="el" href="CO__Linux__threads_8h.html" title="Helper functions for implementing CANopen threads in Linux.">CO_Linux_threads.h</a>, function <code>void CANrx_threadTmr_init(uint16_t interval_in_milliseconds (changed to) uint32_t interval_in_microseconds)</code></li>
+<li>CO_Linux_threads.h, function <code>void CANrx_threadTmr_init(uint16_t interval_in_milliseconds (changed to) uint32_t interval_in_microseconds)</code></li>
 <li><a class="el" href="group__CO__driver.html#ga25ee22cd2e3a2f3bb49990e8bc3076b0" title="Configure CAN message receive buffer.">CO_CANrxBufferInit()</a>: remove check COB ID already used.</li>
-<li>change macros CO_DRIVER_MULTI_INTERFACE and CO_DRIVER_ERROR_REPORTING. To enable(disable), set to 1(0). <h2>Fixed</h2>
+<li>change macros CO_DRIVER_MULTI_INTERFACE and CO_DRIVER_ERROR_REPORTING. To enable(disable), set to 1(0).</li>
+<li>Rename CO_Linux_threads.h/.c to <a class="el" href="CO__epoll__interface_8h.html" title="Helper functions for Linux epoll interface to CANopenNode.">CO_epoll_interface.h</a>/.c and reorganize them. Move epoll, timerfd and eventfd system calls from CO_driver.c to here.</li>
+<li>Can run in single thread, including gateway. <h2>Fixed</h2>
 </li>
 </ul>
 <ul>
@@ -140,7 +154,7 @@ $(document).ready(function(){initNavTree('md_doc_CHANGELOG.html',''); initResiza
 <ul>
 <li>Documentation added to <code>doc</code> directory: CHANGELOG.md, deviceSupport.md, gettingStarted.md, LSSusage.md and traceUsage.md.</li>
 <li>All CANopen objects calculates next timer info for OS. Useful for energy saving.</li>
-<li>Added file <a class="el" href="CO__config_8h.html" title="Configuration macros for CANopenNode.">CO_config.h</a> for stack configuration. Can be overridden by target specific or by custom definitions.</li>
+<li>Added file <a class="el" href="CO__config_8h.html" title="Configuration macros for CANopenNode.">CO_config.h</a> for stack configuration. Can be overridden by target specific or by custom definitions. It enables/disables whole CanOpenNode objects or parts of them. It also specifies some constants.</li>
 <li><a class="el" href="CO__fifo_8h.html" title="FIFO circular buffer.">CO_fifo.h</a>/c for fifo data buffer, used with rewritten SDO client, etc.</li>
 <li>CANopen gateway-ascii command interface according to CiA309-3 as a microcontroller independent module. It includes NMT master, LSS master and SDO client interface. Interface is non-blocking, it is added to mainline. Example for Linux stdio and socket is included.</li>
 </ul>
@@ -208,7 +222,7 @@ $(document).ready(function(){initNavTree('md_doc_CHANGELOG.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -3,6 +3,7 @@ var structCO__SDOclient__t =
     [ "OD", "structCO__SDOclient__t.html#a89334ad9cc4ac6751f4a8225f1645923", null ],
     [ "nodeId", "structCO__SDOclient__t.html#a13de9457791eecf17051e405665bfa4a", null ],
     [ "OD_IO", "structCO__SDOclient__t.html#a16fa659bc3098a3fbd60d0f6efde937a", null ],
+    [ "attribute", "structCO__SDOclient__t.html#a609088a2005febd6cd1561288cf1b7d1", null ],
     [ "CANdevRx", "structCO__SDOclient__t.html#a3283cda81a28d3b193a6a6bef29fadab", null ],
     [ "CANdevRxIdx", "structCO__SDOclient__t.html#afb8613dbcacfcefb970fabca4106eaeb", null ],
     [ "CANdevTx", "structCO__SDOclient__t.html#ab4f18ed8c085ea333ca165e486f4ead3", null ],

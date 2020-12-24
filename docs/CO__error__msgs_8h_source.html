@@ -154,48 +154,52 @@ $(document).ready(function(){initNavTree('CO__error__msgs_8h_source.html',''); i
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * Message definitions for debugging</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define DBG_ERRNO                 &quot;(%s) OS error \&quot;%s\&quot; in %s&quot;, __func__, strerror(errno)</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#define DBG_CAN_TX_FAILED         &quot;(%s) Transmitting CAN msg OID 0x%08x failed(%s)&quot;, __func__</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#define DBG_CAN_RX_PARAM_FAILED   &quot;(%s) Setting CAN rx buffer failed (%s)&quot;, __func__</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define DBG_CAN_RX_FAILED         &quot;(%s) Receiving CAN msg failed (%s)&quot;, __func__</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define DBG_CAN_ERROR_GENERAL     &quot;(%s) Socket error msg ID: 0x%08x, Data[0..7]: 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x (%s)&quot;, __func__</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define DBG_CAN_RX_EPOLL          &quot;(%s) CAN Epoll error (0x%02x - %s)&quot;, __func__</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define DBG_CAN_SET_LISTEN_ONLY   &quot;(%s) %s Set Listen Only&quot;, __func__</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#define DBG_CAN_CLR_LISTEN_ONLY   &quot;(%s) %s Leave Listen Only&quot;, __func__</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/* mainline */</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#define DBG_EMERGENCY_RX          &quot;CANopen Emergency message from node 0x%02X: errorCode=0x%04X, errorRegister=0x%02X, errorBit=0x%02X, infoCode=0x%08X&quot;</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#define DBG_NMT_CHANGE            &quot;CANopen NMT state changed to: \&quot;%s\&quot; (%d)&quot;</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#define DBG_HB_CONS_NMT_CHANGE    &quot;CANopen Remote node ID = 0x%02X: NMT state changed to: \&quot;%s\&quot; (%d)&quot;</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#define DBG_ARGUMENT_UNKNOWN      &quot;(%s) Unknown %s argument: \&quot;%s\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define DBG_NOT_TCP_PORT          &quot;(%s) -c argument \&quot;%s\&quot; is not a valid tcp port&quot;, __func__</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#define DBG_WRONG_NODE_ID         &quot;(%s) Wrong node ID \&quot;%d\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#define DBG_WRONG_PRIORITY        &quot;(%s) Wrong RT priority \&quot;%d\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#define DBG_NO_CAN_DEVICE         &quot;(%s) Can&#39;t find CAN device \&quot;%s\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#define DBG_OBJECT_DICTIONARY     &quot;(%s) Error in Object Dictionary \&quot;%s\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#define DBG_CAN_OPEN              &quot;(%s) CANopen error in %s, err=%d&quot;, __func__</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define DBG_CAN_OPEN_INFO         &quot;CANopen device, Node ID = 0x%02X, %s&quot;</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/* CO_Linux_threads */</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#define DBG_COMMAND_LOCAL_BIND    &quot;(%s) Can&#39;t bind local socket to path \&quot;%s\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#define DBG_COMMAND_TCP_BIND      &quot;(%s) Can&#39;t bind tcp socket to port \&quot;%d\&quot;&quot;, __func__</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#define DBG_COMMAND_STDIO_INFO    &quot;CANopen command interface on \&quot;standard IO\&quot; started&quot;</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#define DBG_COMMAND_LOCAL_INFO    &quot;CANopen command interface on local socket \&quot;%s\&quot; started&quot;</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#define DBG_COMMAND_TCP_INFO      &quot;CANopen command interface on tcp port \&quot;%d\&quot; started&quot;</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __cplusplus */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define DBG_GENERAL               &quot;(%s) Error: %s%d&quot;, __func__</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#define DBG_ERRNO                 &quot;(%s) OS error \&quot;%s\&quot; in %s&quot;, __func__, strerror(errno)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#define DBG_CO_DEBUG              &quot;(%s) CO_DEBUG: %s&quot;, __func__</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define DBG_CAN_TX_FAILED         &quot;(%s) Transmitting CAN msg OID 0x%08x failed(%s)&quot;, __func__</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define DBG_CAN_RX_PARAM_FAILED   &quot;(%s) Setting CAN rx buffer failed (%s)&quot;, __func__</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define DBG_CAN_RX_FAILED         &quot;(%s) Receiving CAN msg failed (%s)&quot;, __func__</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define DBG_CAN_ERROR_GENERAL     &quot;(%s) Socket error msg ID: 0x%08x, Data[0..7]: 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x, 0x%02x (%s)&quot;, __func__</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#define DBG_CAN_RX_EPOLL          &quot;(%s) CAN Epoll error (0x%02x - %s)&quot;, __func__</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#define DBG_CAN_SET_LISTEN_ONLY   &quot;(%s) %s Set Listen Only&quot;, __func__</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define DBG_CAN_CLR_LISTEN_ONLY   &quot;(%s) %s Leave Listen Only&quot;, __func__</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/* mainline */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#define DBG_EMERGENCY_RX          &quot;CANopen Emergency message from node 0x%02X: errorCode=0x%04X, errorRegister=0x%02X, errorBit=0x%02X, infoCode=0x%08X&quot;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#define DBG_NMT_CHANGE            &quot;CANopen NMT state changed to: \&quot;%s\&quot; (%d)&quot;</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define DBG_HB_CONS_NMT_CHANGE    &quot;CANopen Remote node ID = 0x%02X (index = %d): NMT state changed to: \&quot;%s\&quot; (%d)&quot;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#define DBG_ARGUMENT_UNKNOWN      &quot;(%s) Unknown %s argument: \&quot;%s\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#define DBG_NOT_TCP_PORT          &quot;(%s) -c argument \&quot;%s\&quot; is not a valid tcp port&quot;, __func__</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#define DBG_WRONG_NODE_ID         &quot;(%s) Wrong node ID \&quot;%d\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#define DBG_WRONG_PRIORITY        &quot;(%s) Wrong RT priority \&quot;%d\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#define DBG_NO_CAN_DEVICE         &quot;(%s) Can&#39;t find CAN device \&quot;%s\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define DBG_OBJECT_DICTIONARY     &quot;(%s) Error in Object Dictionary \&quot;%s\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#define DBG_OD_ENTRY              &quot;(%s) Error in Object Dictionary entry: 0x%X&quot;, __func__</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#define DBG_CAN_OPEN              &quot;(%s) CANopen error in %s, err=%d&quot;, __func__</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#define DBG_CAN_OPEN_INFO         &quot;CANopen device, Node ID = 0x%02X, %s&quot;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/* CO_epoll_interface */</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#define DBG_EPOLL_UNKNOWN         &quot;(%s) CAN Epoll error, events=0x%02x, fd=%d&quot;, __func__</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#define DBG_COMMAND_LOCAL_BIND    &quot;(%s) Can&#39;t bind local socket to path \&quot;%s\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#define DBG_COMMAND_TCP_BIND      &quot;(%s) Can&#39;t bind tcp socket to port \&quot;%d\&quot;&quot;, __func__</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#define DBG_COMMAND_STDIO_INFO    &quot;CANopen command interface on \&quot;standard IO\&quot; started&quot;</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#define DBG_COMMAND_LOCAL_INFO    &quot;CANopen command interface on local socket \&quot;%s\&quot; started&quot;</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#define DBG_COMMAND_TCP_INFO      &quot;CANopen command interface on tcp port \&quot;%d\&quot; started&quot;</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CO_ERROR_MSGS_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __cplusplus */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CO_ERROR_MSGS_H */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_4b0ffcb7ab18f30ccfa85879d0b1134f.html">socketCAN</a></li><li class="navelem"><b>CO_error_msgs.h</b></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

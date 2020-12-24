@@ -174,7 +174,7 @@ Macros</h2></td></tr>
 <li>CO_CONFIG_SDO_CLI_BLOCK - Enable SDO client block transfer. If set, then CO_CONFIG_SDO_CLI_SEGMENTED, CO_CONFIG_FIFO_ALT_READ and CO_CONFIG_FIFO_CRC16_CCITT must also be set.</li>
 <li>CO_CONFIG_SDO_CLI_LOCAL - Enable local transfer, if Node-ID of the SDO server is the same as node-ID of the SDO client. (SDO client is the same device as SDO server.) Transfer data directly without communication on CAN.</li>
 <li><a class="el" href="group__CO__STACK__CONFIG__COMMON.html#gab55099df45bed12f182ef7c0c779dc14" title="Enable custom callback after CAN receive.">CO_CONFIG_FLAG_CALLBACK_PRE</a> - Enable custom callback after preprocessing received SDO CAN message. Callback is configured by <a class="el" href="group__CO__SDOclient.html#ga4377eaecc3bd0a8320a2bbe1ef0ef776" title="Initialize SDOclient callback function.">CO_SDOclient_initCallbackPre()</a>.</li>
-<li><a class="el" href="group__CO__STACK__CONFIG__COMMON.html#ga9e84c3a9256f15246be7766a61096c2d" title="Enable calculation of timerNext_us variable.">CO_CONFIG_FLAG_TIMERNEXT</a> - Enable calculation of timerNext_us variable inside <a class="el" href="group__CO__SDOclient.html#ga40f6e79592e1d587d02bbb4eaefa9489" title="Initiate SDO download communication.">CO_SDOclientDownloadInitiate()</a>, <a class="el" href="group__CO__SDOclient.html#gaab262f0a8d08ba023639a2c197d0943a" title="Process SDO download communication.">CO_SDOclientDownload()</a>, <a class="el" href="group__CO__SDOclient.html#ga3180f82563b3ed768fe7d3bd34fe1886" title="Initiate SDO upload communication.">CO_SDOclientUploadInitiate()</a>, <a class="el" href="group__CO__SDOclient.html#gab44dabaf3deb88ffcf7c4ef72300287d" title="Process SDO upload communication.">CO_SDOclientUpload()</a>.</li>
+<li><a class="el" href="group__CO__STACK__CONFIG__COMMON.html#ga9e84c3a9256f15246be7766a61096c2d" title="Enable calculation of timerNext_us variable.">CO_CONFIG_FLAG_TIMERNEXT</a> - Enable calculation of timerNext_us variable inside <a class="el" href="group__CO__SDOclient.html#ga40f6e79592e1d587d02bbb4eaefa9489" title="Initiate SDO download communication.">CO_SDOclientDownloadInitiate()</a>, <a class="el" href="group__CO__SDOclient.html#gaab262f0a8d08ba023639a2c197d0943a" title="Process SDO download communication.">CO_SDOclientDownload()</a>, <a class="el" href="group__CO__SDOclient.html#ga3180f82563b3ed768fe7d3bd34fe1886" title="Initiate SDO upload communication.">CO_SDOclientUploadInitiate()</a>, <a class="el" href="group__CO__SDOclient.html#gabd3a3be7e3d1649adfdd253c979ec21f" title="Process SDO upload communication.">CO_SDOclientUpload()</a>.</li>
 <li><a class="el" href="group__CO__STACK__CONFIG__COMMON.html#gaf0f46ccffdd156cc7c2d8774ecb2060d" title="Enable dynamic behaviour of Object Dictionary variables.">CO_CONFIG_FLAG_OD_DYNAMIC</a> - Enable dynamic configuration of SDO clients (Writing to object 0x1280+ re-configures the client). </li>
 </ul>
 
@@ -193,7 +193,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Size of the internal data buffer for the SDO client. </p>
-<p>Circular buffer is used for SDO communication. it can be read or written between successive SDO calls. So size of the buffer can be lower than size of the actual size of data transferred. If only segmented transfer is used, then buffer size can be as low as 7 bytes, if data are read/written each cycle. If block transfer is used, buffer size should be set to at least 889 bytes, so maximum blksize can be used. In that case data should be read/written proper time between cycles. </p>
+<p>Circular buffer is used for SDO communication. It can be read or written between successive SDO calls. So size of the buffer can be lower than size of the actual size of data transferred. If only segmented transfer is used, then buffer size can be as low as 7 bytes, if data are read/written each cycle. If block transfer is used, buffer size should be set to at least 1000 bytes, so maximum blksize can be used (blksize is calculated from free buffer space). Default value for block transfer is 1000, otherwise 32. </p>
 
 </div>
 </div>
@@ -202,7 +202,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('structOD__stream__t.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>IO stream structure, used for read/write access to OD variable.  
+<p>IO stream structure, used for read/write access to OD variable, part of <a class="el" href="structOD__IO__t.html">OD_IO_t</a>.  
  <a href="structOD__stream__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CO__ODinterface_8h_source.html">CO_ODinterface.h</a>&gt;</code></p>
@@ -109,7 +109,7 @@ Data Fields</h2></td></tr>
 <tr class="memdesc:aad2551a7bf0da6396e6b909adf487b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to original data object, defined by Object Dictionary.  <a href="structOD__stream__t.html#aad2551a7bf0da6396e6b909adf487b01">More...</a><br /></td></tr>
 <tr class="separator:aad2551a7bf0da6396e6b909adf487b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3c8ded429eefa8646317207c0b3ff97"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__stream__t.html#af3c8ded429eefa8646317207c0b3ff97">object</a></td></tr>
-<tr class="memdesc:af3c8ded429eefa8646317207c0b3ff97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to object, passed by <a class="el" href="group__CO__ODinterface.html#gaecb92fc6fa7dafbf687d6366456eb724">OD_extensionIO_init()</a>.  <a href="structOD__stream__t.html#af3c8ded429eefa8646317207c0b3ff97">More...</a><br /></td></tr>
+<tr class="memdesc:af3c8ded429eefa8646317207c0b3ff97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to object, passed by <a class="el" href="group__CO__ODinterface.html#gac07bbe54fbfecc6bc8da2e10b2c0f7e8">OD_extensionIO_init()</a>.  <a href="structOD__stream__t.html#af3c8ded429eefa8646317207c0b3ff97">More...</a><br /></td></tr>
 <tr class="separator:af3c8ded429eefa8646317207c0b3ff97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60c4499678a5db84a7f7285b934ce75a"><td class="memItemLeft" align="right" valign="top"><a id="a60c4499678a5db84a7f7285b934ce75a"></a>
 <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__stream__t.html#a60c4499678a5db84a7f7285b934ce75a">dataLength</a></td></tr>
@@ -121,8 +121,7 @@ Data Fields</h2></td></tr>
 <tr class="separator:a97799b896ee689504771a9274575bcdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>IO stream structure, used for read/write access to OD variable. </p>
-<p>Structure is initialized with <a class="el" href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub()</a> function. </p>
+<div class="textblock"><p>IO stream structure, used for read/write access to OD variable, part of <a class="el" href="structOD__IO__t.html">OD_IO_t</a>. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="aad2551a7bf0da6396e6b909adf487b01"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad2551a7bf0da6396e6b909adf487b01">&#9670;&nbsp;</a></span>dataObjectOriginal</h2>
@@ -137,7 +136,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Pointer to original data object, defined by Object Dictionary. </p>
-<p>If memory for data object is not specified by Object Dictionary, then dataObjectOriginal is NULL. Default read/write functions operate on it. </p>
+<p>Default read/write functions operate on it. If memory for data object is not specified by Object Dictionary, then dataObjectOriginal is NULL. </p>
 
 </div>
 </div>
@@ -153,7 +152,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Pointer to object, passed by <a class="el" href="group__CO__ODinterface.html#gaecb92fc6fa7dafbf687d6366456eb724">OD_extensionIO_init()</a>. </p>
+<p>Pointer to object, passed by <a class="el" href="group__CO__ODinterface.html#gac07bbe54fbfecc6bc8da2e10b2c0f7e8">OD_extensionIO_init()</a>. </p>
 <p>Can be used inside read / write functions from IO extension. </p>
 
 </div>
@@ -167,7 +166,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structOD__stream__t.html">OD_stream_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

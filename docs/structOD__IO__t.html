@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('structOD__IO__t.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>Helper structure for storing all objects necessary for frequent read from or write to specific OD variable.  
+<p>Structure for input / output on the OD variable.  
  <a href="structOD__IO__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CO__ODinterface_8h_source.html">CO_ODinterface.h</a>&gt;</code></p>
@@ -107,21 +107,82 @@ $(document).ready(function(){initNavTree('structOD__IO__t.html',''); initResizab
 Data Fields</h2></td></tr>
 <tr class="memitem:a7f31cae6c859c2a2eaf2610b65fd6626"><td class="memItemLeft" align="right" valign="top"><a id="a7f31cae6c859c2a2eaf2610b65fd6626"></a>
 <a class="el" href="structOD__stream__t.html">OD_stream_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a></td></tr>
-<tr class="memdesc:a7f31cae6c859c2a2eaf2610b65fd6626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object passed to read or write. <br /></td></tr>
+<tr class="memdesc:a7f31cae6c859c2a2eaf2610b65fd6626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object Dictionary stream object, passed to read or write. <br /></td></tr>
 <tr class="separator:a7f31cae6c859c2a2eaf2610b65fd6626"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0ed3186d15d20f80f877a5f087fdebc"><td class="memItemLeft" align="right" valign="top"><a id="ab0ed3186d15d20f80f877a5f087fdebc"></a>
-<a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">read</a> )(<a class="el" href="structOD__stream__t.html">OD_stream_t</a> *<a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, void *buf, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> count, <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> *returnCode)</td></tr>
-<tr class="memdesc:ab0ed3186d15d20f80f877a5f087fdebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read function pointer, see <a class="el" href="structOD__subEntry__t.html">OD_subEntry_t</a>. <br /></td></tr>
+<tr class="memitem:ab0ed3186d15d20f80f877a5f087fdebc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">read</a> )(<a class="el" href="structOD__stream__t.html">OD_stream_t</a> *<a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, void *buf, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> count, <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> *returnCode)</td></tr>
+<tr class="memdesc:ab0ed3186d15d20f80f877a5f087fdebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for reading value from specified variable from Object Dictionary.  <a href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">More...</a><br /></td></tr>
 <tr class="separator:ab0ed3186d15d20f80f877a5f087fdebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa296d8e76d99af5c395971602a453b78"><td class="memItemLeft" align="right" valign="top"><a id="aa296d8e76d99af5c395971602a453b78"></a>
-<a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__IO__t.html#aa296d8e76d99af5c395971602a453b78">write</a> )(<a class="el" href="structOD__stream__t.html">OD_stream_t</a> *<a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, const void *buf, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> count, <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> *returnCode)</td></tr>
-<tr class="memdesc:aa296d8e76d99af5c395971602a453b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write function pointer, see <a class="el" href="structOD__subEntry__t.html">OD_subEntry_t</a>. <br /></td></tr>
+<tr class="memitem:aa296d8e76d99af5c395971602a453b78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOD__IO__t.html#aa296d8e76d99af5c395971602a453b78">write</a> )(<a class="el" href="structOD__stream__t.html">OD_stream_t</a> *<a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, const void *buf, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> count, <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> *returnCode)</td></tr>
+<tr class="memdesc:aa296d8e76d99af5c395971602a453b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for writing value into specified variable inside Object Dictionary.  <a href="structOD__IO__t.html#aa296d8e76d99af5c395971602a453b78">More...</a><br /></td></tr>
 <tr class="separator:aa296d8e76d99af5c395971602a453b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Helper structure for storing all objects necessary for frequent read from or write to specific OD variable. </p>
-<p>Structure can be used by application and can be filled inside and after <a class="el" href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub()</a> function call. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<div class="textblock"><p>Structure for input / output on the OD variable. </p>
+<p>It is initialized with <a class="el" href="group__CO__ODinterface.html#gaf1f736d4b4d6754d971f0c0a63655bcf">OD_getSub()</a> function. Access principle to OD variable is via read/write functions operating on stream, similar as standard read/write. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="ab0ed3186d15d20f80f877a5f087fdebc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0ed3186d15d20f80f877a5f087fdebc">&#9670;&nbsp;</a></span>read</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>(* OD_IO_t::read) (<a class="el" href="structOD__stream__t.html">OD_stream_t</a> *<a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, void *buf, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> count, <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> *returnCode)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer for reading value from specified variable from Object Dictionary. </p>
+<p>If OD variable is larger than buf, then this function must be called several times. After completed successful read function returns 'ODR_OK'. If read is partial, it returns 'ODR_PARTIAL'. In case of errors function returns code similar to SDO abort code.</p>
+<p>Read can be restarted with <a class="el" href="group__CO__ODinterface.html#ga3715e0a6b15bdf45659e1e01f9fc4e65">OD_rwRestart()</a> function.</p>
+<p>At the moment, when Object Dictionary is initialized, every variable has assigned the same "read" function. This default function simply copies data from Object Dictionary variable. Application can bind its own "read" function for specific object. In that case application is able to calculate data for reading from own internal state at the moment of "read" function call. For this functionality OD object must have IO extension enabled. OD object must also be initialized with <a class="el" href="group__CO__ODinterface.html#gac07bbe54fbfecc6bc8da2e10b2c0f7e8">OD_extensionIO_init()</a> function call.</p>
+<p>"read" function must always copy all own data to buf, except if "buf" is not large enough. ("*returnCode" must not return 'ODR_PARTIAL', if there is still space in "buf".)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">stream</td><td>Object Dictionary stream object. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">subIndex</td><td>Object Dictionary subIndex of the accessed element. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">buf</td><td>Pointer to external buffer, where to data will be copied. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">count</td><td>Size of the external buffer in bytes. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">returnCode</td><td>Return value from <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes successfully read. </dd></dl>
+
+</div>
+</div>
+<a id="aa296d8e76d99af5c395971602a453b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa296d8e76d99af5c395971602a453b78">&#9670;&nbsp;</a></span>write</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a>(* OD_IO_t::write) (<a class="el" href="structOD__stream__t.html">OD_stream_t</a> *<a class="el" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, const void *buf, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> count, <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> *returnCode)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer for writing value into specified variable inside Object Dictionary. </p>
+<p>If OD variable is larger than buf, then this function must be called several times. After completed successful write function returns 'ODR_OK'. If write is partial, it returns 'ODR_PARTIAL'. In case of errors function returns code similar to SDO abort code.</p>
+<p>Write can be restarted with <a class="el" href="group__CO__ODinterface.html#ga3715e0a6b15bdf45659e1e01f9fc4e65">OD_rwRestart()</a> function.</p>
+<p>At the moment, when Object Dictionary is initialised, every variable has assigned the same "write" function, which simply copies data to Object Dictionary variable. Application can bind its own "write" function, similar as it can bind "read" function.</p>
+<p>"write" function must always copy all available data from buf. If OD variable expect more data, then "*returnCode" must return 'ODR_PARTIAL'.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">stream</td><td>Object Dictionary stream object. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">subIndex</td><td>Object Dictionary subIndex of the accessed element. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">buf</td><td>Pointer to external buffer, from where data will be copied. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">count</td><td>Size of the external buffer in bytes. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">returnCode</td><td>Return value from ODR_t.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes successfully written, must be equal to count on success or zero on error. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>301/<a class="el" href="CO__ODinterface_8h_source.html">CO_ODinterface.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -130,7 +191,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structOD__IO__t.html">OD_IO_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

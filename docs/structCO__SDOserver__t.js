@@ -22,7 +22,7 @@ var structCO__SDOserver__t =
     [ "finished", "structCO__SDOserver__t.html#a90997c7a119e97d2cb8b9bbc5fb5145f", null ],
     [ "SDOtimeoutTime_us", "structCO__SDOserver__t.html#a09381f3b6885d0a3bc7d1fa96805eb5d", null ],
     [ "timeoutTimer", "structCO__SDOserver__t.html#a69dfa2436ba0bb51c527eb03330b48a7", null ],
-    [ "buf", "structCO__SDOserver__t.html#ab866bef60a888c32cb6d49b1f7f4889c", null ],
+    [ "buf", "structCO__SDOserver__t.html#ab834e69e77b72e1ee1d39d35e21e0df4", null ],
     [ "bufOffsetWr", "structCO__SDOserver__t.html#a69f52a30b4e7dc0a6e55c88b3126f814", null ],
     [ "bufOffsetRd", "structCO__SDOserver__t.html#a93557d1ee64582bc37c76f4d4680f7a5", null ],
     [ "block_SDOtimeoutTime_us", "structCO__SDOserver__t.html#ae1e16955965dced9464abd0a6bf8c2b2", null ],

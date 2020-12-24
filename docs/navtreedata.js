@@ -27,8 +27,19 @@ var NAVTREE =
     [ "Device Support", "md_doc_deviceSupport.html", null ],
     [ "Getting Started", "md_doc_gettingStarted.html", null ],
     [ "LSS usage", "md_doc_LSSusage.html", null ],
-    [ "Object Dictionary", "md_doc_objectDictionary.html", null ],
+    [ "Object Dictionary", "md_doc_objectDictionary.html", [
+      [ "Definitions from CiA 301", "md_doc_objectDictionary.html#definitions-from-cia-301", null ],
+      [ "Operation", "md_doc_objectDictionary.html#operation", null ],
+      [ "Object Dictionary Example", "md_doc_objectDictionary.html#object-dictionary-example", null ],
+      [ "XML Device Description", "md_doc_objectDictionary.html#xml-device-description", null ],
+      [ "Object Dictionary Requirements By CANopenNode", "md_doc_objectDictionary.html#object-dictionary-requirements-by-canopennode", null ]
+    ] ],
     [ "Trace usage", "md_doc_traceUsage.html", null ],
+    [ "CANopen documentation", "md_example_DS301_profile.html", [
+      [ "Device Information", "md_example_DS301_profile.html#device-information", null ],
+      [ "PDO Mapping", "md_example_DS301_profile.html#pdo-mapping", null ],
+      [ "Communication Specific Parameters", "md_example_DS301_profile.html#communication-specific-parameters", null ]
+    ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -56,15 +67,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "CANopen_8h.html",
-"group__CO__CANopen__301__fifo.html#gae9bfcb5f9c52de5f7239ab133fe326ec",
-"group__CO__Emergency.html#gga2cfc261cce03577083ee3f1a31d5e03ca360c75e04303d1c55e2bc8528407cb87",
-"group__CO__LSS.html#ggacb4c13e75306153eafd535e55ba0ca2caaa4d4f1a766516c6d97a81483001e8ef",
-"group__CO__ODgetSetters.html#gaa9cba6642facf33cdbe2e0155a90d571",
-"group__CO__PDO.html#ga34532746ccf88ccfa835716e89369478",
-"group__CO__STACK__CONFIG__NMT__HB.html#gafa3b1f1b4931175bf9c67a5d45633e76",
-"group__CO__socketCAN.html",
-"structCO__LSSslave__t.html#af163113cf94a4a2c74521ffe194522b2",
-"structCO__t.html"
+"group__CO__CANopen__301__fifo.html#gae038564001c68ab242a6f33756668ac5",
+"group__CO__Emergency.html#gga0653c307fd6bc5238babf48e01c9fa02ae210dc1069c7b046527f7d7903ef82cb",
+"group__CO__LSS.html#ggacb4c13e75306153eafd535e55ba0ca2ca12ca7fd4a3604cb8281fa7d58d1137e2",
+"group__CO__ODgetSetters.html#gaad4d755515e8dccf3616f14fe3914bde",
+"group__CO__SDOclient.html#ga754160e34089aea70f84d22b06eaff9e",
+"group__CO__STACK__CONFIG__SRDO.html#ga61645e6ad8a02e356abde012434bedf9",
+"group__CO__epoll__interface.html#ga2aef637d4f2f818a7d95a7bfac251132",
+"structCO__LSSmaster__t.html#ad7ee57af199cfd615f6caa07358f0ce7",
+"structCO__TPDO__t.html#a52c1e56f282549b0949721049bcc7e73"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

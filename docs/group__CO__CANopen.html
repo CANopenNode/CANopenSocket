@@ -92,11 +92,10 @@ $(document).ready(function(){initNavTree('group__CO__CANopen.html',''); initResi
 
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a> &#124;
 <a href="#files">Files</a> &#124;
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">CANopen</div>  </div>
 </div><!--header-->
@@ -105,12 +104,6 @@ $(document).ready(function(){initNavTree('group__CO__CANopen.html',''); initResi
 <p>CANopenNode is free and open source implementation of CANopen communication protocol.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
-Modules</h2></td></tr>
-<tr class="memitem:group__CO__NO__OBJ"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html">CANopen configuration</a></td></tr>
-<tr class="memdesc:group__CO__NO__OBJ"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definitions specify, which and how many CANopenNode communication objects will be used in current configuration. Usage of some objects is mandatory and is fixed. Others are defined in CO_OD.h. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:CANopen_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CANopen_8h.html">CANopen.h</a></td></tr>
@@ -119,30 +112,45 @@ Files</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html">CO_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen object with pointers to all CANopenNode objects.  <a href="structCO__t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__config__t.html">CO_config_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen configuration, used with <a class="el" href="group__CO__CANopen.html#gaf6ef29daa2063de90b4799ae795c7027">CO_new()</a>  <a href="structCO__config__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html">CO_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen object - collection of all CANopenNode objects.  <a href="structCO__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gae3927c69d6937caf2b67ac49c5e41982"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gae3927c69d6937caf2b67ac49c5e41982">CO_MULTIPLE_OD</a></td></tr>
+<tr class="memdesc:gae3927c69d6937caf2b67ac49c5e41982"><td class="mdescLeft">&#160;</td><td class="mdescRight">If macro is defined externally, then configuration with multiple object dictionaries will be possible.  <a href="group__CO__CANopen.html#gae3927c69d6937caf2b67ac49c5e41982">More...</a><br /></td></tr>
+<tr class="separator:gae3927c69d6937caf2b67ac49c5e41982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab00eab90dbe59885c98831e2d819e56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaab00eab90dbe59885c98831e2d819e56">CO_USE_GLOBALS</a></td></tr>
+<tr class="memdesc:gaab00eab90dbe59885c98831e2d819e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">If macro is defined externally, then global variables for CANopen objects will be used instead of heap.  <a href="group__CO__CANopen.html#gaab00eab90dbe59885c98831e2d819e56">More...</a><br /></td></tr>
+<tr class="separator:gaab00eab90dbe59885c98831e2d819e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaadb1d01f45937f04dc1a852fb0858735"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaadb1d01f45937f04dc1a852fb0858735">CO_new</a> (<a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *heapMemoryUsed)</td></tr>
-<tr class="memdesc:gaadb1d01f45937f04dc1a852fb0858735"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate and initialize memory for CANopen object.  <a href="group__CO__CANopen.html#gaadb1d01f45937f04dc1a852fb0858735">More...</a><br /></td></tr>
-<tr class="separator:gaadb1d01f45937f04dc1a852fb0858735"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacdcafe5027a800ab14c5d32a8fa97cfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gacdcafe5027a800ab14c5d32a8fa97cfb">CO_delete</a> (void *CANptr)</td></tr>
-<tr class="memdesc:gacdcafe5027a800ab14c5d32a8fa97cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete CANopen object and free memory.  <a href="group__CO__CANopen.html#gacdcafe5027a800ab14c5d32a8fa97cfb">More...</a><br /></td></tr>
-<tr class="separator:gacdcafe5027a800ab14c5d32a8fa97cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab33aa7899db750f1840ba64674f5fb5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gab33aa7899db750f1840ba64674f5fb5e">CO_CANinit</a> (void *CANptr, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> bitRate)</td></tr>
-<tr class="memdesc:gab33aa7899db750f1840ba64674f5fb5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CAN driver.  <a href="group__CO__CANopen.html#gab33aa7899db750f1840ba64674f5fb5e">More...</a><br /></td></tr>
-<tr class="separator:gab33aa7899db750f1840ba64674f5fb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3de87df54415e3c5c824eceff677f4a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga3de87df54415e3c5c824eceff677f4a4">CO_LSSinit</a> (<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *pendingNodeID, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *pendingBitRate)</td></tr>
-<tr class="memdesc:ga3de87df54415e3c5c824eceff677f4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopen LSS slave.  <a href="group__CO__CANopen.html#ga3de87df54415e3c5c824eceff677f4a4">More...</a><br /></td></tr>
-<tr class="separator:ga3de87df54415e3c5c824eceff677f4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad85587d228b8ab0899a90c73ec0c7d9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gad85587d228b8ab0899a90c73ec0c7d9b">CO_CANopenInit</a> (<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeId)</td></tr>
-<tr class="memdesc:gad85587d228b8ab0899a90c73ec0c7d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopenNode.  <a href="group__CO__CANopen.html#gad85587d228b8ab0899a90c73ec0c7d9b">More...</a><br /></td></tr>
-<tr class="separator:gad85587d228b8ab0899a90c73ec0c7d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7a36da54b801074032622708e06a742e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">CO_NMT_reset_cmd_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e">CO_process</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
-<tr class="memdesc:ga7a36da54b801074032622708e06a742e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen objects.  <a href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e">More...</a><br /></td></tr>
-<tr class="separator:ga7a36da54b801074032622708e06a742e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6ef29daa2063de90b4799ae795c7027"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaf6ef29daa2063de90b4799ae795c7027">CO_new</a> (<a class="el" href="structCO__config__t.html">CO_config_t</a> *config, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *heapMemoryUsed)</td></tr>
+<tr class="memdesc:gaf6ef29daa2063de90b4799ae795c7027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new CANopen object.  <a href="group__CO__CANopen.html#gaf6ef29daa2063de90b4799ae795c7027">More...</a><br /></td></tr>
+<tr class="separator:gaf6ef29daa2063de90b4799ae795c7027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7023592c26cf6649aa67bc2c04dfd95d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga7023592c26cf6649aa67bc2c04dfd95d">CO_delete</a> (<a class="el" href="structCO__t.html">CO_t</a> *co)</td></tr>
+<tr class="memdesc:ga7023592c26cf6649aa67bc2c04dfd95d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete CANopen object and free memory.  <a href="group__CO__CANopen.html#ga7023592c26cf6649aa67bc2c04dfd95d">More...</a><br /></td></tr>
+<tr class="separator:ga7023592c26cf6649aa67bc2c04dfd95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c9143f717e8df279034fb897e39b517"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga4c9143f717e8df279034fb897e39b517">CO_isLSSslaveEnabled</a> (<a class="el" href="structCO__t.html">CO_t</a> *co)</td></tr>
+<tr class="memdesc:ga4c9143f717e8df279034fb897e39b517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if LSS slave is enabled.  <a href="group__CO__CANopen.html#ga4c9143f717e8df279034fb897e39b517">More...</a><br /></td></tr>
+<tr class="separator:ga4c9143f717e8df279034fb897e39b517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga619d9ee70c17464bb819b48b5eddb074"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga619d9ee70c17464bb819b48b5eddb074">CO_CANinit</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, void *CANptr, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> bitRate)</td></tr>
+<tr class="memdesc:ga619d9ee70c17464bb819b48b5eddb074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CAN driver.  <a href="group__CO__CANopen.html#ga619d9ee70c17464bb819b48b5eddb074">More...</a><br /></td></tr>
+<tr class="separator:ga619d9ee70c17464bb819b48b5eddb074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0e11332fd28af597bc47b21327cdc8a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga0e11332fd28af597bc47b21327cdc8a3">CO_LSSinit</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="unionCO__LSS__address__t.html">CO_LSS_address_t</a> *lssAddress, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *pendingNodeID, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *pendingBitRate)</td></tr>
+<tr class="memdesc:ga0e11332fd28af597bc47b21327cdc8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopen LSS slave.  <a href="group__CO__CANopen.html#ga0e11332fd28af597bc47b21327cdc8a3">More...</a><br /></td></tr>
+<tr class="separator:ga0e11332fd28af597bc47b21327cdc8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0b64a860299af6e96f5663419aa6d446"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga0b64a860299af6e96f5663419aa6d446">CO_CANopenInit</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="structCO__EM__t.html">CO_EM_t</a> *em, const <a class="el" href="structOD__t.html">OD_t</a> *od, const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *OD_statusBits, <a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a> NMTcontrol, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> firstHBTime_ms, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> SDOserverTimeoutTime_ms, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> SDOclientTimeoutTime_ms, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> SDOclientBlockTransfer, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeId)</td></tr>
+<tr class="memdesc:ga0b64a860299af6e96f5663419aa6d446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopenNode.  <a href="group__CO__CANopen.html#ga0b64a860299af6e96f5663419aa6d446">More...</a><br /></td></tr>
+<tr class="separator:ga0b64a860299af6e96f5663419aa6d446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga895d7fad40b60aacdac3cb0615729b5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">CO_NMT_reset_cmd_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e">CO_process</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> enableGateway, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
+<tr class="memdesc:ga895d7fad40b60aacdac3cb0615729b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen objects.  <a href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e">More...</a><br /></td></tr>
+<tr class="separator:ga895d7fad40b60aacdac3cb0615729b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad5c15c3ca475912661f512d37413b12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaad5c15c3ca475912661f512d37413b12">CO_process_SYNC</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
 <tr class="memdesc:gaad5c15c3ca475912661f512d37413b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen SYNC objects.  <a href="group__CO__CANopen.html#gaad5c15c3ca475912661f512d37413b12">More...</a><br /></td></tr>
 <tr class="separator:gaad5c15c3ca475912661f512d37413b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,54 +163,93 @@ Functions</h2></td></tr>
 <tr class="memitem:gab76d7283fe5190d3a0009b423a9ba8b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gab76d7283fe5190d3a0009b423a9ba8b1">CO_process_SRDO</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
 <tr class="memdesc:gab76d7283fe5190d3a0009b423a9ba8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen SRDO objects.  <a href="group__CO__CANopen.html#gab76d7283fe5190d3a0009b423a9ba8b1">More...</a><br /></td></tr>
 <tr class="separator:gab76d7283fe5190d3a0009b423a9ba8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:gaa6b0e31a1f760af91bb742c83c00a6c1"><td class="memItemLeft" align="right" valign="top"><a id="gaa6b0e31a1f760af91bb742c83c00a6c1"></a>
-<a class="el" href="structCO__t.html">CO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaa6b0e31a1f760af91bb742c83c00a6c1">CO</a></td></tr>
-<tr class="memdesc:gaa6b0e31a1f760af91bb742c83c00a6c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen object. <br /></td></tr>
-<tr class="separator:gaa6b0e31a1f760af91bb742c83c00a6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>CANopenNode is free and open source implementation of CANopen communication protocol. </p>
 <p>CANopen is the internationally standardized (EN 50325-4) (CiA DS-301) CAN-based higher-layer protocol for embedded control system. For more information on CANopen see <a href="http://www.can-cia.org/">http://www.can-cia.org/</a></p>
 <p>CANopenNode homepage is <a href="https://github.com/CANopenNode/CANopenNode">https://github.com/CANopenNode/CANopenNode</a></p>
-<p><a class="el" href="CANopen_8h.html" title="Main CANopenNode file.">CANopen.h</a> file combines Object dictionary (CO_OD) and all other CANopen source files. Configuration information are read from CO_OD.h file. CO_OD.h/.c files defines CANopen Object Dictionary and are generated by external tool. <a class="el" href="CANopen_8h.html" title="Main CANopenNode file.">CANopen.h</a> file contains most common configuration of CANopenNode objects and can also be a template for custom, more complex configurations.</p>
+<p><a class="el" href="CANopen_8h.html" title="Main CANopenNode file.">CANopen.h</a> file combines all CANopenNode source files. <a class="el" href="group__CO__STACK__CONFIG.html">Stack configuration</a> is first defined in "CO_config.h" file. Number of different CANopenNode objects used is configured with <a class="el" href="structCO__config__t.html">CO_config_t</a> structure or is read directly from "OD.h" file, if single object dictionary definition is used. "OD.h" and "OD.c" files defines CANopen Object Dictionary and are generated by external tool.</p>
 <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 <p><a href="https://www.apache.org/licenses/LICENSE-2.0">https://www.apache.org/licenses/LICENSE-2.0</a></p>
 <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. </p>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="gaadb1d01f45937f04dc1a852fb0858735"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaadb1d01f45937f04dc1a852fb0858735">&#9670;&nbsp;</a></span>CO_new()</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="gae3927c69d6937caf2b67ac49c5e41982"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae3927c69d6937caf2b67ac49c5e41982">&#9670;&nbsp;</a></span>CO_MULTIPLE_OD</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a> CO_new </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *&#160;</td>
-          <td class="paramname"><em>heapMemoryUsed</em></td><td>)</td>
-          <td></td>
+          <td class="memname">#define CO_MULTIPLE_OD</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Allocate and initialize memory for CANopen object. </p>
-<p>Function must be called the first time, after program starts.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>With some microcontrollers it is necessary to specify Heap size within linker configuration.</dd></dl>
+<p>If macro is defined externally, then configuration with multiple object dictionaries will be possible. </p>
+<p>If macro is not defined, default "OD.h" file with necessary definitions, such as OD_CNT_xxx, will be used, and also memory consumption and startup time will be lower. </p>
+
+</div>
+</div>
+<a id="gaab00eab90dbe59885c98831e2d819e56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab00eab90dbe59885c98831e2d819e56">&#9670;&nbsp;</a></span>CO_USE_GLOBALS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CO_USE_GLOBALS</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If macro is defined externally, then global variables for CANopen objects will be used instead of heap. </p>
+<p>This is possible only if CO_MULTIPLE_OD is not defined. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="gaf6ef29daa2063de90b4799ae795c7027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf6ef29daa2063de90b4799ae795c7027">&#9670;&nbsp;</a></span>CO_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCO__t.html">CO_t</a>* CO_new </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__config__t.html">CO_config_t</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *&#160;</td>
+          <td class="paramname"><em>heapMemoryUsed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create new CANopen object. </p>
+<p>If CO_USE_GLOBALS is defined, then function uses global static variables for all the CANopenNode objects. Otherwise it allocates all objects from heap.</p>
+<dl class="section remark"><dt>Remarks</dt><dd>With some microcontrollers it is necessary to specify Heap size within linker configuration, if heap is used.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">config</td><td>Configuration structure, used if <a class="el" href="group__CO__CANopen.html#gae3927c69d6937caf2b67ac49c5e41982">CO_MULTIPLE_OD</a> is defined. It must stay in memory permanently. If CO_MULTIPLE_OD is not defined, config should be NULL and parameters are retrieved from default "OD.h" file. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">heapMemoryUsed</td><td>Information about heap memory used. Ignored if NULL.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532" title="Return values of some CANopen functions.">CO_ReturnError_t</a>: CO_ERROR_NO, CO_ERROR_ILLEGAL_ARGUMENT, CO_ERROR_OUT_OF_MEMORY </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Successfully allocated and configured <a class="el" href="structCO__t.html" title="CANopen object - collection of all CANopenNode objects.">CO_t</a> object or NULL. </dd></dl>
 
 </div>
 </div>
-<a id="gacdcafe5027a800ab14c5d32a8fa97cfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacdcafe5027a800ab14c5d32a8fa97cfb">&#9670;&nbsp;</a></span>CO_delete()</h2>
+<a id="ga7023592c26cf6649aa67bc2c04dfd95d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7023592c26cf6649aa67bc2c04dfd95d">&#9670;&nbsp;</a></span>CO_delete()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,8 +257,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void CO_delete </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>CANptr</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td>
+          <td class="paramname"><em>co</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -221,15 +268,42 @@ Variables</h2></td></tr>
 <p>Must be called at program exit.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">CANptr</td><td>Pointer to the user-defined CAN base structure, passed to <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a>. </td></tr>
+    <tr><td class="paramname">co</td><td>CANopen object. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="gab33aa7899db750f1840ba64674f5fb5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab33aa7899db750f1840ba64674f5fb5e">&#9670;&nbsp;</a></span>CO_CANinit()</h2>
+<a id="ga4c9143f717e8df279034fb897e39b517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c9143f717e8df279034fb897e39b517">&#9670;&nbsp;</a></span>CO_isLSSslaveEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> CO_isLSSslaveEnabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td>
+          <td class="paramname"><em>co</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test if LSS slave is enabled. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">co</td><td>CANopen object.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if enabled </dd></dl>
+
+</div>
+</div>
+<a id="ga619d9ee70c17464bb819b48b5eddb074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga619d9ee70c17464bb819b48b5eddb074">&#9670;&nbsp;</a></span>CO_CANinit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,6 +311,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a> CO_CANinit </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td>
+          <td class="paramname"><em>co</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>CANptr</em>, </td>
         </tr>
@@ -258,17 +338,18 @@ Variables</h2></td></tr>
 <p>Function must be called in the communication reset section.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">co</td><td>CANopen object. </td></tr>
     <tr><td class="paramname">CANptr</td><td>Pointer to the user-defined CAN base structure, passed to <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a>. </td></tr>
     <tr><td class="paramname">bitRate</td><td>CAN bit rate. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532" title="Return values of some CANopen functions.">CO_ReturnError_t</a>: CO_ERROR_NO, CO_ERROR_ILLEGAL_ARGUMENT, CO_ERROR_ILLEGAL_BAUDRATE, CO_ERROR_OUT_OF_MEMORY </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CO_ERROR_NO in case of success. </dd></dl>
 
 </div>
 </div>
-<a id="ga3de87df54415e3c5c824eceff677f4a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3de87df54415e3c5c824eceff677f4a4">&#9670;&nbsp;</a></span>CO_LSSinit()</h2>
+<a id="ga0e11332fd28af597bc47b21327cdc8a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0e11332fd28af597bc47b21327cdc8a3">&#9670;&nbsp;</a></span>CO_LSSinit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,6 +357,18 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a> CO_LSSinit </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td>
+          <td class="paramname"><em>co</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="unionCO__LSS__address__t.html">CO_LSS_address_t</a> *&#160;</td>
+          <td class="paramname"><em>lssAddress</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *&#160;</td>
           <td class="paramname"><em>pendingNodeID</em>, </td>
         </tr>
@@ -295,20 +388,22 @@ Variables</h2></td></tr>
 
 <p>Initialize CANopen LSS slave. </p>
 <p>Function must be called before CO_CANopenInit.</p>
-<p>See <a class="el" href="group__CO__LSSslave.html#gaaba1fafcd0024609f8a72be4810baf66" title="Initialize LSS object.">CO_LSSslave_init()</a> for description of parameters.</p>
+<p>See <a class="el" href="group__CO__LSSslave.html#gaaba1fafcd0024609f8a72be4810baf66">CO_LSSslave_init()</a> for description of parameters.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">pendingNodeID</td><td>Pending node ID or 0xFF(unconfigured) </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">pendingBitRate</td><td>Pending bit rate of the CAN interface </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">co</td><td>CANopen object. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">lssAddress</td><td>LSS slave address, from OD object 0x1018 </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">pendingNodeID</td><td>Pending node ID or 0xFF (unconfigured) </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">pendingBitRate</td><td>Pending bit rate of the CAN interface</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532" title="Return values of some CANopen functions.">CO_ReturnError_t</a>: CO_ERROR_NO, CO_ERROR_ILLEGAL_ARGUMENT </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CO_ERROR_NO in case of success. </dd></dl>
 
 </div>
 </div>
-<a id="gad85587d228b8ab0899a90c73ec0c7d9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad85587d228b8ab0899a90c73ec0c7d9b">&#9670;&nbsp;</a></span>CO_CANopenInit()</h2>
+<a id="ga0b64a860299af6e96f5663419aa6d446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0b64a860299af6e96f5663419aa6d446">&#9670;&nbsp;</a></span>CO_CANopenInit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,9 +411,73 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a> CO_CANopenInit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td>
+          <td class="paramname"><em>co</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *&#160;</td>
+          <td class="paramname"><em>NMT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structCO__EM__t.html">CO_EM_t</a> *&#160;</td>
+          <td class="paramname"><em>em</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structOD__t.html">OD_t</a> *&#160;</td>
+          <td class="paramname"><em>od</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>OD_statusBits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a>&#160;</td>
+          <td class="paramname"><em>NMTcontrol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>firstHBTime_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>SDOserverTimeoutTime_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>SDOclientTimeoutTime_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td>
+          <td class="paramname"><em>SDOclientBlockTransfer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -327,16 +486,26 @@ Variables</h2></td></tr>
 <p>Function must be called in the communication reset section.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nodeId</td><td>CANopen Node ID (1 ... 127) or 0xFF(unconfigured). In the CANopen initialization it is the same as pendingBitRate from <a class="el" href="group__CO__CANopen.html#ga3de87df54415e3c5c824eceff677f4a4" title="Initialize CANopen LSS slave.">CO_LSSinit()</a>. If it is unconfigured, then some CANopen objects will not be initialized nor processed. </td></tr>
+    <tr><td class="paramname">co</td><td>CANopen object. </td></tr>
+    <tr><td class="paramname">em</td><td>Emergency object, which is used inside different CANopen objects, usually for error reporting. If NULL, then 'co-&gt;em' will be used. if NULL and 'co-&gt;CNT_EM' is 0, then function returns with error. </td></tr>
+    <tr><td class="paramname">NMT</td><td>If 'co-&gt;CNT_NMT' is 0, this object must be specified, If 'co-&gt;CNT_NMT' is 1,then it is ignored and can be NULL. NMT object is used for retrieving NMT internal state inside <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
+    <tr><td class="paramname">od</td><td>CANopen Object dictionary </td></tr>
+    <tr><td class="paramname">OD_statusBits</td><td>Argument passed to <a class="el" href="group__CO__Emergency.html#ga5b80f59df00b71dca7a5c18c139aa71e">CO_EM_init()</a>. May be NULL. </td></tr>
+    <tr><td class="paramname">NMTcontrol</td><td>Argument passed to <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259">CO_NMT_init()</a>. </td></tr>
+    <tr><td class="paramname">firstHBTime_ms</td><td>Argument passed to <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259">CO_NMT_init()</a>. </td></tr>
+    <tr><td class="paramname">SDOserverTimeoutTime_ms</td><td>Argument passed to <a class="el" href="group__CO__SDOserver.html#gac989ba60f25fd2bc48bca6df0c0c1dde">CO_SDOserver_init()</a>. </td></tr>
+    <tr><td class="paramname">SDOclientTimeoutTime_ms</td><td>Default timeout in milliseconds for SDO client, 500 typically. SDO client is configured from <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a>. </td></tr>
+    <tr><td class="paramname">SDOclientBlockTransfer</td><td>If true, block transfer will be set in SDO client by default. SDO client is configured from by <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a>. </td></tr>
+    <tr><td class="paramname">nodeId</td><td>CANopen Node ID (1 ... 127) or 0xFF(unconfigured). In the CANopen initialization it is the same as pendingBitRate from <a class="el" href="group__CO__CANopen.html#ga0e11332fd28af597bc47b21327cdc8a3" title="Initialize CANopen LSS slave.">CO_LSSinit()</a>. If it is unconfigured, then some CANopen objects will not be initialized nor processed.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532" title="Return values of some CANopen functions.">CO_ReturnError_t</a>: CO_ERROR_NO, CO_ERROR_ILLEGAL_ARGUMENT </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CO_ERROR_NO in case of success. </dd></dl>
 
 </div>
 </div>
-<a id="ga7a36da54b801074032622708e06a742e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7a36da54b801074032622708e06a742e">&#9670;&nbsp;</a></span>CO_process()</h2>
+<a id="ga895d7fad40b60aacdac3cb0615729b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga895d7fad40b60aacdac3cb0615729b5e">&#9670;&nbsp;</a></span>CO_process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,6 +515,12 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td>
           <td class="paramname"><em>co</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td>
+          <td class="paramname"><em>enableGateway</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -372,12 +547,13 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">co</td><td>CANopen object. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">enableGateway</td><td>If true, gateway to external world will be enabled. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in microseconds. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - maximum delay time after this function should be called next time in [microseconds]. Value can be used for OS sleep time. Initial value must be set to maximum interval time. Output will be equal or lower to initial value. Calculation is based on various timers which expire in known time. Parameter should be used in combination with callbacks configured with CO_***_initCallbackPre() functions. Those callbacks should also trigger calling of <a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e" title="Process CANopen objects.">CO_process()</a> function. Parameter is ignored if NULL. See also <a class="el" href="group__CO__STACK__CONFIG__COMMON.html#gab55099df45bed12f182ef7c0c779dc14">CO_CONFIG_FLAG_CALLBACK_PRE</a> configuration macro.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - maximum delay time after this function should be called next time in [microseconds]. Value can be used for OS sleep time. Initial value must be set to maximum interval time. Output will be equal or lower to initial value. Calculation is based on various timers which expire in known time. Parameter should be used in combination with callbacks configured with CO_***_initCallbackPre() functions. Those callbacks should also trigger calling of <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a> function. Parameter is ignored if NULL. See also <a class="el" href="group__CO__STACK__CONFIG__COMMON.html#gab55099df45bed12f182ef7c0c779dc14">CO_CONFIG_FLAG_CALLBACK_PRE</a> configuration macro.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674" title="Return code for CO_NMT_process() that tells application code what to reset.">CO_NMT_reset_cmd_t</a> from <a class="el" href="group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Node or communication reset request, from <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0">CO_NMT_process()</a>. </dd></dl>
 
 </div>
 </div>
@@ -414,12 +590,12 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Process CANopen SYNC objects. </p>
-<p>Function must be called cyclically from real time thread with constant interval (1ms typically). It processes SYNC CANopen objects.</p>
+<p>Function must be called cyclically. For time critical applications it may be called from real time thread with constant interval (1ms typically). It processes SYNC CANopen objects.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">co</td><td>CANopen object. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in microseconds. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e" title="Process CANopen objects.">CO_process()</a>.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a>.</td></tr>
   </table>
   </dd>
 </dl>
@@ -454,7 +630,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Process CANopen RPDO objects. </p>
-<p>Function must be called cyclically from real time thread with constant. interval (1ms typically). It processes receive PDO CANopen objects.</p>
+<p>Function must be called cyclically. For time critical applications it may be called from real time thread with constant interval (1ms typically). It processes receive PDO CANopen objects.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">co</td><td>CANopen object. </td></tr>
@@ -504,13 +680,13 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Process CANopen TPDO objects. </p>
-<p>Function must be called cyclically from real time thread with constant. interval (1ms typically). It processes transmit PDO CANopen objects.</p>
+<p>Function must be called cyclically. For time critical applications it may be called from real time thread with constant interval (1ms typically). It processes transmit PDO CANopen objects.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">co</td><td>CANopen object. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">syncWas</td><td>True, if CANopen SYNC message was just received or transmitted. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in microseconds. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -550,12 +726,12 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Process CANopen SRDO objects. </p>
-<p>Function must be called cyclically from real time thread with constant. interval (1ms typically). It processes receive SRDO CANopen objects.</p>
+<p>Function must be called cyclically. For time critical applications it may be called from real time thread with constant interval (1ms typically). It processes SRDO CANopen objects.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">co</td><td>CANopen object. </td></tr>
     <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in microseconds. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -567,7 +743,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

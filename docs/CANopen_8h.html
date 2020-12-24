@@ -94,8 +94,7 @@ $(document).ready(function(){initNavTree('CANopen_8h.html',''); initResizable();
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">CANopen.h File Reference<div class="ingroups"><a class="el" href="group__CO__CANopen.html">CANopen</a></div></div>  </div>
 </div><!--header-->
@@ -104,14 +103,15 @@ $(document).ready(function(){initNavTree('CANopen_8h.html',''); initResizable();
 <p>Main CANopenNode file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="CO__driver_8h_source.html">301/CO_driver.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="CO__ODinterface_8h_source.html">301/CO_ODinterface.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="CO__NMT__Heartbeat_8h_source.html">301/CO_NMT_Heartbeat.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="CO__HBconsumer_8h_source.html">301/CO_HBconsumer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="CO__Emergency_8h_source.html">301/CO_Emergency.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__SDOserver_8h_source.html">301/CO_SDOserver.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__SDOclient_8h_source.html">301/CO_SDOclient.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="CO__Emergency_8h_source.html">301/CO_Emergency.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="CO__NMT__Heartbeat_8h_source.html">301/CO_NMT_Heartbeat.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="CO__TIME_8h_source.html">301/CO_TIME.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__SYNC_8h_source.html">301/CO_SYNC.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__PDO_8h_source.html">301/CO_PDO.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="CO__HBconsumer_8h_source.html">301/CO_HBconsumer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="CO__TIME_8h_source.html">301/CO_TIME.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__LEDs_8h_source.html">303/CO_LEDs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__GFC_8h_source.html">304/CO_GFC.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__SRDO_8h_source.html">304/CO_SRDO.h</a>&quot;</code><br />
@@ -119,101 +119,50 @@ $(document).ready(function(){initNavTree('CANopen_8h.html',''); initResizable();
 <code>#include &quot;<a class="el" href="CO__LSSmaster_8h_source.html">305/CO_LSSmaster.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__gateway__ascii_8h_source.html">309/CO_gateway_ascii.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="CO__trace_8h_source.html">extra/CO_trace.h</a>&quot;</code><br />
-<code>#include &quot;CO_OD.h&quot;</code><br />
 </div>
 <p><a href="CANopen_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__config__t.html">CO_config_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen configuration, used with <a class="el" href="group__CO__CANopen.html#gaf6ef29daa2063de90b4799ae795c7027">CO_new()</a>  <a href="structCO__config__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__t.html">CO_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen object with pointers to all CANopenNode objects.  <a href="structCO__t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen object - collection of all CANopenNode objects.  <a href="structCO__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga4f27bee7223ee8d189ecf3fed854b135"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga4f27bee7223ee8d189ecf3fed854b135">CO_NO_NMT</a>&#160;&#160;&#160;(1)</td></tr>
-<tr class="memdesc:ga4f27bee7223ee8d189ecf3fed854b135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of NMT objects, fixed to 1 slave(CANrx) <br /></td></tr>
-<tr class="separator:ga4f27bee7223ee8d189ecf3fed854b135"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad3e54b50eebef2507fa6504ff664973e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#gad3e54b50eebef2507fa6504ff664973e">CO_NO_NMT_MST</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:gad3e54b50eebef2507fa6504ff664973e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of NMT master objects, 0 or 1 master(CANtx).  <a href="group__CO__NO__OBJ.html#gad3e54b50eebef2507fa6504ff664973e">More...</a><br /></td></tr>
-<tr class="separator:gad3e54b50eebef2507fa6504ff664973e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad159c826e338044f521877f0a2cb3399"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#gad159c826e338044f521877f0a2cb3399">CO_NO_SYNC</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:gad159c826e338044f521877f0a2cb3399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of SYNC objects, 0 or 1 (consumer(CANrx) + producer(CANtx)) <br /></td></tr>
-<tr class="separator:gad159c826e338044f521877f0a2cb3399"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac3798c40574463c36ba57b2332213608"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#gac3798c40574463c36ba57b2332213608">CO_NO_EMERGENCY</a>&#160;&#160;&#160;(1)</td></tr>
-<tr class="memdesc:gac3798c40574463c36ba57b2332213608"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Emergency producer objects, fixed to 1 producer(CANtx) <br /></td></tr>
-<tr class="separator:gac3798c40574463c36ba57b2332213608"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf7abe058aa71aa9c2469b2313e444377"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#gaf7abe058aa71aa9c2469b2313e444377">CO_NO_EM_CONS</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:gaf7abe058aa71aa9c2469b2313e444377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Emergency consumer objects, 0 or 1 consumer(CANrx).  <a href="group__CO__NO__OBJ.html#gaf7abe058aa71aa9c2469b2313e444377">More...</a><br /></td></tr>
-<tr class="separator:gaf7abe058aa71aa9c2469b2313e444377"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7e548904d5ac8527412e03fc4c445842"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga7e548904d5ac8527412e03fc4c445842">CO_NO_TIME</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:ga7e548904d5ac8527412e03fc4c445842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Time-stamp objects, 0 or 1 (consumer(CANrx) + producer(CANtx)) <br /></td></tr>
-<tr class="separator:ga7e548904d5ac8527412e03fc4c445842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4d585d0313ff20c15df55c620d8dcdce"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga4d585d0313ff20c15df55c620d8dcdce">CO_NO_GFC</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:ga4d585d0313ff20c15df55c620d8dcdce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of GFC objects, 0 or 1 (consumer(CANrx) + producer(CANtx)) <br /></td></tr>
-<tr class="separator:ga4d585d0313ff20c15df55c620d8dcdce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3fd70c7d577da632c62d4bccef1b410c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga3fd70c7d577da632c62d4bccef1b410c">CO_NO_RPDO</a>&#160;&#160;&#160;(0 - 64)</td></tr>
-<tr class="memdesc:ga3fd70c7d577da632c62d4bccef1b410c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of SRDO objects, 0 to 64 (consumer(CANrx) + producer(CANtx))  <a href="group__CO__NO__OBJ.html#ga3fd70c7d577da632c62d4bccef1b410c">More...</a><br /></td></tr>
-<tr class="separator:ga3fd70c7d577da632c62d4bccef1b410c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3fd70c7d577da632c62d4bccef1b410c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga3fd70c7d577da632c62d4bccef1b410c">CO_NO_RPDO</a>&#160;&#160;&#160;(1 - 512)</td></tr>
-<tr class="memdesc:ga3fd70c7d577da632c62d4bccef1b410c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of SRDO objects, 0 to 64 (consumer(CANrx) + producer(CANtx))  <a href="group__CO__NO__OBJ.html#ga3fd70c7d577da632c62d4bccef1b410c">More...</a><br /></td></tr>
-<tr class="separator:ga3fd70c7d577da632c62d4bccef1b410c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga48e2baafb4253c5d3d6882add81201fc"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga48e2baafb4253c5d3d6882add81201fc">CO_NO_TPDO</a>&#160;&#160;&#160;(1 - 512)</td></tr>
-<tr class="memdesc:ga48e2baafb4253c5d3d6882add81201fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of TPDO objects, 1 to 512 producers (CANtx) <br /></td></tr>
-<tr class="separator:ga48e2baafb4253c5d3d6882add81201fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae05671a26d9dfe361478d5627b18b778"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#gae05671a26d9dfe361478d5627b18b778">CO_NO_SDO_SERVER</a>&#160;&#160;&#160;(1 - 128)</td></tr>
-<tr class="memdesc:gae05671a26d9dfe361478d5627b18b778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of SDO server objects, from 1 to 128 (CANrx + CANtx) <br /></td></tr>
-<tr class="separator:gae05671a26d9dfe361478d5627b18b778"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga651a131f31175e56783b58bf1d881ef1"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga651a131f31175e56783b58bf1d881ef1">CO_NO_SDO_CLIENT</a>&#160;&#160;&#160;(0 - 128)</td></tr>
-<tr class="memdesc:ga651a131f31175e56783b58bf1d881ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of SDO client objects, from 0 to 128 (CANrx + CANtx) <br /></td></tr>
-<tr class="separator:ga651a131f31175e56783b58bf1d881ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga87772082cac323ab6b7981a5eef1c13d"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga87772082cac323ab6b7981a5eef1c13d">CO_NO_HB_PROD</a>&#160;&#160;&#160;(1)</td></tr>
-<tr class="memdesc:ga87772082cac323ab6b7981a5eef1c13d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of HB producer objects, fixed to 1 producer(CANtx) <br /></td></tr>
-<tr class="separator:ga87772082cac323ab6b7981a5eef1c13d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga54e67bd5e554f7a463d07af56dff36b2"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga54e67bd5e554f7a463d07af56dff36b2">CO_NO_HB_CONS</a>&#160;&#160;&#160;(0 - 127)</td></tr>
-<tr class="memdesc:ga54e67bd5e554f7a463d07af56dff36b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of HB consumer objects, from 0 to 127 consumers(CANrx) <br /></td></tr>
-<tr class="separator:ga54e67bd5e554f7a463d07af56dff36b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae89409c0dbd4270ca1adf3ea9e42bf80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#gae89409c0dbd4270ca1adf3ea9e42bf80">CO_NO_LSS_SLAVE</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:gae89409c0dbd4270ca1adf3ea9e42bf80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of LSS slave objects, 0 or 1 (CANrx + CANtx).  <a href="group__CO__NO__OBJ.html#gae89409c0dbd4270ca1adf3ea9e42bf80">More...</a><br /></td></tr>
-<tr class="separator:gae89409c0dbd4270ca1adf3ea9e42bf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4df45e2bf09a4e7456f8e3681c0a09a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga4df45e2bf09a4e7456f8e3681c0a09a9">CO_NO_LSS_MASTER</a>&#160;&#160;&#160;(0 - 1)</td></tr>
-<tr class="memdesc:ga4df45e2bf09a4e7456f8e3681c0a09a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of LSS master objects, 0 or 1 (CANrx + CANtx).  <a href="group__CO__NO__OBJ.html#ga4df45e2bf09a4e7456f8e3681c0a09a9">More...</a><br /></td></tr>
-<tr class="separator:ga4df45e2bf09a4e7456f8e3681c0a09a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5c94a18cf5ad4f39869c930120c526e0"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NO__OBJ.html#ga5c94a18cf5ad4f39869c930120c526e0">CO_NO_TRACE</a>&#160;&#160;&#160;(0 - )</td></tr>
-<tr class="memdesc:ga5c94a18cf5ad4f39869c930120c526e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Trace objects, 0 to many. <br /></td></tr>
-<tr class="separator:ga5c94a18cf5ad4f39869c930120c526e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae3927c69d6937caf2b67ac49c5e41982"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gae3927c69d6937caf2b67ac49c5e41982">CO_MULTIPLE_OD</a></td></tr>
+<tr class="memdesc:gae3927c69d6937caf2b67ac49c5e41982"><td class="mdescLeft">&#160;</td><td class="mdescRight">If macro is defined externally, then configuration with multiple object dictionaries will be possible.  <a href="group__CO__CANopen.html#gae3927c69d6937caf2b67ac49c5e41982">More...</a><br /></td></tr>
+<tr class="separator:gae3927c69d6937caf2b67ac49c5e41982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab00eab90dbe59885c98831e2d819e56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaab00eab90dbe59885c98831e2d819e56">CO_USE_GLOBALS</a></td></tr>
+<tr class="memdesc:gaab00eab90dbe59885c98831e2d819e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">If macro is defined externally, then global variables for CANopen objects will be used instead of heap.  <a href="group__CO__CANopen.html#gaab00eab90dbe59885c98831e2d819e56">More...</a><br /></td></tr>
+<tr class="separator:gaab00eab90dbe59885c98831e2d819e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaadb1d01f45937f04dc1a852fb0858735"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaadb1d01f45937f04dc1a852fb0858735">CO_new</a> (<a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *heapMemoryUsed)</td></tr>
-<tr class="memdesc:gaadb1d01f45937f04dc1a852fb0858735"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate and initialize memory for CANopen object.  <a href="group__CO__CANopen.html#gaadb1d01f45937f04dc1a852fb0858735">More...</a><br /></td></tr>
-<tr class="separator:gaadb1d01f45937f04dc1a852fb0858735"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacdcafe5027a800ab14c5d32a8fa97cfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gacdcafe5027a800ab14c5d32a8fa97cfb">CO_delete</a> (void *CANptr)</td></tr>
-<tr class="memdesc:gacdcafe5027a800ab14c5d32a8fa97cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete CANopen object and free memory.  <a href="group__CO__CANopen.html#gacdcafe5027a800ab14c5d32a8fa97cfb">More...</a><br /></td></tr>
-<tr class="separator:gacdcafe5027a800ab14c5d32a8fa97cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab33aa7899db750f1840ba64674f5fb5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gab33aa7899db750f1840ba64674f5fb5e">CO_CANinit</a> (void *CANptr, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> bitRate)</td></tr>
-<tr class="memdesc:gab33aa7899db750f1840ba64674f5fb5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CAN driver.  <a href="group__CO__CANopen.html#gab33aa7899db750f1840ba64674f5fb5e">More...</a><br /></td></tr>
-<tr class="separator:gab33aa7899db750f1840ba64674f5fb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3de87df54415e3c5c824eceff677f4a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga3de87df54415e3c5c824eceff677f4a4">CO_LSSinit</a> (<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *pendingNodeID, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *pendingBitRate)</td></tr>
-<tr class="memdesc:ga3de87df54415e3c5c824eceff677f4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopen LSS slave.  <a href="group__CO__CANopen.html#ga3de87df54415e3c5c824eceff677f4a4">More...</a><br /></td></tr>
-<tr class="separator:ga3de87df54415e3c5c824eceff677f4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad85587d228b8ab0899a90c73ec0c7d9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gad85587d228b8ab0899a90c73ec0c7d9b">CO_CANopenInit</a> (<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeId)</td></tr>
-<tr class="memdesc:gad85587d228b8ab0899a90c73ec0c7d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopenNode.  <a href="group__CO__CANopen.html#gad85587d228b8ab0899a90c73ec0c7d9b">More...</a><br /></td></tr>
-<tr class="separator:gad85587d228b8ab0899a90c73ec0c7d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7a36da54b801074032622708e06a742e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">CO_NMT_reset_cmd_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e">CO_process</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
-<tr class="memdesc:ga7a36da54b801074032622708e06a742e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen objects.  <a href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e">More...</a><br /></td></tr>
-<tr class="separator:ga7a36da54b801074032622708e06a742e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6ef29daa2063de90b4799ae795c7027"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCO__t.html">CO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaf6ef29daa2063de90b4799ae795c7027">CO_new</a> (<a class="el" href="structCO__config__t.html">CO_config_t</a> *config, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *heapMemoryUsed)</td></tr>
+<tr class="memdesc:gaf6ef29daa2063de90b4799ae795c7027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new CANopen object.  <a href="group__CO__CANopen.html#gaf6ef29daa2063de90b4799ae795c7027">More...</a><br /></td></tr>
+<tr class="separator:gaf6ef29daa2063de90b4799ae795c7027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7023592c26cf6649aa67bc2c04dfd95d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga7023592c26cf6649aa67bc2c04dfd95d">CO_delete</a> (<a class="el" href="structCO__t.html">CO_t</a> *co)</td></tr>
+<tr class="memdesc:ga7023592c26cf6649aa67bc2c04dfd95d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete CANopen object and free memory.  <a href="group__CO__CANopen.html#ga7023592c26cf6649aa67bc2c04dfd95d">More...</a><br /></td></tr>
+<tr class="separator:ga7023592c26cf6649aa67bc2c04dfd95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c9143f717e8df279034fb897e39b517"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga4c9143f717e8df279034fb897e39b517">CO_isLSSslaveEnabled</a> (<a class="el" href="structCO__t.html">CO_t</a> *co)</td></tr>
+<tr class="memdesc:ga4c9143f717e8df279034fb897e39b517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if LSS slave is enabled.  <a href="group__CO__CANopen.html#ga4c9143f717e8df279034fb897e39b517">More...</a><br /></td></tr>
+<tr class="separator:ga4c9143f717e8df279034fb897e39b517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga619d9ee70c17464bb819b48b5eddb074"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga619d9ee70c17464bb819b48b5eddb074">CO_CANinit</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, void *CANptr, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> bitRate)</td></tr>
+<tr class="memdesc:ga619d9ee70c17464bb819b48b5eddb074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CAN driver.  <a href="group__CO__CANopen.html#ga619d9ee70c17464bb819b48b5eddb074">More...</a><br /></td></tr>
+<tr class="separator:ga619d9ee70c17464bb819b48b5eddb074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0e11332fd28af597bc47b21327cdc8a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga0e11332fd28af597bc47b21327cdc8a3">CO_LSSinit</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="unionCO__LSS__address__t.html">CO_LSS_address_t</a> *lssAddress, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *pendingNodeID, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> *pendingBitRate)</td></tr>
+<tr class="memdesc:ga0e11332fd28af597bc47b21327cdc8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopen LSS slave.  <a href="group__CO__CANopen.html#ga0e11332fd28af597bc47b21327cdc8a3">More...</a><br /></td></tr>
+<tr class="separator:ga0e11332fd28af597bc47b21327cdc8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0b64a860299af6e96f5663419aa6d446"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga0b64a860299af6e96f5663419aa6d446">CO_CANopenInit</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="structCO__EM__t.html">CO_EM_t</a> *em, const <a class="el" href="structOD__t.html">OD_t</a> *od, const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *OD_statusBits, <a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a> NMTcontrol, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> firstHBTime_ms, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> SDOserverTimeoutTime_ms, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> SDOclientTimeoutTime_ms, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> SDOclientBlockTransfer, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeId)</td></tr>
+<tr class="memdesc:ga0b64a860299af6e96f5663419aa6d446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize CANopenNode.  <a href="group__CO__CANopen.html#ga0b64a860299af6e96f5663419aa6d446">More...</a><br /></td></tr>
+<tr class="separator:ga0b64a860299af6e96f5663419aa6d446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga895d7fad40b60aacdac3cb0615729b5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">CO_NMT_reset_cmd_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e">CO_process</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> enableGateway, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
+<tr class="memdesc:ga895d7fad40b60aacdac3cb0615729b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen objects.  <a href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e">More...</a><br /></td></tr>
+<tr class="separator:ga895d7fad40b60aacdac3cb0615729b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad5c15c3ca475912661f512d37413b12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaad5c15c3ca475912661f512d37413b12">CO_process_SYNC</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
 <tr class="memdesc:gaad5c15c3ca475912661f512d37413b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen SYNC objects.  <a href="group__CO__CANopen.html#gaad5c15c3ca475912661f512d37413b12">More...</a><br /></td></tr>
 <tr class="separator:gaad5c15c3ca475912661f512d37413b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,13 +175,6 @@ Functions</h2></td></tr>
 <tr class="memitem:gab76d7283fe5190d3a0009b423a9ba8b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gab76d7283fe5190d3a0009b423a9ba8b1">CO_process_SRDO</a> (<a class="el" href="structCO__t.html">CO_t</a> *co, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
 <tr class="memdesc:gab76d7283fe5190d3a0009b423a9ba8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process CANopen SRDO objects.  <a href="group__CO__CANopen.html#gab76d7283fe5190d3a0009b423a9ba8b1">More...</a><br /></td></tr>
 <tr class="separator:gab76d7283fe5190d3a0009b423a9ba8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:gaa6b0e31a1f760af91bb742c83c00a6c1"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structCO__t.html">CO_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen.html#gaa6b0e31a1f760af91bb742c83c00a6c1">CO</a></td></tr>
-<tr class="memdesc:gaa6b0e31a1f760af91bb742c83c00a6c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen object. <br /></td></tr>
-<tr class="separator:gaa6b0e31a1f760af91bb742c83c00a6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main CANopenNode file. </p>
@@ -249,7 +191,7 @@ Uwe Kindler </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="CANopen_8h.html">CANopen.h</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

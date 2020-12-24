@@ -110,7 +110,7 @@ Files</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html">CO_NMT_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT consumer and Heartbeat producer object, initialized by <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a>  <a href="structCO__NMT__t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT consumer and Heartbeat producer object.  <a href="structCO__NMT__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -142,45 +142,60 @@ Enumerations</h2></td></tr>
 <a class="el" href="group__CO__NMT__Heartbeat.html#ggaf42f056a571b8e17a2d74428d1a49674a2ab187bf1daccd4bc31685c08ca93bf1">CO_RESET_APP</a> = 2, 
 <a class="el" href="group__CO__NMT__Heartbeat.html#ggaf42f056a571b8e17a2d74428d1a49674ae2c7805e42ce9b7c893018922b24a102">CO_RESET_QUIT</a> = 3
  }</td></tr>
-<tr class="memdesc:gaf42f056a571b8e17a2d74428d1a49674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return code for <a class="el" href="group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a> that tells application code what to reset.  <a href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">More...</a><br /></td></tr>
+<tr class="memdesc:gaf42f056a571b8e17a2d74428d1a49674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return code from <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a> that tells application code what to reset.  <a href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">More...</a><br /></td></tr>
 <tr class="separator:gaf42f056a571b8e17a2d74428d1a49674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf92cf5943801e5dda84654345cc3d67f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a> { <br />
+&#160;&#160;<a class="el" href="group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faaa5ab06e2047e51ac7d2767e8a821d80">CO_NMT_ERR_REG_MASK</a> = 0x00FFU, 
+<a class="el" href="group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faf4da9fa5d805e0f535abf95a175312e8">CO_NMT_STARTUP_TO_OPERATIONAL</a> = 0x0100U, 
+<a class="el" href="group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faf151918ecf07fc43ba30489d31ca275a">CO_NMT_ERR_ON_BUSOFF_HB</a> = 0x1000U, 
+<a class="el" href="group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faab1cd82001a087114a5361910e206c74">CO_NMT_ERR_ON_ERR_REG</a> = 0x2000U, 
+<br />
+&#160;&#160;<a class="el" href="group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67fa9498a5af4e0557a2c0284c04b26b3eb5">CO_NMT_ERR_TO_STOPPED</a> = 0x4000U, 
+<a class="el" href="group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67fa6e79d137c725417786035982cd0e2687">CO_NMT_ERR_FREE_TO_OPERATIONAL</a> = 0x8000U
+<br />
+ }</td></tr>
+<tr class="memdesc:gaf92cf5943801e5dda84654345cc3d67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT control bitfield for NMT internal state.  <a href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">More...</a><br /></td></tr>
+<tr class="separator:gaf92cf5943801e5dda84654345cc3d67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga3d1e633487f14741ce32c80ed8be1312"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312">CO_NMT_init</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="structCO__EM__t.html">CO_EM_t</a> *em, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeId, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> firstHBTime_ms, <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *NMT_CANdevRx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> NMT_rxIdx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANidRxNMT, <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *NMT_CANdevTx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> NMT_txIdx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANidTxNMT, <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *HB_CANdevTx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> HB_txIdx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANidTxHB)</td></tr>
-<tr class="memdesc:ga3d1e633487f14741ce32c80ed8be1312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize NMT and Heartbeat producer object.  <a href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312">More...</a><br /></td></tr>
-<tr class="separator:ga3d1e633487f14741ce32c80ed8be1312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga53c92521fff0fab405f8a372702c7259"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259">CO_NMT_init</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *OD_1017_ProducerHbTime, <a class="el" href="structCO__EM__t.html">CO_EM_t</a> *em, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeId, <a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a> NMTcontrol, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> firstHBTime_ms, <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *NMT_CANdevRx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> NMT_rxIdx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANidRxNMT, <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *NMT_CANdevTx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> NMT_txIdx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANidTxNMT, <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *HB_CANdevTx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> HB_txIdx, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> CANidTxHB)</td></tr>
+<tr class="memdesc:ga53c92521fff0fab405f8a372702c7259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize NMT and Heartbeat producer object.  <a href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259">More...</a><br /></td></tr>
+<tr class="separator:ga53c92521fff0fab405f8a372702c7259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga58b6123938e950b5e8c38ec0b9caeec4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga58b6123938e950b5e8c38ec0b9caeec4">CO_NMT_initCallbackPre</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, void *object, void(*pFunctSignal)(void *object))</td></tr>
 <tr class="memdesc:ga58b6123938e950b5e8c38ec0b9caeec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize NMT callback function after message preprocessed.  <a href="group__CO__NMT__Heartbeat.html#ga58b6123938e950b5e8c38ec0b9caeec4">More...</a><br /></td></tr>
 <tr class="separator:ga58b6123938e950b5e8c38ec0b9caeec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga87d153e39b32586b67ee6dd47dfce787"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga87d153e39b32586b67ee6dd47dfce787">CO_NMT_initCallbackChanged</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, void(*pFunctNMT)(<a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> state))</td></tr>
 <tr class="memdesc:ga87d153e39b32586b67ee6dd47dfce787"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize NMT callback function.  <a href="group__CO__NMT__Heartbeat.html#ga87d153e39b32586b67ee6dd47dfce787">More...</a><br /></td></tr>
 <tr class="separator:ga87d153e39b32586b67ee6dd47dfce787"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1fe239fe8212f8fe671bf9a355020531"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">CO_NMT_reset_cmd_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531">CO_NMT_process</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> HBtime_ms, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> NMTstartup, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> errorRegister, const <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> errorBehavior[], <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
-<tr class="memdesc:ga1fe239fe8212f8fe671bf9a355020531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process received NMT and produce Heartbeat messages.  <a href="group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531">More...</a><br /></td></tr>
-<tr class="separator:ga1fe239fe8212f8fe671bf9a355020531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga724ff5b1d9cfee955914f365514deda0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674">CO_NMT_reset_cmd_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0">CO_NMT_process</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> *NMTstate, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> timeDifference_us, <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> *timerNext_us)</td></tr>
+<tr class="memdesc:ga724ff5b1d9cfee955914f365514deda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process received NMT and produce Heartbeat messages.  <a href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0">More...</a><br /></td></tr>
+<tr class="separator:ga724ff5b1d9cfee955914f365514deda0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2e3f0d579e321d73b53bf469d49b0ce3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga2e3f0d579e321d73b53bf469d49b0ce3">CO_NMT_getInternalState</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT)</td></tr>
 <tr class="memdesc:ga2e3f0d579e321d73b53bf469d49b0ce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query current NMT state.  <a href="group__CO__NMT__Heartbeat.html#ga2e3f0d579e321d73b53bf469d49b0ce3">More...</a><br /></td></tr>
 <tr class="separator:ga2e3f0d579e321d73b53bf469d49b0ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga91b7041eda0487bbc0588d3200e0e868"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga91b7041eda0487bbc0588d3200e0e868">CO_NMT_setInternalState</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> state)</td></tr>
+<tr class="memdesc:ga91b7041eda0487bbc0588d3200e0e868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set internal NMT state.  <a href="group__CO__NMT__Heartbeat.html#ga91b7041eda0487bbc0588d3200e0e868">More...</a><br /></td></tr>
+<tr class="separator:ga91b7041eda0487bbc0588d3200e0e868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9d557708be1bfb9b169718abea90b663"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__NMT__Heartbeat.html#ga9d557708be1bfb9b169718abea90b663">CO_NMT_sendCommand</a> (<a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="group__CO__NMT__Heartbeat.html#gac396242e2e12ef6b0b22ff48636bc4eb">CO_NMT_command_t</a> command, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> nodeID)</td></tr>
 <tr class="memdesc:ga9d557708be1bfb9b169718abea90b663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send NMT master command.  <a href="group__CO__NMT__Heartbeat.html#ga9d557708be1bfb9b169718abea90b663">More...</a><br /></td></tr>
 <tr class="separator:ga9d557708be1bfb9b169718abea90b663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>CANopen Network management and Heartbeat producer protocol.</p>
-<p>CANopen device can be in one of the <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744" title="Internal network state of the CANopen node.">CO_NMT_internalState_t</a></p><ul>
+<p>CANopen device can be in one of the <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a></p><ul>
 <li>Initializing. It is active before CANopen is initialized.</li>
 <li>Pre-operational. All CANopen objects are active, except PDOs.</li>
 <li>Operational. Process data objects (PDOs) are active too.</li>
 <li>Stopped. Only Heartbeat producer and NMT consumer are active.</li>
 </ul>
-<p>NMT master can change the internal state of the devices by sending <a class="el" href="group__CO__NMT__Heartbeat.html#gac396242e2e12ef6b0b22ff48636bc4eb" title="Commands from NMT master.">CO_NMT_command_t</a>.</p>
+<p>NMT master can change the internal state of the devices by sending <a class="el" href="group__CO__NMT__Heartbeat.html#gac396242e2e12ef6b0b22ff48636bc4eb">CO_NMT_command_t</a>.</p>
 <h3>NMT message contents:</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Byte </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone"><a class="el" href="group__CO__NMT__Heartbeat.html#gac396242e2e12ef6b0b22ff48636bc4eb" title="Commands from NMT master.">CO_NMT_command_t</a>  </td></tr>
+<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone"><a class="el" href="group__CO__NMT__Heartbeat.html#gac396242e2e12ef6b0b22ff48636bc4eb">CO_NMT_command_t</a>  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">Node ID. If zero, command addresses all nodes.  </td></tr>
 </table>
@@ -189,9 +204,9 @@ Functions</h2></td></tr>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Byte </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone"><a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744" title="Internal network state of the CANopen node.">CO_NMT_internalState_t</a>  </td></tr>
+<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone"><a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a>  </td></tr>
 </table>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__CO__driver.html#ga01dd35ae53fd2209ceccabdc8bf8dd06" title="Default CANopen identifiers.">CO_Default_CAN_ID_t</a> </dd></dl>
+<p>See <a class="el" href="group__CO__driver.html#ga01dd35ae53fd2209ceccabdc8bf8dd06">CO_Default_CAN_ID_t</a> for CAN identifiers. </p>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="ga1e8c2a6c0fd4a33183503d25a7c6d744"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga1e8c2a6c0fd4a33183503d25a7c6d744">&#9670;&nbsp;</a></span>CO_NMT_internalState_t</h2>
@@ -207,15 +222,15 @@ Functions</h2></td></tr>
 
 <p>Internal network state of the CANopen node. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744a52d111d4262b514df4433ae07969cc3c"></a>CO_NMT_UNKNOWN&#160;</td><td class="fielddoc"><p>Device state is unknown (for heartbeat consumer) </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744a52d111d4262b514df4433ae07969cc3c"></a>CO_NMT_UNKNOWN&#160;</td><td class="fielddoc"><p>-1, Device state is unknown (for heartbeat consumer) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744a672c48c0e9bd5cb070bd86e1dcdc085c"></a>CO_NMT_INITIALIZING&#160;</td><td class="fielddoc"><p>Device is initializing. </p>
+<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744a672c48c0e9bd5cb070bd86e1dcdc085c"></a>CO_NMT_INITIALIZING&#160;</td><td class="fielddoc"><p>0, Device is initializing </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744ae41d4ebcb7e26e165c8685b5809871a9"></a>CO_NMT_PRE_OPERATIONAL&#160;</td><td class="fielddoc"><p>Device is in pre-operational state. </p>
+<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744ae41d4ebcb7e26e165c8685b5809871a9"></a>CO_NMT_PRE_OPERATIONAL&#160;</td><td class="fielddoc"><p>127, Device is in pre-operational state </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744a3f9d07a10f2781201b85e9de9ba1c9a5"></a>CO_NMT_OPERATIONAL&#160;</td><td class="fielddoc"><p>Device is in operational state. </p>
+<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744a3f9d07a10f2781201b85e9de9ba1c9a5"></a>CO_NMT_OPERATIONAL&#160;</td><td class="fielddoc"><p>5, Device is in operational state </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744aba34c0b4b2c6a0c11b01236cbe949ed5"></a>CO_NMT_STOPPED&#160;</td><td class="fielddoc"><p>Device is stopped. </p>
+<tr><td class="fieldname"><a id="gga1e8c2a6c0fd4a33183503d25a7c6d744aba34c0b4b2c6a0c11b01236cbe949ed5"></a>CO_NMT_STOPPED&#160;</td><td class="fielddoc"><p>4, Device is stopped </p>
 </td></tr>
 </table>
 
@@ -235,15 +250,15 @@ Functions</h2></td></tr>
 
 <p>Commands from NMT master. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4eba6c7cdae79e5939cf321cdf82aa6b4146"></a>CO_NMT_ENTER_OPERATIONAL&#160;</td><td class="fielddoc"><p>Start device. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4eba6c7cdae79e5939cf321cdf82aa6b4146"></a>CO_NMT_ENTER_OPERATIONAL&#160;</td><td class="fielddoc"><p>1, Start device </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4eba8a2911a2a576a1bd83b7f4a247cd77c9"></a>CO_NMT_ENTER_STOPPED&#160;</td><td class="fielddoc"><p>Stop device. </p>
+<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4eba8a2911a2a576a1bd83b7f4a247cd77c9"></a>CO_NMT_ENTER_STOPPED&#160;</td><td class="fielddoc"><p>2, Stop device </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4eba575ed4f3386e8a63498921e659aa7ba4"></a>CO_NMT_ENTER_PRE_OPERATIONAL&#160;</td><td class="fielddoc"><p>Put device into pre-operational. </p>
+<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4eba575ed4f3386e8a63498921e659aa7ba4"></a>CO_NMT_ENTER_PRE_OPERATIONAL&#160;</td><td class="fielddoc"><p>128, Put device into pre-operational </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4ebaa8558d18a80148a598e6295ef41cdf97"></a>CO_NMT_RESET_NODE&#160;</td><td class="fielddoc"><p>Reset device. </p>
+<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4ebaa8558d18a80148a598e6295ef41cdf97"></a>CO_NMT_RESET_NODE&#160;</td><td class="fielddoc"><p>129, Reset device </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4ebabc6aef9d84c816eecaea38f9fe2cbd9c"></a>CO_NMT_RESET_COMMUNICATION&#160;</td><td class="fielddoc"><p>Reset CANopen communication on device. </p>
+<tr><td class="fieldname"><a id="ggac396242e2e12ef6b0b22ff48636bc4ebabc6aef9d84c816eecaea38f9fe2cbd9c"></a>CO_NMT_RESET_COMMUNICATION&#160;</td><td class="fielddoc"><p>130, Reset CANopen communication on device </p>
 </td></tr>
 </table>
 
@@ -261,23 +276,55 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return code for <a class="el" href="group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a> that tells application code what to reset. </p>
+<p>Return code from <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a> that tells application code what to reset. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674a1e75deb437b2e06b2c1f353bf76d8807"></a>CO_RESET_NOT&#160;</td><td class="fielddoc"><p>Normal return, no action. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674a1e75deb437b2e06b2c1f353bf76d8807"></a>CO_RESET_NOT&#160;</td><td class="fielddoc"><p>0, Normal return, no action </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674a2a48dc2be7c9ffa7874eb08a1ba39f6f"></a>CO_RESET_COMM&#160;</td><td class="fielddoc"><p>Application must provide communication reset. </p>
+<tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674a2a48dc2be7c9ffa7874eb08a1ba39f6f"></a>CO_RESET_COMM&#160;</td><td class="fielddoc"><p>1, Application must provide communication reset. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674a2ab187bf1daccd4bc31685c08ca93bf1"></a>CO_RESET_APP&#160;</td><td class="fielddoc"><p>Application must provide complete device reset. </p>
+<tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674a2ab187bf1daccd4bc31685c08ca93bf1"></a>CO_RESET_APP&#160;</td><td class="fielddoc"><p>2, Application must provide complete device reset </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674ae2c7805e42ce9b7c893018922b24a102"></a>CO_RESET_QUIT&#160;</td><td class="fielddoc"><p>Application must quit, no reset of microcontroller (command is not requested by the stack.) </p>
+<tr><td class="fieldname"><a id="ggaf42f056a571b8e17a2d74428d1a49674ae2c7805e42ce9b7c893018922b24a102"></a>CO_RESET_QUIT&#160;</td><td class="fielddoc"><p>3, Application must quit, no reset of microcontroller (command is not requested by the stack.) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="gaf92cf5943801e5dda84654345cc3d67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf92cf5943801e5dda84654345cc3d67f">&#9670;&nbsp;</a></span>CO_NMT_control_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>NMT control bitfield for NMT internal state. </p>
+<p>Variable of this type is passed to <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259">CO_NMT_init()</a> function. It controls behavior of the <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> of the device according to CANopen error register.</p>
+<p>Internal NMT state is controlled also with external NMT command, <a class="el" href="group__CO__NMT__Heartbeat.html#ga91b7041eda0487bbc0588d3200e0e868">CO_NMT_setInternalState()</a> or <a class="el" href="group__CO__NMT__Heartbeat.html#ga9d557708be1bfb9b169718abea90b663">CO_NMT_sendCommand()</a> functions. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaf92cf5943801e5dda84654345cc3d67faaa5ab06e2047e51ac7d2767e8a821d80"></a>CO_NMT_ERR_REG_MASK&#160;</td><td class="fielddoc"><p>First 8 bits can be used to specify bitmask for the <a class="el" href="group__CO__Emergency.html#ga2cfc261cce03577083ee3f1a31d5e03c">CO_errorRegister_t</a>, to get relevant bits for the calculation. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf92cf5943801e5dda84654345cc3d67faf4da9fa5d805e0f535abf95a175312e8"></a>CO_NMT_STARTUP_TO_OPERATIONAL&#160;</td><td class="fielddoc"><p>If bit is set, then device enters NMT operational state after the initialization phase, otherwise it enters NMT pre-operational state. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf92cf5943801e5dda84654345cc3d67faf151918ecf07fc43ba30489d31ca275a"></a>CO_NMT_ERR_ON_BUSOFF_HB&#160;</td><td class="fielddoc"><p>If bit is set and device is operational, it enters NMT pre-operational or stopped state, if CAN bus is off or heartbeat consumer timeout is detected. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf92cf5943801e5dda84654345cc3d67faab1cd82001a087114a5361910e206c74"></a>CO_NMT_ERR_ON_ERR_REG&#160;</td><td class="fielddoc"><p>If bit is set and device is operational, it enters NMT pre-operational or stopped state, if masked CANopen error register is different than zero. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf92cf5943801e5dda84654345cc3d67fa9498a5af4e0557a2c0284c04b26b3eb5"></a>CO_NMT_ERR_TO_STOPPED&#160;</td><td class="fielddoc"><p>If bit is set and CO_NMT_ERR_ON_xx condition is met, then device will enter NMT stopped state, otherwise it will enter NMT pre-op state. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaf92cf5943801e5dda84654345cc3d67fa6e79d137c725417786035982cd0e2687"></a>CO_NMT_ERR_FREE_TO_OPERATIONAL&#160;</td><td class="fielddoc"><p>If bit is set and device is pre-operational, it enters NMT operational state automatically, if conditions from CO_NMT_ERR_ON_xx are all false. </p>
 </td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga3d1e633487f14741ce32c80ed8be1312"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3d1e633487f14741ce32c80ed8be1312">&#9670;&nbsp;</a></span>CO_NMT_init()</h2>
+<a id="ga53c92521fff0fab405f8a372702c7259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga53c92521fff0fab405f8a372702c7259">&#9670;&nbsp;</a></span>CO_NMT_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,6 +338,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>OD_1017_ProducerHbTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="structCO__EM__t.html">CO_EM_t</a> *&#160;</td>
           <td class="paramname"><em>em</em>, </td>
         </tr>
@@ -299,6 +352,12 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
           <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a>&#160;</td>
+          <td class="paramname"><em>NMTcontrol</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -373,9 +432,11 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">NMT</td><td>This object will be initialized. </td></tr>
+    <tr><td class="paramname">OD_1017_ProducerHbTime</td><td>OD entry for 0x1017 -"Producer heartbeat time", entry is required, IO extension is optional for runtime configuration. </td></tr>
     <tr><td class="paramname">em</td><td>Emergency object. </td></tr>
     <tr><td class="paramname">nodeId</td><td>CANopen Node ID of this device. </td></tr>
-    <tr><td class="paramname">firstHBTime_ms</td><td>Time between bootup and first heartbeat message in milliseconds. If firstHBTime is greater than <em>Producer Heartbeat time</em> (object dictionary, index 0x1017), latter is used instead. </td></tr>
+    <tr><td class="paramname">NMTcontrol</td><td>Control variable for calculation of NMT internal state, based on error register, startup and runtime behavior. </td></tr>
+    <tr><td class="paramname">firstHBTime_ms</td><td>Time between bootup and first heartbeat message in milliseconds. If firstHBTime_ms is greater than "Producer Heartbeat time" (OD object 0x1017), latter is used instead. Entry is required, IO extension is optional. </td></tr>
     <tr><td class="paramname">NMT_CANdevRx</td><td>CAN device for NMT reception. </td></tr>
     <tr><td class="paramname">NMT_rxIdx</td><td>Index of receive buffer in above CAN device. </td></tr>
     <tr><td class="paramname">CANidRxNMT</td><td>CAN identifier for NMT receive message. </td></tr>
@@ -388,7 +449,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532" title="Return values of some CANopen functions.">CO_ReturnError_t</a> CO_ERROR_NO or CO_ERROR_ILLEGAL_ARGUMENT. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532" title="Return values of some CANopen functions.">CO_ReturnError_t</a> CO_ERROR_NO on success. </dd></dl>
 
 </div>
 </div>
@@ -425,7 +486,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize NMT callback function after message preprocessed. </p>
-<p>Function initializes optional callback function, which should immediately start processing of <a class="el" href="group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a> function. Callback is called after NMT message is received from the CAN bus.</p>
+<p>Function initializes optional callback function, which should immediately start processing of <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a> function. Callback is called after NMT message is received from the CAN bus.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">NMT</td><td>This object. </td></tr>
@@ -464,8 +525,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize NMT callback function. </p>
-<p>Function initializes optional callback function, which is called after NMT State change has occured. Function may wake up external task which handles NMT events. The first call is made immediately to give the consumer the current NMT state.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>Be aware that the callback function is run inside the CAN receive function context. Depending on the driver, this might be inside an interrupt!</dd></dl>
+<p>Function initializes optional callback function, which is called after NMT State change has occurred. Function may wake up external task which handles NMT events. The first call is made immediately to give the consumer the current NMT state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">NMT</td><td>This object. </td></tr>
@@ -476,8 +536,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1fe239fe8212f8fe671bf9a355020531"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1fe239fe8212f8fe671bf9a355020531">&#9670;&nbsp;</a></span>CO_NMT_process()</h2>
+<a id="ga724ff5b1d9cfee955914f365514deda0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga724ff5b1d9cfee955914f365514deda0">&#9670;&nbsp;</a></span>CO_NMT_process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,32 +551,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> *&#160;</td>
+          <td class="paramname"><em>NMTstate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td>
           <td class="paramname"><em>timeDifference_us</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td>
-          <td class="paramname"><em>HBtime_ms</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td>
-          <td class="paramname"><em>NMTstartup</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
-          <td class="paramname"><em>errorRegister</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
-          <td class="paramname"><em>errorBehavior</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -537,16 +579,13 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">NMT</td><td>This object. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in [microseconds]. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">HBtime_ms</td><td><em>Producer Heartbeat time</em> (object dictionary, index 0x1017). </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">NMTstartup</td><td><em>NMT startup behavior</em> (object dictionary, index 0x1F80). </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">errorRegister</td><td><em>Error register</em> (object dictionary, index 0x1001). </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">errorBehavior</td><td>pointer to <em>Error behavior</em> array (object dictionary, index 0x1029). Object controls, if device should leave NMT operational state. Length of array must be 6. If pointer is NULL, no calculation is made. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga7a36da54b801074032622708e06a742e" title="Process CANopen objects.">CO_process()</a>.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">NMTstate</td><td>If not NULL, CANopen NMT internal state is returned. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">timeDifference_us</td><td>Time difference from previous function call in microseconds. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">timerNext_us</td><td>info to OS - see <a class="el" href="group__CO__CANopen.html#ga895d7fad40b60aacdac3cb0615729b5e" title="Process CANopen objects.">CO_process()</a>.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674" title="Return code for CO_NMT_process() that tells application code what to reset.">CO_NMT_reset_cmd_t</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__NMT__Heartbeat.html#gaf42f056a571b8e17a2d74428d1a49674" title="Return code from CO_NMT_process() that tells application code what to reset.">CO_NMT_reset_cmd_t</a> </dd></dl>
 
 </div>
 </div>
@@ -581,7 +620,53 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744" title="Internal network state of the CANopen node.">CO_NMT_internalState_t</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="ga91b7041eda0487bbc0588d3200e0e868"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga91b7041eda0487bbc0588d3200e0e868">&#9670;&nbsp;</a></span>CO_NMT_setInternalState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void CO_NMT_setInternalState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *&#160;</td>
+          <td class="paramname"><em>NMT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a>&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set internal NMT state. </p>
+<p>Functions sets state directly, without any checking. <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0">CO_NMT_process()</a> may also switch between states automatically, see <a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">NMT</td><td>This object. </td></tr>
+    <tr><td class="paramname">state</td><td>New state. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -618,7 +703,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Send NMT master command. </p>
-<p>This functionality can only be used from NMT master. There is one exception where application from slave node may send NMT master command: If CANopen object 0x1F80 has value of <b>0x2</b>, then NMT slave shall execute the NMT service start remote node (CO_NMT_ENTER_OPERATIONAL) with nodeID set to 0.</p>
+<p>This functionality may only be used from NMT master, as specified by standard CiA302-2. Standard provides one exception, where application from slave node may send NMT master command: "If CANopen object 0x1F80 has value of <b>0x2</b>, then NMT slave shall execute the NMT service start remote node (CO_NMT_ENTER_OPERATIONAL) with nodeID set to 0."</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">NMT</td><td>This object. </td></tr>
@@ -627,9 +712,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0: Operation completed successfully. </dd>
-<dd>
-other: same as <a class="el" href="group__CO__driver.html#ga4664a9f5d547cb0605a9e929fb079f2e" title="Send CAN message.">CO_CANsend()</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CO_ERROR_NO on success or CO_ReturnError_t from <a class="el" href="group__CO__driver.html#ga4664a9f5d547cb0605a9e929fb079f2e" title="Send CAN message.">CO_CANsend()</a>. </dd></dl>
 
 </div>
 </div>
@@ -638,7 +721,7 @@ other: same as <a class="el" href="group__CO__driver.html#ga4664a9f5d547cb0605a9
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

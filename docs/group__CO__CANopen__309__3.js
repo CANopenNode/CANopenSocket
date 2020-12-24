@@ -3,7 +3,7 @@ var group__CO__CANopen__309__3 =
     [ "Command syntax", "group__CO__CANopen__309__3__Syntax.html", null ],
     [ "CO_gateway_ascii.h", "CO__gateway__ascii_8h.html", null ],
     [ "CO_GTWA_t", "structCO__GTWA__t.html", [
-      [ "readCallback", "structCO__GTWA__t.html#ad25ec03bf924a158d6c46262eddf6869", null ],
+      [ "readCallback", "structCO__GTWA__t.html#a036c4a3a89b8171baba8039fc50876ba", null ],
       [ "readCallbackObject", "structCO__GTWA__t.html#ae1b9a86d7020ac21713a9b658a08495b", null ],
       [ "sequence", "structCO__GTWA__t.html#a31b7ae3a5da107dfb5432f5a95f9faee", null ],
       [ "net_default", "structCO__GTWA__t.html#aec9a1ffe0ce40572452d3f1e36e51c1b", null ],
@@ -76,6 +76,7 @@ var group__CO__CANopen__309__3 =
       [ "CO_GTWA_ST_IDLE", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a98a36dabc8934b9c2d37b13999e3c393", null ],
       [ "CO_GTWA_ST_READ", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954aaca55c8223aa1ba8f18031196178ea58", null ],
       [ "CO_GTWA_ST_WRITE", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a959c96b4eb3d948a977f66679423baa2", null ],
+      [ "CO_GTWA_ST_WRITE_ABORTED", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954ab10b68af4a8bc47f96abf552c7baa3b9", null ],
       [ "CO_GTWA_ST_LSS_SWITCH_GLOB", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954afcc0bdbc08aa70d401f122c73055223e", null ],
       [ "CO_GTWA_ST_LSS_SWITCH_SEL", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a19bb6359e2efba37226a5dcf27d4a0e3", null ],
       [ "CO_GTWA_ST_LSS_SET_NODE", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954acbc1d88036a086ae9d9dcbed1742330e", null ],
@@ -89,8 +90,8 @@ var group__CO__CANopen__309__3 =
       [ "CO_GTWA_ST_HELP", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954af2f0ce738128675b98926aba680884d1", null ],
       [ "CO_GTWA_ST_LED", "group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a1a467cf33b8d3a2c0e8e31f87d81f05c", null ]
     ] ],
-    [ "CO_GTWA_init", "group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad", null ],
-    [ "CO_GTWA_initRead", "group__CO__CANopen__309__3.html#ga70e27b3b469fbb8d26c964bbecc4702c", null ],
+    [ "CO_GTWA_init", "group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee", null ],
+    [ "CO_GTWA_initRead", "group__CO__CANopen__309__3.html#ga2093c35b83b096e01bd0c65ae9374e30", null ],
     [ "CO_GTWA_write_getSpace", "group__CO__CANopen__309__3.html#gad614da9bb171d995c02ffe1940fe7e64", null ],
     [ "CO_GTWA_write", "group__CO__CANopen__309__3.html#gaae1f01d444be975aa3cb3b2c9ebded3d", null ],
     [ "CO_GTWA_log_print", "group__CO__CANopen__309__3.html#ga20523907b832d55b47b855dd92409996", null ],

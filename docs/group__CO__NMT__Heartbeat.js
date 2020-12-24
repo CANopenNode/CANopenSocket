@@ -2,12 +2,13 @@ var group__CO__NMT__Heartbeat =
 [
     [ "CO_NMT_Heartbeat.h", "CO__NMT__Heartbeat_8h.html", null ],
     [ "CO_NMT_t", "structCO__NMT__t.html", [
-      [ "operatingState", "structCO__NMT__t.html#aaccc89ac956131330518afd7632a74fc", null ],
-      [ "operatingStatePrev", "structCO__NMT__t.html#aa158da268507ebe279834be82992bdb2", null ],
-      [ "resetCommand", "structCO__NMT__t.html#a13b628972063a5452a4e16e829a549e4", null ],
+      [ "operatingState", "structCO__NMT__t.html#abebf973c819c48fa36c48ba2eb84818a", null ],
+      [ "operatingStatePrev", "structCO__NMT__t.html#a544df8108d0853dd6d2938fa253ef018", null ],
+      [ "internalCommand", "structCO__NMT__t.html#a7a56fcf387bd2922ece9106538d986ef", null ],
       [ "nodeId", "structCO__NMT__t.html#a6cf0441aff58a3e208d1ed221a26709c", null ],
+      [ "NMTcontrol", "structCO__NMT__t.html#a0c28cae6c3c7319c8fdfe694a3b4d9a7", null ],
+      [ "HBproducerTime_us", "structCO__NMT__t.html#a983a4ba9a004d216e32414c0a38736c4", null ],
       [ "HBproducerTimer", "structCO__NMT__t.html#a0babc82bd6dfde07511b87167941b4f0", null ],
-      [ "firstHBTime", "structCO__NMT__t.html#a37c8f55e5d29a3535b82bcd391bf1aba", null ],
       [ "em", "structCO__NMT__t.html#a60848ed23fb775dc4412be0e7ff9bc4b", null ],
       [ "NMT_CANdevTx", "structCO__NMT__t.html#aaa1a7f9278595d82eaddbee8ac434ca9", null ],
       [ "NMT_TXbuff", "structCO__NMT__t.html#a6c9ca6315daa74257699ff657165d409", null ],
@@ -37,10 +38,19 @@ var group__CO__NMT__Heartbeat =
       [ "CO_RESET_APP", "group__CO__NMT__Heartbeat.html#ggaf42f056a571b8e17a2d74428d1a49674a2ab187bf1daccd4bc31685c08ca93bf1", null ],
       [ "CO_RESET_QUIT", "group__CO__NMT__Heartbeat.html#ggaf42f056a571b8e17a2d74428d1a49674ae2c7805e42ce9b7c893018922b24a102", null ]
     ] ],
-    [ "CO_NMT_init", "group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312", null ],
+    [ "CO_NMT_control_t", "group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f", [
+      [ "CO_NMT_ERR_REG_MASK", "group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faaa5ab06e2047e51ac7d2767e8a821d80", null ],
+      [ "CO_NMT_STARTUP_TO_OPERATIONAL", "group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faf4da9fa5d805e0f535abf95a175312e8", null ],
+      [ "CO_NMT_ERR_ON_BUSOFF_HB", "group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faf151918ecf07fc43ba30489d31ca275a", null ],
+      [ "CO_NMT_ERR_ON_ERR_REG", "group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67faab1cd82001a087114a5361910e206c74", null ],
+      [ "CO_NMT_ERR_TO_STOPPED", "group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67fa9498a5af4e0557a2c0284c04b26b3eb5", null ],
+      [ "CO_NMT_ERR_FREE_TO_OPERATIONAL", "group__CO__NMT__Heartbeat.html#ggaf92cf5943801e5dda84654345cc3d67fa6e79d137c725417786035982cd0e2687", null ]
+    ] ],
+    [ "CO_NMT_init", "group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259", null ],
     [ "CO_NMT_initCallbackPre", "group__CO__NMT__Heartbeat.html#ga58b6123938e950b5e8c38ec0b9caeec4", null ],
     [ "CO_NMT_initCallbackChanged", "group__CO__NMT__Heartbeat.html#ga87d153e39b32586b67ee6dd47dfce787", null ],
-    [ "CO_NMT_process", "group__CO__NMT__Heartbeat.html#ga1fe239fe8212f8fe671bf9a355020531", null ],
+    [ "CO_NMT_process", "group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0", null ],
     [ "CO_NMT_getInternalState", "group__CO__NMT__Heartbeat.html#ga2e3f0d579e321d73b53bf469d49b0ce3", null ],
+    [ "CO_NMT_setInternalState", "group__CO__NMT__Heartbeat.html#ga91b7041eda0487bbc0588d3200e0e868", null ],
     [ "CO_NMT_sendCommand", "group__CO__NMT__Heartbeat.html#ga9d557708be1bfb9b169718abea90b663", null ]
 ];

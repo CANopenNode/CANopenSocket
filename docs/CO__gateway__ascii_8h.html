@@ -124,7 +124,7 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga52919223e5f43323f15c6a382913653d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of response string buffer.  <a href="group__CO__CANopen__309__3.html#ga52919223e5f43323f15c6a382913653d">More...</a><br /></td></tr>
 <tr class="separator:ga52919223e5f43323f15c6a382913653d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa631d47f972204f26502d65894694cfb"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#gaa631d47f972204f26502d65894694cfb">CO_GTWA_STATE_TIMEOUT_TIME_US</a>&#160;&#160;&#160;1000000</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#gaa631d47f972204f26502d65894694cfb">CO_GTWA_STATE_TIMEOUT_TIME_US</a>&#160;&#160;&#160;1200000</td></tr>
 <tr class="memdesc:gaa631d47f972204f26502d65894694cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timeout time in microseconds for some internal states. <br /></td></tr>
 <tr class="separator:gaa631d47f972204f26502d65894694cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -173,19 +173,20 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a98a36dabc8934b9c2d37b13999e3c393">CO_GTWA_ST_IDLE</a> = 0x00U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954aaca55c8223aa1ba8f18031196178ea58">CO_GTWA_ST_READ</a> = 0x10U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a959c96b4eb3d948a977f66679423baa2">CO_GTWA_ST_WRITE</a> = 0x11U, 
-<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954afcc0bdbc08aa70d401f122c73055223e">CO_GTWA_ST_LSS_SWITCH_GLOB</a> = 0x20U, 
+<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954ab10b68af4a8bc47f96abf552c7baa3b9">CO_GTWA_ST_WRITE_ABORTED</a> = 0x12U, 
 <br />
-&#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a19bb6359e2efba37226a5dcf27d4a0e3">CO_GTWA_ST_LSS_SWITCH_SEL</a> = 0x21U, 
+&#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954afcc0bdbc08aa70d401f122c73055223e">CO_GTWA_ST_LSS_SWITCH_GLOB</a> = 0x20U, 
+<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a19bb6359e2efba37226a5dcf27d4a0e3">CO_GTWA_ST_LSS_SWITCH_SEL</a> = 0x21U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954acbc1d88036a086ae9d9dcbed1742330e">CO_GTWA_ST_LSS_SET_NODE</a> = 0x22U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a6e18980d6fbcbd7dd871af5c98c4755e">CO_GTWA_ST_LSS_CONF_BITRATE</a> = 0x23U, 
-<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a63e0705eddd22fb9d476c1b370394fc4">CO_GTWA_ST_LSS_STORE</a> = 0x24U, 
 <br />
-&#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954abc4877f6d72e218cbd4959279a537b94">CO_GTWA_ST_LSS_INQUIRE</a> = 0x25U, 
+&#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a63e0705eddd22fb9d476c1b370394fc4">CO_GTWA_ST_LSS_STORE</a> = 0x24U, 
+<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954abc4877f6d72e218cbd4959279a537b94">CO_GTWA_ST_LSS_INQUIRE</a> = 0x25U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a17254161b141cc0c424c3649655f4df2">CO_GTWA_ST_LSS_INQUIRE_ADDR_ALL</a> = 0x26U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954ab8c2946ce5d3581ecf5640bd1f5667b7">CO_GTWA_ST__LSS_FASTSCAN</a> = 0x30U, 
-<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a338a75317f0bf276f1c786316d6b9ec7">CO_GTWA_ST_LSS_ALLNODES</a> = 0x31U, 
 <br />
-&#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a829f096eca2ccd152069e97d9c70022f">CO_GTWA_ST_LOG</a> = 0x80U, 
+&#160;&#160;<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a338a75317f0bf276f1c786316d6b9ec7">CO_GTWA_ST_LSS_ALLNODES</a> = 0x31U, 
+<a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a829f096eca2ccd152069e97d9c70022f">CO_GTWA_ST_LOG</a> = 0x80U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954af2f0ce738128675b98926aba680884d1">CO_GTWA_ST_HELP</a> = 0x81U, 
 <a class="el" href="group__CO__CANopen__309__3.html#ggae809d7b5adbc7a4fb1f2fce527b30954a1a467cf33b8d3a2c0e8e31f87d81f05c">CO_GTWA_ST_LED</a> = 0x82U
 <br />
@@ -195,12 +196,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gad13eb098ffb6126f99425104c646e9ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad">CO_GTWA_init</a> (<a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a> *gtwa, <a class="el" href="structCO__SDOclient__t.html">CO_SDOclient_t</a> *SDO_C, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> SDOtimeoutTimeDefault, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> SDOblockTransferEnableDefault, <a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="structCO__LSSmaster__t.html">CO_LSSmaster_t</a> *LSSmaster, <a class="el" href="structCO__LEDs__t.html">CO_LEDs_t</a> *LEDs, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> dummy)</td></tr>
-<tr class="memdesc:gad13eb098ffb6126f99425104c646e9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Gateway-ascii object.  <a href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad">More...</a><br /></td></tr>
-<tr class="separator:gad13eb098ffb6126f99425104c646e9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga70e27b3b469fbb8d26c964bbecc4702c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#ga70e27b3b469fbb8d26c964bbecc4702c">CO_GTWA_initRead</a> (<a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a> *gtwa, size_t(*readCallback)(void *object, const char *buf, size_t count), void *readCallbackObject)</td></tr>
-<tr class="memdesc:ga70e27b3b469fbb8d26c964bbecc4702c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize read callback in Gateway-ascii object.  <a href="group__CO__CANopen__309__3.html#ga70e27b3b469fbb8d26c964bbecc4702c">More...</a><br /></td></tr>
-<tr class="separator:ga70e27b3b469fbb8d26c964bbecc4702c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabc95dab4fb09bcb18948502f922520ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee">CO_GTWA_init</a> (<a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a> *gtwa, <a class="el" href="structCO__SDOclient__t.html">CO_SDOclient_t</a> *SDO_C, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> SDOclientTimeoutTime_ms, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> SDOclientBlockTransfer, <a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *NMT, <a class="el" href="structCO__LSSmaster__t.html">CO_LSSmaster_t</a> *LSSmaster, <a class="el" href="structCO__LEDs__t.html">CO_LEDs_t</a> *LEDs, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> dummy)</td></tr>
+<tr class="memdesc:gabc95dab4fb09bcb18948502f922520ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Gateway-ascii object.  <a href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee">More...</a><br /></td></tr>
+<tr class="separator:gabc95dab4fb09bcb18948502f922520ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2093c35b83b096e01bd0c65ae9374e30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#ga2093c35b83b096e01bd0c65ae9374e30">CO_GTWA_initRead</a> (<a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a> *gtwa, size_t(*readCallback)(void *object, const char *buf, size_t count, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *connectionOK), void *readCallbackObject)</td></tr>
+<tr class="memdesc:ga2093c35b83b096e01bd0c65ae9374e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize read callback in Gateway-ascii object.  <a href="group__CO__CANopen__309__3.html#ga2093c35b83b096e01bd0c65ae9374e30">More...</a><br /></td></tr>
+<tr class="separator:ga2093c35b83b096e01bd0c65ae9374e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad614da9bb171d995c02ffe1940fe7e64"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__309__3.html#gad614da9bb171d995c02ffe1940fe7e64">CO_GTWA_write_getSpace</a> (<a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a> *gtwa)</td></tr>
 <tr class="memdesc:gad614da9bb171d995c02ffe1940fe7e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get free write buffer space.  <a href="group__CO__CANopen__309__3.html#gad614da9bb171d995c02ffe1940fe7e64">More...</a><br /></td></tr>
 <tr class="separator:gad614da9bb171d995c02ffe1940fe7e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,7 +230,7 @@ Martin Wagner </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_77924ae5e158f0fe5749d81e75dc818c.html">309</a></li><li class="navelem"><a class="el" href="CO__gateway__ascii_8h.html">CO_gateway_ascii.h</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

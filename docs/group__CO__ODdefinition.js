@@ -13,14 +13,20 @@ var group__CO__ODdefinition =
       [ "dataElementLength", "structOD__obj__array__t.html#a985fb68eba74f9e8fb76a4c5d85e96e9", null ],
       [ "dataElementSizeof", "structOD__obj__array__t.html#ad310fa351ebb2a44f66451dd12675bf9", null ]
     ] ],
+    [ "OD_obj_record_t", "structOD__obj__record__t.html", [
+      [ "data", "structOD__obj__record__t.html#a490d4818eaa6ca94d2c6fc598647dbd1", null ],
+      [ "subIndex", "structOD__obj__record__t.html#a7cfa0012ae3aec7bbfc98e5e8301782c", null ],
+      [ "attribute", "structOD__obj__record__t.html#a42290a19541170f8d108acf029fec171", null ],
+      [ "dataLength", "structOD__obj__record__t.html#a1302f14c20e976ac884196d4c3e201c1", null ]
+    ] ],
     [ "OD_extensionIO_t", "structOD__extensionIO__t.html", [
       [ "object", "structOD__extensionIO__t.html#a929dace9c5bf5f1e3090f3fbff40f9b8", null ],
       [ "read", "structOD__extensionIO__t.html#af4c210e173adb94e297ad26eacb2b678", null ],
       [ "write", "structOD__extensionIO__t.html#a06573b7740c3c991352734bba25f0fd4", null ]
     ] ],
     [ "OD_obj_extended_t", "structOD__obj__extended__t.html", [
-      [ "flagsPDO", "structOD__obj__extended__t.html#a80e8186d50cb6ca8ebf447d43815e566", null ],
       [ "extIO", "structOD__obj__extended__t.html#a6ccf59c770c3887233ab7b850e77e375", null ],
+      [ "flagsPDO", "structOD__obj__extended__t.html#a80e8186d50cb6ca8ebf447d43815e566", null ],
       [ "odObjectOriginal", "structOD__obj__extended__t.html#abbc62d96e2ecafc99bb1eaf1210f816a", null ]
     ] ],
     [ "OD_objectTypes_t", "group__CO__ODdefinition.html#gaae426e9d66ec1bacfef2d93f096d7805", [

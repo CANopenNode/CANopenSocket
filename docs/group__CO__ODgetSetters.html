@@ -220,6 +220,17 @@ Functions</h2></td></tr>
 <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__ODgetSetters.html#ga87a34e3e04dd2faa851d2d9c0a24e945">OD_getPtr_r64</a> (const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *entry, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, <a class="el" href="group__CO__dataTypes.html#gac55f3ae81b5bc9053760baacf57e47f4">float64_t</a> **val)</td></tr>
 <tr class="memdesc:ga87a34e3e04dd2faa851d2d9c0a24e945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to float64_t variable from OD, see <a class="el" href="group__CO__ODgetSetters.html#gaa4e6671855056e5ae13d198acdfab664">OD_getPtr_i8</a>. <br /></td></tr>
 <tr class="separator:ga87a34e3e04dd2faa851d2d9c0a24e945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaad4d755515e8dccf3616f14fe3914bde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__ODgetSetters.html#gaad4d755515e8dccf3616f14fe3914bde">OD_getPtr_vs</a> (const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *entry, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, char **val, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> *dataLength)</td></tr>
+<tr class="memdesc:gaad4d755515e8dccf3616f14fe3914bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to "visible string" variable from Object Dictionary.  <a href="group__CO__ODgetSetters.html#gaad4d755515e8dccf3616f14fe3914bde">More...</a><br /></td></tr>
+<tr class="separator:gaad4d755515e8dccf3616f14fe3914bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga06361976dce86f180de76e1fced9a212"><td class="memItemLeft" align="right" valign="top"><a id="ga06361976dce86f180de76e1fced9a212"></a>
+<a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__ODgetSetters.html#ga06361976dce86f180de76e1fced9a212">OD_getPtr_os</a> (const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *entry, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> **val, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> *dataLength)</td></tr>
+<tr class="memdesc:ga06361976dce86f180de76e1fced9a212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to "octet string" variable from OD, see <a class="el" href="group__CO__ODgetSetters.html#gaad4d755515e8dccf3616f14fe3914bde">OD_getPtr_vs</a>. <br /></td></tr>
+<tr class="separator:ga06361976dce86f180de76e1fced9a212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3efb5f4a50ff7ab17b37bf9c0fcf030"><td class="memItemLeft" align="right" valign="top"><a id="gaf3efb5f4a50ff7ab17b37bf9c0fcf030"></a>
+<a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__ODgetSetters.html#gaf3efb5f4a50ff7ab17b37bf9c0fcf030">OD_getPtr_us</a> (const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *entry, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> subIndex, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> **val, <a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> *dataLength)</td></tr>
+<tr class="memdesc:gaf3efb5f4a50ff7ab17b37bf9c0fcf030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to "unicode string" variable from OD, see <a class="el" href="group__CO__ODgetSetters.html#gaad4d755515e8dccf3616f14fe3914bde">OD_getPtr_vs</a>. <br /></td></tr>
+<tr class="separator:gaf3efb5f4a50ff7ab17b37bf9c0fcf030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Getter and setter helper functions for accessing different types of Object Dictionary variables. </p>
@@ -374,12 +385,65 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gaad4d755515e8dccf3616f14fe3914bde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaad4d755515e8dccf3616f14fe3914bde">&#9670;&nbsp;</a></span>OD_getPtr_vs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a> OD_getPtr_vs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structOD__entry__t.html">OD_entry_t</a> *&#160;</td>
+          <td class="paramname"><em>entry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>subIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a> *&#160;</td>
+          <td class="paramname"><em>dataLength</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get pointer to "visible string" variable from Object Dictionary. </p>
+<p>Function always returns "dataObjectOriginal" pointer, which points to data in the original OD location. Take care, if IO extension is enabled on OD entry.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">entry</td><td>OD entry returned by <a class="el" href="group__CO__ODinterface.html#gaaacaadfc28bfaf485cefc8bff64310f4">OD_find()</a>. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">subIndex</td><td>Sub-index of the variable from the OD object. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">val</td><td>Pointer to variable will be written here. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dataLength</td><td>Total variable length will be written here, may be NULL.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Value from <a class="el" href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a>, "ODR_OK" in case of success. Error, if variable does not exist in object dictionary or it has zero length or other reason. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

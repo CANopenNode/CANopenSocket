@@ -19,8 +19,12 @@ var group__CO__driver =
       [ "bufferInhibitFlag", "structCO__CANmodule__t.html#ad7af19de0bf39c8927c926b095cb5292", null ],
       [ "firstCANtxMessage", "structCO__CANmodule__t.html#ac12bd37971b89b5796fec0de71be0f07", null ],
       [ "CANtxCount", "structCO__CANmodule__t.html#a269294aa6a15ba56f92a460fae0536ac", null ],
-      [ "errOld", "structCO__CANmodule__t.html#aa0627988ddedc3a4ec3bbfcf3b818d06", null ]
+      [ "errOld", "structCO__CANmodule__t.html#aa0627988ddedc3a4ec3bbfcf3b818d06", null ],
+      [ "errinfo", "structCO__CANmodule__t.html#aead6585dcb9b8214dd77e8f74ca2aea1", null ]
     ] ],
+    [ "CO_VERSION_MAJOR", "group__CO__driver.html#ga0e351c2972f6d8f2e08fb5ac21a833b8", null ],
+    [ "CO_VERSION_MINOR", "group__CO__driver.html#gaac3f110c1dd3cfc2b994b5c20d1c6ace", null ],
+    [ "CO_errinfo", "group__CO__driver.html#gaaa84189910b720ce18c8d83aab405d86", null ],
     [ "CO_Default_CAN_ID_t", "group__CO__driver.html#ga01dd35ae53fd2209ceccabdc8bf8dd06", [
       [ "CO_CAN_ID_NMT_SERVICE", "group__CO__driver.html#gga01dd35ae53fd2209ceccabdc8bf8dd06a335d0f6204819d267ba396b715f66ead", null ],
       [ "CO_CAN_ID_GFC", "group__CO__driver.html#gga01dd35ae53fd2209ceccabdc8bf8dd06a0ba8a628aa1a873a21820070261c2783", null ],

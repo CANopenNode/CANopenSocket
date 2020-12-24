@@ -1,6 +1,6 @@
 var structCO__GTWA__t =
 [
-    [ "readCallback", "structCO__GTWA__t.html#ad25ec03bf924a158d6c46262eddf6869", null ],
+    [ "readCallback", "structCO__GTWA__t.html#a036c4a3a89b8171baba8039fc50876ba", null ],
     [ "readCallbackObject", "structCO__GTWA__t.html#ae1b9a86d7020ac21713a9b658a08495b", null ],
     [ "sequence", "structCO__GTWA__t.html#a31b7ae3a5da107dfb5432f5a95f9faee", null ],
     [ "net_default", "structCO__GTWA__t.html#aec9a1ffe0ce40572452d3f1e36e51c1b", null ],

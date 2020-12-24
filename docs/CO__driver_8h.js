@@ -1,5 +1,7 @@
 var CO__driver_8h =
 [
+    [ "CO_VERSION_MAJOR", "group__CO__driver.html#ga0e351c2972f6d8f2e08fb5ac21a833b8", null ],
+    [ "CO_VERSION_MINOR", "group__CO__driver.html#gaac3f110c1dd3cfc2b994b5c20d1c6ace", null ],
     [ "CO_LITTLE_ENDIAN", "group__CO__dataTypes.html#gaed3e1bffaf912485092fc20193705f35", null ],
     [ "CO_SWAP_16", "group__CO__dataTypes.html#ga1717fcaabbe2cd6cd9fc0bc0cb917a6c", null ],
     [ "CO_SWAP_32", "group__CO__dataTypes.html#gadf87da54942e3a0ff159688c5e0e267b", null ],
@@ -16,6 +18,7 @@ var CO__driver_8h =
     [ "CO_FLAG_READ", "group__CO__critical__sections.html#ga577a6ebcf246087f084c75d9ae25eeb7", null ],
     [ "CO_FLAG_SET", "group__CO__critical__sections.html#gac54b5e4f680aa8b0177f0df5d5be2e88", null ],
     [ "CO_FLAG_CLEAR", "group__CO__critical__sections.html#ga044da4253aeed15c3e0bb7fce13664af", null ],
+    [ "CO_errinfo", "group__CO__driver.html#gaaa84189910b720ce18c8d83aab405d86", null ],
     [ "bool_t", "group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5", null ],
     [ "int8_t", "group__CO__dataTypes.html#gaef44329758059c91c76d334e8fc09700", null ],
     [ "int16_t", "group__CO__dataTypes.html#ga932e6ccc3d54c58f761c1aead83bd6d7", null ],

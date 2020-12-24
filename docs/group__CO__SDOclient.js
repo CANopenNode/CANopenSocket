@@ -5,6 +5,7 @@ var group__CO__SDOclient =
       [ "OD", "structCO__SDOclient__t.html#a89334ad9cc4ac6751f4a8225f1645923", null ],
       [ "nodeId", "structCO__SDOclient__t.html#a13de9457791eecf17051e405665bfa4a", null ],
       [ "OD_IO", "structCO__SDOclient__t.html#a16fa659bc3098a3fbd60d0f6efde937a", null ],
+      [ "attribute", "structCO__SDOclient__t.html#a609088a2005febd6cd1561288cf1b7d1", null ],
       [ "CANdevRx", "structCO__SDOclient__t.html#a3283cda81a28d3b193a6a6bef29fadab", null ],
       [ "CANdevRxIdx", "structCO__SDOclient__t.html#afb8613dbcacfcefb970fabca4106eaeb", null ],
       [ "CANdevTx", "structCO__SDOclient__t.html#ab4f18ed8c085ea333ca165e486f4ead3", null ],
@@ -36,7 +37,7 @@ var group__CO__SDOclient =
       [ "block_dataUploadLast", "structCO__SDOclient__t.html#ae9e678cb0e461851298658c7eee01334", null ],
       [ "block_crc", "structCO__SDOclient__t.html#a51322a623ff85d36a8be60c0fe11430e", null ]
     ] ],
-    [ "CO_SDOclient_init", "group__CO__SDOclient.html#ga4f33f56f950c61a931f5a60e80e553d5", null ],
+    [ "CO_SDOclient_init", "group__CO__SDOclient.html#ga754160e34089aea70f84d22b06eaff9e", null ],
     [ "CO_SDOclient_initCallbackPre", "group__CO__SDOclient.html#ga4377eaecc3bd0a8320a2bbe1ef0ef776", null ],
     [ "CO_SDOclient_setup", "group__CO__SDOclient.html#gade3bf4e3249aa4c611570ec43563a08d", null ],
     [ "CO_SDOclientDownloadInitiate", "group__CO__SDOclient.html#ga40f6e79592e1d587d02bbb4eaefa9489", null ],
@@ -44,7 +45,7 @@ var group__CO__SDOclient =
     [ "CO_SDOclientDownloadBufWrite", "group__CO__SDOclient.html#ga958d0568bd47d9a3152f9ea8d104b5f5", null ],
     [ "CO_SDOclientDownload", "group__CO__SDOclient.html#gaab262f0a8d08ba023639a2c197d0943a", null ],
     [ "CO_SDOclientUploadInitiate", "group__CO__SDOclient.html#ga3180f82563b3ed768fe7d3bd34fe1886", null ],
-    [ "CO_SDOclientUpload", "group__CO__SDOclient.html#gab44dabaf3deb88ffcf7c4ef72300287d", null ],
+    [ "CO_SDOclientUpload", "group__CO__SDOclient.html#gabd3a3be7e3d1649adfdd253c979ec21f", null ],
     [ "CO_SDOclientUploadBufRead", "group__CO__SDOclient.html#gaf5cd4e009476b15a2cd995a9841fb175", null ],
     [ "CO_SDOclientClose", "group__CO__SDOclient.html#ga9b98ea2c36f864f1a589c842528b12ab", null ]
 ];

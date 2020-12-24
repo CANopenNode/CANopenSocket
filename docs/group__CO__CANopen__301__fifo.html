@@ -137,6 +137,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6817a4baeaee87a578291e9de820b126"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga6817a4baeaee87a578291e9de820b126">CO_fifo_reset</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo)</td></tr>
 <tr class="memdesc:ga6817a4baeaee87a578291e9de820b126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset fifo object, make it empty.  <a href="group__CO__CANopen__301__fifo.html#ga6817a4baeaee87a578291e9de820b126">More...</a><br /></td></tr>
 <tr class="separator:ga6817a4baeaee87a578291e9de820b126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15a27a4871e680475f680c574050844a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga15a27a4871e680475f680c574050844a">CO_fifo_purge</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo)</td></tr>
+<tr class="memdesc:ga15a27a4871e680475f680c574050844a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Purge all data in fifo object, keep other properties.  <a href="group__CO__CANopen__301__fifo.html#ga15a27a4871e680475f680c574050844a">More...</a><br /></td></tr>
+<tr class="separator:ga15a27a4871e680475f680c574050844a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d456e83af18cce9db9157b5a30fac21"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga0d456e83af18cce9db9157b5a30fac21">CO_fifo_getSpace</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo)</td></tr>
 <tr class="memdesc:ga0d456e83af18cce9db9157b5a30fac21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get free buffer space in <a class="el" href="structCO__fifo__t.html" title="Fifo object.">CO_fifo_t</a> object.  <a href="group__CO__CANopen__301__fifo.html#ga0d456e83af18cce9db9157b5a30fac21">More...</a><br /></td></tr>
 <tr class="separator:ga0d456e83af18cce9db9157b5a30fac21"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,9 +176,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga0dbef46e369e659bab7e29742971134c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga0dbef46e369e659bab7e29742971134c">CO_fifo_CommSearch</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> clear)</td></tr>
 <tr class="memdesc:ga0dbef46e369e659bab7e29742971134c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search command inside FIFO.  <a href="group__CO__CANopen__301__fifo.html#ga0dbef46e369e659bab7e29742971134c">More...</a><br /></td></tr>
 <tr class="separator:ga0dbef46e369e659bab7e29742971134c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2df6fbc2e44688a31ae8142102794e8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga2df6fbc2e44688a31ae8142102794e8b">CO_fifo_trimSpaces</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo)</td></tr>
-<tr class="memdesc:ga2df6fbc2e44688a31ae8142102794e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim spaces inside FIFO.  <a href="group__CO__CANopen__301__fifo.html#ga2df6fbc2e44688a31ae8142102794e8b">More...</a><br /></td></tr>
-<tr class="separator:ga2df6fbc2e44688a31ae8142102794e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac01a59d65d275bd9f9a7fb0ea04fb915"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#gac01a59d65d275bd9f9a7fb0ea04fb915">CO_fifo_trimSpaces</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> *insideComment)</td></tr>
+<tr class="memdesc:gac01a59d65d275bd9f9a7fb0ea04fb915"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trim spaces inside FIFO.  <a href="group__CO__CANopen__301__fifo.html#gac01a59d65d275bd9f9a7fb0ea04fb915">More...</a><br /></td></tr>
+<tr class="separator:gac01a59d65d275bd9f9a7fb0ea04fb915"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga87a199708c95d3ca02e2fcc4ca4a6319"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga87a199708c95d3ca02e2fcc4ca4a6319">CO_fifo_readToken</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo, char *buf, size_t count, char *closed, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> *err)</td></tr>
 <tr class="memdesc:ga87a199708c95d3ca02e2fcc4ca4a6319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get token from FIFO buffer.  <a href="group__CO__CANopen__301__fifo.html#ga87a199708c95d3ca02e2fcc4ca4a6319">More...</a><br /></td></tr>
 <tr class="separator:ga87a199708c95d3ca02e2fcc4ca4a6319"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,6 +244,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 <tr class="memitem:ga8000ba92f2023a88b5f7d0399373b206"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga8000ba92f2023a88b5f7d0399373b206">CO_fifo_readVs2a</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo, char *buf, size_t count, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> end)</td></tr>
 <tr class="memdesc:ga8000ba92f2023a88b5f7d0399373b206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from fifo and output as visible string.  <a href="group__CO__CANopen__301__fifo.html#ga8000ba92f2023a88b5f7d0399373b206">More...</a><br /></td></tr>
 <tr class="separator:ga8000ba92f2023a88b5f7d0399373b206"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7b9dcd98906837e82fa914d10028cf33"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga7b9dcd98906837e82fa914d10028cf33">CO_fifo_readB642a</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *fifo, char *buf, size_t count, <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> end)</td></tr>
+<tr class="memdesc:ga7b9dcd98906837e82fa914d10028cf33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from fifo and output as mime-base64 encoded string.  <a href="group__CO__CANopen__301__fifo.html#ga7b9dcd98906837e82fa914d10028cf33">More...</a><br /></td></tr>
+<tr class="separator:ga7b9dcd98906837e82fa914d10028cf33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1788f69639bcc6bfa59bf85e57e5e13a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga1788f69639bcc6bfa59bf85e57e5e13a">CO_fifo_cpyTok2U8</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *dest, <a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *src, <a class="el" href="group__CO__CANopen__301__fifo.html#ga2c7db7d527e4055a5dde62b74dfc2818">CO_fifo_st</a> *status)</td></tr>
 <tr class="memdesc:ga1788f69639bcc6bfa59bf85e57e5e13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read ascii string from src fifo and copy as uint8_t variable to dest fifo.  <a href="group__CO__CANopen__301__fifo.html#ga1788f69639bcc6bfa59bf85e57e5e13a">More...</a><br /></td></tr>
 <tr class="separator:ga1788f69639bcc6bfa59bf85e57e5e13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -286,6 +292,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 <tr class="memitem:ga8cb3d7032cd46dfeb3b6c0bbd5ed1575"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#ga8cb3d7032cd46dfeb3b6c0bbd5ed1575">CO_fifo_cpyTok2Vs</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *dest, <a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *src, <a class="el" href="group__CO__CANopen__301__fifo.html#ga2c7db7d527e4055a5dde62b74dfc2818">CO_fifo_st</a> *status)</td></tr>
 <tr class="memdesc:ga8cb3d7032cd46dfeb3b6c0bbd5ed1575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy visible string to data.  <a href="group__CO__CANopen__301__fifo.html#ga8cb3d7032cd46dfeb3b6c0bbd5ed1575">More...</a><br /></td></tr>
 <tr class="separator:ga8cb3d7032cd46dfeb3b6c0bbd5ed1575"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf11cf0cccc01e86f341e2b31607e90c7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__CANopen__301__fifo.html#gaf11cf0cccc01e86f341e2b31607e90c7">CO_fifo_cpyTok2B64</a> (<a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *dest, <a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *src, <a class="el" href="group__CO__CANopen__301__fifo.html#ga2c7db7d527e4055a5dde62b74dfc2818">CO_fifo_st</a> *status)</td></tr>
+<tr class="memdesc:gaf11cf0cccc01e86f341e2b31607e90c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read ascii mime-base64 encoded string from src fifo and copy as binary data to dest fifo.  <a href="group__CO__CANopen__301__fifo.html#gaf11cf0cccc01e86f341e2b31607e90c7">More...</a><br /></td></tr>
+<tr class="separator:gaf11cf0cccc01e86f341e2b31607e90c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>FIFO is organized as circular buffer with predefined capacity. It must be initialized by <a class="el" href="group__CO__CANopen__301__fifo.html#ga44e8f83feb2dd463b2fbb399dcd4de4d" title="Initialize fifo object.">CO_fifo_init()</a>. Functions are not not thread safe.</p>
@@ -401,6 +410,41 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ga15a27a4871e680475f680c574050844a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga15a27a4871e680475f680c574050844a">&#9670;&nbsp;</a></span>CO_fifo_purge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> CO_fifo_purge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *&#160;</td>
+          <td class="paramname"><em>fifo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Purge all data in fifo object, keep other properties. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fifo</td><td>This object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true, if data were purged or false, if fifo were already empty </dd></dl>
 
 </div>
 </div>
@@ -915,8 +959,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 
 </div>
 </div>
-<a id="ga2df6fbc2e44688a31ae8142102794e8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2df6fbc2e44688a31ae8142102794e8b">&#9670;&nbsp;</a></span>CO_fifo_trimSpaces()</h2>
+<a id="gac01a59d65d275bd9f9a7fb0ea04fb915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac01a59d65d275bd9f9a7fb0ea04fb915">&#9670;&nbsp;</a></span>CO_fifo_trimSpaces()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -925,8 +969,18 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
           <td class="memname"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> CO_fifo_trimSpaces </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *&#160;</td>
-          <td class="paramname"><em>fifo</em></td><td>)</td>
+          <td class="paramname"><em>fifo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> *&#160;</td>
+          <td class="paramname"><em>insideComment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -935,7 +989,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 <p>Function removes all non graphical characters and comments from fifo buffer. It stops on first graphical character or on command delimiter (later is also removed).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fifo</td><td>This object.</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">fifo</td><td>This object. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">insideComment</td><td>if set to true as input, it skips all characters and searches only for delimiter. As output it is set to true, if fifo is empty, is inside comment and command delimiter is not found.</td></tr>
   </table>
   </dd>
 </dl>
@@ -1060,7 +1115,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
     <tr><td class="paramname">fifo</td><td>This object. </td></tr>
     <tr><td class="paramname">buf</td><td>Buffer into which ascii string will be copied. </td></tr>
     <tr><td class="paramname">count</td><td>Available count of bytes inside the buf. </td></tr>
-    <tr><td class="paramname">end</td><td>If true, then fifo contains last bytes, which has to be read.</td></tr>
+    <tr><td class="paramname">end</td><td>True indicates, that fifo contains last bytes of data.</td></tr>
   </table>
   </dd>
 </dl>
@@ -1107,7 +1162,50 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 </div><div class="memdoc">
 
 <p>Read data from fifo and output as visible string. </p>
-<p>A visible string is enclosed with double quotes. If a double quote is used within the string, the quotes are escaped by a second quotes, e.g. “Hello “”World””, CANopen is great”. See also CO_fifo_readU82a </p>
+<p>A visible string is enclosed with double quotes. If a double quote is used within the string, the quotes are escaped by a second quotes, e.g. “Hello “”World””, CANopen is great”. UTF-8 characters and also line breaks works with this function. Function removes all NULL and CR characters from output string. See also CO_fifo_readU82a </p>
+
+</div>
+</div>
+<a id="ga7b9dcd98906837e82fa914d10028cf33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7b9dcd98906837e82fa914d10028cf33">&#9670;&nbsp;</a></span>CO_fifo_readB642a()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CO_fifo_readB642a </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *&#160;</td>
+          <td class="paramname"><em>fifo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read data from fifo and output as mime-base64 encoded string. </p>
+<p>Encoding is as specified in RFC 2045, without CR-LF, but one long string. See also CO_fifo_readU82a </p>
 
 </div>
 </div>
@@ -1226,7 +1324,44 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 </div><div class="memdoc">
 
 <p>Copy visible string to data. </p>
-<p>A visible string must be enclosed with double quotes, if it contains space. If a double quote is used within the string, the quotes are escaped by a second quotes. See CO_fifo_cpyTok2U8 </p>
+<p>A visible string must be enclosed with double quotes, if it contains space. If a double quote is used within the string, the quotes are escaped by a second quotes. Input string can not contain newline characters. See CO_fifo_cpyTok2U8 </p>
+
+</div>
+</div>
+<a id="gaf11cf0cccc01e86f341e2b31607e90c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf11cf0cccc01e86f341e2b31607e90c7">&#9670;&nbsp;</a></span>CO_fifo_cpyTok2B64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CO_fifo_cpyTok2B64 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structCO__fifo__t.html">CO_fifo_t</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__CANopen__301__fifo.html#ga2c7db7d527e4055a5dde62b74dfc2818">CO_fifo_st</a> *&#160;</td>
+          <td class="paramname"><em>status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read ascii mime-base64 encoded string from src fifo and copy as binary data to dest fifo. </p>
+<p>Encoding is as specified in RFC 2045, without CR-LF, but one long string in single line. See also CO_fifo_readU82a </p>
 
 </div>
 </div>
@@ -1235,7 +1370,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gr
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

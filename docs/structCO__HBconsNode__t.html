@@ -141,6 +141,13 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__HBconsNode__t.html#a7fd2636d9f46b7ff47676f716f6f00a4">NMTstatePrev</a></td></tr>
 <tr class="memdesc:a7fd2636d9f46b7ff47676f716f6f00a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous value of the remote node (Heartbeat payload) <br /></td></tr>
 <tr class="separator:a7fd2636d9f46b7ff47676f716f6f00a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4ec7dfe9e47a3e7a9bdad382fd7f56"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__HBconsNode__t.html#a3f4ec7dfe9e47a3e7a9bdad382fd7f56">pFunctSignalNmtChanged</a> )(<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> <a class="el" href="structCO__HBconsNode__t.html#a180aca37057c670be35bbdd89f72b812">nodeId</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> idx, <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> state, void *object)</td></tr>
+<tr class="memdesc:a3f4ec7dfe9e47a3e7a9bdad382fd7f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for remote NMT changed event.  <a href="structCO__HBconsNode__t.html#a3f4ec7dfe9e47a3e7a9bdad382fd7f56">More...</a><br /></td></tr>
+<tr class="separator:a3f4ec7dfe9e47a3e7a9bdad382fd7f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a1c5abd88c2ecd451e2a1ca65d3dc93"><td class="memItemLeft" align="right" valign="top"><a id="a2a1c5abd88c2ecd451e2a1ca65d3dc93"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__HBconsNode__t.html#a2a1c5abd88c2ecd451e2a1ca65d3dc93">pFunctSignalObjectNmtChanged</a></td></tr>
+<tr class="memdesc:a2a1c5abd88c2ecd451e2a1ca65d3dc93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to object. <br /></td></tr>
+<tr class="separator:a2a1c5abd88c2ecd451e2a1ca65d3dc93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac44d2a232ca2b352fd717ee8e6f28e90"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__HBconsNode__t.html#ac44d2a232ca2b352fd717ee8e6f28e90">pFunctSignalHbStarted</a> )(<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> <a class="el" href="structCO__HBconsNode__t.html#a180aca37057c670be35bbdd89f72b812">nodeId</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> idx, void *object)</td></tr>
 <tr class="memdesc:ac44d2a232ca2b352fd717ee8e6f28e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for heartbeat state change to active event.  <a href="structCO__HBconsNode__t.html#ac44d2a232ca2b352fd717ee8e6f28e90">More...</a><br /></td></tr>
 <tr class="separator:ac44d2a232ca2b352fd717ee8e6f28e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,6 +173,23 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>One monitored node inside <a class="el" href="structCO__HBconsumer__t.html" title="Heartbeat consumer object.">CO_HBconsumer_t</a>. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a3f4ec7dfe9e47a3e7a9bdad382fd7f56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f4ec7dfe9e47a3e7a9bdad382fd7f56">&#9670;&nbsp;</a></span>pFunctSignalNmtChanged</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* CO_HBconsNode_t::pFunctSignalNmtChanged) (<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> <a class="el" href="structCO__HBconsNode__t.html#a180aca37057c670be35bbdd89f72b812">nodeId</a>, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> idx, <a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a> state, void *object)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback for remote NMT changed event. </p>
+<p>From <a class="el" href="group__CO__HBconsumer.html#gabab4b2dd74f6e341fe8b683f7a6d56f3" title="Initialize Heartbeat consumer NMT changed callback function.">CO_HBconsumer_initCallbackNmtChanged()</a> or NULL. </p>
+
+</div>
+</div>
 <a id="ac44d2a232ca2b352fd717ee8e6f28e90"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac44d2a232ca2b352fd717ee8e6f28e90">&#9670;&nbsp;</a></span>pFunctSignalHbStarted</h2>
 
@@ -226,7 +250,7 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structCO__HBconsNode__t.html">CO_HBconsNode_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -95,17 +95,19 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <div class="title">Object Dictionary </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1>Definitions from CiA 301 </h1>
+<div class="textblock"><h1><a class="anchor" id="definitions-from-cia-301"></a>
+Definitions from CiA 301</h1>
 <p>The <b>Object Dictionary</b> is a collection of all the data items which have an influence on the behavior of the application objects, the communication objects and the state machine used on this device. It serves as an interface between the communication and the application. The object dictionary is essentially a grouping of objects accessible via the network in an ordered pre-defined fashion. Each object within the object dictionary is addressed using a 16-bit index and a 8-bit sub-index.</p>
 <p>A <b>SDO</b> (Service Data Object) is providing direct access to object entries of a CANopen device's object dictionary. As these object entries may contain data of arbitrary size and data type. SDOs may be used to transfer multiple data sets (each containing an arbitrary large block of data) from a client to a server and vice versa. The client shall control via a multiplexer (index and sub-index of the object dictionary) which data set shall be transferred. The content of the data set is defined within the object dictionary.</p>
 <p>A <b>PDO</b> (Process Data Object) is providing real-time data transfer of object entries of a CANopen device's object dictionary. The transfer of PDO is performed with no protocol overhead. The PDO correspond to objects in the object dictionary and provide the interface to the application objects. Data type and mapping of application objects into a PDO is determined by a corresponding PDO mapping structure within the object dictionary.</p>
-<h1>Operation </h1>
+<h1><a class="anchor" id="operation"></a>
+Operation</h1>
 <h2>Terms</h2>
 <p>The term <b>OD object</b> means object from object dictionary located at specific 16-bit index. There are different types of OD objects in CANopen: variables, arrays and records (structures). Each OD object contains pointer to actual data, data length(s) and attribute(s). See <a class="el" href="group__CO__ODdefinition.html#gaae426e9d66ec1bacfef2d93f096d7805">OD_objectTypes_t</a>.</p>
 <p>The term <b>OD variable</b> is basic variable of specified type. For example: int8_t, uint32_t, float64_t, ... or just sequence of binary data with known or unknown data length. Each OD variable resides in Object dictionary at specified 16-bit index and 8-bit sub-index.</p>
 <p>The term <b>OD entry</b> means structure element, which contains some basic properties of the OD object, indication of type of OD object and pointer to all necessary data for the OD object. An array of OD entries together with information about total number of OD entries represents object dictionary as defined inside CANopenNode. See <a class="el" href="structOD__entry__t.html">OD_entry_t</a> and <a class="el" href="structOD__t.html">OD_t</a>.</p>
 <h2>Access</h2>
-<p>Application and the stack have access to OD objects via universal <a class="el" href="structOD__t.html">OD_t</a> object and <a class="el" href="group__CO__ODinterface.html#gaaacaadfc28bfaf485cefc8bff64310f4">OD_find()</a> function. No direct access to custom structures, which define object dictionary, is required. Properties for specific OD variable is fetched with <a class="el" href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub()</a> function. Access to actual variable is via <b>read</b> and <b>write</b> functions. Pointer to those two functions is fetched by <a class="el" href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub()</a>. See <a class="el" href="structOD__stream__t.html">OD_stream_t</a> and <a class="el" href="structOD__subEntry__t.html">OD_subEntry_t</a>. See also shortcuts: <a class="el" href="group__CO__ODgetSetters.html">Getters and setters</a>, for access to data of different type.</p>
+<p>Application and the stack have access to OD objects via universal <a class="el" href="structOD__t.html">OD_t</a> object and <a class="el" href="group__CO__ODinterface.html#gaaacaadfc28bfaf485cefc8bff64310f4">OD_find()</a> function. No direct access to custom structures, which define object dictionary, is required. Properties for specific OD variable is fetched with <a class="el" href="group__CO__ODinterface.html#gaf1f736d4b4d6754d971f0c0a63655bcf">OD_getSub()</a> function. Access to actual variable is via <b>read</b> and <b>write</b> functions. Pointer to those two functions is fetched by <a class="el" href="group__CO__ODinterface.html#gaf1f736d4b4d6754d971f0c0a63655bcf">OD_getSub()</a>. See <a class="el" href="structOD__stream__t.html">OD_stream_t</a> and <a class="el" href="structOD__subEntry__t.html">OD_subEntry_t</a>. See also shortcuts: <a class="el" href="group__CO__ODgetSetters.html">Getters and setters</a>, for access to data of different type.</p>
 <h2>Optional extensions</h2>
 <p>There are some optional extensions to the object dictionary:</p><ul>
 <li><b>PDO flags</b> informs application, if specific OD variable was received or sent by PDO. And also gives the application ability to request a TPDO, to which variable is possibly mapped.</li>
@@ -125,8 +127,7 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <div class="line"> </div>
 <div class="line">    <span class="comment">/* Init IO for &quot;Manufacturer device name&quot; at index 0x1008, sub-index 0x00 */</span></div>
 <div class="line">    entry = <a class="code" href="group__CO__ODinterface.html#gaaacaadfc28bfaf485cefc8bff64310f4">OD_find</a>(od, 0x1008);</div>
-<div class="line">    ret = <a class="code" href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub</a>(entry, 0x00, &amp;subEntry, &amp;io1008.<a class="code" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, <span class="keyword">false</span>);</div>
-<div class="line">    io1008.<a class="code" href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">read</a> = subEntry.<a class="code" href="structOD__subEntry__t.html#ab13ddb4abea3c69b8e7398451700dc92">read</a>;</div>
+<div class="line">    ret = <a class="code" href="group__CO__ODinterface.html#gaf1f736d4b4d6754d971f0c0a63655bcf">OD_getSub</a>(entry, 0x00, &amp;subEntry, &amp;io1008, <span class="keyword">false</span>);</div>
 <div class="line">    <span class="comment">/* Read with io1008, subindex = 0x00 */</span></div>
 <div class="line">    <span class="keywordflow">if</span> (ret == <a class="code" href="group__CO__ODinterface.html#gga0e9afd8ad27de0920d1fe0738834869ca15f7f20e27f1c5f174bdeecfeef45cc2">ODR_OK</a>)</div>
 <div class="line">        bytesRd = io1008.<a class="code" href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">read</a>(&amp;io1008.<a class="code" href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">stream</a>, 0x00, &amp;buf[0], <span class="keyword">sizeof</span>(buf), &amp;ret);</div>
@@ -152,7 +153,8 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <div class="line">    <a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> devType = ODxyz_0.x1000_deviceType;</div>
 <div class="line">    ODxyz_0.x1018_identity.serialNumber = 0x12345678;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1>Object dictionary example </h1>
+</div><!-- fragment --><h1><a class="anchor" id="object-dictionary-example"></a>
+Object Dictionary Example</h1>
 <p>Actual Object dictionary for one CANopen device is defined by pair of OD_xyz.h and ODxyz.h files.</p>
 <p>Suffix "xyz" is unique name of the object dictionary. If single default object dictionary is used, suffix is omitted. Such way configuration with multiple object dictionaries is possible.</p>
 <p>Data for OD definition are arranged inside multiple structures. Structures are different for different configuration of OD. Data objects, created with those structures, are constant or are variable.</p>
@@ -160,9 +162,9 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <dl class="section warning"><dt>Warning</dt><dd>Manual editing of ODxyz.h/.c files is very error-prone.</dd></dl>
 <p>Pair of ODxyz.h/.c files can be generated by OD editor tool. The tool can edit standard CANopen device description file in xml format. Xml file may include also some non-standard elements, specific to CANopenNode. Xml file is then used for automatic generation of ODxyz.h/.c files.</p>
 <h2>Example ODxyz.h file</h2>
-<div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="fragment"><div class="line"><span class="comment">/* OD data declaration of all groups ******************************************/</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line">    <a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> x1000_deviceType;</div>
-<div class="line">    <a class="code" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> x1001_errorRegister;</div>
 <div class="line">    <span class="keyword">struct </span>{</div>
 <div class="line">        <a class="code" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> maxSubIndex;</div>
 <div class="line">        <a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> vendorID;</div>
@@ -170,115 +172,151 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <div class="line">        <a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> revisionNumber;</div>
 <div class="line">        <a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> serialNumber;</div>
 <div class="line">    } x1018_identity;</div>
-<div class="line">} ODxyz_0_t;</div>
+<div class="line">} ODxyz_PERSIST_COMM_t;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line">    <a class="code" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> x1001_errorRegister;</div>
-<div class="line">} ODxyz_1_t;</div>
+<div class="line">    <a class="code" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> x1003_preDefinedErrorField_sub0;</div>
+<div class="line">    <a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a> x1003_preDefinedErrorField[8];</div>
+<div class="line">} ODxyz_RAM_t;</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">extern</span> ODxyz_0_t ODxyz_0;</div>
-<div class="line"><span class="keyword">extern</span> ODxyz_1_t ODxyz_1;</div>
+<div class="line"><span class="keyword">extern</span> ODxyz_PERSIST_COMM_t ODxyz_PERSIST_COMM;</div>
+<div class="line"><span class="keyword">extern</span> ODxyz_RAM_t ODxyz_RAM;</div>
 <div class="line"><span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="structOD__t.html">OD_t</a> ODxyz;</div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#define ODxyz_1000_deviceType &amp;ODxyz.list[0]</span></div>
-<div class="line"><span class="preprocessor">#define ODxyz_1001_errorRegister &amp;ODxyz.list[1]</span></div>
-<div class="line"><span class="preprocessor">#define ODxyz_1018_identity &amp;ODxyz.list[2]</span></div>
+<div class="line"><span class="comment">/* Object dictionary entries - shortcuts **************************************/</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1000 &amp;ODxyz.list[0]</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1001 &amp;ODxyz.list[1]</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1003 &amp;ODxyz.list[2]</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1018 &amp;ODxyz.list[3]</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1000_deviceType &amp;ODxyz.list[0]</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1001_errorRegister &amp;ODxyz.list[1]</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1003_preDefinedErrorField &amp;ODxyz.list[2]</span></div>
+<div class="line"><span class="preprocessor">#define ODxyz_ENTRY_H1018_identity &amp;ODxyz.list[3]</span></div>
 </div><!-- fragment --><h2>Example ODxyz.c file</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define OD_DEFINITION</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="CO__ODinterface_8h.html">301/CO_ODinterface.h</a>&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;ODxyz.h&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    <a class="code" href="structOD__extensionIO__t.html">OD_extensionIO_t</a> xio_1001_errorRegister;</div>
-<div class="line">} ODxyz_ext_t;</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    <a class="code" href="structOD__obj__var__t.html">OD_obj_var_t</a> o_1000_deviceType;</div>
-<div class="line">    <a class="code" href="structOD__obj__var__t.html">OD_obj_var_t</a> orig_1001_errorRegister;</div>
-<div class="line">    <a class="code" href="structOD__obj__extended__t.html">OD_obj_extended_t</a> o_1001_errorRegister;</div>
-<div class="line">    <a class="code" href="structOD__obj__var__t.html">OD_obj_var_t</a> o_1018_identity[5];</div>
-<div class="line">} ODxyz_objs_t;</div>
-<div class="line"> </div>
-<div class="line">ODxyz_0_t ODxyz_0 = {</div>
+<div class="line"><span class="comment">/* OD data initialization of all groups ***************************************/</span></div>
+<div class="line">ODxyz_PERSIST_COMM_t ODxyz_PERSIST_COMM = {</div>
 <div class="line">    .x1000_deviceType = 0L,</div>
 <div class="line">    .x1018_identity = {</div>
 <div class="line">        .maxSubIndex = 4,</div>
 <div class="line">        .vendorID = 0L,</div>
 <div class="line">        .productCode = 0L,</div>
 <div class="line">        .revisionNumber = 0L,</div>
-<div class="line">        .serialNumber = 0L,</div>
-<div class="line">    },</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line">ODxyz_1_t ODxyz_1 = {</div>
-<div class="line">    .x1001_errorRegister = 0,</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> ODxyz_ext_t ODxyz_ext = {0};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> ODxyz_objs_t ODxyz_objs = {</div>
-<div class="line">    .o_1000_deviceType = {</div>
-<div class="line">        .<a class="code" href="structOD__obj__var__t.html#a7c15865c69e0dc0a09f6d21bd890d062">data</a> = &amp;ODxyz_0.x1000_deviceType,</div>
-<div class="line">        .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
-<div class="line">        .dataLength = 4,</div>
-<div class="line">    },</div>
-<div class="line">    .orig_1001_errorRegister = {</div>
-<div class="line">        .data = &amp;ODxyz_1.x1001_errorRegister,</div>
-<div class="line">        .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a>,</div>
-<div class="line">        .dataLength = 1,</div>
-<div class="line">    },</div>
-<div class="line">    .o_1001_errorRegister = {</div>
-<div class="line">        .flagsPDO = <a class="code" href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>,</div>
-<div class="line">        .extIO = &amp;ODxyz_ext.xio_1001_errorRegister,</div>
-<div class="line">        .odObjectOriginal = &amp;ODxyz_objs.orig_1001_errorRegister,</div>
-<div class="line">    },</div>
-<div class="line">    .o_1018_identity = {</div>
-<div class="line">        {</div>
-<div class="line">            .data = &amp;ODxyz_0.x1018_identity.maxSubIndex,</div>
-<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a>,</div>
-<div class="line">            .dataLength = 1,</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            .data = &amp;ODxyz_0.x1018_identity.vendorID,</div>
-<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
-<div class="line">            .dataLength = 4,</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            .data = &amp;ODxyz_0.x1018_identity.productCode,</div>
-<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
-<div class="line">            .dataLength = 4,</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            .data = &amp;ODxyz_0.x1018_identity.revisionNumber,</div>
-<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
-<div class="line">            .dataLength = 4,</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            .data = &amp;ODxyz_0.x1018_identity.serialNumber,</div>
-<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
-<div class="line">            .dataLength = 4,</div>
-<div class="line">        },</div>
+<div class="line">        .serialNumber = 0L</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
+<div class="line">ODxyz_RAM_t ODxyz_RAM = {</div>
+<div class="line">    .x1001_errorRegister = 0,</div>
+<div class="line">    .x1003_preDefinedErrorField_sub0 = 0,</div>
+<div class="line">    .x1003_preDefinedErrorField = {0, 0, 0, 0, 0, 0, 0, 0}</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/* IO extensions and flagsPDO (configurable by application) *******************/</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    <a class="code" href="structOD__extensionIO__t.html">OD_extensionIO_t</a> xio_1003_preDefinedErrorField;</div>
+<div class="line">} ODxyzExts_t;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> ODxyzExts_t ODxyzExts = {0};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/* All OD objects (constant) **************************************************/</span></div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    <a class="code" href="structOD__obj__var__t.html">OD_obj_var_t</a> o_1000_deviceType;</div>
+<div class="line">    <a class="code" href="structOD__obj__var__t.html">OD_obj_var_t</a> o_1001_errorRegister;</div>
+<div class="line">    <a class="code" href="structOD__obj__array__t.html">OD_obj_array_t</a> o_1003_preDefinedErrorField;</div>
+<div class="line">    <a class="code" href="structOD__obj__extended__t.html">OD_obj_extended_t</a> oE_1003_preDefinedErrorField;</div>
+<div class="line">    <a class="code" href="structOD__obj__record__t.html">OD_obj_record_t</a> o_1018_identity[5];</div>
+<div class="line">} ODxyzObjs_t;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> ODxyzObjs_t ODxyzObjs = {</div>
+<div class="line">    .o_1000_deviceType = {</div>
+<div class="line">        .<a class="code" href="structOD__obj__record__t.html#a490d4818eaa6ca94d2c6fc598647dbd1">data</a> = &amp;ODxyz_PERSIST_COMM.x1000_deviceType,</div>
+<div class="line">        .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
+<div class="line">        .dataLength = 4</div>
+<div class="line">    },</div>
+<div class="line">    .o_1001_errorRegister = {</div>
+<div class="line">        .data = &amp;ODxyz_RAM.x1001_errorRegister,</div>
+<div class="line">        .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a>,</div>
+<div class="line">        .dataLength = 1</div>
+<div class="line">    },</div>
+<div class="line">    .o_1003_preDefinedErrorField = {</div>
+<div class="line">        .data0 = &amp;ODxyz_RAM.x1003_preDefinedErrorField_sub0,</div>
+<div class="line">        .data = &amp;ODxyz_RAM.x1003_preDefinedErrorField[0],</div>
+<div class="line">        .attribute0 = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151a2c60ba85cbe4f25d5511ffab3dcd7486">ODA_SDO_RW</a>,</div>
+<div class="line">        .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
+<div class="line">        .dataElementLength = 4,</div>
+<div class="line">        .dataElementSizeof = <span class="keyword">sizeof</span>(<a class="code" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>)</div>
+<div class="line">    },</div>
+<div class="line">    .oE_1003_preDefinedErrorField = {</div>
+<div class="line">        .extIO = &amp;ODxyzExts.xio_1003_preDefinedErrorField,</div>
+<div class="line">        .flagsPDO = <a class="code" href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>,</div>
+<div class="line">        .odObjectOriginal = &amp;ODxyzObjs.o_1003_preDefinedErrorField</div>
+<div class="line">    },</div>
+<div class="line">    .o_1018_identity = {</div>
+<div class="line">        {</div>
+<div class="line">            .data = &amp;ODxyz_PERSIST_COMM.x1018_identity.maxSubIndex,</div>
+<div class="line">            .subIndex = 0,</div>
+<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a>,</div>
+<div class="line">            .dataLength = 1</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            .data = &amp;ODxyz_PERSIST_COMM.x1018_identity.vendorID,</div>
+<div class="line">            .subIndex = 1,</div>
+<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
+<div class="line">            .dataLength = 4</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            .data = &amp;ODxyz_PERSIST_COMM.x1018_identity.productCode,</div>
+<div class="line">            .subIndex = 2,</div>
+<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
+<div class="line">            .dataLength = 4</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            .data = &amp;ODxyz_PERSIST_COMM.x1018_identity.revisionNumber,</div>
+<div class="line">            .subIndex = 3,</div>
+<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
+<div class="line">            .dataLength = 4</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            .data = &amp;ODxyz_PERSIST_COMM.x1018_identity.serialNumber,</div>
+<div class="line">            .subIndex = 4,</div>
+<div class="line">            .attribute = <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a> | <a class="code" href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a>,</div>
+<div class="line">            .dataLength = 4</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/* Object dictionary **********************************************************/</span></div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structOD__entry__t.html">OD_entry_t</a> ODxyzList[] = {</div>
+<div class="line">    {0x1000, 1, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820">ODT_VAR</a>, &amp;ODxyzObjs.o_1000_deviceType},</div>
+<div class="line">    {0x1001, 1, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820">ODT_VAR</a>, &amp;ODxyzObjs.o_1001_errorRegister},</div>
+<div class="line">    {0x1003, 9, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805adb58a7faa735918d39b8bbcd3a6ad594">ODT_EVAR</a>, &amp;ODxyzObjs.oE_1003_preDefinedErrorField},</div>
+<div class="line">    {0x1018, 5, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a9376cface357f03bec8a651a307f33b9">ODT_REC</a>, &amp;ODxyzObjs.o_1018_identity},</div>
+<div class="line">    {0x0000, 0, 0, <a class="code" href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>}</div>
+<div class="line">};</div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="structOD__t.html">OD_t</a> ODxyz = {</div>
-<div class="line">    3, {</div>
-<div class="line">    {0x1000, 0, 0, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820">ODT_VAR</a>, &amp;ODxyz_objs.o_1000_deviceType},</div>
-<div class="line">    {0x1001, 0, 1, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805adb58a7faa735918d39b8bbcd3a6ad594">ODT_EVAR</a>, &amp;ODxyz_objs.o_1001_errorRegister},</div>
-<div class="line">    {0x1018, 4, 0, <a class="code" href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a9376cface357f03bec8a651a307f33b9">ODT_REC</a>, &amp;ODxyz_objs.o_1018_identity},</div>
-<div class="line">    {0x0000, 0, 0, 0, <a class="code" href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>}</div>
-<div class="line">}};</div>
-</div><!-- fragment --><h1>XML device description </h1>
+<div class="line">    (<span class="keyword">sizeof</span>(ODxyzList) / <span class="keyword">sizeof</span>(ODxyzList[0])) - 1,</div>
+<div class="line">    &amp;ODxyzList[0]</div>
+<div class="line">};</div>
+</div><!-- fragment --><h1><a class="anchor" id="xml-device-description"></a>
+XML Device Description</h1>
 <p>CANopen device description - XML schema definition - is specified by CiA 311 standard.</p>
 <p>CiA 311 complies with standard ISO 15745-1:2005/Amd1 (Industrial automation systems and integration - Open systems application integration framework).</p>
 <p>CANopen device description is basically a XML file with all the information about CANopen device. The larges part of the file is a list of all object dictionary variables with all necessary properties and documentation. This file can be edited with OD editor application and can be used as data source, from which Object dictionary for CANopenNode is generated. Furthermore, this file can be used with CANopen configuration tool, which interacts with CANopen devices on running CANopen network.</p>
-<p>XML schema definitions are available at: <a href="http://www.canopen.org/xml/1.1">http://www.canopen.org/xml/1.1</a> One of the tools for viewing XML schemas is "xsddiagram" (<a href="https://github.com/dgis/xsddiagram">https://github.com/dgis/xsddiagram</a>).</p>
+<p>XML schema definitions are available at: <a href="http://www.canopen.org/xml/1.1">http://www.canopen.org/xml/1.1</a> One of the tools for viewing XML schemas and validating XDD project files is "xsddiagram" (<a href="https://github.com/dgis/xsddiagram">https://github.com/dgis/xsddiagram</a>). Command line alternative to XDD file validation against schema is: <code>xmlstarlet val --err --xsd 311/CANopen.xsd project_file.xdd</code></p>
 <p>CANopen specifies also another type of files for CANopen device description. These are EDS files, which are in INI format. It is possible to convert between those two formats. But CANopenNode uses XML format.</p>
 <p>The device description file has "XDD" file extension. The name of this file shall contain the vendor-ID of the CANopen device in the form of 8 hexadecimal digits in any position of the name and separated with underscores. For example "name1_12345678_name2.XDD".</p>
 <p>CANopenNode includes multiple profile definition files, one for each CANopen object. Those files have "XPD" extension. They are in the same XML format as XDD files. The XML editor tool can use XPD files to insert prepared data into device description file (XDD), which is being edited.</p>
+<p>There are also device configuration files with "XDC" extension. They are describing a configured CANopen device and include additional elements, such as default value, denominator and device commissioning elements. Similar as "dcf" files in INI format.</p>
 <h2>XDD, XPD file example</h2>
 <div class="fragment"><div class="line">&lt;?<span class="keyword">xml</span> <span class="keyword">version</span>=<span class="stringliteral">&quot;1.0&quot;</span> <span class="keyword">encoding</span>=<span class="stringliteral">&quot;utf-8&quot;</span>?&gt;</div>
-<div class="line">&lt;<span class="keywordtype">ISO15745ProfileContainer</span> <span class="keyword">xmlns:xsi</span>=<span class="stringliteral">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="keyword">xmlns</span>=<span class="stringliteral">&quot;http://www.canopen.org/xml/1.0&quot;</span>&gt;</div>
+<div class="line">&lt;<span class="keywordtype">ISO15745ProfileContainer</span> <span class="keyword">xmlns:xsi</span>=<span class="stringliteral">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="keyword">xmlns</span>=<span class="stringliteral">&quot;http://www.canopen.org/xml/1.1&quot;</span>&gt;</div>
 <div class="line">  &lt;<span class="keywordtype">ISO15745Profile</span>&gt;</div>
 <div class="line">    &lt;<span class="keywordtype">ProfileHeader</span>&gt;...&lt;/<span class="keywordtype">ProfileHeader</span>&gt;</div>
 <div class="line">    &lt;<span class="keywordtype">ProfileBody</span> <span class="keyword">xsi:type</span>=<span class="stringliteral">&quot;ProfileBody_Device_CANopen&quot;</span> <span class="keyword">fileName</span>=<span class="stringliteral">&quot;...&quot;</span> <span class="keyword">fileCreator</span>=<span class="stringliteral">&quot;...&quot;</span> <span class="keyword">fileCreationDate</span>=<span class="stringliteral">&quot;...&quot;</span> <span class="keyword">fileVersion</span>=<span class="stringliteral">&quot;...&quot;</span>&gt;</div>
@@ -300,7 +338,7 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <div class="line">            &lt;<span class="keywordtype">denotation</span>&gt;...&lt;/<span class="keywordtype">denotation</span>&gt;</div>
 <div class="line">            &lt;<span class="keywordtype">BYTE</span>/&gt;</div>
 <div class="line">            &lt;<span class="keywordtype">defaultValue</span> <span class="keyword">value</span>=<span class="stringliteral">&quot;0&quot;</span> /&gt;</div>
-<div class="line">            &lt;<span class="keywordtype">property</span> <span class="keyword">name</span>=<span class="stringliteral">&quot;CO_storageGroup&quot;</span> <span class="keyword">value</span>=<span class="stringliteral">&quot;1&quot;</span>&gt;</div>
+<div class="line">            &lt;<span class="keywordtype">property</span> <span class="keyword">name</span>=<span class="stringliteral">&quot;CO_storageGroup&quot;</span> <span class="keyword">value</span>=<span class="stringliteral">&quot;RAM&quot;</span>&gt;</div>
 <div class="line">            &lt;<span class="keywordtype">property</span> <span class="keyword">name</span>=<span class="stringliteral">&quot;CO_extensionIO&quot;</span> <span class="keyword">value</span>=<span class="stringliteral">&quot;true&quot;</span>&gt;</div>
 <div class="line">          &lt;/<span class="keywordtype">parameter</span>&gt;</div>
 <div class="line">          &lt;<span class="keywordtype">parameter</span> <span class="keyword">uniqueID</span>=<span class="stringliteral">&quot;UID_PARAM_1018&quot;</span>&gt;</div>
@@ -345,19 +383,6 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <div class="line">            &lt;<span class="keywordtype">defaultValue</span> <span class="keyword">value</span>=<span class="stringliteral">&quot;0x00000000&quot;</span> /&gt;</div>
 <div class="line">          &lt;/<span class="keywordtype">parameter</span>&gt;</div>
 <div class="line">        &lt;/<span class="keywordtype">parameterList</span>&gt;</div>
-<div class="line">        &lt;<span class="keywordtype">parameterGroupList</span>&gt;</div>
-<div class="line">          &lt;<span class="keywordtype">parameterGroup</span> <span class="keyword">uniqueID</span>=<span class="stringliteral">&quot;UID_PG_CO_COMM&quot;</span>&gt;</div>
-<div class="line">            &lt;<span class="keywordtype">label</span> <span class="keyword">lang</span>=<span class="stringliteral">&quot;en&quot;</span>&gt;<span class="keyword">CANopen</span> <span class="keyword">Communication</span> <span class="keyword">Parameters</span>&lt;/<span class="keywordtype">label</span>&gt;</div>
-<div class="line">            &lt;<span class="keywordtype">description</span> <span class="keyword">lang</span>=<span class="stringliteral">&quot;en&quot;</span>&gt;...&lt;/<span class="keywordtype">description</span>&gt;</div>
-<div class="line">            &lt;<span class="keywordtype">parameterGroup</span> <span class="keyword">uniqueID</span>=<span class="stringliteral">&quot;UID_PG_CO_COMM_COMMON&quot;</span>&gt;</div>
-<div class="line">              &lt;<span class="keywordtype">label</span> <span class="keyword">lang</span>=<span class="stringliteral">&quot;en&quot;</span>&gt;<span class="keyword">CANopen</span> <span class="keyword">Common</span> <span class="keyword">Communication</span> <span class="keyword">Parameters</span>&lt;/<span class="keywordtype">label</span>&gt;</div>
-<div class="line">              &lt;<span class="keywordtype">description</span> <span class="keyword">lang</span>=<span class="stringliteral">&quot;en&quot;</span>&gt;...&lt;/<span class="keywordtype">description</span>&gt;</div>
-<div class="line">              &lt;<span class="keywordtype">parameterRef</span> <span class="keyword">uniqueIDRef</span>=<span class="stringliteral">&quot;UID_PARAM_1000&quot;</span> /&gt;</div>
-<div class="line">              &lt;<span class="keywordtype">parameterRef</span> <span class="keyword">uniqueIDRef</span>=<span class="stringliteral">&quot;UID_PARAM_1001&quot;</span> /&gt;</div>
-<div class="line">              &lt;<span class="keywordtype">parameterRef</span> <span class="keyword">uniqueIDRef</span>=<span class="stringliteral">&quot;UID_PARAM_1018&quot;</span> /&gt;</div>
-<div class="line">            &lt;/<span class="keywordtype">parameterGroup</span>&gt;</div>
-<div class="line">          &lt;/<span class="keywordtype">parameterGroup</span>&gt;</div>
-<div class="line">        &lt;/<span class="keywordtype">parameterGroupList</span>&gt;</div>
 <div class="line">      &lt;/<span class="keywordtype">ApplicationProcess</span>&gt;</div>
 <div class="line">    &lt;/<span class="keywordtype">ProfileBody</span>&gt;</div>
 <div class="line">  &lt;/<span class="keywordtype">ISO15745Profile</span>&gt;</div>
@@ -385,16 +410,16 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <p>Above XML file example shows necessary data for OD interface used by CANopenNode and other parameters required by the standard. Standard specifies many other parameters, which are not used by CANopenNode for simplicity.</p>
 <p>XML file is divided into two parts:</p><ol type="1">
 <li>"ProfileBody_Device_CANopen" - more standardized information</li>
-<li>"ProfileBody_CommunicationNetwork_CANopen" - communication related info</li>
+<li>"ProfileBody_CommunicationNetwork_CANopen" - CANopen specific information</li>
 </ol>
-<p>Most important part of the XML file is definition of each OD object. All OD objects are listed in "CANopenObjectList", which resides in the second part of the XML file. Each "CANopenObject" and "CANopenSubObject" of the list contains a link to parameter ("uniqueIDRef"), which resides in the first part of the XML file. So data for each OD object is split between two parts of the XML file.</p>
+<p>Largest part of the XML file is definition of each OD object. All OD objects are listed in "CANopenObjectList", which resides in the second part of the XML file. Each "CANopenObject" and "CANopenSubObject" of the list contains a link to parameter ("uniqueIDRef"), which resides in the first part of the XML file. So data for each OD object is split between two parts of the XML file.</p>
 <h3>&lt;CANopenObject&gt;</h3>
 <ul>
 <li>"index" (required) - Object dictionary index</li>
 <li>"name" (required) - Name of the parameter</li>
 <li>"objectType" (required) - "7"=VAR, "8"=ARRAY, "9"=RECORD</li>
 <li>"subNumber" (required if "objectType" is "8" or "9")</li>
-<li>"PDOmapping" (optional if "objectType" is "7", default is "no"):<ul>
+<li>"PDOmapping" (optional if "objectType" is "7"):<ul>
 <li>"no" - mapping not allowed</li>
 <li>"default" - not used, same as "optional"</li>
 <li>"optional" - mapping allowed to TPDO or RPDO</li>
@@ -409,21 +434,20 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <li>"subIndex" (required) - Object dictionary sub-index</li>
 <li>"name" (required) - Name of the parameter</li>
 <li>"objectType" (required, always "7")</li>
-<li>"PDOmapping" (optional, same as above, default is "no")</li>
+<li>"PDOmapping" (optional, same as above)</li>
 <li>"uniqueIDRef" (required or see below) - Reference to &lt;parameter&gt;</li>
 </ul>
 <h3>uniqueIDRef</h3>
-<p>This is required attribute from "CANopenObject" and "CANopenSubObject". It contains reference to &lt;parameter&gt; in "ProfileBody_Device_CANopen" section of the XML file. There are additional necessary properties.</p>
+<p>This is required attribute from "CANopenObject" and "CANopenSubObject". It contains reference to &lt;parameter&gt; in "ProfileBody_Device_CANopen" section of the XML file.</p>
 <p>If "uniqueIDRef" attribute is not specified and "objectType" is 7(VAR), then "CANopenObject" or "CANopenSubObject" must contain additional attributes:</p><ul>
 <li>"dataType" (required for VAR) - CANopen basic data type, see below</li>
 <li>"accessType" (required for VAR) - "ro", "wo", "rw" or "const"</li>
 <li>"defaultValue" (optional) - Default value for the variable.</li>
-<li>"denotation" (optional) - Not used by CANopenNode.</li>
 </ul>
 <h3>&lt;parameter&gt;</h3>
 <ul>
-<li>"uniqueID" (required)</li>
-<li>"access" (required for VAR) - can be one of:<ul>
+<li>&quot;<b>uniqueID</b>&quot; (required)</li>
+<li>&quot;<b>access</b>&quot; (required for VAR) - can be one of:<ul>
 <li>"const" - same as "read"</li>
 <li>"read" - only read access with SDO or PDO</li>
 <li>"write" - only write access with SDO or PDO</li>
@@ -433,29 +457,30 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <li>"noAccess" - object will be in object dictionary, but no access.</li>
 </ul>
 </li>
-<li>&lt;label lang="en"&gt; (required)</li>
-<li>&lt;description lang="en"&gt; (required)</li>
-<li>&lt;UINT and similar/&gt; (required) - Basic or complex data type. Basic data type (for VAR) is specified in IEC 61131-3 (see below). If data type is complex (ARRAY or RECORD), then &lt;dataTypeIDRef&gt; must be specified and entry must be added in the &lt;dataTypeList&gt;. Such definition of complex data types is required by the standard, but it is not required by CANopenNode.</li>
-<li>&lt;defaultValue&gt; (optional for VAR) - Default value for the variable.</li>
+<li>&lt;<b>label</b> lang="en"&gt;, &lt;<b>description</b> lang="en"&gt; (required) - several elements in multiple languages possible</li>
+<li>&lt;<b>INT and similar</b>/&gt; (required) - Basic or complex data type. Basic data type (for VAR) is specified in IEC 61131-3 (see below). If data type is complex (ARRAY or RECORD), then <b>&lt;dataTypeIDRef&gt;</b> must be specified and entry must be added in the <b>&lt;dataTypeList&gt;</b>. Such definition of complex data types is required by the standard, but it is not required by CANopenNode.</li>
+<li>&lt;<b>defaultValue</b>&gt; (optional for VAR) - Default value for the variable. If it is empty string, then data is not stored inside object dictionary. Application should provide own data via IO extension.</li>
+<li>&lt;<b>property</b> name="..." value="..."&gt; (optional) - Multiple elements may contain additional custom properties. CANopenNode uses custom properties with following names:<ul>
+<li>&quot;<b>CO_disabled</b>&quot; (used for base OD entry) - Valid value is "false" (default) or "true". if OD entry is disabled, then it will not be present in generated Object Dictionary .h and .c files.</li>
+<li>&quot;<b>CO_countLabel</b>&quot; (used for base OD entry) - Valid value is any string without spaces. OD exporter will generate a macro for each different string. For example, if four OD objects have "CO_countLabel" set to "TPDO", then macro "#define ODxyz_CNT_TPDO 4" will be generated by OD exporter. "CO_countLabel" is not required for configuration with multiple object dictionaries (CO_MULTIPLE_OD), although may be useful. Default is "".</li>
+<li>&quot;<b>CO_storageGroup</b>&quot; (used for base OD entry) - group name (string) into which the C variable will belong. Variables from specific storage group may then be stored into non-volatile memory, automatically or by SDO command. Default is "RAM". Please note: if &lt;defaultValue&gt; is empty string at specific subindex, then no storage group will be used for that variable.</li>
+<li>&quot;<b>CO_extensionIO</b>&quot; (used for base OD entry) - Valid value is "false" (default) or "true", if IO extension is enabled.</li>
+<li>&quot;<b>CO_flagsPDO</b>&quot; (used for base OD entry) - Valid value is "false" (default) or "true", if PDO flags are enabled.</li>
+<li>&quot;<b>CO_accessSRDO</b>&quot; (used for each "VAR") - Valid values are: "tx", "rx", "trx", "no"(default).</li>
+<li>&quot;<b>CO_stringLengthMin</b>&quot; (used for each "VAR") - Minimum length of the string. Used with "VISIBLE_STRING" and "UNICODE_STRING". If CO_stringLengthMin is smaller than length of the string in &lt;defaultValue&gt;, then it is ignored. Byte length of unicode string is 2 * CO_stringLengthMin. If &lt;defaultValue&gt; is empty and CO_stringLengthMin is 0, then data is not stored inside object dictionary. Default is 0.</li>
 </ul>
-<p>Additional, optional, CANopenNode specific properties, which can be used inside parameters describing &lt;CANopenObject&gt;:</p><ul>
-<li>&lt;property name="CO_storageGroup" value="..."&gt; - group into which the C variable will belong. Variables from specific storage group may then be stored into non-volatile memory, automatically or by SDO command. Valid value is from 0x00 (default - not stored) to 0x7F.</li>
-<li>&lt;property name="CO_extensionIO" value="..."&gt; - Valid value is "false" (default) or "true", if IO extension is enabled.</li>
-<li>&lt;property name="CO_flagsPDO" value="..."&gt; - Valid value is "false" (default) or "true", if PDO flags are enabled.</li>
-<li>&lt;property name="CO_countLabel" value="..."&gt; - Valid value is any string without spaces. OD exporter will generate a macro for each different string. For example, if four OD objects have "CO_countLabel" set to "TPDO", then macro "#define ODxyz_NO_TPDO 4" will be generated by OD exporter.</li>
+</li>
 </ul>
-<p>Additional, optional, CANopenNode specific property, which can be used inside parameters describing "VAR":</p><ul>
-<li>&lt;property name="CO_accessSRDO" value="..."&gt; - Valid values are: "tx", "rx", "trx", "no"(default).</li>
-<li>&lt;property name="CO_byteLength" value="..."&gt; - Length of the variable in bytes, optionally used by string or domain. If CO_byteLength is not specified for string, then length is calculated from string &lt;defaultValue&gt;.</li>
-</ul>
-<h3>CANopen basic data types</h3>
+<h3>Other elements</h3>
+<p>Other elements listed in the above XML example are required by the standard. There are also many other elements, not listed above. All those does not influence the CANopenNode object dictionary exporter.</p>
+<h2>CANopen basic data types</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">CANopenNode </th><th class="markdownTableHeadNone">IEC 61131-3 </th><th class="markdownTableHeadNone">CANopen </th><th class="markdownTableHeadNone">dataType  </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">bool_t </td><td class="markdownTableBodyNone">BOOL </td><td class="markdownTableBodyNone">BOOLEAN </td><td class="markdownTableBodyNone">0x01  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">int8_t </td><td class="markdownTableBodyNone">CHAR, SINT </td><td class="markdownTableBodyNone">INTEGER8 </td><td class="markdownTableBodyNone">0x02  </td></tr>
+<td class="markdownTableBodyNone">int8_t </td><td class="markdownTableBodyNone">SINT, (CHAR) </td><td class="markdownTableBodyNone">INTEGER8 </td><td class="markdownTableBodyNone">0x02  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">int16_t </td><td class="markdownTableBodyNone">INT </td><td class="markdownTableBodyNone">INTEGER16 </td><td class="markdownTableBodyNone">0x03  </td></tr>
 <tr class="markdownTableRowEven">
@@ -463,69 +488,201 @@ $(document).ready(function(){initNavTree('md_doc_objectDictionary.html',''); ini
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">int64_t </td><td class="markdownTableBodyNone">LINT </td><td class="markdownTableBodyNone">INTEGER64 </td><td class="markdownTableBodyNone">0x15  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">uint8_t </td><td class="markdownTableBodyNone">BYTE, USINT </td><td class="markdownTableBodyNone">UNSIGNED8 </td><td class="markdownTableBodyNone">0x05  </td></tr>
+<td class="markdownTableBodyNone">uint8_t </td><td class="markdownTableBodyNone">USINT, (BYTE) </td><td class="markdownTableBodyNone">UNSIGNED8 </td><td class="markdownTableBodyNone">0x05  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">uint16_t </td><td class="markdownTableBodyNone">WORD, UINT </td><td class="markdownTableBodyNone">UNSIGNED16 </td><td class="markdownTableBodyNone">0x06  </td></tr>
+<td class="markdownTableBodyNone">uint16_t </td><td class="markdownTableBodyNone">UINT, (WORD) </td><td class="markdownTableBodyNone">UNSIGNED16 </td><td class="markdownTableBodyNone">0x06  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">uint32_t </td><td class="markdownTableBodyNone">DWORD, UDINT </td><td class="markdownTableBodyNone">UNSIGNED32 </td><td class="markdownTableBodyNone">0x07  </td></tr>
+<td class="markdownTableBodyNone">uint32_t </td><td class="markdownTableBodyNone">UDINT, (DWORD) </td><td class="markdownTableBodyNone">UNSIGNED32 </td><td class="markdownTableBodyNone">0x07  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">uint64_t </td><td class="markdownTableBodyNone">LWORD, ULINT </td><td class="markdownTableBodyNone">UNSIGNED64 </td><td class="markdownTableBodyNone">0x1B  </td></tr>
+<td class="markdownTableBodyNone">uint64_t </td><td class="markdownTableBodyNone">ULINT, (LWORD) </td><td class="markdownTableBodyNone">UNSIGNED64 </td><td class="markdownTableBodyNone">0x1B  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">float32_t </td><td class="markdownTableBodyNone">REAL </td><td class="markdownTableBodyNone">REAL32 </td><td class="markdownTableBodyNone">0x08  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">float64_t </td><td class="markdownTableBodyNone">LREAL </td><td class="markdownTableBodyNone">REAL64 </td><td class="markdownTableBodyNone">0x11  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">STRING </td><td class="markdownTableBodyNone">VISIBLE_STRING </td><td class="markdownTableBodyNone">0x09  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">INTEGER24 </td><td class="markdownTableBodyNone">0x10  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">OCTET_STRING </td><td class="markdownTableBodyNone">0x0A  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">INTEGER40 </td><td class="markdownTableBodyNone">0x12  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">WSTRING </td><td class="markdownTableBodyNone">UNICODE_STRING </td><td class="markdownTableBodyNone">0x0B  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">INTEGER48 </td><td class="markdownTableBodyNone">0x13  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">TIME_OF_DAY </td><td class="markdownTableBodyNone">0x0C  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">INTEGER56 </td><td class="markdownTableBodyNone">0x14  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">TIME_DIFFERENCE </td><td class="markdownTableBodyNone">0x0D  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">UNSIGNED24 </td><td class="markdownTableBodyNone">0x16  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">DOMAIN </td><td class="markdownTableBodyNone">0x0F  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">UNSIGNED40 </td><td class="markdownTableBodyNone">0x18  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">bytestring_t </td><td class="markdownTableBodyNone">BITSTRING </td><td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">-  </td></tr>
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">UNSIGNED48 </td><td class="markdownTableBodyNone">0x19  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">UNSIGNED56 </td><td class="markdownTableBodyNone">0x1A  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">char [] </td><td class="markdownTableBodyNone">STRING (2) </td><td class="markdownTableBodyNone">VISIBLE_STRING </td><td class="markdownTableBodyNone">0x09  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">uint8_t [] </td><td class="markdownTableBodyNone">BITSTRING (3) </td><td class="markdownTableBodyNone">OCTET_STRING </td><td class="markdownTableBodyNone">0x0A  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">uint16_t [] </td><td class="markdownTableBodyNone">WSTRING (2) </td><td class="markdownTableBodyNone">UNICODE_STRING </td><td class="markdownTableBodyNone">0x0B  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">TIME_OF_DAY </td><td class="markdownTableBodyNone">0x0C  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">- </td><td class="markdownTableBodyNone">(1) </td><td class="markdownTableBodyNone">TIME_DIFFERENCE </td><td class="markdownTableBodyNone">0x0D  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">app. specific </td><td class="markdownTableBodyNone">BITSTRING (4) </td><td class="markdownTableBodyNone">DOMAIN </td><td class="markdownTableBodyNone">0x0F  </td></tr>
 </table>
-<h3>&lt;parameterGroupList&gt;</h3>
-<p>This is optional element and is not required by standard, nor by CANopenNode. This can be very useful for documentation, which can be organised into multiple chapters with multiple levels. CANopen objects can then be organised in any way, not only by index.</p>
-<h3>Other elements</h3>
-<p>Other elements listed in the above XML example are required by the standard and does not influence the CANopenNode object dictionary generator. </p>
+<p>(1) Data is translated into OCTET_STRING.</p>
+<p>(2) Additional property "CO_stringLengthMin" indicates the minimum length of the string in CANopenNode. Property is ignored, if strlen(defaultValue) is larger. Otherwise remaining data locations are filled with zeroes. Strings always have additional element on the end of the array with value=0, which is never written (string is always null terminated). All strings have additional attribute "ODA_STR" in object dictionary. Attribute enables SDO to transfer data of length, which corresponds to actual string length. (Actual size of data read or written by SDO may be smaller than data size of the OD variable.) VISIBLE_STRING may contain control characters and UTF-8 characters, which should work on most target systems (like printf("%s", ...)). So VISIBLE_STRING may be more usable for printing complete set of unicode characters than UNICODE_STRING.</p>
+<p>(3) Default value for BITSTRING (OCTET_STRING) is written as space separated, two hex digit bytes in little-endian format.</p>
+<p>(4) Default value for DOMAIN is stored as empty string.</p>
+<h1><a class="anchor" id="object-dictionary-requirements-by-canopennode"></a>
+Object Dictionary Requirements By CANopenNode</h1>
+<ul>
+<li><b>Used by</b> column indicates CANopenNode object or its part, which uses the OD object. It also indicates, if OD object is required or optional for actual configuration. For the configuration of the CANopenNode objects see <a href="301/CO_config.h">Stack configuration</a>. If CANopenNode object or its part is disabled in stack configuration, then OD object is not used. Note that OD objects: 1000, 1001 and 1017 and 1018 are mandatory for CANopen.</li>
+<li><b>CO_extensionIO</b> column indicates, if OD object must have property "CO_extensionIO" set to true:<ul>
+<li>"no" - no IO extension used</li>
+<li>"optional" - If IO extension is enabled, then writing to the OD parameter will reflect in CANopen run time, otherwise reset communication is required for changes to take effect.</li>
+<li>"required" - IO extension is required on OD object and init function will return error if not enabled.</li>
+<li>"req if DYNAMIC" - IO extension is required on OD object if CO_CONFIG_FLAG_OD_DYNAMIC is set.</li>
+<li>"yes, own data" - OD object don't need own data and IO extension is necessary for OD object to work. Init function will not return error, if OD object does not exist or doesn't have IO extension enabled.</li>
+</ul>
+</li>
+<li><b>CO_countLabel</b> column indicates, which value must have property "CO_countLabel" inside OD object.</li>
+</ul>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">index </th><th class="markdownTableHeadNone">Description </th><th class="markdownTableHeadNone">Used by </th><th class="markdownTableHeadNone">CO_extensionIO </th><th class="markdownTableHeadNone">CO_countLabel  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1000 </td><td class="markdownTableBodyNone">Device type </td><td class="markdownTableBodyNone">CANopen, req </td><td class="markdownTableBodyNone">no </td><td class="markdownTableBodyNone">NMT  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1001 </td><td class="markdownTableBodyNone">Error register </td><td class="markdownTableBodyNone">CANopen, EM, req </td><td class="markdownTableBodyNone">no </td><td class="markdownTableBodyNone">EM  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1002 </td><td class="markdownTableBodyNone">Manufacturer status register </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1003 </td><td class="markdownTableBodyNone">Pre-defined error field </td><td class="markdownTableBodyNone">EM_HISTORY, opt </td><td class="markdownTableBodyNone">yes, own data </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1005 </td><td class="markdownTableBodyNone">COB-ID SYNC message </td><td class="markdownTableBodyNone">SYNC, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone">SYNC  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1006 </td><td class="markdownTableBodyNone">Communication cycle period </td><td class="markdownTableBodyNone">SYNC_PRODUCER, req </td><td class="markdownTableBodyNone">opt </td><td class="markdownTableBodyNone">SYNC_PROD  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1007 </td><td class="markdownTableBodyNone">Synchronous window length </td><td class="markdownTableBodyNone">SYNC, opt </td><td class="markdownTableBodyNone">opt </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1008 </td><td class="markdownTableBodyNone">Manufacturer device name </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1009 </td><td class="markdownTableBodyNone">Manufacturer hardware version </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">100A </td><td class="markdownTableBodyNone">Manufacturer software version </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100C </td><td class="markdownTableBodyNone">Guard time </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">100D </td><td class="markdownTableBodyNone">Life time factor </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1010 </td><td class="markdownTableBodyNone">Store parameters </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1011 </td><td class="markdownTableBodyNone">Restore default parameters </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1012 </td><td class="markdownTableBodyNone">COB-ID time stamp object </td><td class="markdownTableBodyNone">TIME, req </td><td class="markdownTableBodyNone">required </td><td class="markdownTableBodyNone">TIME  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1013 </td><td class="markdownTableBodyNone">High resolution time stamp </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1014 </td><td class="markdownTableBodyNone">COB-ID EMCY </td><td class="markdownTableBodyNone">EM_PRODUCER, req </td><td class="markdownTableBodyNone">required </td><td class="markdownTableBodyNone">EM_PROD  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1015 </td><td class="markdownTableBodyNone">Inhibit time EMCY </td><td class="markdownTableBodyNone">EM_PROD_INHIBIT, opt </td><td class="markdownTableBodyNone">optional </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1016 </td><td class="markdownTableBodyNone">Consumer heartbeat time </td><td class="markdownTableBodyNone">HB_CONS, req </td><td class="markdownTableBodyNone">optional </td><td class="markdownTableBodyNone">HB_CONS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1017 </td><td class="markdownTableBodyNone">Producer heartbeat time </td><td class="markdownTableBodyNone">CANopen, NMT, req </td><td class="markdownTableBodyNone">required </td><td class="markdownTableBodyNone">HB_PROD  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1018 </td><td class="markdownTableBodyNone">Identity object </td><td class="markdownTableBodyNone">CANopen, LSS_SL, req </td><td class="markdownTableBodyNone">no </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1019 </td><td class="markdownTableBodyNone">Synch. counter overflow value </td><td class="markdownTableBodyNone">SYNC, opt </td><td class="markdownTableBodyNone">no </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1020 </td><td class="markdownTableBodyNone">Verify configuration </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1021 </td><td class="markdownTableBodyNone">Store EDS </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1022 </td><td class="markdownTableBodyNone">Store format </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1023 </td><td class="markdownTableBodyNone">OS command </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1024 </td><td class="markdownTableBodyNone">OS command mode </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1025 </td><td class="markdownTableBodyNone">OS debugger interface </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1026 </td><td class="markdownTableBodyNone">OS prompt </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1027 </td><td class="markdownTableBodyNone">Module list </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1028 </td><td class="markdownTableBodyNone">Emergency consumer object </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1029 </td><td class="markdownTableBodyNone">Error behavior object </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1200 </td><td class="markdownTableBodyNone">SDO server parameter (first) </td><td class="markdownTableBodyNone">SDO optional </td><td class="markdownTableBodyNone">required </td><td class="markdownTableBodyNone">SDO_SRV  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1201+ </td><td class="markdownTableBodyNone">SDO server parameter </td><td class="markdownTableBodyNone">SDO+, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone">SDO_SRV  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1280+ </td><td class="markdownTableBodyNone">SDO client parameter </td><td class="markdownTableBodyNone">SDO_CLI, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone">SDO_CLI  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1300 </td><td class="markdownTableBodyNone">Global fail-safe command par </td><td class="markdownTableBodyNone">GFC, req </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">GFC  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1301+ </td><td class="markdownTableBodyNone">SRDO communication parameter </td><td class="markdownTableBodyNone">SRDO, req </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">SRDO  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1381+ </td><td class="markdownTableBodyNone">SRDO mapping parameter </td><td class="markdownTableBodyNone">SRDO, req </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">13FE </td><td class="markdownTableBodyNone">Configuration valid </td><td class="markdownTableBodyNone">SRDO, req </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">13FF </td><td class="markdownTableBodyNone">Safety configuration checksum </td><td class="markdownTableBodyNone">SRDO, req </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1400+ </td><td class="markdownTableBodyNone">RPDO communication parameter </td><td class="markdownTableBodyNone">RPDO, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone">RPDO  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1600+ </td><td class="markdownTableBodyNone">RPDO mapping parameter </td><td class="markdownTableBodyNone">RPDO, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1800+ </td><td class="markdownTableBodyNone">TPDO communication parameter </td><td class="markdownTableBodyNone">TPDO, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone">TPDO  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1A00+ </td><td class="markdownTableBodyNone">TPDO mapping parameter </td><td class="markdownTableBodyNone">TPDO, req </td><td class="markdownTableBodyNone">req if DYNAMIC </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1FA0+ </td><td class="markdownTableBodyNone">Object scanner list </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1FD0+ </td><td class="markdownTableBodyNone">Object dispatching list </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Custom objects </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">any </td><td class="markdownTableBodyNone">Error status bits </td><td class="markdownTableBodyNone">EM_STATUS_BITS, opt </td><td class="markdownTableBodyNone">yes, own data </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">any+ </td><td class="markdownTableBodyNone">Trace </td><td class="markdownTableBodyNone">TRACE, req </td><td class="markdownTableBodyNone">yes, own data </td><td class="markdownTableBodyNone">TRACE  </td></tr>
+</table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__CO__dataTypes_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdoc">UNSIGNED32 in CANopen (0007h), 32-bit unsigned integer.</div><div class="ttdef"><b>Definition:</b> CO_driver.h:141</div></div>
-<div class="ttc" id="astructOD__IO__t_html_a7f31cae6c859c2a2eaf2610b65fd6626"><div class="ttname"><a href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">OD_IO_t::stream</a></div><div class="ttdeci">OD_stream_t stream</div><div class="ttdoc">Object passed to read or write.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:333</div></div>
-<div class="ttc" id="astructOD__extensionIO__t_html"><div class="ttname"><a href="structOD__extensionIO__t.html">OD_extensionIO_t</a></div><div class="ttdoc">Object pointed by OD_obj_extended_t contains application specified parameters for extended OD object.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:727</div></div>
-<div class="ttc" id="agroup__CO__ODdefinition_html_ggaae426e9d66ec1bacfef2d93f096d7805a9376cface357f03bec8a651a307f33b9"><div class="ttname"><a href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a9376cface357f03bec8a651a307f33b9">ODT_REC</a></div><div class="ttdeci">@ ODT_REC</div><div class="ttdoc">This type corresponds to CANopen Object Dictionary object with object code equal to RECORD.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:685</div></div>
-<div class="ttc" id="agroup__CO__ODdefinition_html_ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820"><div class="ttname"><a href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820">ODT_VAR</a></div><div class="ttdeci">@ ODT_VAR</div><div class="ttdoc">This type corresponds to CANopen Object Dictionary object with object code equal to VAR.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:672</div></div>
-<div class="ttc" id="astructOD__IO__t_html_ab0ed3186d15d20f80f877a5f087fdebc"><div class="ttname"><a href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">OD_IO_t::read</a></div><div class="ttdeci">OD_size_t(* read)(OD_stream_t *stream, uint8_t subIndex, void *buf, OD_size_t count, ODR_t *returnCode)</div><div class="ttdoc">Read function pointer, see OD_subEntry_t.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:335</div></div>
-<div class="ttc" id="agroup__CO__ODdefinition_html_ggaae426e9d66ec1bacfef2d93f096d7805adb58a7faa735918d39b8bbcd3a6ad594"><div class="ttname"><a href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805adb58a7faa735918d39b8bbcd3a6ad594">ODT_EVAR</a></div><div class="ttdeci">@ ODT_EVAR</div><div class="ttdoc">Same as ODT_VAR, but extended with OD_obj_extended_t type.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:689</div></div>
-<div class="ttc" id="agroup__CO__ODinterface_html_gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367"><div class="ttname"><a href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a></div><div class="ttdeci">@ ODA_MB</div><div class="ttdoc">Variable is multi-byte ((u)int16_t to (u)int64_t)</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:127</div></div>
+<div class="ttc" id="agroup__CO__dataTypes_html_ga33594304e786b158f3fb30289278f5af"><div class="ttname"><a href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a></div><div class="ttdeci">unsigned long int uint32_t</div><div class="ttdoc">UNSIGNED32 in CANopen (0007h), 32-bit unsigned integer.</div><div class="ttdef"><b>Definition:</b> CO_driver.h:155</div></div>
+<div class="ttc" id="astructOD__IO__t_html_a7f31cae6c859c2a2eaf2610b65fd6626"><div class="ttname"><a href="structOD__IO__t.html#a7f31cae6c859c2a2eaf2610b65fd6626">OD_IO_t::stream</a></div><div class="ttdeci">OD_stream_t stream</div><div class="ttdoc">Object Dictionary stream object, passed to read or write.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:265</div></div>
+<div class="ttc" id="astructOD__extensionIO__t_html"><div class="ttname"><a href="structOD__extensionIO__t.html">OD_extensionIO_t</a></div><div class="ttdoc">Object pointed by OD_obj_extended_t contains application specified parameters for extended OD object.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:734</div></div>
+<div class="ttc" id="agroup__CO__ODdefinition_html_ggaae426e9d66ec1bacfef2d93f096d7805a9376cface357f03bec8a651a307f33b9"><div class="ttname"><a href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a9376cface357f03bec8a651a307f33b9">ODT_REC</a></div><div class="ttdeci">@ ODT_REC</div><div class="ttdoc">This type corresponds to CANopen Object Dictionary object with object code equal to RECORD.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:682</div></div>
+<div class="ttc" id="agroup__CO__ODdefinition_html_ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820"><div class="ttname"><a href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805a829f1df882410efc0ea0e05b3435c820">ODT_VAR</a></div><div class="ttdeci">@ ODT_VAR</div><div class="ttdoc">This type corresponds to CANopen Object Dictionary object with object code equal to VAR.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:669</div></div>
+<div class="ttc" id="astructOD__obj__record__t_html_a490d4818eaa6ca94d2c6fc598647dbd1"><div class="ttname"><a href="structOD__obj__record__t.html#a490d4818eaa6ca94d2c6fc598647dbd1">OD_obj_record_t::data</a></div><div class="ttdeci">void * data</div><div class="ttdoc">Pointer to data.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:724</div></div>
+<div class="ttc" id="astructOD__IO__t_html_ab0ed3186d15d20f80f877a5f087fdebc"><div class="ttname"><a href="structOD__IO__t.html#ab0ed3186d15d20f80f877a5f087fdebc">OD_IO_t::read</a></div><div class="ttdeci">OD_size_t(* read)(OD_stream_t *stream, uint8_t subIndex, void *buf, OD_size_t count, ODR_t *returnCode)</div><div class="ttdoc">Function pointer for reading value from specified variable from Object Dictionary.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:296</div></div>
+<div class="ttc" id="agroup__CO__ODdefinition_html_ggaae426e9d66ec1bacfef2d93f096d7805adb58a7faa735918d39b8bbcd3a6ad594"><div class="ttname"><a href="group__CO__ODdefinition.html#ggaae426e9d66ec1bacfef2d93f096d7805adb58a7faa735918d39b8bbcd3a6ad594">ODT_EVAR</a></div><div class="ttdeci">@ ODT_EVAR</div><div class="ttdoc">Same as ODT_VAR, but extended with OD_obj_extended_t type.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:686</div></div>
+<div class="ttc" id="agroup__CO__ODinterface_html_gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367"><div class="ttname"><a href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ae02b665e7e8d8bd84f341c9ad040d367">ODA_MB</a></div><div class="ttdeci">@ ODA_MB</div><div class="ttdoc">Variable is multi-byte ((u)int16_t to (u)int64_t)</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:120</div></div>
 <div class="ttc" id="agroup__CO__ODinterface_html_gaaacaadfc28bfaf485cefc8bff64310f4"><div class="ttname"><a href="group__CO__ODinterface.html#gaaacaadfc28bfaf485cefc8bff64310f4">OD_find</a></div><div class="ttdeci">const OD_entry_t * OD_find(const OD_t *od, uint16_t index)</div><div class="ttdoc">Find OD entry in Object Dictionary.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.c:160</div></div>
-<div class="ttc" id="astructOD__obj__var__t_html"><div class="ttname"><a href="structOD__obj__var__t.html">OD_obj_var_t</a></div><div class="ttdoc">Object for single OD variable, used for &quot;VAR&quot; and &quot;RECORD&quot; type OD objects.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:704</div></div>
-<div class="ttc" id="agroup__CO__ODinterface_html_gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485"><div class="ttname"><a href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a></div><div class="ttdeci">@ ODA_SDO_R</div><div class="ttdoc">SDO server may read from the variable.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:118</div></div>
-<div class="ttc" id="astructOD__subEntry__t_html"><div class="ttname"><a href="structOD__subEntry__t.html">OD_subEntry_t</a></div><div class="ttdoc">Structure describing properties of a variable, located in specific index and sub-index inside the Obj...</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:229</div></div>
-<div class="ttc" id="astructOD__obj__extended__t_html"><div class="ttname"><a href="structOD__obj__extended__t.html">OD_obj_extended_t</a></div><div class="ttdoc">Object for extended type of OD variable, configurable by OD_extensionIO_init() function.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:742</div></div>
+<div class="ttc" id="astructOD__obj__var__t_html"><div class="ttname"><a href="structOD__obj__var__t.html">OD_obj_var_t</a></div><div class="ttdoc">Object for single OD variable, used for &quot;VAR&quot; type OD objects.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:701</div></div>
+<div class="ttc" id="agroup__CO__ODinterface_html_gaf1f736d4b4d6754d971f0c0a63655bcf"><div class="ttname"><a href="group__CO__ODinterface.html#gaf1f736d4b4d6754d971f0c0a63655bcf">OD_getSub</a></div><div class="ttdeci">ODR_t OD_getSub(const OD_entry_t *entry, uint8_t subIndex, OD_subEntry_t *subEntry, OD_IO_t *io, bool_t odOrig)</div><div class="ttdoc">Find sub-object with specified sub-index on OD entry returned by OD_find.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.c:200</div></div>
+<div class="ttc" id="agroup__CO__ODinterface_html_gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485"><div class="ttname"><a href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151ada3eb985961ffdd9cf655d1a7a7d9485">ODA_SDO_R</a></div><div class="ttdeci">@ ODA_SDO_R</div><div class="ttdoc">SDO server may read from the variable.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:111</div></div>
+<div class="ttc" id="astructOD__subEntry__t_html"><div class="ttname"><a href="structOD__subEntry__t.html">OD_subEntry_t</a></div><div class="ttdoc">Structure describing properties of a variable, located in specific index and sub-index inside the Obj...</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:201</div></div>
+<div class="ttc" id="astructOD__obj__array__t_html"><div class="ttname"><a href="structOD__obj__array__t.html">OD_obj_array_t</a></div><div class="ttdoc">Object for OD array of variables, used for &quot;ARRAY&quot; type OD objects.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:710</div></div>
+<div class="ttc" id="astructOD__obj__extended__t_html"><div class="ttname"><a href="structOD__obj__extended__t.html">OD_obj_extended_t</a></div><div class="ttdoc">Object for extended type of OD variable, configurable by OD_extensionIO_init() function.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:749</div></div>
 <div class="ttc" id="aCO__ODinterface_8h_html"><div class="ttname"><a href="CO__ODinterface_8h.html">CO_ODinterface.h</a></div><div class="ttdoc">CANopen Object Dictionary interface.</div></div>
-<div class="ttc" id="agroup__CO__ODinterface_html_gga0e9afd8ad27de0920d1fe0738834869ca15f7f20e27f1c5f174bdeecfeef45cc2"><div class="ttname"><a href="group__CO__ODinterface.html#gga0e9afd8ad27de0920d1fe0738834869ca15f7f20e27f1c5f174bdeecfeef45cc2">ODR_OK</a></div><div class="ttdeci">@ ODR_OK</div><div class="ttdoc">SDO abort 0x00000000 - Read/write successfully finished.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:144</div></div>
-<div class="ttc" id="agroup__CO__ODinterface_html_ga0e9afd8ad27de0920d1fe0738834869c"><div class="ttname"><a href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a></div><div class="ttdeci">ODR_t</div><div class="ttdoc">Return codes from OD access functions.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:137</div></div>
-<div class="ttc" id="astructOD__t_html"><div class="ttname"><a href="structOD__t.html">OD_t</a></div><div class="ttdoc">Object Dictionary.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:368</div></div>
-<div class="ttc" id="agroup__CO__ODgetSetters_html_gac63795511b7decfbbc46ddb7c2b59cfd"><div class="ttname"><a href="group__CO__ODgetSetters.html#gac63795511b7decfbbc46ddb7c2b59cfd">OD_set_u16</a></div><div class="ttdeci">ODR_t OD_set_u16(const OD_entry_t *entry, uint8_t subIndex, uint16_t val, bool_t odOrig)</div><div class="ttdoc">Set uint16_t variable in Object Dictionary, see OD_set_i8.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.c:515</div></div>
-<div class="ttc" id="astructOD__subEntry__t_html_ab13ddb4abea3c69b8e7398451700dc92"><div class="ttname"><a href="structOD__subEntry__t.html#ab13ddb4abea3c69b8e7398451700dc92">OD_subEntry_t::read</a></div><div class="ttdeci">OD_size_t(* read)(OD_stream_t *stream, uint8_t subIndex, void *buf, OD_size_t count, ODR_t *returnCode)</div><div class="ttdoc">Function pointer for reading value from specified variable from Object Dictionary.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:292</div></div>
-<div class="ttc" id="agroup__CO__dataTypes_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdoc">NULL, for general usage.</div><div class="ttdef"><b>Definition:</b> CO_driver.h:121</div></div>
-<div class="ttc" id="astructOD__IO__t_html"><div class="ttname"><a href="structOD__IO__t.html">OD_IO_t</a></div><div class="ttdoc">Helper structure for storing all objects necessary for frequent read from or write to specific OD var...</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:331</div></div>
-<div class="ttc" id="astructOD__entry__t_html"><div class="ttname"><a href="structOD__entry__t.html">OD_entry_t</a></div><div class="ttdoc">Object Dictionary entry for one OD object.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:350</div></div>
-<div class="ttc" id="agroup__CO__ODinterface_html_ga73eaf11787c003e24a21e988c69903ca"><div class="ttname"><a href="group__CO__ODinterface.html#ga73eaf11787c003e24a21e988c69903ca">OD_getSub</a></div><div class="ttdeci">ODR_t OD_getSub(const OD_entry_t *entry, uint8_t subIndex, OD_subEntry_t *subEntry, OD_stream_t *stream, bool_t odOrig)</div><div class="ttdoc">Find sub-object with specified sub-index on OD entry returned by OD_find.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.c:200</div></div>
-<div class="ttc" id="agroup__CO__dataTypes_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">UNSIGNED8 in CANopen (0005h), 8-bit unsigned integer.</div><div class="ttdef"><b>Definition:</b> CO_driver.h:137</div></div>
+<div class="ttc" id="agroup__CO__ODinterface_html_gga0e9afd8ad27de0920d1fe0738834869ca15f7f20e27f1c5f174bdeecfeef45cc2"><div class="ttname"><a href="group__CO__ODinterface.html#gga0e9afd8ad27de0920d1fe0738834869ca15f7f20e27f1c5f174bdeecfeef45cc2">ODR_OK</a></div><div class="ttdeci">@ ODR_OK</div><div class="ttdoc">SDO abort 0x00000000 - Read/write successfully finished.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:139</div></div>
+<div class="ttc" id="agroup__CO__ODinterface_html_ga0e9afd8ad27de0920d1fe0738834869c"><div class="ttname"><a href="group__CO__ODinterface.html#ga0e9afd8ad27de0920d1fe0738834869c">ODR_t</a></div><div class="ttdeci">ODR_t</div><div class="ttdoc">Return codes from OD access functions.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:132</div></div>
+<div class="ttc" id="astructOD__t_html"><div class="ttname"><a href="structOD__t.html">OD_t</a></div><div class="ttdoc">Object Dictionary.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:352</div></div>
+<div class="ttc" id="agroup__CO__ODgetSetters_html_gac63795511b7decfbbc46ddb7c2b59cfd"><div class="ttname"><a href="group__CO__ODgetSetters.html#gac63795511b7decfbbc46ddb7c2b59cfd">OD_set_u16</a></div><div class="ttdeci">ODR_t OD_set_u16(const OD_entry_t *entry, uint8_t subIndex, uint16_t val, bool_t odOrig)</div><div class="ttdoc">Set uint16_t variable in Object Dictionary, see OD_set_i8.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.c:545</div></div>
+<div class="ttc" id="agroup__CO__dataTypes_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__CO__dataTypes.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdoc">NULL, for general usage.</div><div class="ttdef"><b>Definition:</b> CO_driver.h:135</div></div>
+<div class="ttc" id="agroup__CO__ODinterface_html_gga47b0d204aaf1ea64b4f826aaf8f5c151a2c60ba85cbe4f25d5511ffab3dcd7486"><div class="ttname"><a href="group__CO__ODinterface.html#gga47b0d204aaf1ea64b4f826aaf8f5c151a2c60ba85cbe4f25d5511ffab3dcd7486">ODA_SDO_RW</a></div><div class="ttdeci">@ ODA_SDO_RW</div><div class="ttdoc">SDO server may read from or write to the variable.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:113</div></div>
+<div class="ttc" id="astructOD__IO__t_html"><div class="ttname"><a href="structOD__IO__t.html">OD_IO_t</a></div><div class="ttdoc">Structure for input / output on the OD variable.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:263</div></div>
+<div class="ttc" id="astructOD__obj__record__t_html"><div class="ttname"><a href="structOD__obj__record__t.html">OD_obj_record_t</a></div><div class="ttdoc">Object for OD sub-elements, used in &quot;RECORD&quot; type OD objects.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:723</div></div>
+<div class="ttc" id="astructOD__entry__t_html"><div class="ttname"><a href="structOD__entry__t.html">OD_entry_t</a></div><div class="ttdoc">Object Dictionary entry for one OD object.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:336</div></div>
+<div class="ttc" id="agroup__CO__dataTypes_html_gaba7bc1797add20fe3efdf37ced1182c5"><div class="ttname"><a href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">UNSIGNED8 in CANopen (0005h), 8-bit unsigned integer.</div><div class="ttdef"><b>Definition:</b> CO_driver.h:151</div></div>
 <div class="ttc" id="agroup__CO__ODinterface_html_gaef984c993ddbf6a0500391e97f05d08e"><div class="ttname"><a href="group__CO__ODinterface.html#gaef984c993ddbf6a0500391e97f05d08e">OD_size_t</a></div><div class="ttdeci">#define OD_size_t</div><div class="ttdoc">Variable of type OD_size_t contains data length in bytes of OD variable.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:44</div></div>
-<div class="ttc" id="astructOD__obj__var__t_html_a7c15865c69e0dc0a09f6d21bd890d062"><div class="ttname"><a href="structOD__obj__var__t.html#a7c15865c69e0dc0a09f6d21bd890d062">OD_obj_var_t::data</a></div><div class="ttdeci">void * data</div><div class="ttdoc">Pointer to data.</div><div class="ttdef"><b>Definition:</b> CO_ODinterface.h:705</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

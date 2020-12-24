@@ -98,44 +98,47 @@ $(document).ready(function(){initNavTree('structCO__NMT__t.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 
-<p>NMT consumer and Heartbeat producer object, initialized by <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a>  
+<p>NMT consumer and Heartbeat producer object.  
  <a href="structCO__NMT__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CO__NMT__Heartbeat_8h_source.html">CO_NMT_Heartbeat.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aaccc89ac956131330518afd7632a74fc"><td class="memItemLeft" align="right" valign="top"><a id="aaccc89ac956131330518afd7632a74fc"></a>
-<a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#aaccc89ac956131330518afd7632a74fc">operatingState</a></td></tr>
-<tr class="memdesc:aaccc89ac956131330518afd7632a74fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current NMT operating state. <br /></td></tr>
-<tr class="separator:aaccc89ac956131330518afd7632a74fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa158da268507ebe279834be82992bdb2"><td class="memItemLeft" align="right" valign="top"><a id="aa158da268507ebe279834be82992bdb2"></a>
-<a class="el" href="group__CO__NMT__Heartbeat.html#ga1e8c2a6c0fd4a33183503d25a7c6d744">CO_NMT_internalState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#aa158da268507ebe279834be82992bdb2">operatingStatePrev</a></td></tr>
-<tr class="memdesc:aa158da268507ebe279834be82992bdb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous NMT operating state. <br /></td></tr>
-<tr class="separator:aa158da268507ebe279834be82992bdb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13b628972063a5452a4e16e829a549e4"><td class="memItemLeft" align="right" valign="top"><a id="a13b628972063a5452a4e16e829a549e4"></a>
-<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a13b628972063a5452a4e16e829a549e4">resetCommand</a></td></tr>
-<tr class="memdesc:a13b628972063a5452a4e16e829a549e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">If different than zero, device will reset. <br /></td></tr>
-<tr class="separator:a13b628972063a5452a4e16e829a549e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abebf973c819c48fa36c48ba2eb84818a"><td class="memItemLeft" align="right" valign="top"><a id="abebf973c819c48fa36c48ba2eb84818a"></a>
+<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#abebf973c819c48fa36c48ba2eb84818a">operatingState</a></td></tr>
+<tr class="memdesc:abebf973c819c48fa36c48ba2eb84818a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current NMT operating state. <br /></td></tr>
+<tr class="separator:abebf973c819c48fa36c48ba2eb84818a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a544df8108d0853dd6d2938fa253ef018"><td class="memItemLeft" align="right" valign="top"><a id="a544df8108d0853dd6d2938fa253ef018"></a>
+<a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a544df8108d0853dd6d2938fa253ef018">operatingStatePrev</a></td></tr>
+<tr class="memdesc:a544df8108d0853dd6d2938fa253ef018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous NMT operating state. <br /></td></tr>
+<tr class="separator:a544df8108d0853dd6d2938fa253ef018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a56fcf387bd2922ece9106538d986ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a7a56fcf387bd2922ece9106538d986ef">internalCommand</a></td></tr>
+<tr class="memdesc:a7a56fcf387bd2922ece9106538d986ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT internal command from CO_NMT_receive() or <a class="el" href="group__CO__NMT__Heartbeat.html#ga9d557708be1bfb9b169718abea90b663" title="Send NMT master command.">CO_NMT_sendCommand()</a>, processed in <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a>.  <a href="structCO__NMT__t.html#a7a56fcf387bd2922ece9106538d986ef">More...</a><br /></td></tr>
+<tr class="separator:a7a56fcf387bd2922ece9106538d986ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cf0441aff58a3e208d1ed221a26709c"><td class="memItemLeft" align="right" valign="top"><a id="a6cf0441aff58a3e208d1ed221a26709c"></a>
 <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a6cf0441aff58a3e208d1ed221a26709c">nodeId</a></td></tr>
-<tr class="memdesc:a6cf0441aff58a3e208d1ed221a26709c"><td class="mdescLeft">&#160;</td><td class="mdescRight">CANopen Node ID of this device. <br /></td></tr>
+<tr class="memdesc:a6cf0441aff58a3e208d1ed221a26709c"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
 <tr class="separator:a6cf0441aff58a3e208d1ed221a26709c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c28cae6c3c7319c8fdfe694a3b4d9a7"><td class="memItemLeft" align="right" valign="top"><a id="a0c28cae6c3c7319c8fdfe694a3b4d9a7"></a>
+<a class="el" href="group__CO__NMT__Heartbeat.html#gaf92cf5943801e5dda84654345cc3d67f">CO_NMT_control_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a0c28cae6c3c7319c8fdfe694a3b4d9a7">NMTcontrol</a></td></tr>
+<tr class="memdesc:a0c28cae6c3c7319c8fdfe694a3b4d9a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
+<tr class="separator:a0c28cae6c3c7319c8fdfe694a3b4d9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a983a4ba9a004d216e32414c0a38736c4"><td class="memItemLeft" align="right" valign="top"><a id="a983a4ba9a004d216e32414c0a38736c4"></a>
+<a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a983a4ba9a004d216e32414c0a38736c4">HBproducerTime_us</a></td></tr>
+<tr class="memdesc:a983a4ba9a004d216e32414c0a38736c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Producer heartbeat time, calculated from OD 0x1017. <br /></td></tr>
+<tr class="separator:a983a4ba9a004d216e32414c0a38736c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0babc82bd6dfde07511b87167941b4f0"><td class="memItemLeft" align="right" valign="top"><a id="a0babc82bd6dfde07511b87167941b4f0"></a>
 <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a0babc82bd6dfde07511b87167941b4f0">HBproducerTimer</a></td></tr>
 <tr class="memdesc:a0babc82bd6dfde07511b87167941b4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal timer for HB producer. <br /></td></tr>
 <tr class="separator:a0babc82bd6dfde07511b87167941b4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37c8f55e5d29a3535b82bcd391bf1aba"><td class="memItemLeft" align="right" valign="top"><a id="a37c8f55e5d29a3535b82bcd391bf1aba"></a>
-<a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a37c8f55e5d29a3535b82bcd391bf1aba">firstHBTime</a></td></tr>
-<tr class="memdesc:a37c8f55e5d29a3535b82bcd391bf1aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
-<tr class="separator:a37c8f55e5d29a3535b82bcd391bf1aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60848ed23fb775dc4412be0e7ff9bc4b"><td class="memItemLeft" align="right" valign="top"><a id="a60848ed23fb775dc4412be0e7ff9bc4b"></a>
 <a class="el" href="structCO__EM__t.html">CO_EM_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a60848ed23fb775dc4412be0e7ff9bc4b">em</a></td></tr>
-<tr class="memdesc:a60848ed23fb775dc4412be0e7ff9bc4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
+<tr class="memdesc:a60848ed23fb775dc4412be0e7ff9bc4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
 <tr class="separator:a60848ed23fb775dc4412be0e7ff9bc4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa1a7f9278595d82eaddbee8ac434ca9"><td class="memItemLeft" align="right" valign="top"><a id="aaa1a7f9278595d82eaddbee8ac434ca9"></a>
 <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#aaa1a7f9278595d82eaddbee8ac434ca9">NMT_CANdevTx</a></td></tr>
-<tr class="memdesc:aaa1a7f9278595d82eaddbee8ac434ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
+<tr class="memdesc:aaa1a7f9278595d82eaddbee8ac434ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
 <tr class="separator:aaa1a7f9278595d82eaddbee8ac434ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c9ca6315daa74257699ff657165d409"><td class="memItemLeft" align="right" valign="top"><a id="a6c9ca6315daa74257699ff657165d409"></a>
 <a class="el" href="structCO__CANtx__t.html">CO_CANtx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#a6c9ca6315daa74257699ff657165d409">NMT_TXbuff</a></td></tr>
@@ -143,7 +146,7 @@ Data Fields</h2></td></tr>
 <tr class="separator:a6c9ca6315daa74257699ff657165d409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedcf17c643f41370a978794301f00169"><td class="memItemLeft" align="right" valign="top"><a id="aedcf17c643f41370a978794301f00169"></a>
 <a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#aedcf17c643f41370a978794301f00169">HB_CANdevTx</a></td></tr>
-<tr class="memdesc:aedcf17c643f41370a978794301f00169"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
+<tr class="memdesc:aedcf17c643f41370a978794301f00169"><td class="mdescLeft">&#160;</td><td class="mdescRight">From <a class="el" href="group__CO__NMT__Heartbeat.html#ga53c92521fff0fab405f8a372702c7259" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> <br /></td></tr>
 <tr class="separator:aedcf17c643f41370a978794301f00169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9fb1bb36758a1ff27b44c20fd6a0192"><td class="memItemLeft" align="right" valign="top"><a id="aa9fb1bb36758a1ff27b44c20fd6a0192"></a>
 <a class="el" href="structCO__CANtx__t.html">CO_CANtx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__NMT__t.html#aa9fb1bb36758a1ff27b44c20fd6a0192">HB_TXbuff</a></td></tr>
@@ -163,8 +166,26 @@ void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <tr class="separator:a64bc9d74c871bf560d8b5db85e4d051e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>NMT consumer and Heartbeat producer object, initialized by <a class="el" href="group__CO__NMT__Heartbeat.html#ga3d1e633487f14741ce32c80ed8be1312" title="Initialize NMT and Heartbeat producer object.">CO_NMT_init()</a> </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<div class="textblock"><p>NMT consumer and Heartbeat producer object. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a7a56fcf387bd2922ece9106538d986ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a56fcf387bd2922ece9106538d986ef">&#9670;&nbsp;</a></span>internalCommand</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> CO_NMT_t::internalCommand</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>NMT internal command from CO_NMT_receive() or <a class="el" href="group__CO__NMT__Heartbeat.html#ga9d557708be1bfb9b169718abea90b663" title="Send NMT master command.">CO_NMT_sendCommand()</a>, processed in <a class="el" href="group__CO__NMT__Heartbeat.html#ga724ff5b1d9cfee955914f365514deda0" title="Process received NMT and produce Heartbeat messages.">CO_NMT_process()</a>. </p>
+<p>0 if no command or CO_NMT_command_t </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>301/<a class="el" href="CO__NMT__Heartbeat_8h_source.html">CO_NMT_Heartbeat.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -173,7 +194,7 @@ void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structCO__NMT__t.html">CO_NMT_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

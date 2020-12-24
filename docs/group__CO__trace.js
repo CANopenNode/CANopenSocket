@@ -9,7 +9,7 @@ var group__CO__trace =
     ] ],
     [ "CO_trace_t", "structCO__trace__t.html", [
       [ "enabled", "structCO__trace__t.html#aefa5e9934aaac1f00d0a1866100dae50", null ],
-      [ "SDO", "structCO__trace__t.html#a8bf359f82a47e624a937d148cd24a4bc", null ],
+      [ "SDO", "structCO__trace__t.html#a33616f410feb93ddb6a2ac238027996b", null ],
       [ "timeBuffer", "structCO__trace__t.html#a83806299bd57a23f5946f81cb05ab41d", null ],
       [ "valueBuffer", "structCO__trace__t.html#abc2f00a5f99453c77dd8515f3526e428", null ],
       [ "bufferSize", "structCO__trace__t.html#a3dfe996be2bef106f50de085a7f5ca9f", null ],
@@ -29,6 +29,6 @@ var group__CO__trace =
       [ "threshold", "structCO__trace__t.html#a6400336e1207dcfa5fa8ef2a908fda08", null ]
     ] ],
     [ "OD_INDEX_TRACE_CONFIG", "group__CO__trace.html#ga4edaf4c29180028f5f128f0aed2a417d", null ],
-    [ "CO_trace_init", "group__CO__trace.html#ga88524926ed5f27d0278d00b0111c553b", null ],
+    [ "CO_trace_init", "group__CO__trace.html#ga50621e5b8e28349f7caf260b6cf9962e", null ],
     [ "CO_trace_process", "group__CO__trace.html#ga5b8d9460d7a42920325cf66eb8b725ec", null ]
 ];

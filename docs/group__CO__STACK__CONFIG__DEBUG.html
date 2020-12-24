@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CANopenNode: Globals</title>
+<title>CANopenNode: Debug messages</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('globals_func_t.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__CO__STACK__CONFIG__DEBUG.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,29 +90,53 @@ $(document).ready(function(){initNavTree('globals_func_t.html',''); initResizabl
 </iframe>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
+  <div class="headertitle">
+<div class="title">Debug messages<div class="ingroups"><a class="el" href="group__CO__CANopen__301.html">CANopen_301</a> &raquo; <a class="el" href="group__CO__driver.html">Driver</a> &raquo; <a class="el" href="group__CO__STACK__CONFIG.html">Stack configuration</a></div></div>  </div>
+</div><!--header-->
 <div class="contents">
-&#160;
 
-<h3><a id="index_t"></a>- t -</h3><ul>
-<li>threadMainWait_close()
-: <a class="el" href="group__CO__socketCAN.html#gab65b24343e81090c4571854566e36d28">CO_Linux_threads.h</a>
-</li>
-<li>threadMainWait_init()
-: <a class="el" href="group__CO__socketCAN.html#ga113aff6005a35eebd06e315575dbab2f">CO_Linux_threads.h</a>
-</li>
-<li>threadMainWait_initOnce()
-: <a class="el" href="group__CO__socketCAN.html#gac44e8243f658c04595067b0dc2f5199e">CO_Linux_threads.h</a>
-</li>
-<li>threadMainWait_process()
-: <a class="el" href="group__CO__socketCAN.html#ga213519b33bc491418ba7bfceaff9d5ff">CO_Linux_threads.h</a>
-</li>
+<p>Messages from different parts of the stack.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga1ce7b96c60a5ab9349b66b77f6a6e2a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__STACK__CONFIG__DEBUG.html#ga1ce7b96c60a5ab9349b66b77f6a6e2a7">CO_CONFIG_DEBUG</a>&#160;&#160;&#160;(0)</td></tr>
+<tr class="memdesc:ga1ce7b96c60a5ab9349b66b77f6a6e2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration of debug messages from different parts of the stack, which can be logged according to target specific function.  <a href="group__CO__STACK__CONFIG__DEBUG.html#ga1ce7b96c60a5ab9349b66b77f6a6e2a7">More...</a><br /></td></tr>
+<tr class="separator:ga1ce7b96c60a5ab9349b66b77f6a6e2a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Messages from different parts of the stack. </p>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga1ce7b96c60a5ab9349b66b77f6a6e2a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1ce7b96c60a5ab9349b66b77f6a6e2a7">&#9670;&nbsp;</a></span>CO_CONFIG_DEBUG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CO_CONFIG_DEBUG&#160;&#160;&#160;(0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configuration of debug messages from different parts of the stack, which can be logged according to target specific function. </p>
+<p>Possible flags, can be ORed:</p><ul>
+<li>CO_CONFIG_DEBUG_COMMON - Define default CO_DEBUG_COMMON(msg) macro. This macro is target specific. This macro is then used as default macro in all other defined CO_DEBUG_XXX(msg) macros.</li>
+<li>CO_CONFIG_DEBUG_SDO_CLIENT - Define default CO_DEBUG_SDO_CLIENT(msg) macro.</li>
+<li>CO_CONFIG_DEBUG_SDO_SERVER - Define default CO_DEBUG_SDO_SERVER(msg) macro. </li>
 </ul>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

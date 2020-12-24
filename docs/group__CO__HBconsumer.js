@@ -11,6 +11,8 @@ var group__CO__HBconsumer =
       [ "pFunctSignalPre", "structCO__HBconsNode__t.html#a61c753c38666dda8a4d4d870fc593ae5", null ],
       [ "functSignalObjectPre", "structCO__HBconsNode__t.html#afd6a4fcc8bc4cc9c647e9ef3d91b2431", null ],
       [ "NMTstatePrev", "structCO__HBconsNode__t.html#a7fd2636d9f46b7ff47676f716f6f00a4", null ],
+      [ "pFunctSignalNmtChanged", "structCO__HBconsNode__t.html#a3f4ec7dfe9e47a3e7a9bdad382fd7f56", null ],
+      [ "pFunctSignalObjectNmtChanged", "structCO__HBconsNode__t.html#a2a1c5abd88c2ecd451e2a1ca65d3dc93", null ],
       [ "pFunctSignalHbStarted", "structCO__HBconsNode__t.html#ac44d2a232ca2b352fd717ee8e6f28e90", null ],
       [ "functSignalObjectHbStarted", "structCO__HBconsNode__t.html#a50ed8caa11fce685dfbba13d11ada0ef", null ],
       [ "pFunctSignalTimeout", "structCO__HBconsNode__t.html#ab6bbeee344ebd1d657bbabc02f51e597", null ],
@@ -28,7 +30,7 @@ var group__CO__HBconsumer =
       [ "NMTisPreOrOperationalPrev", "structCO__HBconsumer__t.html#a2fe3d81e2124918d0d5947e6891a060e", null ],
       [ "CANdevRx", "structCO__HBconsumer__t.html#af5d8828478e2b51fe47a63f24dd896b1", null ],
       [ "CANdevRxIdxStart", "structCO__HBconsumer__t.html#a00d176c84d169115399c276031b71722", null ],
-      [ "pFunctSignalNmtChanged", "structCO__HBconsumer__t.html#a387497807b3fdc2d61ad0fa492502e8b", null ],
+      [ "pFunctSignalNmtChanged", "structCO__HBconsumer__t.html#a58314f7d35efc2dbeae14ba4be76dec1", null ],
       [ "pFunctSignalObjectNmtChanged", "structCO__HBconsumer__t.html#ad583c93f4e59f98669cd18f263aee45a", null ]
     ] ],
     [ "CO_HBconsumer_state_t", "group__CO__HBconsumer.html#ga7658e41b7c045b7b612e4ef8a2b663f3", [
@@ -37,10 +39,10 @@ var group__CO__HBconsumer =
       [ "CO_HBconsumer_ACTIVE", "group__CO__HBconsumer.html#gga7658e41b7c045b7b612e4ef8a2b663f3ad80c78b38e6d28927bf3d1b1464b36e9", null ],
       [ "CO_HBconsumer_TIMEOUT", "group__CO__HBconsumer.html#gga7658e41b7c045b7b612e4ef8a2b663f3a8a7ac49e5c809994ee65f365a7a75f22", null ]
     ] ],
-    [ "CO_HBconsumer_init", "group__CO__HBconsumer.html#ga6114ea2d29843d847dbf45f39120e114", null ],
+    [ "CO_HBconsumer_init", "group__CO__HBconsumer.html#gacc31c4848a14c9c367505b20e4a6a496", null ],
     [ "CO_HBconsumer_initEntry", "group__CO__HBconsumer.html#gaf4bfa2bbd2b7d70f25b6bf173932170a", null ],
     [ "CO_HBconsumer_initCallbackPre", "group__CO__HBconsumer.html#ga2faa596dcebbec8f486788a791d638be", null ],
-    [ "CO_HBconsumer_initCallbackNmtChanged", "group__CO__HBconsumer.html#gaf6cde91423fe90950ec176b1ae7fe44e", null ],
+    [ "CO_HBconsumer_initCallbackNmtChanged", "group__CO__HBconsumer.html#gabab4b2dd74f6e341fe8b683f7a6d56f3", null ],
     [ "CO_HBconsumer_initCallbackHeartbeatStarted", "group__CO__HBconsumer.html#ga6c9bd0df815428719b9f9429ed4476a9", null ],
     [ "CO_HBconsumer_initCallbackTimeout", "group__CO__HBconsumer.html#gaef359610a0cdd1331da266be9c55c2d2", null ],
     [ "CO_HBconsumer_initCallbackRemoteReset", "group__CO__HBconsumer.html#ga8758a7bd92aa458b90d5da9221cc694f", null ],

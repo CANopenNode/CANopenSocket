@@ -11,5 +11,6 @@ var structCO__CANmodule__t =
     [ "bufferInhibitFlag", "structCO__CANmodule__t.html#ad7af19de0bf39c8927c926b095cb5292", null ],
     [ "firstCANtxMessage", "structCO__CANmodule__t.html#ac12bd37971b89b5796fec0de71be0f07", null ],
     [ "CANtxCount", "structCO__CANmodule__t.html#a269294aa6a15ba56f92a460fae0536ac", null ],
-    [ "errOld", "structCO__CANmodule__t.html#aa0627988ddedc3a4ec3bbfcf3b818d06", null ]
+    [ "errOld", "structCO__CANmodule__t.html#aa0627988ddedc3a4ec3bbfcf3b818d06", null ],
+    [ "errinfo", "structCO__CANmodule__t.html#aead6585dcb9b8214dd77e8f74ca2aea1", null ]
 ];

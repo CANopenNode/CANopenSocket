@@ -105,12 +105,12 @@ $(document).ready(function(){initNavTree('structCO__GTWA__t.html',''); initResiz
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:ad25ec03bf924a158d6c46262eddf6869"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#ad25ec03bf924a158d6c46262eddf6869">readCallback</a> )(void *object, const char *buf, size_t count)</td></tr>
-<tr class="memdesc:ad25ec03bf924a158d6c46262eddf6869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to external function for reading response from Gateway-ascii object.  <a href="structCO__GTWA__t.html#ad25ec03bf924a158d6c46262eddf6869">More...</a><br /></td></tr>
-<tr class="separator:ad25ec03bf924a158d6c46262eddf6869"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a036c4a3a89b8171baba8039fc50876ba"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a036c4a3a89b8171baba8039fc50876ba">readCallback</a> )(void *object, const char *buf, size_t count, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *connectionOK)</td></tr>
+<tr class="memdesc:a036c4a3a89b8171baba8039fc50876ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to external function for reading response from Gateway-ascii object.  <a href="structCO__GTWA__t.html#a036c4a3a89b8171baba8039fc50876ba">More...</a><br /></td></tr>
+<tr class="separator:a036c4a3a89b8171baba8039fc50876ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1b9a86d7020ac21713a9b658a08495b"><td class="memItemLeft" align="right" valign="top"><a id="ae1b9a86d7020ac21713a9b658a08495b"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#ae1b9a86d7020ac21713a9b658a08495b">readCallbackObject</a></td></tr>
-<tr class="memdesc:ae1b9a86d7020ac21713a9b658a08495b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to object, which will be used inside readCallback, from <a class="el" href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
+<tr class="memdesc:ae1b9a86d7020ac21713a9b658a08495b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to object, which will be used inside readCallback, from <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
 <tr class="separator:ae1b9a86d7020ac21713a9b658a08495b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31b7ae3a5da107dfb5432f5a95f9faee"><td class="memItemLeft" align="right" valign="top"><a id="a31b7ae3a5da107dfb5432f5a95f9faee"></a>
 <a class="el" href="group__CO__dataTypes.html#ga33594304e786b158f3fb30289278f5af">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a31b7ae3a5da107dfb5432f5a95f9faee">sequence</a></td></tr>
@@ -149,7 +149,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <tr class="memdesc:a67770af170976d4d904fbc044d347376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual size of data in respBuf. <br /></td></tr>
 <tr class="separator:a67770af170976d4d904fbc044d347376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a605bfa0c99f4a0235980de0603a050ca"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a605bfa0c99f4a0235980de0603a050ca">respBufOffset</a></td></tr>
-<tr class="memdesc:a605bfa0c99f4a0235980de0603a050ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">If only part of data has been successfully written into external application (with <a class="el" href="structCO__GTWA__t.html#ad25ec03bf924a158d6c46262eddf6869" title="Pointer to external function for reading response from Gateway-ascii object.">readCallback()</a>), then Gateway-ascii object will stay in current state.  <a href="structCO__GTWA__t.html#a605bfa0c99f4a0235980de0603a050ca">More...</a><br /></td></tr>
+<tr class="memdesc:a605bfa0c99f4a0235980de0603a050ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">If only part of data has been successfully written into external application (with <a class="el" href="structCO__GTWA__t.html#a036c4a3a89b8171baba8039fc50876ba" title="Pointer to external function for reading response from Gateway-ascii object.">readCallback()</a>), then Gateway-ascii object will stay in current state.  <a href="structCO__GTWA__t.html#a605bfa0c99f4a0235980de0603a050ca">More...</a><br /></td></tr>
 <tr class="separator:a605bfa0c99f4a0235980de0603a050ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef556bb4c595944ebf3de22a2c9d5007"><td class="memItemLeft" align="right" valign="top"><a id="aef556bb4c595944ebf3de22a2c9d5007"></a>
 <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#aef556bb4c595944ebf3de22a2c9d5007">respHold</a></td></tr>
@@ -169,7 +169,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <tr class="separator:ac5fc932142ed17d04393ae30819fb021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a274945dbaacfd975f86a58566a884769"><td class="memItemLeft" align="right" valign="top"><a id="a274945dbaacfd975f86a58566a884769"></a>
 <a class="el" href="structCO__SDOclient__t.html">CO_SDOclient_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a274945dbaacfd975f86a58566a884769">SDO_C</a></td></tr>
-<tr class="memdesc:a274945dbaacfd975f86a58566a884769"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO client object from <a class="el" href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
+<tr class="memdesc:a274945dbaacfd975f86a58566a884769"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO client object from <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
 <tr class="separator:a274945dbaacfd975f86a58566a884769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fa3fe5ce1806296cf36ef5d8c3ecae2"><td class="memItemLeft" align="right" valign="top"><a id="a9fa3fe5ce1806296cf36ef5d8c3ecae2"></a>
 <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a9fa3fe5ce1806296cf36ef5d8c3ecae2">SDOtimeoutTime</a></td></tr>
@@ -179,9 +179,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a0b05c1b89fe8b104b019d12679d4edcf">SDOblockTransferEnable</a></td></tr>
 <tr class="memdesc:a0b05c1b89fe8b104b019d12679d4edcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">SDO block transfer enabled? <br /></td></tr>
 <tr class="separator:a0b05c1b89fe8b104b019d12679d4edcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae981f9a446cfaad8a5450e77adc32ec"><td class="memItemLeft" align="right" valign="top"><a id="aae981f9a446cfaad8a5450e77adc32ec"></a>
-<a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#aae981f9a446cfaad8a5450e77adc32ec">SDOdataCopyStatus</a></td></tr>
-<tr class="memdesc:aae981f9a446cfaad8a5450e77adc32ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate status of data copy from / to SDO buffer. <br /></td></tr>
+<tr class="memitem:aae981f9a446cfaad8a5450e77adc32ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#aae981f9a446cfaad8a5450e77adc32ec">SDOdataCopyStatus</a></td></tr>
+<tr class="memdesc:aae981f9a446cfaad8a5450e77adc32ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicate status of data copy from / to SDO buffer.  <a href="structCO__GTWA__t.html#aae981f9a446cfaad8a5450e77adc32ec">More...</a><br /></td></tr>
 <tr class="separator:aae981f9a446cfaad8a5450e77adc32ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b9bcb2113286454a273b9b43f4e1548"><td class="memItemLeft" align="right" valign="top"><a id="a7b9bcb2113286454a273b9b43f4e1548"></a>
 const CO_GTWA_dataType_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a7b9bcb2113286454a273b9b43f4e1548">SDOdataType</a></td></tr>
@@ -189,11 +188,11 @@ const CO_GTWA_dataType_t *&#160;</td><td class="memItemRight" valign="bottom"><a
 <tr class="separator:a7b9bcb2113286454a273b9b43f4e1548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aa019a1583f8ba56fada7c5ed8ec191"><td class="memItemLeft" align="right" valign="top"><a id="a6aa019a1583f8ba56fada7c5ed8ec191"></a>
 <a class="el" href="structCO__NMT__t.html">CO_NMT_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a6aa019a1583f8ba56fada7c5ed8ec191">NMT</a></td></tr>
-<tr class="memdesc:a6aa019a1583f8ba56fada7c5ed8ec191"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT object from <a class="el" href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
+<tr class="memdesc:a6aa019a1583f8ba56fada7c5ed8ec191"><td class="mdescLeft">&#160;</td><td class="mdescRight">NMT object from <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
 <tr class="separator:a6aa019a1583f8ba56fada7c5ed8ec191"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2897d681afe5bd45db8306b52734318"><td class="memItemLeft" align="right" valign="top"><a id="ae2897d681afe5bd45db8306b52734318"></a>
 <a class="el" href="structCO__LSSmaster__t.html">CO_LSSmaster_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#ae2897d681afe5bd45db8306b52734318">LSSmaster</a></td></tr>
-<tr class="memdesc:ae2897d681afe5bd45db8306b52734318"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSSmaster object from <a class="el" href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
+<tr class="memdesc:ae2897d681afe5bd45db8306b52734318"><td class="mdescLeft">&#160;</td><td class="mdescRight">LSSmaster object from <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
 <tr class="separator:ae2897d681afe5bd45db8306b52734318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae702db8c811f7e85f3fd8984bde8f9d"><td class="memItemLeft" align="right" valign="top"><a id="aae702db8c811f7e85f3fd8984bde8f9d"></a>
 <a class="el" href="unionCO__LSS__address__t.html">CO_LSS_address_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#aae702db8c811f7e85f3fd8984bde8f9d">lssAddress</a></td></tr>
@@ -245,31 +244,32 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a5ce9a4cef511904ad4038c0b1443d3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90ec5c0f770fd1a3ec2ea4f33059357a"><td class="memItemLeft" align="right" valign="top"><a id="a90ec5c0f770fd1a3ec2ea4f33059357a"></a>
 <a class="el" href="structCO__LEDs__t.html">CO_LEDs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCO__GTWA__t.html#a90ec5c0f770fd1a3ec2ea4f33059357a">LEDs</a></td></tr>
-<tr class="memdesc:a90ec5c0f770fd1a3ec2ea4f33059357a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structCO__LEDs__t.html" title="LEDs object, initialized by CO_LEDs_init()">CO_LEDs_t</a> object for CANopen status LEDs imitation from <a class="el" href="group__CO__CANopen__309__3.html#gad13eb098ffb6126f99425104c646e9ad" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
+<tr class="memdesc:a90ec5c0f770fd1a3ec2ea4f33059357a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structCO__LEDs__t.html" title="LEDs object, initialized by CO_LEDs_init()">CO_LEDs_t</a> object for CANopen status LEDs imitation from <a class="el" href="group__CO__CANopen__309__3.html#gabc95dab4fb09bcb18948502f922520ee" title="Initialize Gateway-ascii object.">CO_GTWA_init()</a> <br /></td></tr>
 <tr class="separator:a90ec5c0f770fd1a3ec2ea4f33059357a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>CANopen Gateway-ascii object. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="ad25ec03bf924a158d6c46262eddf6869"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad25ec03bf924a158d6c46262eddf6869">&#9670;&nbsp;</a></span>readCallback</h2>
+<a id="a036c4a3a89b8171baba8039fc50876ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a036c4a3a89b8171baba8039fc50876ba">&#9670;&nbsp;</a></span>readCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* CO_GTWA_t::readCallback) (void *object, const char *buf, size_t count)</td>
+          <td class="memname">size_t(* CO_GTWA_t::readCallback) (void *object, const char *buf, size_t count, <a class="el" href="group__CO__dataTypes.html#gaba7bc1797add20fe3efdf37ced1182c5">uint8_t</a> *connectionOK)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Pointer to external function for reading response from Gateway-ascii object. </p>
-<p>Pointer is initialized in <a class="el" href="group__CO__CANopen__309__3.html#ga70e27b3b469fbb8d26c964bbecc4702c" title="Initialize read callback in Gateway-ascii object.">CO_GTWA_initRead()</a>.</p>
+<p>Pointer is initialized in <a class="el" href="group__CO__CANopen__309__3.html#ga2093c35b83b096e01bd0c65ae9374e30" title="Initialize read callback in Gateway-ascii object.">CO_GTWA_initRead()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">object</td><td>Void pointer to custom object </td></tr>
-    <tr><td class="paramname">buf</td><td>Buffer from which data can be read </td></tr>
-    <tr><td class="paramname">count</td><td>Count of bytes available inside buffer</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">object</td><td>Void pointer to custom object </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">buf</td><td>Buffer from which data can be read </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">count</td><td>Count of bytes available inside buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">connectionOK</td><td>different than 0 indicates connection is OK.</td></tr>
   </table>
   </dd>
 </dl>
@@ -289,8 +289,25 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
       </table>
 </div><div class="memdoc">
 
-<p>If only part of data has been successfully written into external application (with <a class="el" href="structCO__GTWA__t.html#ad25ec03bf924a158d6c46262eddf6869" title="Pointer to external function for reading response from Gateway-ascii object.">readCallback()</a>), then Gateway-ascii object will stay in current state. </p>
+<p>If only part of data has been successfully written into external application (with <a class="el" href="structCO__GTWA__t.html#a036c4a3a89b8171baba8039fc50876ba" title="Pointer to external function for reading response from Gateway-ascii object.">readCallback()</a>), then Gateway-ascii object will stay in current state. </p>
 <p>This situation is indicated with respHold variable and respBufOffset indicates offset to untransferred data inside respBuf. </p>
+
+</div>
+</div>
+<a id="aae981f9a446cfaad8a5450e77adc32ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae981f9a446cfaad8a5450e77adc32ec">&#9670;&nbsp;</a></span>SDOdataCopyStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> CO_GTWA_t::SDOdataCopyStatus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Indicate status of data copy from / to SDO buffer. </p>
+<p>If reading, true indicates, that response has started. If writing, true indicates, that SDO buffer contains only part of data and more data will follow. </p>
 
 </div>
 </div>
@@ -303,7 +320,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structCO__GTWA__t.html">CO_GTWA_t</a></li>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

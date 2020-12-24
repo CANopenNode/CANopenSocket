@@ -9,6 +9,8 @@ var structCO__HBconsNode__t =
     [ "pFunctSignalPre", "structCO__HBconsNode__t.html#a61c753c38666dda8a4d4d870fc593ae5", null ],
     [ "functSignalObjectPre", "structCO__HBconsNode__t.html#afd6a4fcc8bc4cc9c647e9ef3d91b2431", null ],
     [ "NMTstatePrev", "structCO__HBconsNode__t.html#a7fd2636d9f46b7ff47676f716f6f00a4", null ],
+    [ "pFunctSignalNmtChanged", "structCO__HBconsNode__t.html#a3f4ec7dfe9e47a3e7a9bdad382fd7f56", null ],
+    [ "pFunctSignalObjectNmtChanged", "structCO__HBconsNode__t.html#a2a1c5abd88c2ecd451e2a1ca65d3dc93", null ],
     [ "pFunctSignalHbStarted", "structCO__HBconsNode__t.html#ac44d2a232ca2b352fd717ee8e6f28e90", null ],
     [ "functSignalObjectHbStarted", "structCO__HBconsNode__t.html#a50ed8caa11fce685dfbba13d11ada0ef", null ],
     [ "pFunctSignalTimeout", "structCO__HBconsNode__t.html#ab6bbeee344ebd1d657bbabc02f51e597", null ],

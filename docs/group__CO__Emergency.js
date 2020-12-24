@@ -137,5 +137,6 @@ var group__CO__Emergency =
     [ "CO_EM_initCallbackRx", "group__CO__Emergency.html#ga583245c954327c3cf7f9fdb97854e76b", null ],
     [ "CO_EM_process", "group__CO__Emergency.html#ga93ae7be6ef966192f5761ce343345d3b", null ],
     [ "CO_error", "group__CO__Emergency.html#ga9221f9f631ead4b6f66cfcff8614ba46", null ],
-    [ "CO_isError", "group__CO__Emergency.html#ga8e9bae71814a3e7bbd8d59d721174c2b", null ]
+    [ "CO_isError", "group__CO__Emergency.html#ga8e9bae71814a3e7bbd8d59d721174c2b", null ],
+    [ "CO_getErrorRegister", "group__CO__Emergency.html#gaf0c47186d9e51fb91d48385a9f6bad6b", null ]
 ];

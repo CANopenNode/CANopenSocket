@@ -19,7 +19,7 @@ var group__CO__SRDO =
     ] ],
     [ "CO_SRDO_t", "structCO__SRDO__t.html", [
       [ "em", "structCO__SRDO__t.html#a1779ab0170d7b604948a9396681212c8", null ],
-      [ "SDO", "structCO__SRDO__t.html#af7d3f8cb5d1460346a992b445c7c39c2", null ],
+      [ "SDO", "structCO__SRDO__t.html#af8121f4d1f0879eba793afaee5c6c804", null ],
       [ "SRDOGuard", "structCO__SRDO__t.html#ab96c524d0b0243527a6b2d3ee89de302", null ],
       [ "mapPointer", "structCO__SRDO__t.html#a3e7570a1aeef89502702175eccb93500", null ],
       [ "dataLength", "structCO__SRDO__t.html#ae994e87a71e85342f3a5b3c046d8a47f", null ],
@@ -43,9 +43,9 @@ var group__CO__SRDO =
       [ "pFunctSignalPre", "structCO__SRDO__t.html#a5c9c5a746066607b6052c66bcf07190e", null ],
       [ "functSignalObjectPre", "structCO__SRDO__t.html#a5807d03b19a7e2ae7c4250dd4e61f235", null ]
     ] ],
-    [ "CO_SRDOGuard_init", "group__CO__SRDO.html#ga5f4f32fc3e907499ee7c54f16c2019b9", null ],
+    [ "CO_SRDOGuard_init", "group__CO__SRDO.html#gacd578e8a5a4af024f8e6f8aef87cbd14", null ],
     [ "CO_SRDOGuard_process", "group__CO__SRDO.html#ga0201fa4da8b37a18f864a9fd7c826a6c", null ],
-    [ "CO_SRDO_init", "group__CO__SRDO.html#gae2d1180535e9f350d8d9471a6a43d25a", null ],
+    [ "CO_SRDO_init", "group__CO__SRDO.html#ga608e6d48e97f1b4da316b36f10e389c6", null ],
     [ "CO_SRDO_initCallbackPre", "group__CO__SRDO.html#gac066166b35bcb3d0b01adfc0e2eb9bb1", null ],
     [ "CO_SRDO_initCallbackEnterSafeState", "group__CO__SRDO.html#ga5303601f6f94c83530b5e165f54b54bb", null ],
     [ "CO_SRDO_requestSend", "group__CO__SRDO.html#gac9a21725c4bb0373ea18a414019cf339", null ],

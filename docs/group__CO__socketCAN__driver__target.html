@@ -117,18 +117,18 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga885fbec013ab54cbf12458610eaaaf7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__socketCAN__driver__target.html#ga885fbec013ab54cbf12458610eaaaf7f">CO_CANmodule_addInterface</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, const void *CANptr)</td></tr>
-<tr class="memdesc:ga885fbec013ab54cbf12458610eaaaf7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add socketCAN interface to can driver.  <a href="group__CO__socketCAN__driver__target.html#ga885fbec013ab54cbf12458610eaaaf7f">More...</a><br /></td></tr>
-<tr class="separator:ga885fbec013ab54cbf12458610eaaaf7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaffa26125993a7a1f6cbfdb468b59333"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__socketCAN__driver__target.html#gaaffa26125993a7a1f6cbfdb468b59333">CO_CANmodule_addInterface</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, int can_ifindex)</td></tr>
+<tr class="memdesc:gaaffa26125993a7a1f6cbfdb468b59333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add socketCAN interface to can driver.  <a href="group__CO__socketCAN__driver__target.html#gaaffa26125993a7a1f6cbfdb468b59333">More...</a><br /></td></tr>
+<tr class="separator:gaaffa26125993a7a1f6cbfdb468b59333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf266a58e21acf104d9f19cd0da704afe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__socketCAN__driver__target.html#gaf266a58e21acf104d9f19cd0da704afe">CO_CANrxBuffer_getInterface</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> ident, const void **const CANptrRx, struct timespec *timestamp)</td></tr>
 <tr class="memdesc:gaf266a58e21acf104d9f19cd0da704afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check on which interface the last message for one message buffer was received.  <a href="group__CO__socketCAN__driver__target.html#gaf266a58e21acf104d9f19cd0da704afe">More...</a><br /></td></tr>
 <tr class="separator:gaf266a58e21acf104d9f19cd0da704afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d7a8fdf7a2fafd4c6d2f2dd1e1017b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__driver.html#ga1cb2d3466eb0c6d267f3b5ff1a0d9532">CO_ReturnError_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__socketCAN__driver__target.html#ga0d7a8fdf7a2fafd4c6d2f2dd1e1017b0">CO_CANtxBuffer_setInterface</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, <a class="el" href="group__CO__dataTypes.html#ga1f1825b69244eb3ad2c7165ddc99c956">uint16_t</a> ident, const void *CANptrTx)</td></tr>
 <tr class="memdesc:ga0d7a8fdf7a2fafd4c6d2f2dd1e1017b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set which interface should be used for message buffer transmission.  <a href="group__CO__socketCAN__driver__target.html#ga0d7a8fdf7a2fafd4c6d2f2dd1e1017b0">More...</a><br /></td></tr>
 <tr class="separator:ga0d7a8fdf7a2fafd4c6d2f2dd1e1017b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga57af27dfaaec8355e89fef506799a4b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__socketCAN__driver__target.html#ga57af27dfaaec8355e89fef506799a4b9">CO_CANrxWait</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, int fdTimer, CO_CANrxMsg_t *buffer)</td></tr>
-<tr class="memdesc:ga57af27dfaaec8355e89fef506799a4b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions receives CAN messages (blocking)  <a href="group__CO__socketCAN__driver__target.html#ga57af27dfaaec8355e89fef506799a4b9">More...</a><br /></td></tr>
-<tr class="separator:ga57af27dfaaec8355e89fef506799a4b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga072c53260a32d7cd30d9ad1b5bb2c359"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CO__socketCAN__driver__target.html#ga072c53260a32d7cd30d9ad1b5bb2c359">CO_CANrxFromEpoll</a> (<a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *CANmodule, struct epoll_event *ev, CO_CANrxMsg_t *buffer, <a class="el" href="group__CO__dataTypes.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *msgIndex)</td></tr>
+<tr class="memdesc:ga072c53260a32d7cd30d9ad1b5bb2c359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives CAN messages from matching epoll event.  <a href="group__CO__socketCAN__driver__target.html#ga072c53260a32d7cd30d9ad1b5bb2c359">More...</a><br /></td></tr>
+<tr class="separator:ga072c53260a32d7cd30d9ad1b5bb2c359"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Linux socketCAN specific <a class="el" href="group__CO__driver.html">Driver</a> definitions for CANopenNode. </p>
@@ -148,7 +148,7 @@ Functions</h2></td></tr>
 <p>Multi interface support. </p>
 <p>Enable this to use interface combining at driver level. This adds functions to broadcast/selective transmit messages on the given interfaces as well as combining all received message into one queue.</p>
 <p>If CO_DRIVER_MULTI_INTERFACE is set to 0, then <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a> adds single socketCAN interface specified by CANptr argument. In case of failure, <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a> returns CO_ERROR_SYSCALL.</p>
-<p>If CO_DRIVER_MULTI_INTERFACE is set to 1, then <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a> ignores CANptr argument. Interfaces must be added by <a class="el" href="group__CO__socketCAN__driver__target.html#ga885fbec013ab54cbf12458610eaaaf7f" title="Add socketCAN interface to can driver.">CO_CANmodule_addInterface()</a> function after <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a>.</p>
+<p>If CO_DRIVER_MULTI_INTERFACE is set to 1, then <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a> ignores CANptr argument. Interfaces must be added by <a class="el" href="group__CO__socketCAN__driver__target.html#gaaffa26125993a7a1f6cbfdb468b59333" title="Add socketCAN interface to can driver.">CO_CANmodule_addInterface()</a> function after <a class="el" href="group__CO__driver.html#ga3a1131813110529494cee5e27c0bf28d" title="Initialize CAN module object.">CO_CANmodule_init()</a>.</p>
 <p>Macro is set to 0 (disabled) by default. It can be overridden.</p>
 <p>This is not intended to realize interface redundancy!!! </p>
 
@@ -175,8 +175,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga885fbec013ab54cbf12458610eaaaf7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga885fbec013ab54cbf12458610eaaaf7f">&#9670;&nbsp;</a></span>CO_CANmodule_addInterface()</h2>
+<a id="gaaffa26125993a7a1f6cbfdb468b59333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaffa26125993a7a1f6cbfdb468b59333">&#9670;&nbsp;</a></span>CO_CANmodule_addInterface()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,8 +190,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>CANptr</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>can_ifindex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -206,7 +206,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">CANmodule</td><td>This object will be initialized. </td></tr>
-    <tr><td class="paramname">CANptr</td><td>CAN module interface index (return value if_nametoindex(), NO pointer!). </td></tr>
+    <tr><td class="paramname">can_ifindex</td><td>CAN Interface index </td></tr>
   </table>
   </dd>
 </dl>
@@ -320,14 +320,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga57af27dfaaec8355e89fef506799a4b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga57af27dfaaec8355e89fef506799a4b9">&#9670;&nbsp;</a></span>CO_CANrxWait()</h2>
+<a id="ga072c53260a32d7cd30d9ad1b5bb2c359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga072c53260a32d7cd30d9ad1b5bb2c359">&#9670;&nbsp;</a></span>CO_CANrxFromEpoll()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__CO__dataTypes.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> CO_CANrxWait </td>
+          <td class="memname"><a class="el" href="group__CO__dataTypes.html#ga449976458a084f880dc8e3d29e7eb6f5">bool_t</a> CO_CANrxFromEpoll </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structCO__CANmodule__t.html">CO_CANmodule_t</a> *&#160;</td>
           <td class="paramname"><em>CANmodule</em>, </td>
@@ -335,14 +335,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>fdTimer</em>, </td>
+          <td class="paramtype">struct epoll_event *&#160;</td>
+          <td class="paramname"><em>ev</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">CO_CANrxMsg_t *&#160;</td>
-          <td class="paramname"><em>buffer</em>&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CO__dataTypes.html#gadb828ef50c2dbb783109824e94cf6c47">int32_t</a> *&#160;</td>
+          <td class="paramname"><em>msgIndex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -352,8 +358,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Functions receives CAN messages (blocking) </p>
-<p>This function waits for received CAN message, CAN error frame, notification event or fdTimer expiration. In case of CAN message it searches <em>rxArray</em> from* <a class="el" href="structCO__CANmodule__t.html" title="Complete CAN module object.">CO_CANmodule_t</a> and if matched it calls the corresponding CANrx_callback, optionally copies received CAN message to <em>buffer</em> and returns index of matched <em>rxArray</em>.</p>
+<p>Receives CAN messages from matching epoll event. </p>
+<p>This function verifies, if epoll event matches event from any CANinterface. In case of match, message is read from CAN and pre-processed for CANopenNode objects. CAN error frames are also processed.</p>
+<p>In case of CAN message function searches <em>rxArray</em> from <a class="el" href="structCO__CANmodule__t.html" title="Complete CAN module object.">CO_CANmodule_t</a> and if matched it calls the corresponding CANrx_callback, optionally copies received CAN message to <em>buffer</em> and returns index of matched <em>rxArray</em>.</p>
 <p>This function can be used in two ways, which can be combined:</p><ul>
 <li>automatic mode: If CANrx_callback is specified for matched <em>rxArray</em>, then calls its callback.</li>
 <li>manual mode: evaluate message filters, return received message</li>
@@ -361,18 +368,13 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir"></td><td class="paramname">CANmodule</td><td>This object. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">fdTimer</td><td>File descriptor with activated timeout. If set to -1, then timer will not be used. File descriptor must be read externally if retval == -1! Read must be nonblocking and provides number of timer expirations since last read. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ev</td><td>Epoll event, which vill be verified for matches. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">buffer</td><td>Storage for received message or <em>NULL</em> if not used. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">msgIndex</td><td>Index of received message in array from <a class="el" href="structCO__CANmodule__t.html" title="Complete CAN module object.">CO_CANmodule_t</a> <em>rxArray</em>, copy of CAN message is available in <em>buffer</em>.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">&gt;=</td><td>0 index of received message in array from <a class="el" href="structCO__CANmodule__t.html" title="Complete CAN module object.">CO_CANmodule_t</a> <em>rxArray</em>, copy of CAN message is available in <em>buffer</em>. </td></tr>
-    <tr><td class="paramname">-1</td><td>no message received (timer expired or notification event or error) </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>True, if epoll event matches any CAN interface. </dd></dl>
 
 </div>
 </div>
@@ -381,7 +383,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:21 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

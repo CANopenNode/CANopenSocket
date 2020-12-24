@@ -151,7 +151,7 @@ Macros</h2></td></tr>
 <li>CO_CONFIG_EM_PROD_CONFIGURABLE - Emergency producer COB-ID is configurable, OD object 0x1014. If not configurable, then 0x1014 is read-only, COB_ID is set to CO_CAN_ID_EMERGENCY + nodeId and write is not verified.</li>
 <li>CO_CONFIG_EM_PROD_INHIBIT - Enable inhibit timer on emergency producer, OD object 0x1015.</li>
 <li>CO_CONFIG_EM_HISTORY - Enable error history, OD object 0x1003, "Pre-defined error field"</li>
-<li>CO_CONFIG_EM_CONSUMER - Enable emergency consumer.</li>
+<li>CO_CONFIG_EM_CONSUMER - Enable simple emergency consumer with callback.</li>
 <li>CO_CONFIG_EM_STATUS_BITS - Access <a class="el" href="group__CO__Emergency.html#ga587034df9d350c8e121c253f1d4eeacc">CO_EM_errorStatusBits_t</a> from OD.</li>
 <li><a class="el" href="group__CO__STACK__CONFIG__COMMON.html#gab55099df45bed12f182ef7c0c779dc14" title="Enable custom callback after CAN receive.">CO_CONFIG_FLAG_CALLBACK_PRE</a> - Enable custom callback after preprocessing emergency condition by <a class="el" href="group__CO__Emergency.html#gab66d4a6daa5f7492704b56a46b135f71" title="Report error condition, for description of parameters see CO_error.">CO_errorReport()</a> or <a class="el" href="group__CO__Emergency.html#ga24e2a9311cf704ec6ed43b0ea730c4a3" title="Reset error condition, for description of parameters see CO_error.">CO_errorReset()</a> call. Callback is configured by <a class="el" href="group__CO__Emergency.html#ga94efd78032de3667e2a89780b08aabed" title="Initialize Emergency callback function.">CO_EM_initCallbackPre()</a>.</li>
 <li><a class="el" href="group__CO__STACK__CONFIG__COMMON.html#ga9e84c3a9256f15246be7766a61096c2d" title="Enable calculation of timerNext_us variable.">CO_CONFIG_FLAG_TIMERNEXT</a> - Enable calculation of timerNext_us variable inside <a class="el" href="group__CO__Emergency.html#ga93ae7be6ef966192f5761ce343345d3b" title="Process Error control and Emergency object.">CO_EM_process()</a>. </li>
@@ -323,7 +323,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Sep 19 2020 10:03:20 for CANopenNode by
+    <li class="footer">Generated on Thu Dec 24 2020 14:30:50 for CANopenNode by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
