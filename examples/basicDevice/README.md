@@ -195,7 +195,7 @@ Domain enables transfer an arbitrary large block of data in one SDO communicatio
 
 See `testingVariables.c` file for implementation of large data transfer. Our `basicDevice` reads data from file, referenced by Object 0x2120, sub index 11. This is a text file in the same directory as our `basicDevice`. We can safely read the file as visible string. If necessary, transfer can be interrupted by `Ctrl+C`. SDO communication will be closed correctly by abort message.
 
-    /cocomm "set sdo_block 1"
+    ./cocomm "set sdo_block 1"
     [1] OK
 
     ./cocomm "4 r 0x2120 11 vs"
@@ -336,11 +336,11 @@ BasicDevice example uses simple `Makefile` to properly compile necessary source 
 
 Directory basicDevice contains softlink `CANopenNode -> ../../CANopenNode/`. This usually works well in Linux ...
 
-### Create project with KDevelop
+### Create project with [KDevelop](https://www.kdevelop.org/)
 - `sudo apt install kdevelop breeze`
-- Run [KDevelop](https://www.kdevelop.org/), select: Project -> open project
+- Run KDevelop, select: Project -> open project
 - Navigate to directory `examples/basicDevice` and click open.
-- KDevelop will recognize `Makefale` and will just use it. Click Finish.
+- KDevelop will recognize `Makefile` and will just use it. Click Finish.
 - Open project settings (right click on project on left panel)
   - Make: set to 1 thread operation.
   - Language support, Includes, add paths to directories:
@@ -354,4 +354,4 @@ Directory basicDevice contains softlink `CANopenNode -> ../../CANopenNode/`. Thi
   - Name it `basicDevice_i4_vcan0`, for example.
   - Executable file: `examples/basicDevice/basicDevice`
   - Arguments: `-i 4 vcan0`
-  - Execute or Debug
+- Build, then Execute or Debug
