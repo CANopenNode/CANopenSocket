@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--File is generated with libedssharp Object Dictionary Editor v0.8-109-gb3f85db, URL: https://github.com/robincornelius/libedssharp-->
+<!--File is generated with libedssharp Object Dictionary Editor v0.8-116-g3349c4d, URL: https://github.com/robincornelius/libedssharp-->
 <!--File includes additional custom properties for CANopenNode, CANopen protocol stack, URL: https://github.com/CANopenNode/CANopenNode-->
 <ISO15745ProfileContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.canopen.org/xml/1.1">
   <ISO15745Profile>
@@ -15,7 +15,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModifiedBy="Janez Paternoster" fileModificationDate="2020-12-23" fileModificationTime="12:22:00.6485240+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModifiedBy="Janez Paternoster" fileModificationDate="2021-02-01" fileModificationTime="15:30:19.4193280+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
       <q1:DeviceIdentity>
         <q1:vendorName></q1:vendorName>
         <q1:vendorID></q1:vendorID>
@@ -52,11 +52,11 @@
             <UDINT />
           </q1:array>
           <q1:array name="Store parameters" uniqueID="UID_ARR_1010">
-            <q1:subrange lowerLimit="0" upperLimit="4" />
+            <q1:subrange lowerLimit="0" upperLimit="6" />
             <UDINT />
           </q1:array>
           <q1:array name="Restore default parameters" uniqueID="UID_ARR_1011">
-            <q1:subrange lowerLimit="0" upperLimit="4" />
+            <q1:subrange lowerLimit="0" upperLimit="6" />
             <UDINT />
           </q1:array>
           <q1:array name="Consumer heartbeat time" uniqueID="UID_ARR_1016">
@@ -582,7 +582,6 @@
   * bit 16-31: Manufacturer specific additional information
   * bit 0-15: Error code as transmited in the Emergency object</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_1003" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_100300" access="readWrite">
             <label lang="en">Number of errors</label>
@@ -638,7 +637,6 @@
             <q1:defaultValue value="0x00000080" />
             <q1:property name="CO_countLabel" value="SYNC" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1006" access="readWrite">
             <description lang="en">Period of SYNC transmission in µs (0 = transmission disabled).</description>
@@ -646,33 +644,31 @@
             <q1:defaultValue value="0" />
             <q1:property name="CO_countLabel" value="SYNC_PROD" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1007" access="readWrite">
             <description lang="en">Synchronous window leghth in µs (0 = not used). All synchronous PDOs must be transmitted within this time window.</description>
             <UDINT />
             <q1:defaultValue value="0" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1010">
             <description lang="en">Sub-indexes 1 and above:
 * Reading provides information about its storage functionality:
-  * bit 1: If set, CANopen device saves parameters autonomously
   * bit 0: If set, CANopen device saves parameters on command
+  * bit 1: If set, CANopen device saves parameters autonomously
 * Writing value 0x65766173 ('s','a','v','e' from LSB to MSB) stores corresponding data.</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_1010" />
-            <q1:property name="CO_extensionIO" value="true" />
+            <q1:property name="CO_countLabel" value="STORAGE" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101000">
             <label lang="en">Highest sub-index supported</label>
             <USINT />
-            <q1:defaultValue value="0x04" />
+            <q1:defaultValue value="0x06" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101001" access="readWrite">
             <label lang="en">Save all parameters</label>
             <UDINT />
-            <q1:defaultValue value="0x00000001" />
+            <q1:defaultValue value="0x00000003" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101002" access="readWrite">
             <label lang="en">Save communication parameters</label>
@@ -685,9 +681,19 @@
             <q1:defaultValue value="0x00000001" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101004" access="readWrite">
-            <label lang="en">Save manufacturer defined parameters</label>
+            <label lang="en">Save LSS parameters</label>
+            <UDINT />
+            <q1:defaultValue value="0x00000003" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_101005" access="readWrite">
+            <label lang="en">Save testing parameters</label>
             <UDINT />
             <q1:defaultValue value="0x00000001" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_101006" access="readWrite">
+            <label lang="en">Save testing auto-store parameters</label>
+            <UDINT />
+            <q1:defaultValue value="0x00000003" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1011">
             <description lang="en">Sub-indexes 1 and above:
@@ -695,12 +701,11 @@
   * bit 0: If set, CANopen device restores parameters
 * Writing value 0x64616F6C ('l','o','a','d' from LSB to MSB) restores corresponding data.</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_1011" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101100">
             <label lang="en">Highest sub-index supported</label>
             <USINT />
-            <q1:defaultValue value="0x04" />
+            <q1:defaultValue value="0x06" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101101" access="readWrite">
             <label lang="en">Restore all default parameters</label>
@@ -718,7 +723,17 @@
             <q1:defaultValue value="0x00000001" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101104" access="readWrite">
-            <label lang="en">Restore manufacturer defined default parameters</label>
+            <label lang="en">Restore LSS default parameters</label>
+            <UDINT />
+            <q1:defaultValue value="0x00000001" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_101105" access="readWrite">
+            <label lang="en">Restore testing default parameters</label>
+            <UDINT />
+            <q1:defaultValue value="0x00000001" />
+          </q1:parameter>
+          <q1:parameter uniqueID="UID_SUB_101106" access="readWrite">
+            <label lang="en">Restore testing auto-store default parameters</label>
             <UDINT />
             <q1:defaultValue value="0x00000001" />
           </q1:parameter>
@@ -731,7 +746,6 @@
             <q1:defaultValue value="0x00000100" />
             <q1:property name="CO_countLabel" value="TIME" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1014" access="readWrite">
             <description lang="en">* bit 31: If set, EMCY does NOT exist / is NOT valid
@@ -741,14 +755,12 @@
             <q1:defaultValue value="0x80+$NODEID" />
             <q1:property name="CO_countLabel" value="EM_PROD" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1015" access="readWrite">
             <description lang="en">Inhibit time of emergency message in multiples of 100µs. The value 0 disables the inhibit time.</description>
             <UINT />
             <q1:defaultValue value="0" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1016">
             <description lang="en">Consumer Heartbeat Time:
@@ -758,7 +770,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_1016" />
             <q1:property name="CO_countLabel" value="HB_CONS" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_101600">
             <label lang="en">Highest sub-index supported</label>
@@ -811,7 +822,6 @@
             <q1:defaultValue value="0" />
             <q1:property name="CO_countLabel" value="HB_PROD" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_1018">
             <description lang="en">* Vendor-ID, assigned by CiA
@@ -863,7 +873,6 @@
 * bit 0-10: 11-bit CAN-ID</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1200" />
             <q1:property name="CO_countLabel" value="SDO_SRV" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_120000">
             <label lang="en">Highest sub-index supported</label>
@@ -890,7 +899,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1280" />
             <q1:property name="CO_countLabel" value="SDO_CLI" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_128000">
             <label lang="en">Highest sub-index supported</label>
@@ -926,7 +934,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1400" />
             <q1:property name="CO_countLabel" value="RPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_140000">
             <label lang="en">Highest sub-index supported</label>
@@ -962,7 +969,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1401" />
             <q1:property name="CO_countLabel" value="RPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_140100">
             <label lang="en">Highest sub-index supported</label>
@@ -998,7 +1004,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1402" />
             <q1:property name="CO_countLabel" value="RPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_140200">
             <label lang="en">Highest sub-index supported</label>
@@ -1034,7 +1039,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1403" />
             <q1:property name="CO_countLabel" value="RPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_140300">
             <label lang="en">Highest sub-index supported</label>
@@ -1067,7 +1071,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1600" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160000" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1125,7 +1128,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1601" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160100" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1183,7 +1185,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1602" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160200" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1241,7 +1242,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1603" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160300" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1308,7 +1308,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1800" />
             <q1:property name="CO_countLabel" value="TPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180000">
             <label lang="en">Highest sub-index supported</label>
@@ -1360,7 +1359,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1801" />
             <q1:property name="CO_countLabel" value="TPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180100">
             <label lang="en">Highest sub-index supported</label>
@@ -1412,7 +1410,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1802" />
             <q1:property name="CO_countLabel" value="TPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180200">
             <label lang="en">Highest sub-index supported</label>
@@ -1464,7 +1461,6 @@
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1803" />
             <q1:property name="CO_countLabel" value="TPDO" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_180300">
             <label lang="en">Highest sub-index supported</label>
@@ -1507,7 +1503,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1A00" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_1A0000" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1565,7 +1560,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1A01" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_1A0100" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1623,7 +1617,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1A02" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_1A0200" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1681,7 +1674,6 @@
   * bit 0-7: data length in bits</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_1A03" />
             <q1:property name="CO_storageGroup" value="PERSIST_COMM" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_1A0300" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
@@ -1732,12 +1724,10 @@
             <description lang="en">Error Status Bits indicates internal error conditions inside stack or inside application. For details see CO_EM_errorStatusBits_t in CO_Emergency.h file or in https://canopennode.github.io/CANopenSocket/group__CO__Emergency.html</description>
             <BITSTRING />
             <q1:defaultValue value="00 00 00 00 00 00 00 00 00 00" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_2105">
             <label lang="en">Version</label>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_2105" />
-            <q1:property name="CO_extensionIO" value="true" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_210500">
             <label lang="en">Highest sub-index supported</label>
@@ -1756,7 +1746,7 @@
             <description lang="en">Power on Counter counts total microcontroller resets in it's lifetime. Variable is an example of EEPROM usage.</description>
             <UDINT />
             <q1:defaultValue value="0" />
-            <q1:property name="CO_storageGroup" value="PERSIST_APP_AUTO" />
+            <q1:property name="CO_storageGroup" value="PERSIST_TEST_AUTO" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_OBJ_2110">
             <description lang="en">Vartiable is free to use by application.</description>
@@ -1851,7 +1841,7 @@
           <q1:parameter uniqueID="UID_OBJ_2111">
             <description lang="en">Vartiable is free to use by application. Variables can be saved on command.</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_2111" />
-            <q1:property name="CO_storageGroup" value="PERSIST_APP" />
+            <q1:property name="CO_storageGroup" value="PERSIST_TEST" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_211100">
             <label lang="en">Highest sub-index supported</label>
@@ -1941,7 +1931,7 @@
           <q1:parameter uniqueID="UID_OBJ_2112">
             <description lang="en">Vartiable is free to use by application. Variable is automatically saved.</description>
             <q1:dataTypeIDRef uniqueIDRef="UID_ARR_2112" />
-            <q1:property name="CO_storageGroup" value="PERSIST_APP_AUTO" />
+            <q1:property name="CO_storageGroup" value="PERSIST_TEST_AUTO" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_211200">
             <label lang="en">Highest sub-index supported</label>
@@ -2031,8 +2021,7 @@
           <q1:parameter uniqueID="UID_OBJ_2120">
             <label lang="en">Testing variables</label>
             <q1:dataTypeIDRef uniqueIDRef="UID_REC_2120" />
-            <q1:property name="CO_storageGroup" value="PERSIST_APP" />
-            <q1:property name="CO_extensionIO" value="true" />
+            <q1:property name="CO_storageGroup" value="PERSIST_TEST" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_212000">
             <label lang="en">Highest sub-index supported</label>
@@ -2356,7 +2345,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModificationDate="2020-12-23" fileModificationTime="12:22:00.6485240+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModificationDate="2021-02-01" fileModificationTime="15:30:19.4193280+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
       <ApplicationLayers>
         <q2:CANopenObjectList>
           <CANopenObject index="1000" name="Device type" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1000" />
@@ -2375,19 +2364,23 @@
           <CANopenObject index="1005" name="COB-ID SYNC message" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1005" />
           <CANopenObject index="1006" name="Communication cycle period" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1006" />
           <CANopenObject index="1007" name="Synchronous window length" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1007" />
-          <CANopenObject index="1010" name="Store parameters" objectType="8" uniqueIDRef="UID_OBJ_1010" subNumber="5">
+          <CANopenObject index="1010" name="Store parameters" objectType="8" uniqueIDRef="UID_OBJ_1010" subNumber="7">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101000" />
             <CANopenSubObject subIndex="01" name="Save all parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101001" />
             <CANopenSubObject subIndex="02" name="Save communication parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101002" />
             <CANopenSubObject subIndex="03" name="Save application parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101003" />
-            <CANopenSubObject subIndex="04" name="Save manufacturer defined parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101004" />
+            <CANopenSubObject subIndex="04" name="Save LSS parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101004" />
+            <CANopenSubObject subIndex="05" name="Save testing parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101005" />
+            <CANopenSubObject subIndex="06" name="Save testing auto-store parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101006" />
           </CANopenObject>
-          <CANopenObject index="1011" name="Restore default parameters" objectType="8" uniqueIDRef="UID_OBJ_1011" subNumber="5">
+          <CANopenObject index="1011" name="Restore default parameters" objectType="8" uniqueIDRef="UID_OBJ_1011" subNumber="7">
             <CANopenSubObject subIndex="00" name="Highest sub-index supported" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101100" />
             <CANopenSubObject subIndex="01" name="Restore all default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101101" />
             <CANopenSubObject subIndex="02" name="Restore communication default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101102" />
             <CANopenSubObject subIndex="03" name="Restore application default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101103" />
-            <CANopenSubObject subIndex="04" name="Restore manufacturer defined default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101104" />
+            <CANopenSubObject subIndex="04" name="Restore LSS default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101104" />
+            <CANopenSubObject subIndex="05" name="Restore testing default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101105" />
+            <CANopenSubObject subIndex="06" name="Restore testing auto-store default parameters" objectType="7" PDOmapping="no" uniqueIDRef="UID_SUB_101106" />
           </CANopenObject>
           <CANopenObject index="1012" name="COB-ID time stamp object" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1012" />
           <CANopenObject index="1014" name="COB-ID EMCY" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1014" />

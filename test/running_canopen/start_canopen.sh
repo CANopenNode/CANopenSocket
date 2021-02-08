@@ -1,14 +1,20 @@
 #!/bin/bash
 
-export can_device=can_test
-export cleanup=tmp/stop_canopen.sh
-
-# if first argument is not specified, run all four CANopen devices
-if [ -z "$1" ] ; then
-    export mask=1234
+if [[ $1 = "" ]] ; then
+    echo "Usage: $0 <CAN device>"
+    exit
 else
-    export mask=$1
+    export can_device=$1
 fi
+
+if [[ $co_device_1 = "" ]] ; then
+    export co_device_1="../../CANopenNode/canopend"
+fi
+if [[ $co_device_4 = "" ]] ; then
+    export co_device_4="../../examples/basicDevice/basicDevice"
+fi
+
+export cleanup=tmp/stop_canopen.sh
 
 # if "can_device" does not exist, create virtual CAN device
 if ! grep -q $can_device /proc/net/can/rcvlist_all ; then
@@ -21,33 +27,29 @@ fi
 # prepare files for storage
 mkdir tmp
 
-echo "Starting several CANopen devices on '$can_device' in backgroud..."
-
-# prepare stop script and run up to four CANopen devices in background
+# prepare stop script and run CANopen devices in background
 echo "#!/bin/bash" > $cleanup
 chmod a+x $cleanup
 
-if [[ "$mask" =~ "1" ]] ; then
-    ./canopend $can_device -i 1 -c "local-/tmp/CO_command_socket_test"&
-    echo kill $! >> $cleanup
-    sleep 0.1
-fi
-if [[ "$mask" =~ "2" ]] ; then
-    ./canopend $can_device -i 4 &
-    echo kill $! >> $cleanup
-    sleep 0.1
-fi
-if [[ "$mask" =~ "3" ]] ; then
-    ./canopend $can_device -i 99 &
-    echo kill $! >> $cleanup
-    sleep 0.1
-fi
-if [[ "$mask" =~ "4" ]] ; then
-    ./canopend $can_device -i 127 &
-    echo kill $! >> $cleanup
-    sleep 0.1
-fi
+echo "Running in background: '$co_device_1 $can_device -i 1 -s \"tmp/dev1_\" -c \"local-/tmp/CO_command_socket\"'"
+echo "-" > tmp/dev1_lss.persist
+echo "-" > tmp/dev1_od_comm.persist
+$co_device_1 $can_device -i 1 -s "tmp/dev1_" -c "local-/tmp/CO_command_socket"&
+echo kill $! >> $cleanup
+sleep 0.1
+echo
+
+echo "Running in background: '$co_device_4 $can_device -i 4 -s \"tmp/dev4_\"'"
+echo "-" > tmp/dev4_lss.persist
+echo "-" > tmp/dev4_od_comm.persist
+echo "-" > tmp/dev4_od_test_auto.persist
+echo "-" > tmp/dev4_od_test.persist
+$co_device_4 $can_device -i 4 -s "tmp/dev4_"&
+echo kill $! >> $cleanup
+sleep 0.1
+echo
 
 echo "rm -r tmp" >> $cleanup
 
-echo -e "\nrun '$cleanup' for cleanup.\n"
+echo "For cleanup run: $cleanup"
+echo

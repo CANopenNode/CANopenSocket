@@ -8,8 +8,8 @@ Description=Basic CANopen device with example usage.
 CreationTime=12:37PM
 CreationDate=11-28-2020
 CreatedBy=Janez Paternoster
-ModificationTime=12:22PM
-ModificationDate=12-23-2020
+ModificationTime=3:30PM
+ModificationDate=02-01-2021
 ModifiedBy=Janez Paternoster
 
 [DeviceInfo]
@@ -278,7 +278,7 @@ PDOMapping=0
 ParameterName=Store parameters
 ObjectType=0x8
 ;StorageLocation=RAM
-SubNumber=0x5
+SubNumber=0x7
 
 [1010sub0]
 ParameterName=Highest sub-index supported
@@ -286,7 +286,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=ro
-DefaultValue=0x04
+DefaultValue=0x06
 PDOMapping=0
 
 [1010sub1]
@@ -295,7 +295,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000001
+DefaultValue=0x00000003
 PDOMapping=0
 
 [1010sub2]
@@ -317,7 +317,16 @@ DefaultValue=0x00000001
 PDOMapping=0
 
 [1010sub4]
-ParameterName=Save manufacturer defined parameters
+ParameterName=Save LSS parameters
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x00000003
+PDOMapping=0
+
+[1010sub5]
+ParameterName=Save testing parameters
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -325,11 +334,20 @@ AccessType=rw
 DefaultValue=0x00000001
 PDOMapping=0
 
+[1010sub6]
+ParameterName=Save testing auto-store parameters
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x00000003
+PDOMapping=0
+
 [1011]
 ParameterName=Restore default parameters
 ObjectType=0x8
 ;StorageLocation=RAM
-SubNumber=0x5
+SubNumber=0x7
 
 [1011sub0]
 ParameterName=Highest sub-index supported
@@ -337,7 +355,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=ro
-DefaultValue=0x04
+DefaultValue=0x06
 PDOMapping=0
 
 [1011sub1]
@@ -368,7 +386,25 @@ DefaultValue=0x00000001
 PDOMapping=0
 
 [1011sub4]
-ParameterName=Restore manufacturer defined default parameters
+ParameterName=Restore LSS default parameters
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x00000001
+PDOMapping=0
+
+[1011sub5]
+ParameterName=Restore testing default parameters
+ObjectType=0x7
+;StorageLocation=RAM
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x00000001
+PDOMapping=0
+
+[1011sub6]
+ParameterName=Restore testing auto-store default parameters
 ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
@@ -2162,7 +2198,7 @@ PDOMapping=0
 [2106]
 ParameterName=Power-on counter
 ObjectType=0x7
-;StorageLocation=PERSIST_APP_AUTO
+;StorageLocation=PERSIST_TEST_AUTO
 DataType=0x0007
 AccessType=ro
 DefaultValue=0
@@ -2330,7 +2366,7 @@ PDOMapping=1
 [2111]
 ParameterName=Variable Int32 save
 ObjectType=0x8
-;StorageLocation=PERSIST_APP
+;StorageLocation=PERSIST_TEST
 SubNumber=0x11
 
 [2111sub0]
@@ -2489,7 +2525,7 @@ PDOMapping=0
 [2112]
 ParameterName=Variable NV Int32 auto save
 ObjectType=0x8
-;StorageLocation=PERSIST_APP_AUTO
+;StorageLocation=PERSIST_TEST_AUTO
 SubNumber=0x11
 
 [2112sub0]
@@ -2648,7 +2684,7 @@ PDOMapping=0
 [2120]
 ParameterName=Testing variables
 ObjectType=0x9
-;StorageLocation=PERSIST_APP
+;StorageLocation=PERSIST_TEST
 SubNumber=0xD
 
 [2120sub0]

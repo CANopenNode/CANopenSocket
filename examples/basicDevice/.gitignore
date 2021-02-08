@@ -1,3 +1,5 @@
 /basicDevice
 /basicDeviceWithGateway
 CO_version.h
+*.persist
+*.persist.old

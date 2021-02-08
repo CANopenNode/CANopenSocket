@@ -71,8 +71,9 @@ fprintf(errStream,
 "                   'export cocomm_port=<port>'. Default is 60000.\n"
 "  -i               If set, then standard input will be read after each command\n"
 "                   string from arguments. Useful with write commands.\n"
-"  -o               If set, then all response will be written non-colored to\n"
-"                   standard output. Set also with 'export cocomm_flat=<0|1>'.\n"
+"  -o all|data|flat By defult (setting 'all') outupt is split to colored stderr\n"
+"                   and stdout. 'data' prints data only to stdout. 'flat' prints\n"
+"                   all to stdout, set also with 'export cocomm_flat=<0|1>'.\n"
 "  -d <can device>  If specified, then candump of specified CAN device will be\n"
 "                   printed after the command response. Set also with\n"
 "                   'export cocomm_candump=<can device>'. Not used by default.\n"
@@ -201,10 +202,7 @@ static int printReply(int fd_gtw) {
 /******************************************************************************/
 int main (int argc, char *argv[]) {
     /* configurable options */
-    greenC = "\033[32m";
-    redC = "\033[31m";
-    resetC = "\033[0m";
-    errStream = stderr;
+    enum {out_all, out_data, out_flat} outputType = out_all;
     char *inputFilePath = NULL;
     char *socketPath = "/tmp/CO_command_socket"; /* Name of the local domain socket */
     char hostname[HOST_NAME_MAX]; /* name of the remote TCP host */
@@ -241,8 +239,7 @@ int main (int argc, char *argv[]) {
     }
     if ((env = getenv("cocomm_flat")) != NULL) {
         if (strcmp(env, "1") == 0) {
-            greenC = redC = resetC = "";
-            errStream = stdout;
+            outputType = out_flat;
         }
     }
     if ((env = getenv("cocomm_candump")) != NULL) {
@@ -256,7 +253,7 @@ int main (int argc, char *argv[]) {
     }
 
     /* Get program options from arguments */
-    while((opt = getopt(argc, argv, "f:s:t:p:iod:n:T:")) != -1) {
+    while((opt = getopt(argc, argv, "f:s:t:p:io:d:n:T:")) != -1) {
         switch (opt) {
             case 'f':
                 inputFilePath = optarg;
@@ -276,8 +273,10 @@ int main (int argc, char *argv[]) {
                 additionalReadStdin = 1;
                 break;
             case 'o':
-                greenC = redC = resetC = "";
-                errStream = stdout;
+                if (strcmp(optarg, "data") == 0)
+                    outputType = out_data;
+                else if (strcmp(optarg, "flat") == 0)
+                    outputType = out_flat;
                 break;
             case 'd':
                 candump = optarg;
@@ -292,6 +291,24 @@ int main (int argc, char *argv[]) {
                 printUsage(argv[0]);
                 exit(EXIT_FAILURE);
         }
+    }
+
+    switch (outputType) {
+        default:
+        case out_all:
+            greenC = "\033[32m";
+            redC = "\033[31m";
+            resetC = "\033[0m";
+            errStream = stderr;
+            break;
+        case out_data:
+            greenC = redC = resetC = "";
+            errStream = fopen("/dev/null", "w+");
+            break;
+        case out_flat:
+            greenC = redC = resetC = "";
+            errStream = stdout;
+            break;
     }
 
     /* Ignore the SIGPIPE signal, which may happen, if gateway broke
@@ -511,7 +528,7 @@ int main (int argc, char *argv[]) {
     free(commBuf);
 
     /* candump output */
-    if (ret == EXIT_SUCCESS && candumpCount > 0) {
+    if (candumpCount > 0) {
         for (int i = 0; i < candumpCount; i++) {
             const char hex_asc[] = "0123456789ABCDEF";
             struct can_frame canFrame;

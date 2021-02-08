@@ -116,7 +116,7 @@ It is very similar as in `CANopenNode/doc/gettingStarted.md`, but actually easie
 
 Parameters to program can be set by program arguments, as described in `cocomm --help`, and can also be changed by environmental variables. For example, to change default socket path in for all next `cocomm` commands in current terminal, type:
 
-    export cocomm_socket=/tmp/CO_command_socket_test
+    export cocomm_socket="some other path than /tmp/CO_command_socket"
 
 Commands can be also written into a file, for example create a `commands.txt` file, and for its content enter the commands:
 
@@ -169,6 +169,9 @@ Type commands and see responses in `cocomm` terminal. Optionally watch CAN commu
     ./cocomm "4 r 0x2120 7 os" | base64 -d
     [1]
     Writing newLines is not possible as visible string, but exotic "ß" characters works.
+
+    ./cocomm "4 r 0x2120 7 os" | base64 -d | hexdump -C
+    [1]...
 
     echo -ne "We can encode anything to base64\n\nand transfer data as octet string or domain." | base64 -w0 | ./cocomm -i "4 w 0x2120 7 os"
     [1] OK
@@ -333,8 +336,6 @@ Here is experimental candump output with two independent pairs of `canopend-basi
 Create project in your favourite IDE
 ------------------------------------
 BasicDevice example uses simple `Makefile` to properly compile necessary source files and set correct compile options. This file can be examined, to see, how to configure project files for your favourite IDE. There is also `gateway.Makefile`, which compiles the project with included gateway objects, similar as `canopend`.
-
-Directory basicDevice contains softlink `CANopenNode -> ../../CANopenNode/`. This usually works well in Linux ...
 
 ### Create project with [KDevelop](https://www.kdevelop.org/)
 - `sudo apt install kdevelop breeze`

@@ -39,12 +39,12 @@
  *
  * @param CANopenConfigured True, if CANopen Node-Id is known and all CANopen
  * objects are configured.
- * @param [out] errinfo Variable may indicate additional information for some
+ * @param [out] errInfo Variable may indicate additional information for some
  * types of errors.
  *
  * @return @ref CO_ReturnError_t CO_ERROR_NO in case of success.
  */
-CO_ReturnError_t app_programStart(bool_t CANopenConfigured, uint16_t *errinfo);
+CO_ReturnError_t app_programStart(bool_t CANopenConfigured, uint32_t *errInfo);
 
 
 /**

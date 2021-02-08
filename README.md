@@ -23,6 +23,7 @@ Update the project:
     cd CANopenSocket
     # make sure, project is clean (git status); changes should be committed (git gui)
     git pull # or: git fetch -> gitk --all (inspect the changes) -> git merge
+    # git submodule init # if new git modules
     git submodule update
 
 Get/update other tools (EDSeditor):
@@ -50,7 +51,7 @@ CANopenSocket contents
    - **EDSEditor** - Object Dictionary Editor from https://github.com/robincornelius/libedssharp. Updated with `get_tools.sh`.
    - **get_tools.sh** - script for getting/updating the tools.
    - **update_docs.sh** - script runs doxygen on CANopenNode and creates softlink index.html.
-   - **vcan0_candump.sh** - script creates virtual CAN device `vcan0` and runs `candump` on it.
+   - **run_canopend_candump.sh** - script creates virtual CAN device `vcan0` and runs `candump` and `canopend` with gateway interface on it.
  - **examples**
    - **basicDevice** - Example CANopenNode device with or without gateway interface. Includes example for different testing variables: 64-bit integers, real numbers, strings, domain, object oriented principle with C, etc. See [basicDevice/README.md](examples/basicDevice/README.md).
  - **test** - Different CANopen testing tools

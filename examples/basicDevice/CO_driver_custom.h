@@ -57,4 +57,22 @@
 #define CO_CONFIG_FIFO (0)
 #endif /* CO_GATEWAY */
 
+#define CO_STORAGE_APPLICATION \
+    { \
+        .addr = &OD_PERSIST_TEST, \
+        .len = sizeof(OD_PERSIST_TEST), \
+        .subIndexOD = 5, \
+        .attr = CO_storage_cmd | CO_storage_restore, \
+        .filename = {'o','d','_','t','e','s','t', \
+                     '.','p','e','r','s','i','s','t','\0'} \
+    }, \
+    { \
+        .addr = &OD_PERSIST_TEST_AUTO, \
+        .len = sizeof(OD_PERSIST_TEST_AUTO), \
+        .subIndexOD = 6, \
+        .attr = CO_storage_cmd | CO_storage_auto | CO_storage_restore, \
+        .filename = {'o','d','_','t','e','s','t','_','a','u','t','o', \
+                     '.','p','e','r','s','i','s','t','\0'} \
+    }
+
 #endif /* CO_DRIVER_CUSTOM_H */

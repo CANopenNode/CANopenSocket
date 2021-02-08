@@ -30,7 +30,10 @@
 #include <stdio.h>
 
 
+/* Define object for testingVariables */
 testingVariables_t testVar;
+/* Extension for OD object */
+OD_extension_t OD_version_extension;
 
 
 /*
@@ -69,21 +72,24 @@ static OD_size_t OD_read_version(OD_stream_t *stream, uint8_t subIndex,
 
 
 /******************************************************************************/
-CO_ReturnError_t app_programStart(bool_t CANopenConfigured, uint16_t *errinfo) {
+CO_ReturnError_t app_programStart(bool_t CANopenConfigured, uint32_t *errInfo) {
     (void) CANopenConfigured;
     CO_ReturnError_t err = CO_ERROR_NO;
 
     /* increment auto-storage variable */
-    OD_PERSIST_APP_AUTO.x2106_power_onCounter ++;
+    OD_PERSIST_TEST_AUTO.x2106_power_onCounter ++;
 
     /* Initialize custom read-only OD object "Version" */
-    OD_extensionIO_init(OD_ENTRY_H2105_version, NULL, OD_read_version, NULL);
+    OD_version_extension.object = NULL;
+    OD_version_extension.read = OD_read_version;
+    OD_version_extension.write = NULL;
+    OD_extension_init(OD_ENTRY_H2105_version, &OD_version_extension);
 
     /* Initialize more advanced object, which operates with testing variables
      * OD_ENTRY_H2120_testingVariables is constant defined in OD.h. More
      * flexible alternative for third argument is 'OD_find(&OD, 0x2120)' */
     err = testingVariables_init(&testVar,
-                                errinfo,
+                                errInfo,
                                 OD_ENTRY_H2120_testingVariables);
 
     return err;
@@ -100,7 +106,7 @@ void app_communicationReset(bool_t CANopenConfigured) {
         printf("CANopen Node-ID is unconfigured, so only LSS slave will work.\n");
 
     printf("Printing 'OD_PERSIST_APP.x2120_testingVariables.stringLong':\n%s\n",
-           OD_PERSIST_APP.x2120_testingVariables.stringLong);
+           OD_PERSIST_TEST.x2120_testingVariables.stringLong);
 
     fflush(stdout);
 }

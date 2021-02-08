@@ -246,40 +246,45 @@ static OD_size_t OD_write_testVar(OD_stream_t *stream, uint8_t subIndex,
 
 /******************************************************************************/
 CO_ReturnError_t testingVariables_init(testingVariables_t *testVar,
-                                       uint16_t *errinfo,
-                                       const OD_entry_t *OD_testVar)
+                                       uint32_t *errInfo,
+                                       OD_entry_t *OD_testVar)
 {
-    if (testVar == NULL || errinfo == NULL || OD_testVar == NULL)
+    if (testVar == NULL || errInfo == NULL || OD_testVar == NULL)
         return CO_ERROR_ILLEGAL_ARGUMENT;
 
     CO_ReturnError_t err = CO_ERROR_NO;
     ODR_t ret, ret1, ret2, ret3, ret4;
+    OD_size_t len1, len2, len3, len4;
 
     /* initialize object variables */
     memset(testVar, 0, sizeof(testingVariables_t));
 
     /* Initialize custom OD object "Testing variables" */
-    ret = OD_extensionIO_init(OD_testVar,
-                              testVar,
-                              OD_read_testVar,
-                              OD_write_testVar);
+    testVar->OD_testVar_extension.object = testVar;
+    testVar->OD_testVar_extension.read = OD_read_testVar;
+    testVar->OD_testVar_extension.write = OD_write_testVar;
+    ret = OD_extension_init(OD_testVar, &testVar->OD_testVar_extension);
 
     /* This is strict behavior and will exit the program on error. Error
      * checking on all OD functions can also be omitted. In that case program
      * will run, but specific OD entry may not be accessible. */
     if (ret != ODR_OK) {
-        *errinfo = OD_getIndex(OD_testVar);
+        *errInfo = OD_getIndex(OD_testVar);
         return CO_ERROR_OD_PARAMETERS;
     }
 
     /* Get variables from Object dictionary, related to "Average" */
-    ret1 = OD_getPtr_i64(OD_testVar, SUBINDEX_I64, &testVar->i64);
-    ret2 = OD_getPtr_u64(OD_testVar, SUBINDEX_U64, &testVar->u64);
-    ret3 = OD_getPtr_r32(OD_testVar, SUBINDEX_R32, &testVar->r32);
-    ret4 = OD_getPtr_r64(OD_testVar, SUBINDEX_R64, &testVar->r64);
+    ret1 = OD_getPtr(OD_testVar, SUBINDEX_I64, (void **)&testVar->i64, &len1);
+    ret2 = OD_getPtr(OD_testVar, SUBINDEX_U64, (void **)&testVar->u64, &len2);
+    ret3 = OD_getPtr(OD_testVar, SUBINDEX_R32, (void **)&testVar->r32, &len3);
+    ret4 = OD_getPtr(OD_testVar, SUBINDEX_R64, (void **)&testVar->r64, &len4);
 
-    if (ret1 != ODR_OK || ret2 != ODR_OK || ret3 != ODR_OK || ret4 != ODR_OK) {
-        *errinfo = OD_getIndex(OD_testVar);
+    if (ret1 != ODR_OK || len1 != sizeof(int64_t)
+        || ret2 != ODR_OK || len2 != sizeof(uint64_t)
+        || ret3 != ODR_OK || len3 != sizeof(float32_t)
+        || ret4 != ODR_OK || len4 != sizeof(float64_t)
+    ) {
+        *errInfo = OD_getIndex(OD_testVar);
         return CO_ERROR_OD_PARAMETERS;
     }
 
@@ -288,18 +293,18 @@ CO_ReturnError_t testingVariables_init(testingVariables_t *testVar,
                       &testVar->parameterU16, true);
 
     if (ret1 != ODR_OK) {
-        *errinfo = OD_getIndex(OD_testVar);
+        *errInfo = OD_getIndex(OD_testVar);
         return CO_ERROR_OD_PARAMETERS;
     }
 
     /* Get variables from Object dictionary, related to "Domain" */
-    ret1 = OD_getPtr_vs(OD_testVar, SUBINDEX_DOMAIN_FILE_READ,
-                        &testVar->domainReadFileName, NULL);
-    ret2 = OD_getPtr_vs(OD_testVar, SUBINDEX_DOMAIN_FILE_WRITE,
-                        &testVar->domainWriteFileName, NULL);
+    ret1 = OD_getPtr(OD_testVar, SUBINDEX_DOMAIN_FILE_READ,
+                     (void **)&testVar->domainReadFileName, NULL);
+    ret2 = OD_getPtr(OD_testVar, SUBINDEX_DOMAIN_FILE_WRITE,
+                     (void **)&testVar->domainWriteFileName, NULL);
 
     if (ret1 != ODR_OK || ret2 != ODR_OK) {
-        *errinfo = OD_getIndex(OD_testVar);
+        *errInfo = OD_getIndex(OD_testVar);
         return CO_ERROR_OD_PARAMETERS;
     }
 
