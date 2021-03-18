@@ -41,32 +41,32 @@ OD_extension_t OD_version_extension;
  *
  * For more information see file CO_ODinterface.h, OD_IO_t.
  */
-static OD_size_t OD_read_version(OD_stream_t *stream, uint8_t subIndex,
-                                 void *buf, OD_size_t count,
-                                 ODR_t *returnCode)
+static ODR_t OD_read_version(OD_stream_t *stream, void *buf,
+                             OD_size_t count, OD_size_t *countRead)
 {
-    if (stream == NULL || buf == NULL || returnCode == NULL) {
-        if (returnCode != NULL) *returnCode = ODR_DEV_INCOMPAT;
-        return 0;
+    if (stream == NULL || buf == NULL || countRead == NULL) {
+        return ODR_DEV_INCOMPAT;
     }
 
-    switch (subIndex) {
+    switch (stream->subIndex) {
         case 1: {
             OD_size_t len = strlen(CO_VERSION_CANOPENNODE);
             if (len > count) len = count;
             memcpy(buf, CO_VERSION_CANOPENNODE, len);
-            *returnCode = ODR_OK;
-            return stream->dataLength = len;
+
+            *countRead = stream->dataLength = len;
+            return ODR_OK;
         }
         case 2: {
             OD_size_t len = strlen(CO_VERSION_APPLICATION);
             if (len > count) len = count;
             memcpy(buf, CO_VERSION_APPLICATION, len);
-            *returnCode = ODR_OK;
-            return stream->dataLength = len;
+
+            *countRead = stream->dataLength = len;
+            return ODR_OK;
         }
         default:
-            return OD_readOriginal(stream, subIndex, buf, count, returnCode);
+            return OD_readOriginal(stream, buf, count, countRead);
     }
 }
 

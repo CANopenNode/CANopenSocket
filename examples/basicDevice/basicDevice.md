@@ -1,5 +1,5 @@
-CANopen documentation
-=====================
+CANopen device documentation
+============================
 **Basic device**
 
 Basic CANopen device with example usage.
@@ -10,10 +10,10 @@ Basic CANopen device with example usage.
 | File Version | 1                              |
 | Created      | 28. 11. 2020 12:37:54          |
 | Created By   | Janez Paternoster              |
-| Modified     | 1. 02. 2021 15:30:19           |
+| Modified     | 16. 03. 2021 19:31:59          |
 | Modified By  | Janez Paternoster              |
 
-This file was automatically generated with [libedssharp](https://github.com/robincornelius/libedssharp) Object Dictionary Editor v0.8-116-g3349c4d
+This file was automatically generated with [libedssharp](https://github.com/robincornelius/libedssharp) Object Dictionary Editor v0.8-122-g6c02323
 
 * [Device Information](#device-information)
 * [PDO Mapping](#pdo-mapping)
@@ -60,11 +60,11 @@ PDO Mapping {#pdo-mapping}
 |   0x62000208 | Write digital output 8-bit (Output)                           |
 
 
-### RPDO 0x1402
+### RPDO 0x1401
 |              |                                                               |
 | ------------ | ------------------------------------------------------------- |
-| COB_ID       | 0x80000400+$NODEID                                            |
-| Transmission | type=254                                                      |
+| COB_ID       | 0x00000300+$NODEID                                            |
+| Transmission | type=255                                                      |
 |   0x64110110 | Write analog output 16-bit (Output)                           |
 |   0x64110210 | Write analog output 16-bit (Output)                           |
 |   0x64110310 | Write analog output 16-bit (Output)                           |
@@ -487,11 +487,11 @@ Sub-indexes 1 and 2:
 
 | Sub  | Name                  | Data Type  | SDO | PDO | SRDO | Default Value |
 | ---- | --------------------- | ---------- | --- | --- | ---- | ------------- |
-| 0x00 | Number of mapped application objects in PDO| UNSIGNED8  | rw  | no  | no   | 0             |
-| 0x01 | Application object 1  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
-| 0x02 | Application object 2  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
-| 0x03 | Application object 3  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
-| 0x04 | Application object 4  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
+| 0x00 | Number of mapped application objects in PDO| UNSIGNED8  | rw  | no  | no   | 4             |
+| 0x01 | Application object 1  | UNSIGNED32 | rw  | no  | no   | 0x64110110    |
+| 0x02 | Application object 2  | UNSIGNED32 | rw  | no  | no   | 0x64110210    |
+| 0x03 | Application object 3  | UNSIGNED32 | rw  | no  | no   | 0x64110310    |
+| 0x04 | Application object 4  | UNSIGNED32 | rw  | no  | no   | 0x64110410    |
 | 0x05 | Application object 5  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
 | 0x06 | Application object 6  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
 | 0x07 | Application object 7  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
@@ -513,11 +513,11 @@ Sub-indexes 1 and 2:
 
 | Sub  | Name                  | Data Type  | SDO | PDO | SRDO | Default Value |
 | ---- | --------------------- | ---------- | --- | --- | ---- | ------------- |
-| 0x00 | Number of mapped application objects in PDO| UNSIGNED8  | rw  | no  | no   | 4             |
-| 0x01 | Application object 1  | UNSIGNED32 | rw  | no  | no   | 0x64110110    |
-| 0x02 | Application object 2  | UNSIGNED32 | rw  | no  | no   | 0x64110210    |
-| 0x03 | Application object 3  | UNSIGNED32 | rw  | no  | no   | 0x64110310    |
-| 0x04 | Application object 4  | UNSIGNED32 | rw  | no  | no   | 0x64110410    |
+| 0x00 | Number of mapped application objects in PDO| UNSIGNED8  | rw  | no  | no   | 0             |
+| 0x01 | Application object 1  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
+| 0x02 | Application object 2  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
+| 0x03 | Application object 3  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
+| 0x04 | Application object 4  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
 | 0x05 | Application object 5  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
 | 0x06 | Application object 6  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
 | 0x07 | Application object 7  | UNSIGNED32 | rw  | no  | no   | 0x00000000    |
@@ -917,8 +917,7 @@ Vartiable is free to use by application. Variable is automatically saved.
 | 0x04 | R64                   | REAL64     | rw  | tr  | no   | 456.789       |
 | 0x05 | Average of four numbers| REAL64     | ro  | t   | no   |               |
 | 0x06 | String short          | VISIBLE_STRING| rw  | no  | no   | str           |
-| 0x07 | String long           | VISIBLE_STRING (len=1000)| rw  | no  | no   | 1000 bytes long string buffer. Visible string may contain UTF-8 characters, like this 3 bytes long '€' Euro symbol. It may contain also control characters like tabs '	' or newLines '
-'.|
+| 0x07 | String long           | VISIBLE_STRING (len=1000)| rw  | no  | no   | Example string with 1000 bytes capacity. It may contain UTF-8 characters, like '€', tabs '	', newlines, etc.|
 | 0x08 | Octet string          | OCTET_STRING| rw  | no  | no   | C8 3D BB      |
 | 0x09 | Parameter with default value| UNSIGNED16 | rw  | no  | no   | 0x1234        |
 | 0x0A | Domain                | DOMAIN     | rw  | no  | no   |               |

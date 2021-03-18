@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--File is generated with libedssharp Object Dictionary Editor v0.8-116-g3349c4d, URL: https://github.com/robincornelius/libedssharp-->
+<!--File is generated with libedssharp Object Dictionary Editor v0.8-122-g6c02323, URL: https://github.com/robincornelius/libedssharp-->
 <!--File includes additional custom properties for CANopenNode, CANopen protocol stack, URL: https://github.com/CANopenNode/CANopenNode-->
 <ISO15745ProfileContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.canopen.org/xml/1.1">
   <ISO15745Profile>
@@ -15,7 +15,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModifiedBy="Janez Paternoster" fileModificationDate="2021-02-01" fileModificationTime="15:30:19.4193280+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q1="http://www.canopen.org/xml/1.1" xsi:type="q1:ProfileBody_Device_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModifiedBy="Janez Paternoster" fileModificationDate="2021-03-16" fileModificationTime="19:31:59.7179280+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
       <q1:DeviceIdentity>
         <q1:vendorName></q1:vendorName>
         <q1:vendorID></q1:vendorID>
@@ -1132,27 +1132,27 @@
           <q1:parameter uniqueID="UID_SUB_160100" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
             <USINT />
-            <q1:defaultValue value="0" />
+            <q1:defaultValue value="4" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160101" access="readWrite">
             <label lang="en">Application object 1</label>
             <UDINT />
-            <q1:defaultValue value="0x00000000" />
+            <q1:defaultValue value="0x64110110" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160102" access="readWrite">
             <label lang="en">Application object 2</label>
             <UDINT />
-            <q1:defaultValue value="0x00000000" />
+            <q1:defaultValue value="0x64110210" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160103" access="readWrite">
             <label lang="en">Application object 3</label>
             <UDINT />
-            <q1:defaultValue value="0x00000000" />
+            <q1:defaultValue value="0x64110310" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160104" access="readWrite">
             <label lang="en">Application object 4</label>
             <UDINT />
-            <q1:defaultValue value="0x00000000" />
+            <q1:defaultValue value="0x64110410" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160105" access="readWrite">
             <label lang="en">Application object 5</label>
@@ -1189,27 +1189,27 @@
           <q1:parameter uniqueID="UID_SUB_160200" access="readWrite">
             <label lang="en">Number of mapped application objects in PDO</label>
             <USINT />
-            <q1:defaultValue value="4" />
+            <q1:defaultValue value="0" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160201" access="readWrite">
             <label lang="en">Application object 1</label>
             <UDINT />
-            <q1:defaultValue value="0x64110110" />
+            <q1:defaultValue value="0x00000000" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160202" access="readWrite">
             <label lang="en">Application object 2</label>
             <UDINT />
-            <q1:defaultValue value="0x64110210" />
+            <q1:defaultValue value="0x00000000" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160203" access="readWrite">
             <label lang="en">Application object 3</label>
             <UDINT />
-            <q1:defaultValue value="0x64110310" />
+            <q1:defaultValue value="0x00000000" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160204" access="readWrite">
             <label lang="en">Application object 4</label>
             <UDINT />
-            <q1:defaultValue value="0x64110410" />
+            <q1:defaultValue value="0x00000000" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_160205" access="readWrite">
             <label lang="en">Application object 5</label>
@@ -2060,7 +2060,7 @@
           <q1:parameter uniqueID="UID_SUB_212007" access="readWrite">
             <label lang="en">String long</label>
             <STRING />
-            <q1:defaultValue value="1000 bytes long string buffer. Visible string may contain UTF-8 characters, like this 3 bytes long '€' Euro symbol. It may contain also control characters like tabs '&#x9;' or newLines '&#xA;'." />
+            <q1:defaultValue value="Example string with 1000 bytes capacity. It may contain UTF-8 characters, like '€', tabs '&#x9;', newlines, etc." />
             <q1:property name="CO_stringLengthMin" value="1000" />
           </q1:parameter>
           <q1:parameter uniqueID="UID_SUB_212008" access="readWrite">
@@ -2345,7 +2345,7 @@
         <ProfileTechnology>CANopen</ProfileTechnology>
       </ISO15745Reference>
     </ProfileHeader>
-    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModificationDate="2021-02-01" fileModificationTime="15:30:19.4193280+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
+    <ProfileBody xmlns:q2="http://www.canopen.org/xml/1.1" xsi:type="q2:ProfileBody_CommunicationNetwork_CANopen" formatName="CANopen" formatVersion="1.0" fileName="basicDevice.xdd" fileCreator="Janez Paternoster" fileCreationDate="2020-11-28" fileCreationTime="12:37:54.0000000+01:00" fileModificationDate="2021-03-16" fileModificationTime="19:31:59.7179280+01:00" fileVersion="1" supportedLanguages="en" xmlns="">
       <ApplicationLayers>
         <q2:CANopenObjectList>
           <CANopenObject index="1000" name="Device type" objectType="7" PDOmapping="no" uniqueIDRef="UID_OBJ_1000" />

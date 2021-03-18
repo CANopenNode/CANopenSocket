@@ -218,6 +218,7 @@ int main (int argc, char *argv[]) {
     int opt;
     struct sockaddr_un addr_un;
     sa_family_t addrFamily = AF_UNIX;
+    errStream = stderr;
 
     if(argc >= 2 && strcmp(argv[1], "--help") == 0) {
         printUsage(argv[0]);

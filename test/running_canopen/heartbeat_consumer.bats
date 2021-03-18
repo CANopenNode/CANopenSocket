@@ -51,9 +51,9 @@ setup_file() {
 000#8201
 7$D1#00
 0$B2#3081101C01000000
-7$D1#7F
+7$D1#05
 0$B2#0000001C00000000
-7$D1#7F"
+7$D1#05"
 }
 
 @test 'Second HB consumer configuration' {

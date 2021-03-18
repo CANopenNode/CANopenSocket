@@ -8,8 +8,8 @@ Description=Basic CANopen device with example usage.
 CreationTime=12:37PM
 CreationDate=11-28-2020
 CreatedBy=Janez Paternoster
-ModificationTime=3:30PM
-ModificationDate=02-01-2021
+ModificationTime=7:31PM
+ModificationDate=03-16-2021
 ModifiedBy=Janez Paternoster
 
 [DeviceInfo]
@@ -886,7 +886,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=rw
-DefaultValue=0
+DefaultValue=4
 PDOMapping=0
 
 [1601sub1]
@@ -895,7 +895,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x64110110
 PDOMapping=0
 
 [1601sub2]
@@ -904,7 +904,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x64110210
 PDOMapping=0
 
 [1601sub3]
@@ -913,7 +913,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x64110310
 PDOMapping=0
 
 [1601sub4]
@@ -922,7 +922,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x00000000
+DefaultValue=0x64110410
 PDOMapping=0
 
 [1601sub5]
@@ -973,7 +973,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0005
 AccessType=rw
-DefaultValue=4
+DefaultValue=0
 PDOMapping=0
 
 [1602sub1]
@@ -982,7 +982,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x64110110
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1602sub2]
@@ -991,7 +991,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x64110210
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1602sub3]
@@ -1000,7 +1000,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x64110310
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1602sub4]
@@ -1009,7 +1009,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0007
 AccessType=rw
-DefaultValue=0x64110410
+DefaultValue=0x00000000
 PDOMapping=0
 
 [1602sub5]
@@ -2756,8 +2756,7 @@ ObjectType=0x7
 ;StorageLocation=RAM
 DataType=0x0009
 AccessType=rw
-DefaultValue=1000 bytes long string buffer. Visible string may contain UTF-8 characters, like this 3 bytes long '€' Euro symbol. It may contain also control characters like tabs '	' or newLines '
-'.
+DefaultValue=Example string with 1000 bytes capacity. It may contain UTF-8 characters, like '€', tabs '	', newlines, etc.
 PDOMapping=0
 
 [2120sub8]

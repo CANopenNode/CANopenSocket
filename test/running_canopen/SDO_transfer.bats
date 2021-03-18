@@ -18,7 +18,7 @@ setup_file() {
 teardown_file() {
     cat binaryFileReport >&3
     rm binaryFile*
-    run rm ../../examples/basicDevice/fileWrittenByDomain
+    run rm fileWrittenByDomain
 }
 
 @test 'Segmented transfer - set filename for upload' {
