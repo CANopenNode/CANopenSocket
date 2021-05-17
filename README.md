@@ -1,7 +1,7 @@
 CANopenSocket
 =============
 
-**THIS REPOSITORY IS OBSOLETE CONTENTS HAS BEEN MOVED TO:**
+**THIS REPOSITORY IS OBSOLETE, ITS CONTENTS HAS BEEN MOVED TO:**
 - https://github.com/CANopenNode/CANopenDemo
 - https://github.com/CANopenNode/CANopenLinux
 
