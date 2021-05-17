@@ -1,13 +1,17 @@
 CANopenSocket
 =============
 
+**THIS REPOSITORY IS OBSOLETE CONTENTS HAS BEEN MOVED TO:**
+- https://github.com/CANopenNode/CANopenDemo
+- https://github.com/CANopenNode/CANopenLinux
+
+--------------------------
+
 CANopenSocket is a collection of CANopen tools and examples.
 
 It is based on [CANopenNode](https://github.com/CANopenNode/CANopenNode), which is free and open source CANopen Stack and is included as a git submodule.
 
 CANopen is the internationally standardized (EN 50325-4) ([CiA301](http://can-cia.org/standardization/technical-documents)) CAN-based higher-layer protocol for embedded control system. For more information on CANopen see http://www.can-cia.org/
-
-**THIS RELEASE OF CANopenSocket CONTAINS NEW, UNFINISHED EDITION OF CANopenNode V4. PDO AND SOME OTHER PARTS ARE UNFINISHED.**
 
 Getting or updating the project
 -------------------------------
