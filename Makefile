@@ -1,15 +1,15 @@
 # Makefile for CANopend.
 
 
-STACKDRV_SRC =  ../CANopenNode/stack/socketCAN
-STACK_SRC =     ../CANopenNode/stack
-CANOPEN_SRC =   ../CANopenNode
-CANOPEND_SRC =  ./src
-OBJ_DICT_SRC =  ./objDict
-APP_SRC =       ./app
+STACKDRV_SRC =  CANopenNode/stack/socketCAN
+STACK_SRC =     CANopenNode/stack
+CANOPEN_SRC =   CANopenNode
+CANOPEND_SRC =  canopend/src
+OBJ_DICT_SRC =  canopend/objDict
+APP_SRC =       canopend/app
 
 
-LINK_TARGET  =  $(APP_SRC)/canopend
+LINK_TARGET  =  canopend/canopend
 
 
 INCLUDE_DIRS = -I$(STACKDRV_SRC) \
@@ -23,6 +23,7 @@ INCLUDE_DIRS = -I$(STACKDRV_SRC) \
 SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
                 $(STACKDRV_SRC)/CO_OD_storage.c     \
                 $(STACKDRV_SRC)/CO_Linux_tasks.c    \
+                $(STACK_SRC)/CO_Node_Guarding.c     \
                 $(STACK_SRC)/crc16-ccitt.c          \
                 $(STACK_SRC)/CO_SDO.c               \
                 $(STACK_SRC)/CO_Emergency.c         \
@@ -31,7 +32,7 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
                 $(STACK_SRC)/CO_PDO.c               \
                 $(STACK_SRC)/CO_HBconsumer.c        \
                 $(STACK_SRC)/CO_SDOmaster.c         \
-                $(STACK_SRC)/CO_LSSmaster.c     		\
+                $(STACK_SRC)/CO_LSSmaster.c         \
                 $(STACK_SRC)/CO_trace.c             \
                 $(CANOPEN_SRC)/CANopen.c            \
                 $(CANOPEND_SRC)/CO_command.c        \
@@ -57,6 +58,8 @@ SOURCES =       $(STACKDRV_SRC)/CO_driver.c         \
 OBJS = $(SOURCES:%.c=%.o)
 CC ?= gcc
 CFLAGS = -Wall -g $(INCLUDE_DIRS)
+CFLAGS += -DCO_NODE_GUARDING_SLAVE=1
+CFLAGS += -DCO_NODE_GUARDING_MASTER=127
 LDFLAGS = -lrt -pthread
 
 

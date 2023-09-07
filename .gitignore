@@ -1,4 +1,4 @@
-/canopend/app/canopend
+/canopend/canopend
 /canopencomm/canopencomm
 /canopencgi/canopen.cgi
 *.o
@@ -12,3 +12,5 @@
 Debug/
 Release/
 
+#kdevelop
+*.kdev4

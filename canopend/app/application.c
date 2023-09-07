@@ -35,7 +35,13 @@ void app_programStart(void){
 
 /******************************************************************************/
 void app_communicationReset(void){
-
+#if 0
+    /* Node guarding testing */
+    CO_nodeGuardingMaster_initNode(CO->NGmaster, 0, 5, 2000);
+    CO_nodeGuardingMaster_initNode(CO->NGmaster, 1, 6, 2000);
+    CO_nodeGuardingMaster_initNode(CO->NGmaster, 4, 7, 2000);
+    CO_nodeGuardingMaster_initNode(CO->NGmaster, 5, 8, 2500);
+#endif
 }
 
 
